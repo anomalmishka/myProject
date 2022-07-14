@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  web-app:
+    container_name: web-app
+    build: ./web-app
+    image: ita:web-app
+    ports:
+      - "8001:8001"
+  data_base-app:
+    container_name: database-app
+    build: ./data-base-app
+    image: ita:data-base-app
+    ports:
+      - "8003:8003"
+  database:
+    container_name: web-db
+    image: postgres:14 # официальный образ базы данных
+    env_file:
+      - ./web-db/database.env # данные для создания пользователя, которым вы будете подключаться приложением
+    volumes:
+      - ./web-db/secure.sql:/docker-entrypoint-initdb.d/secure.sql # путь к скрипту для создания таблиц
+      - ./web-db/data:/var/lib/postgresql/data/ # путь к папке для хранения состояния данных
+    ports:
+      - "5438:5432"
+    depends_on:
+      - web-db
+      - web-app
+      - database-app
+
+#  docker-compose -f docker-compose.yml up -d --build
+#  docker-compose -f docker-compose.yml down            - команда останавливает и удаляет контейнеры.
+#  docker-compose -f docker-compose.yml logs -f         - команда для просмотра логов внутри контейнеров.

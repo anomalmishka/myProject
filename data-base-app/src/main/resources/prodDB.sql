@@ -1,0 +1,127 @@
+select from user ;
+--drop table IF EXISTS SALES, CAR_AUTO_PARTS, CAR, AUTOPARTS, DEALER, USER;
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE SALES
+--(
+--    ID INT AUTO_INCREMENT,
+--    WORKING_DAYS ENUM('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'),
+--    PRIMARY KEY (ID)
+--);
+--insert into SALES (ID, WORKING_DAYS) values(null, 'MONDAY');
+--insert into SALES (ID, WORKING_DAYS) values(null, 'TUESDAY');
+--insert into SALES (ID, WORKING_DAYS) values(null, 'WEDNESDAY');
+--insert into SALES (ID, WORKING_DAYS) values(null, 'THURSDAY');
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE AUTOPARTS
+--(
+--    ID INT AUTO_INCREMENT,
+--    BRAND_NAME_PARTS VARCHAR(20),
+--    MODEL_PARTS VARCHAR(20),
+--    PARTS_NAME VARCHAR(20),
+--    PARTS_MODEL VARCHAR(20),
+--    NUMBER_PARTS INT,
+--    PRICE_PARTS INT,
+--    IS_SOLD_PARTS BOOL,
+--    ZONED_DATE_TIME DATETIME,
+--    SALES_ID INT,
+--    PRIMARY KEY (ID)
+--);
+--insert into AUTOPARTS (ID, BRAND_NAME_PARTS, MODEL_PARTS, PARTS_NAME, PARTS_MODEL, NUMBER_PARTS, PRICE_PARTS, IS_SOLD_PARTS, ZONED_DATE_TIME, SALES_ID)
+--values(null, 'BOSCH','motor','A','B', 225566, 1000, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 1);
+--
+--insert into AUTOPARTS (ID, BRAND_NAME_PARTS, MODEL_PARTS, PARTS_NAME, PARTS_MODEL, NUMBER_PARTS, PRICE_PARTS, IS_SOLD_PARTS, ZONED_DATE_TIME, SALES_ID)
+--values(null, 'BOSCH','motor','A','B', 225566, 1000, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 2);
+--
+--insert into AUTOPARTS (ID, BRAND_NAME_PARTS, MODEL_PARTS, PARTS_NAME, PARTS_MODEL, NUMBER_PARTS, PRICE_PARTS, IS_SOLD_PARTS, ZONED_DATE_TIME, SALES_ID)
+--values(null, 'BOSCH','motor','A','B', 225566, 1000, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 3);
+--
+--insert into AUTOPARTS (ID, BRAND_NAME_PARTS, MODEL_PARTS, PARTS_NAME, PARTS_MODEL, NUMBER_PARTS, PRICE_PARTS, IS_SOLD_PARTS, ZONED_DATE_TIME, SALES_ID)
+--values(null, 'BOSCH','motor','A','B', 225566, 1000, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 4);
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE CAR
+--(
+--    ID INT AUTO_INCREMENT,
+--    BRAND_NAME VARCHAR(20),
+--    MODEL_NAME VARCHAR(20),
+--    AGE_CAR INT,
+--    BODY_TYPE VARCHAR(20),
+--    COLOR_BODY VARCHAR(20),
+--    NUMBER_PASSANGER VARCHAR(20),
+--    IS_SOLD BOOL,
+--    ZONED_DATE_TIME DATETIME,
+--    PRIMARY KEY (ID)
+--);
+--insert into CAR (ID, BRAND_NAME, MODEL_NAME, AGE_CAR, BODY_TYPE, COLOR_BODY, NUMBER_PASSANGER, IS_SOLD, ZONED_DATE_TIME)
+--values(null,'BMW','X6', 10,'A', 'M', 4, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]');
+--insert into CAR (ID, BRAND_NAME, MODEL_NAME, AGE_CAR, BODY_TYPE, COLOR_BODY, NUMBER_PASSANGER, IS_SOLD, ZONED_DATE_TIME)
+--values(null,'BMW','X6', 10,'A', 'M', 4, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]');
+--insert into CAR (ID, BRAND_NAME, MODEL_NAME, AGE_CAR, BODY_TYPE, COLOR_BODY, NUMBER_PASSANGER, IS_SOLD, ZONED_DATE_TIME)
+--values(null,'BMW','X6', 10,'A', 'M', 4, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]');
+--insert into CAR (ID, BRAND_NAME, MODEL_NAME, AGE_CAR, BODY_TYPE, COLOR_BODY, NUMBER_PASSANGER, IS_SOLD, ZONED_DATE_TIME)
+--values(null,'BMW','X6', 10,'A', 'M', 4, false,'2022-05-13T16:01:07.900+03:00[Europe/Minsk]');
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE USER
+--(
+--    ID INT AUTO_INCREMENT,
+--    NAME VARCHAR(20),
+--    LASTNAME VARCHAR(20),
+--    AGE INT,
+--    SEX VARCHAR(20),
+--    IS_ACTIVE_PROFILE BOOL,
+--    CATEGORY_CLIENT VARCHAR(20),
+--    PHONE INT,
+--    ZONED_DATE_TIME DATETIME,
+--    CAR_ID INT,
+--    PRIMARY KEY (ID)
+--);
+--insert into USER (ID, NAME, LASTNAME, AGE, SEX, IS_ACTIVE_PROFILE, CATEGORY_CLIENT, PHONE, ZONED_DATE_TIME, CAR_ID)
+--values(null,'Joe','Baiden', 45,'M', true, 'A', 7788, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 1);
+--insert into USER (ID, NAME, LASTNAME, AGE, SEX, IS_ACTIVE_PROFILE, CATEGORY_CLIENT, PHONE, ZONED_DATE_TIME, CAR_ID)
+--values(null,'Joe','Baiden', 45,'M', true, 'A', 7788, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 2);
+--insert into USER (ID, NAME, LASTNAME, AGE, SEX, IS_ACTIVE_PROFILE, CATEGORY_CLIENT, PHONE, ZONED_DATE_TIME, CAR_ID)
+--values(null,'Joe','Baiden', 45,'M', true, 'A', 7788, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 3);
+--insert into USER (ID, NAME, LASTNAME, AGE, SEX, IS_ACTIVE_PROFILE, CATEGORY_CLIENT, PHONE, ZONED_DATE_TIME, CAR_ID)
+--values(null,'Joe','Baiden', 45,'M', true, 'A', 7788, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 4);
+--
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE DEALER
+--(
+--    ID INT AUTO_INCREMENT,
+--    LOCATION VARCHAR(20),
+--    SALESMAN VARCHAR(20),
+--    NUMBER_OF_SALES_PER_YEAR INT,
+--    BROKEN_SALES INT,
+--    YEARS_WARRANTY INT,
+--    YEARS_LICENSE INT,
+--    IS_WORK BOOL,
+--    ZONED_DATE_TIME DATETIME,
+--    USER_ID INT,
+--    PRIMARY KEY (ID)
+--);
+--insert into DEALER (ID, LOCATION, SALESMAN, NUMBER_OF_SALES_PER_YEAR, BROKEN_SALES, YEARS_WARRANTY, YEARS_LICENSE, IS_WORK, ZONED_DATE_TIME, USER_ID)
+--values(null, 'brest', 'petya', 130, 6,  5, 5, true, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 1);
+--insert into DEALER (ID, LOCATION, SALESMAN, NUMBER_OF_SALES_PER_YEAR, BROKEN_SALES, YEARS_WARRANTY, YEARS_LICENSE, IS_WORK, ZONED_DATE_TIME, USER_ID)
+--values(null, 'brest', 'petya', 130, 6,  5, 5, true, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 2);
+--insert into DEALER (ID, LOCATION, SALESMAN, NUMBER_OF_SALES_PER_YEAR, BROKEN_SALES, YEARS_WARRANTY, YEARS_LICENSE, IS_WORK, ZONED_DATE_TIME, USER_ID)
+--values(null, 'brest', 'petya', 130, 6,  5, 5, true, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 3);
+--insert into DEALER (ID, LOCATION, SALESMAN, NUMBER_OF_SALES_PER_YEAR, BROKEN_SALES, YEARS_WARRANTY, YEARS_LICENSE, IS_WORK, ZONED_DATE_TIME, USER_ID)
+--values(null, 'brest', 'petya', 130, 6,  5, 5, true, '2022-05-13T16:01:07.900+03:00[Europe/Minsk]', 4);
+--------------------------------------------------------------------------------------------------------------------------
+--create TABLE CAR_AUTO_PARTS
+--(
+--    AUTO_PARTS_ID INT,
+--    CAR_ID INT
+--);
+--insert into CAR_AUTO_PARTS (CAR_ID, AUTO_PARTS_ID)
+--values(1,1);
+--insert into CAR_AUTO_PARTS (CAR_ID, AUTO_PARTS_ID)
+--values(2,2);
+--insert into CAR_AUTO_PARTS (CAR_ID, AUTO_PARTS_ID)
+--values(3,3);
+--insert into CAR_AUTO_PARTS (CAR_ID, AUTO_PARTS_ID)
+--values(4,4);
+--------------------------------------------------------------------------------------------------------------------------
+----удаление всех записей в таблице
+----DELETE FROM USER;
+----полное удаление данных
+----TRUNCATE TABLE Clients;
