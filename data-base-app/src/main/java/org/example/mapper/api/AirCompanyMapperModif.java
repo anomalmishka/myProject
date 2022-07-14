@@ -1,20 +1,24 @@
 package org.example.mapper.api;
 
+import lombok.RequiredArgsConstructor;
 import org.example.dto.api.AirCompanyDTOModif;
 import org.example.model.AirCompany;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
 @Component
 public class AirCompanyMapperModif {
+
+    private final AirPlaneMapperModif airPlaneMapperModif;
+
     public AirCompanyDTOModif toDTO(AirCompany airCompany) {
         return AirCompanyDTOModif.builder()
                 .id(airCompany.getId())
                 .nameCompany(airCompany.getNameCompany())
                 .countryLocation(airCompany.getCountryLocation())
-                .airPlanes(airCompany.getAirPlanes())
+                .airPlaneDTOModifs(airPlaneMapperModif.toDTO(airCompany.getAirPlanes()))
                 .build();
     }
 
@@ -30,7 +34,7 @@ public class AirCompanyMapperModif {
                 .id(airCompanyDTOModif.getId())
                 .nameCompany(airCompanyDTOModif.getNameCompany())
                 .countryLocation(airCompanyDTOModif.getCountryLocation())
-                .airPlanes(airCompanyDTOModif.getAirPlanes())
+                .airPlanes(airPlaneMapperModif.toModel(airCompanyDTOModif.getAirPlaneDTOModifs()))
                 .build();
     }
 }

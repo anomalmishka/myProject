@@ -16,5 +16,5 @@ public class AirCompanyDTOModif {
     private Long id;
     private String nameCompany;
     private String countryLocation;
-    private List<AirPlane> airPlanes;
+    private List<AirPlaneDTOModif> airPlaneDTOModifs;
 }
