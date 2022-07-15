@@ -39,6 +39,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 request);
     }
+
     @ExceptionHandler(value = {ErrorInvalidData.class})
     protected ResponseEntity<Object> handleErrorInvalidData(RuntimeException ex, WebRequest request) {
         String text = "The entered data is not correct. " + ex.getMessage();
