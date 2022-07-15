@@ -25,5 +25,6 @@ public class BankCard {
     private Bank bank;
     private String holderName;
     private String holderLastname;
+    private Long cardNumber;
     private Date serviceEndDate;
 }

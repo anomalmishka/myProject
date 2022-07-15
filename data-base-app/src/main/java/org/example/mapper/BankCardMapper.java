@@ -20,6 +20,7 @@ public class BankCardMapper {
                 .bank(bankCard.getBank())
                 .holderName(bankCard.getHolderName())
                 .holderLastname(bankCard.getHolderLastname())
+                .cardNumber(bankCard.getCardNumber())
                 .serviceEndDate(bankCard.getServiceEndDate())
                 .build();
     }
@@ -38,6 +39,7 @@ public class BankCardMapper {
                 .bank(bankCardDTO.getBank())
                 .holderName(bankCardDTO.getHolderName())
                 .holderLastname(bankCardDTO.getHolderLastname())
+                .cardNumber(bankCardDTO.getCardNumber())
                 .serviceEndDate(bankCardDTO.getServiceEndDate())
                 .build();
     }
