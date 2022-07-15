@@ -18,7 +18,9 @@ public class AirPlaneDTOModif {
     private String type;
     private String routeStart;
     private String routeEnd;
+    private Integer ticketPrice;
     private Integer numberPassanger;
-    private Date flightDate;
+    private Date flightDateStart;
+    private Date flightDateEnd;
     private List<Ticket> tickets;
 }

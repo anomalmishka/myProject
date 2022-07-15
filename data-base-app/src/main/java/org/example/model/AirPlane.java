@@ -23,13 +23,14 @@ public class AirPlane {
     private String type;
     private String routeStart;
     private String routeEnd;
+    private Integer ticketPrice;
     private Integer numberPassanger;
-    private Date flightDate;
+    private Date flightDateStart;
+    private Date flightDateEnd;
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            orphanRemoval=true
+            fetch = FetchType.LAZY
     )
     @JoinColumn(name="AIR_PLANE_ID")
     private List<Ticket> tickets;

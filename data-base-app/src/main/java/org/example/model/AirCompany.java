@@ -24,8 +24,7 @@ public class AirCompany {
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            orphanRemoval=true
+            fetch = FetchType.LAZY
     )
     @JoinColumn(name="AIR_COMPANY_ID")
     private List<AirPlane> airPlanes;

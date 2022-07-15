@@ -11,13 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Builder
-public class AirPlaneDTO {
-    private Long id;
-    private String type;
+public class FilterDTO {
     private String routeStart;
     private String routeEnd;
-    private Integer ticketPrice;
-    private Integer numberPassanger;
-    private Date flightDateStart;
-    private Date flightDateEnd;
+
+    private Date dateStart;
+    private Date dateEnd;
+
+    private Integer priceStart;
+    private Integer priceEnd;
 }

@@ -15,8 +15,10 @@ public class AirPlaneMapperModif {
                 .type(airPlane.getType())
                 .routeStart(airPlane.getRouteStart())
                 .routeEnd(airPlane.getRouteEnd())
+                .ticketPrice(airPlane.getTicketPrice())
                 .numberPassanger(airPlane.getNumberPassanger())
-                .flightDate(airPlane.getFlightDate())
+                .flightDateStart(airPlane.getFlightDateStart())
+                .flightDateEnd(airPlane.getFlightDateEnd())
                 .tickets(airPlane.getTickets())
                 .build();
     }
@@ -34,8 +36,10 @@ public class AirPlaneMapperModif {
                 .type(airPlaneDTOModif.getType())
                 .routeStart(airPlaneDTOModif.getRouteStart())
                 .routeEnd(airPlaneDTOModif.getRouteEnd())
+                .ticketPrice(airPlaneDTOModif.getTicketPrice())
                 .numberPassanger(airPlaneDTOModif.getNumberPassanger())
-                .flightDate(airPlaneDTOModif.getFlightDate())
+                .flightDateStart(airPlaneDTOModif.getFlightDateStart())
+                .flightDateEnd(airPlaneDTOModif.getFlightDateEnd())
                 .tickets(airPlaneDTOModif.getTickets())
                 .build();
     }

@@ -19,7 +19,6 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
     private Integer passengerSeat;
-    private Integer ticketPrice;
     private Boolean isEmptySeat;
     private Boolean isActive;
 }

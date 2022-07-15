@@ -14,7 +14,6 @@ public class TicketMapper {
         return TicketDTO.builder()
                 .id(ticket.getId())
                 .passengerSeat(ticket.getPassengerSeat())
-                .ticketPrice(ticket.getTicketPrice())
                 .isEmptySeat(ticket.getIsEmptySeat())
                 .isActive(ticket.getIsActive())
                 .build();
@@ -31,7 +30,6 @@ public class TicketMapper {
         return Ticket.builder()
                 .id(ticketDTO.getId())
                 .passengerSeat(ticketDTO.getPassengerSeat())
-                .ticketPrice(ticketDTO.getTicketPrice())
                 .isEmptySeat(ticketDTO.getIsEmptySeat())
                 .isActive(ticketDTO.getIsActive())
                 .build();

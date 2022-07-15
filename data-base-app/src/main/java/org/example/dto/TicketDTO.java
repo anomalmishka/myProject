@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class TicketDTO {
     private Long id;
     private Integer passengerSeat;
-    private Integer ticketPrice;
     private Boolean isEmptySeat;
     private Boolean isActive;
 }

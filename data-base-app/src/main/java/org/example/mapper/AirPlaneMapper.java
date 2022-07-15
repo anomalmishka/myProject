@@ -1,24 +1,25 @@
 package org.example.mapper;
 
-
 import org.example.dto.AirPlaneDTO;
 import org.example.model.AirPlane;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class AirPlaneMapper {
+
     public AirPlaneDTO toDTO(AirPlane airPlane) {
         return AirPlaneDTO.builder()
                 .id(airPlane.getId())
                 .type(airPlane.getType())
                 .routeStart(airPlane.getRouteStart())
                 .routeEnd(airPlane.getRouteEnd())
+                .ticketPrice(airPlane.getTicketPrice())
                 .numberPassanger(airPlane.getNumberPassanger())
-                .flightDate(airPlane.getFlightDate())
+                .flightDateStart(airPlane.getFlightDateStart())
+                .flightDateEnd(airPlane.getFlightDateEnd())
                 .build();
     }
 
@@ -35,8 +36,10 @@ public class AirPlaneMapper {
                 .type(airPlaneDTO.getType())
                 .routeStart(airPlaneDTO.getRouteStart())
                 .routeEnd(airPlaneDTO.getRouteEnd())
+                .ticketPrice(airPlaneDTO.getTicketPrice())
                 .numberPassanger(airPlaneDTO.getNumberPassanger())
-                .flightDate(airPlaneDTO.getFlightDate())
+                .flightDateStart(airPlaneDTO.getFlightDateStart())
+                .flightDateEnd(airPlaneDTO.getFlightDateEnd())
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Builder
-public class AirPlaneDTO {
-    private Long id;
-    private String type;
+public class FilterObject {
     private String routeStart;
     private String routeEnd;
-    private Integer ticketPrice;
-    private Integer numberPassanger;
-    private Date flightDateStart;
-    private Date flightDateEnd;
+
+    private Date dateStart;
+    private Date dateEnd;
+
+    private Integer priceStart;
+    private Integer priceEnd;
 }
