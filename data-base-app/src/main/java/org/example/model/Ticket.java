@@ -11,8 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Builder
-@Entity
-@Table(name = "TICKET")
+@Entity(name = "TICKET")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +20,8 @@ public class Ticket {
     private Integer passengerSeat;
     private Boolean isEmptySeat;
     private Boolean isActive;
+    @ManyToOne
+    private AirPlane airPlane;
+    @ManyToOne
+    private User user;
 }

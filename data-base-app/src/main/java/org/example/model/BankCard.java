@@ -14,8 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Builder
-@Entity
-@Table(name = "BankCard")
+@Entity(name = "BANK_CARD")
 public class BankCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +26,7 @@ public class BankCard {
     private String holderLastname;
     private Long cardNumber;
     private Date serviceEndDate;
+
+    @ManyToOne
+    private User user;
 }

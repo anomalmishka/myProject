@@ -1,9 +1,9 @@
-package org.example.service;
+package org.example.service.buisness;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.AirCompany;
 import org.example.service.api.AirCompanyService;
-import org.example.service.api.BuisnessAirCompanyService;
+import org.example.service.api.buisness.BuisnessAirCompanyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

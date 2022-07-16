@@ -1,8 +1,9 @@
-package org.example.service;
+package org.example.service.buisness;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.User;
-import org.example.service.api.BuisnessUserService;
+import org.example.service.UserServiceImpl;
+import org.example.service.api.buisness.BuisnessUserService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

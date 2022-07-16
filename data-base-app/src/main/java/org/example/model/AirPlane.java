@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-@Entity
-@Table(name = "AIR_PLANE")
+@Entity(name = "AIR_PLANE")
 public class AirPlane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +26,9 @@ public class AirPlane {
     private Integer numberPassanger;
     private Date flightDateStart;
     private Date flightDateEnd;
+
+    @ManyToOne
+    private AirCompany airCompany;
 
     @OneToMany(
             cascade = CascadeType.ALL,

@@ -1,12 +1,9 @@
 package org.example.controller.buisness;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.api.AirCompanyDTOModif;
 import org.example.dto.api.UserDTOModif;
 import org.example.mapper.api.UserMapperModif;
-import org.example.service.api.BuisnessAirCompanyService;
-import org.example.service.api.BuisnessUserService;
-import org.example.service.api.UserService;
+import org.example.service.api.buisness.BuisnessUserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

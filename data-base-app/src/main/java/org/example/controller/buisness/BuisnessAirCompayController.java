@@ -3,7 +3,7 @@ package org.example.controller.buisness;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.api.AirCompanyDTOModif;
 import org.example.mapper.api.AirCompanyMapperModif;
-import org.example.service.api.BuisnessAirCompanyService;
+import org.example.service.api.buisness.BuisnessAirCompanyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
