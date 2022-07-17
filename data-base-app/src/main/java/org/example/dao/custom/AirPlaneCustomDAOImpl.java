@@ -10,6 +10,8 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository
 public class AirPlaneCustomDAOImpl implements AirPlaneCustomDAO {
@@ -149,5 +151,47 @@ public class AirPlaneCustomDAOImpl implements AirPlaneCustomDAO {
         predicateList.add(criteriaBuilder.and(predicatePriceStart, predicatePriceEnd));
         query.where(criteriaBuilder.and(predicateList.toArray(Predicate[]::new)));
         return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<AirPlane> findAirPlaneWhereRouteSEOneWaypoint(FilterAirPlaneObject filterAirPlaneObject) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<AirPlane> query = criteriaBuilder.createQuery(AirPlane.class);
+        Root<AirPlane> root = query.from(AirPlane.class);
+        String routeStart = filterAirPlaneObject.getRouteStart();
+        String routeEnd = filterAirPlaneObject.getRouteEnd();
+
+        //выбираю все самолеты вылетающие из routeStart
+        Predicate predicateFindAllPlaneWhereRouteStart = criteriaBuilder.equal(root.get(AirPlane_.routeStart), routeStart);
+        query.where(predicateFindAllPlaneWhereRouteStart);
+        List<AirPlane> resultRouteStartList = entityManager.createQuery(query).getResultList();
+
+        //выбираю из этих самолетов те, у которых есть routeEnd
+        List<String> routeEndList = resultRouteStartList.stream().map(AirPlane::getRouteEnd).collect(Collectors.toList());
+        List<Predicate> predicateRoute = routeEndList.stream()
+                .map(routeEndSecond -> criteriaBuilder.equal(root.get(AirPlane_.routeStart), routeEndSecond))
+                .collect(Collectors.toList());
+        Predicate or = criteriaBuilder.or(predicateRoute.toArray(Predicate[]::new));
+        Predicate equal = criteriaBuilder.equal(root.get(AirPlane_.routeEnd), routeEnd);
+        Predicate and = criteriaBuilder.and(or, equal);
+        query.where(and);
+        List<AirPlane> resultListRouteEnd = entityManager.createQuery(query).getResultList();
+
+        //выбираю для найденных routeStart wayPoint routeEnd
+        List<String> routeStartList = resultListRouteEnd.stream().map(AirPlane::getRouteStart).collect(Collectors.toList());
+        System.out.println(routeStartList); //[Minsk-moskva, Paris-moskva]
+
+        List<Predicate> predicateRouteEnd = routeStartList.stream()
+                .map(routeEndSecond -> criteriaBuilder.equal(root.get(AirPlane_.routeEnd), routeEndSecond))
+                .collect(Collectors.toList());
+        Predicate orSecond = criteriaBuilder.or(predicateRouteEnd.toArray(Predicate[]::new));
+        Predicate equalSecond = criteriaBuilder.equal(root.get(AirPlane_.routeStart), routeStart);
+        Predicate andSecond = criteriaBuilder.and(orSecond, equalSecond);
+        query.where(andSecond);
+        List<AirPlane> resultListRouteStart = entityManager.createQuery(query).getResultList();
+
+        return Stream.concat(resultListRouteStart.stream(), resultListRouteEnd.stream())
+                .collect(Collectors.toList());
     }
 }

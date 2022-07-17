@@ -1,14 +1,18 @@
 package org.example.mapper.api;
 
+import lombok.RequiredArgsConstructor;
 import org.example.dto.api.AirPlaneDTOModif;
+import org.example.mapper.TicketMapper;
 import org.example.model.AirPlane;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
 @Component
 public class AirPlaneMapperModif {
+    private final TicketMapper ticketMapper;
+
     public AirPlaneDTOModif toDTO(AirPlane airPlane) {
         return AirPlaneDTOModif.builder()
                 .id(airPlane.getId())
@@ -19,7 +23,7 @@ public class AirPlaneMapperModif {
                 .numberPassanger(airPlane.getNumberPassanger())
                 .flightDateStart(airPlane.getFlightDateStart())
                 .flightDateEnd(airPlane.getFlightDateEnd())
-                .tickets(airPlane.getTickets())
+                .ticketDTOS(ticketMapper.toDTO(airPlane.getTickets()))
                 .build();
     }
 
@@ -40,7 +44,7 @@ public class AirPlaneMapperModif {
                 .numberPassanger(airPlaneDTOModif.getNumberPassanger())
                 .flightDateStart(airPlaneDTOModif.getFlightDateStart())
                 .flightDateEnd(airPlaneDTOModif.getFlightDateEnd())
-                .tickets(airPlaneDTOModif.getTickets())
+                .tickets(ticketMapper.toModel(airPlaneDTOModif.getTicketDTOS()))
                 .build();
     }
 }

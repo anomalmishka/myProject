@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.dto.TicketDTO;
 import org.example.model.Ticket;
 
 import java.util.Date;
@@ -22,5 +23,5 @@ public class AirPlaneDTOModif {
     private Integer numberPassanger;
     private Date flightDateStart;
     private Date flightDateEnd;
-    private List<Ticket> tickets;
+    private List<TicketDTO> ticketDTOS;
 }

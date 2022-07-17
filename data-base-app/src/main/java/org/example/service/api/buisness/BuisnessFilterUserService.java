@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface BuisnessFilterUserService {
 
-    List<User> findAllUserWhereAirPlane(Long idAirPlane);
+    List<User> findAllUserWhereAirCompany(Long idAirCompany);
 
+    List<User> findAllUserWhereAirPlane(Long idAirPlane);
 }
 

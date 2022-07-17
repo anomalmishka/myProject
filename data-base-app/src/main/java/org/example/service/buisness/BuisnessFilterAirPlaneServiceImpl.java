@@ -50,4 +50,9 @@ public class BuisnessFilterAirPlaneServiceImpl implements BuisnessFilterAirPlane
     public List<AirPlane> findAirPlaneWhereRouteSEAndDateSEAndPriceSE(FilterAirPlaneObject filterAirPlaneObject) {
         return airPlaneCustomDAOImpl.findAirPlaneWhereRouteSEAndDateSEAndPriceSE(filterAirPlaneObject);
     }
+
+    @Override
+    public List<AirPlane> findAirPlaneWhereRouteSEOneWaypoint(FilterAirPlaneObject filterAirPlaneObject) {
+        return airPlaneCustomDAOImpl.findAirPlaneWhereRouteSEOneWaypoint(filterAirPlaneObject);
+    }
 }

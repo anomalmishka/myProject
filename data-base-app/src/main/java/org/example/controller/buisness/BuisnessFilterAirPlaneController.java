@@ -51,6 +51,9 @@ public class BuisnessFilterAirPlaneController {
     public List<AirPlaneDTOModif> findAirPlaneWhereRouteSEAndDateSEAndPriceSE(@RequestBody FilterAirPlaneDTO filterAirPlaneDTO) {
         return airPlaneMapperModif.toDTO(buisnessFilterAirPlaneService.findAirPlaneWhereRouteSEAndDateSEAndPriceSE(filterAirPlaneMapper.toModel(filterAirPlaneDTO)));
     }
-
+    @PostMapping(path = "find/route/one/waypoint", produces = "application/json", consumes = "application/json")
+    public List<AirPlaneDTOModif> findAirPlaneWhereRouteSEOneWaypoint(@RequestBody FilterAirPlaneDTO filterAirPlaneDTO) {
+        return airPlaneMapperModif.toDTO(buisnessFilterAirPlaneService.findAirPlaneWhereRouteSEOneWaypoint(filterAirPlaneMapper.toModel(filterAirPlaneDTO)));
+    }
 }
 
