@@ -1,11 +1,11 @@
 package org.example.controller.buisness;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.FilterAirPlaneDTO;
-import org.example.dto.api.AirPlaneDTOModif;
-import org.example.mapper.FilterAirPlaneMapper;
-import org.example.mapper.api.AirPlaneMapperModif;
-import org.example.service.api.buisness.BuisnessFilterAirPlaneService;
+import org.example.dto.filter.FilterAirPlaneDTO;
+import org.example.dto.modelsDTO.modif.AirPlaneDTOModif;
+import org.example.mapper.filter.FilterAirPlaneMapper;
+import org.example.mapper.modelsMapper.modif.AirPlaneMapperModif;
+import org.example.service.interfaces.buisness.BuisnessFilterAirPlaneService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

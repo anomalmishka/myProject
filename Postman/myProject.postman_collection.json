@@ -7,687 +7,2189 @@
 	},
 	"item": [
 		{
-			"name": "buisness",
+			"name": "data-base-app",
 			"item": [
 				{
-					"name": "air/company",
+					"name": "buisness",
 					"item": [
 						{
-							"name": "create/all",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "filter",
+							"item": [
+								{
+									"name": "airPlane",
+									"item": [
+										{
+											"name": "simple filter",
+											"item": [
+												{
+													"name": "find/route",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"route"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "find/date",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/date",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"date"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "find/price",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/price",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"price"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "hard filter",
+											"item": [
+												{
+													"name": "find/route/and/date",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\",\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/date",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"route",
+																"and",
+																"date"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "find/route/and/price",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\",\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/price",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"route",
+																"and",
+																"price"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "find/date/and/price",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\",\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/date/and/price",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"date",
+																"and",
+																"price"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "find/route/and/date/and/price",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"routeStart\": \"London\",\n    \"routeEnd\": \"Minsk\",\n    \"dateStart\": \"1656846000000\",\n    \"dateEnd\": \"1656853200000\",\n    \"priceStart\": 300,\n    \"priceEnd\": 300\n}\n// {\n//     \"routeStart\": \"Moskva\",\n//     \"routeEnd\": \"Minsk\",\n//     \"dateStart\": \"1656838800000\",\n//     \"dateEnd\": \"1656846000000\",\n//     \"priceStart\": 200,\n//     \"priceEnd\": 200\n// }",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/date/and/price",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"route",
+																"and",
+																"date",
+																"and",
+																"price"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "waypoint",
+											"item": [
+												{
+													"name": "find/route/one/waypoint",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"routeStart\": \"Paris\",\n    \"routeEnd\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/one/waypoint",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"air",
+																"plane",
+																"find",
+																"route",
+																"one",
+																"waypoint"
+															]
+														}
+													},
+													"response": []
+												}
+											]
 										}
-									}
+									]
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/create/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"create",
-										"all"
+								{
+									"name": "user",
+									"item": [
+										{
+											"name": "find/user/air/plane/1/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/buisness/filter/user/find/user/air/plane/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"buisness",
+														"filter",
+														"user",
+														"find",
+														"user",
+														"air",
+														"plane",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "find/user/air/company/1/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/buisness/filter/user/find/user/air/company/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"buisness",
+														"filter",
+														"user",
+														"find",
+														"user",
+														"air",
+														"company",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "ticket",
+									"item": [
+										{
+											"name": "find/ticket/where/user/1/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/buisness/filter/ticket/find/ticket/where/user/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"buisness",
+														"filter",
+														"ticket",
+														"find",
+														"ticket",
+														"where",
+														"user",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										}
 									]
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "update/all",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"id\":1,\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/update/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"update",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "read/1/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/read/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"read",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,5]\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"delete",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,3]\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/air/company/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"air",
-										"company",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
+							]
 						}
 					]
 				},
 				{
-					"name": "user",
+					"name": "models controller",
 					"item": [
 						{
-							"name": "create/all",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "air company",
+							"item": [
+								{
+									"name": "air/company/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"read",
+												"all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/create/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"create",
-										"all"
-									]
+								{
+									"name": "air/company/read/2/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/read/2/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"read",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/read/all/id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/update",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/delete/1/",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/delete/1/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"delete",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/delete/all/id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[2,3]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "update/all",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\":3,\n    \"name\": \"Guest\",\n    \"lastname\": \"GuestLastname\",\n    \"sex\": \"M\",\n    \"phone\": \"2222222\",\n    \"passportNumber\": \"GG33333333\",\n    \"email\": \"guest@gmail.com\",\n    \"age\": 36,\n    \"categoryClient\": \"VIP\",\n    \"isActiveProfile\": true,\n    \"bankCards\":\n    [\n        {\n        \"id\":3,\n        \"cardType\": \"VISA\",\n        \"bank\": \"BELINVESTBANK\",\n        \"holderName\": \"Guest\",\n        \"holderLastname\": \"GuestLastname\",\n        \"cardNumber\": 6666555544443333,\n        \"serviceEndDate\": 1656838800000\n        }\n    ],\n    \"tickets\":\n    [\n        {        \n        \"id\":3,\n        \"passengerSeat\": \"444\",\n        \"ticketPrice\": 666,\n        \"isEmptySeat\": false,\n        \"isActive\": true\n        }\n    ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "air plane",
+							"item": [
+								{
+									"name": "air/plane/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"read",
+												"all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/update/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"update",
-										"all"
-									]
+								{
+									"name": "air/plane/read/2/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/read/2/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"read",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/plane/read/all/id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/plane/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"type\": \"747\",\r\n    \"routeStart\": \"Minsk\",\r\n    \"routeEnd\": \"Moskva\",\r\n    \"ticketPrice\": 300,\r\n    \"numberPassanger\": 6,\r\n    \"flightDateStart\": 1656838800000,\r\n    \"flightDateEnd\": 1656838800000\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/plane/update",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"type\": \"747\",\r\n    \"routeStart\": \"Minsk\",\r\n    \"routeEnd\": \"Moskva\",\r\n    \"ticketPrice\": 300,\r\n    \"numberPassanger\": 6,\r\n    \"flightDateStart\": 1656838800000,\r\n    \"flightDateEnd\": 1656838800000\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/plane/delete/1/",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/delete/1/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"delete",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/plane/delete/all/id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[2,3]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/plane/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"plane",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "bankcard",
+							"item": [
+								{
+									"name": "ticket/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"read",
+												"all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"read",
-										"all"
-									]
+								{
+									"name": "ticket/read/2/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/read/2/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"read",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/read/all/id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"cardType\": \"VISA\",\r\n    \"bank\": \"BELARUSBANK\",\r\n    \"holderName\": \"MAKSIM\",\r\n    \"holderLastname\": \"YAZVINSKI\",\r\n    \"serviceEndDate\": 1212121212121\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/update",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"cardType\": \"VISA\",\r\n    \"bank\": \"BELARUSBANK\",\r\n    \"holderName\": \"MAKSIM\",\r\n    \"holderLastname\": \"YAZVINSKI\",\r\n    \"serviceEndDate\": 1212121212121\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/delete/1/",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/delete/1/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"delete",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/delete/all/id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[2,3]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/bank/card/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"bank",
+												"card",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "read/1/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "ticket",
+							"item": [
+								{
+									"name": "ticket/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"read",
+												"all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/read/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"read",
-										"1",
-										""
-									]
+								{
+									"name": "ticket/read/2/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/read/4/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"read",
+												"4",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/read/all/id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"passengerSeat\": 30,\r\n    \"isEmptySeat\": false,\r\n    \"isActive\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/update",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"passengerSeat\": 30,\r\n    \"isEmptySeat\": false,\r\n    \"isActive\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/delete/1/",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/delete/1/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"delete",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ticket/delete/all/id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[2,3]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/ticket/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"ticket",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,5]\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "user",
+							"item": [
+								{
+									"name": "get user/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"read",
+												"all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"read",
-										"all",
-										"id"
-									]
+								{
+									"name": "get user/read/2/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/read/2/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"read",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get user/read/all/id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "post user/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"max\",\r\n    \"lastname\": \"yazvinski\",\r\n    \"sex\": \"M\",\r\n    \"phone\": 99996666,\r\n    \"passportNumber\": \"KK2223344\",\r\n    \"email\": \"abrakadabra@gmail.com\",\r\n    \"age\": 30,\r\n    \"categoryClient\": \"VIP\",\r\n    \"isActiveProfile\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "put user/update",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"vasya\",\r\n    \"lastname\": \"vase4kin\",\r\n    \"sex\": \"M\",\r\n    \"phone\": 1000000,\r\n    \"passportNumber\": \"KH0000000\",\r\n    \"email\": \"abrakadabra@gmail.com\",\r\n    \"age\": 40,\r\n    \"categoryClient\": \"simple\",\r\n    \"isActiveProfile\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "del user/delete/1/",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/delete/1/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"delete",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "del user/delete/all/id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[2,3]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/user/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"user",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "modif",
+							"item": [
+								{
+									"name": "user",
+									"item": [
+										{
+											"name": "create/all",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Guest\",\n    \"lastname\": \"GuestLastname\",\n    \"sex\": \"M\",\n    \"phone\": \"2222222\",\n    \"passportNumber\": \"GG33333333\",\n    \"email\": \"guest@gmail.com\",\n    \"age\": 36,\n    \"categoryClient\": \"VIP\",\n    \"isActiveProfile\": true,\n    \"bankCards\":\n    [\n        {\n        \"cardType\": \"VISA\",\n        \"bank\": \"BELINVESTBANK\",\n        \"holderName\": \"Guest\",\n        \"holderLastname\": \"GuestLastname\",\n        \"cardNumber\": 6666555544443333,\n        \"serviceEndDate\": 1656838800000\n        }\n    ],\n    \"tickets\":\n    [\n        {        \n        \"passengerSeat\": \"444\",\n        \"isEmptySeat\": false,\n        \"isActive\": true\n        }\n    ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/create/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"create",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update/all",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\":3,\n    \"name\": \"Guest\",\n    \"lastname\": \"GuestLastname\",\n    \"sex\": \"M\",\n    \"phone\": \"2222222\",\n    \"passportNumber\": \"GG33333333\",\n    \"email\": \"guest@gmail.com\",\n    \"age\": 36,\n    \"categoryClient\": \"VIP\",\n    \"isActiveProfile\": true,\n    \"bankCards\":\n    [\n        {\n        \"id\":3,\n        \"cardType\": \"VISA\",\n        \"bank\": \"BELINVESTBANK\",\n        \"holderName\": \"Guest\",\n        \"holderLastname\": \"GuestLastname\",\n        \"cardNumber\": 6666555544443333,\n        \"serviceEndDate\": 1656838800000\n        }\n    ],\n    \"tickets\":\n    [\n        {        \n        \"id\":3,\n        \"passengerSeat\": \"444\",\n        \"isEmptySeat\": false,\n        \"isActive\": true\n        }\n    ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/update/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"update",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/read/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"read",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/1/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/read/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"read",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/all/id",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,5]\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/read/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"read",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,3]\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"delete",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
 										}
-									}
+									]
 								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"delete",
-										"1",
-										""
+								{
+									"name": "air/company",
+									"item": [
+										{
+											"name": "create/all",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"ticketPrice\": 300,\n                \"numberPassanger\": \"3\",\n                \"flightDateStart\": 1656838800000,\n                \"flightDateEnd\": 1656838900000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/create/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"create",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update/all",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"id\":1,\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"id\": 1,\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"ticketPrice\": 300,\n                \"numberPassanger\": \"3\",\n                \"flightDateStart\": 1656838800000,\n                \"flightDateEnd\": 1656838900000,\n                \"tickets\":\n                        [\n                            {\n                                \"id\": 1,\n                                \"passengerSeat\": 1,\n                                \"isEmptySeat\": false,\n                                \"isActive\": true\n                            },\n                            {\n                                \"id\": 2,\n                                \"passengerSeat\": 2,\n                                \"isEmptySeat\": false,\n                                \"isActive\": true\n                            },\n                            {\n                                \"id\": 3,\n                                \"passengerSeat\": 3,\n                                \"isEmptySeat\": false,\n                                \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/update/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"update",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"read",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/1/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"read",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/all/id",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,5]\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"read",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,3]\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/company/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"company",
+														"delete",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										}
 									]
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,3]\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/buisness/user/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"buisness",
-										"user",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
+							]
 						}
 					]
 				}
 			]
 		},
 		{
-			"name": "models controller",
+			"name": "service-app",
 			"item": [
 				{
-					"name": "air company",
+					"name": "find user where airplane",
 					"item": [
 						{
-							"name": "air/company/read/all",
+							"name": "find/user/air/plane/1/ Copy",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/read/2/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/read/2/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"read",
-										"2",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,10]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "id",
-										"value": "2",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/delete/1/",
-							"request": {
-								"method": "DELETE",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -699,1026 +2201,21 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/delete/1/",
+									"raw": "http://localhost:8002/service-app/user/find/where/air/plane/1/",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8003",
+									"port": "8002",
 									"path": [
-										"data-base-app",
+										"service-app",
+										"user",
+										"find",
+										"where",
 										"air",
-										"company",
-										"delete",
+										"plane",
 										"1",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/company/delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[2,3]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/company/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"company",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "air plane",
-					"item": [
-						{
-							"name": "air/plane/read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/read/2/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/read/2/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"read",
-										"2",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,10]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "id",
-										"value": "2",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"747\",\r\n    \"routeStart\": \"Minsk\",\r\n    \"routeEnd\": \"Moskva\",\r\n    \"numberPassanger\": \"120\",\r\n    \"flightDate\": 1212121212121\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"type\": \"747\",\r\n    \"routeStart\": \"Minsk\",\r\n    \"routeEnd\": \"Moskva\",\r\n    \"numberPassanger\": \"120\",\r\n    \"flightDate\": 1212121212121\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"delete",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "air/plane/delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[2,3]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/air/plane/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"air",
-										"plane",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "bankcard",
-					"item": [
-						{
-							"name": "ticket/read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/read/2/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/read/2/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"read",
-										"2",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,10]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "id",
-										"value": "2",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"cardType\": \"VISA\",\r\n    \"bank\": \"BELARUSBANK\",\r\n    \"holderName\": \"MAKSIM\",\r\n    \"holderLastname\": \"YAZVINSKI\",\r\n    \"serviceEndDate\": 1212121212121\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"cardType\": \"VISA\",\r\n    \"bank\": \"BELARUSBANK\",\r\n    \"holderName\": \"MAKSIM\",\r\n    \"holderLastname\": \"YAZVINSKI\",\r\n    \"serviceEndDate\": 1212121212121\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"delete",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[2,3]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/bank/card/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"bank",
-										"card",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "ticket",
-					"item": [
-						{
-							"name": "ticket/read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/read/2/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/read/4/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"read",
-										"4",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,10]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "id",
-										"value": "2",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"passengerSeat\": 30,\r\n    \"ticketPrice\": 400,\r\n    \"isEmptySeat\": false,\r\n    \"isActive\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"passengerSeat\": 30,\r\n    \"ticketPrice\": 400,\r\n    \"isEmptySeat\": false,\r\n    \"isActive\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"delete",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ticket/delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[2,3]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/ticket/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"ticket",
-										"delete",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "user",
-					"item": [
-						{
-							"name": "get user/read/all",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/read/all",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"read",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get user/read/2/",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/read/2/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"read",
-										"2",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get user/read/all/id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[1,2,10]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/read/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"read",
-										"all",
-										"id"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "post user/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "id",
-										"value": "2",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"max\",\r\n    \"lastname\": \"yazvinski\",\r\n    \"sex\": \"M\",\r\n    \"phone\": 99996666,\r\n    \"passportNumber\": \"KK2223344\",\r\n    \"email\": \"abrakadabra@gmail.com\",\r\n    \"age\": 30,\r\n    \"categoryClient\": \"VIP\",\r\n    \"isActiveProfile\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "put user/update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"vasya\",\r\n    \"lastname\": \"vase4kin\",\r\n    \"sex\": \"M\",\r\n    \"phone\": 1000000,\r\n    \"passportNumber\": \"KH0000000\",\r\n    \"email\": \"abrakadabra@gmail.com\",\r\n    \"age\": 40,\r\n    \"categoryClient\": \"simple\",\r\n    \"isActiveProfile\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "del user/delete/1/",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/delete/1/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"delete",
-										"1",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "del user/delete/all/id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[2,3]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8003/data-base-app/user/delete/all/id",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8003",
-									"path": [
-										"data-base-app",
-										"user",
-										"delete",
-										"all",
-										"id"
 									]
 								}
 							},

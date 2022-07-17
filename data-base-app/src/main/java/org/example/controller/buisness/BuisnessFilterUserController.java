@@ -1,9 +1,9 @@
 package org.example.controller.buisness;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.UserDTO;
-import org.example.mapper.UserMapper;
-import org.example.service.api.buisness.BuisnessFilterUserService;
+import org.example.dto.modelsDTO.UserDTO;
+import org.example.mapper.modelsMapper.UserMapper;
+import org.example.service.interfaces.buisness.BuisnessFilterUserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
