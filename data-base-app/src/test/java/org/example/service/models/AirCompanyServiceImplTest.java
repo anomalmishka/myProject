@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.models;
 
 import org.example.dao.models.AirCompanyDAO;
 import org.example.model.entity.AirCompany;
