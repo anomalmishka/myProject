@@ -124,11 +124,11 @@ class AirCompanyServiceImplTest {
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
                 .build();
-//        Mockito.when(airCompanyDAO.deleteById(GIVEN_ID)).thenReturn(ANSWER);
-//        List<AirCompany> ACTUAL_LIST = airCompanyService.deleteById(GIVEN_ID);
-//        assertEquals(EXPECTED_LIST, ACTUAL_LIST);
-//        Mockito.verify(airCompanyDAO, Mockito.times(1))
-//                .findAllById(GIVEN_ID_LIST);
+        Mockito.when(airCompanyDAO.findById(GIVEN_ID)).thenReturn(Optional.of(ANSWER));
+        AirCompany ACTUAL = airCompanyService.deleteById(GIVEN_ID);
+        assertEquals(EXPECTED, ACTUAL);
+        Mockito.verify(airCompanyDAO, Mockito.times(1))
+                .deleteById(GIVEN_ID);
     }
 
     @Test

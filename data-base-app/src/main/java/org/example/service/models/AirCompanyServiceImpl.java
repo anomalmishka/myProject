@@ -7,6 +7,7 @@ import org.example.model.entity.AirCompany;
 import org.example.service.api.AirCompanyService;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -48,7 +49,7 @@ public class AirCompanyServiceImpl implements AirCompanyService {
 
     @Override
     public AirCompany deleteById(Long id) {
-        AirCompany deleteEntity = readById(id);
+        AirCompany deleteEntity = airCompanyDAO.findById(id).orElse(null);
         airCompanyDAO.deleteById(id);
         return deleteEntity;
     }

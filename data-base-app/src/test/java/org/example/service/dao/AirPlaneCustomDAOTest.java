@@ -1,4 +1,4 @@
-package org.example.service.dto;
+package org.example.service.dao;
 
 import org.example.dao.custom.airPlane.AirPlaneCustomDAO;
 import org.example.model.entity.AirPlane;

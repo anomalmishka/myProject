@@ -1,8 +1,8 @@
 package org.example.dao.custom.airPlane;
 
+import org.example.model.entity.AirPlane_;
 import org.example.model.filter.FilterAirPlaneObject;
 import org.example.model.entity.AirPlane;
-import org.example.model.entity.AirPlane_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
