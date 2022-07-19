@@ -1,7 +1,7 @@
 package org.example.mapper.modelsMapper.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.AirCompanyDTOModif;
+import org.example.dto.models.modif.AirCompanyDTOModif;
 import org.example.model.entity.AirCompany;
 import org.springframework.stereotype.Component;
 

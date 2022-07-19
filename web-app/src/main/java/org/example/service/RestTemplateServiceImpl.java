@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.dto.modelsDTO.modif.AirPlaneDTOModif;
+import org.example.dto.models.modif.AirPlaneDTOModif;
 import org.example.model.filter.FilterObj;
 import org.example.service.interfaces.RestTemplateService;
 import org.springframework.boot.web.client.RestTemplateBuilder;

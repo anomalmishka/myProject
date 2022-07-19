@@ -1,10 +1,9 @@
 package org.example.mapper.modelsMapper.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.UserDTOModif;
+import org.example.dto.models.modif.UserDTOModif;
 import org.example.mapper.modelsMapper.BankCardMapper;
 import org.example.mapper.modelsMapper.TicketMapper;
-import org.example.model.entity.BankCard;
 import org.example.model.entity.User;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package org.example.service.interfaces;
 
-import org.example.dto.modelsDTO.modif.AirPlaneDTOModif;
+import org.example.dto.models.modif.AirPlaneDTOModif;
 import org.example.model.filter.FilterObj;
 import org.springframework.http.HttpMethod;
 

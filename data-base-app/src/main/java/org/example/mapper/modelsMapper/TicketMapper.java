@@ -1,7 +1,7 @@
 package org.example.mapper.modelsMapper;
 
 
-import org.example.dto.modelsDTO.TicketDTO;
+import org.example.dto.models.TicketDTO;
 import org.example.model.entity.Ticket;
 import org.springframework.stereotype.Component;
 

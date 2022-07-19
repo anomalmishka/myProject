@@ -47,23 +47,13 @@ public class SecurityConfigDocker extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/create/**").hasAnyAuthority("AUTHOR")
-                .antMatchers("/update/**").hasAnyAuthority("EDITOR", "AUTHOR")
-                .antMatchers("/delete/**").hasAnyAuthority("AUTHOR")
-                .antMatchers("/read/**").hasAnyAuthority("READER", "EDITOR", "AUTHOR")
-                .antMatchers("/find/**").hasAnyAuthority("AUTHOR")
+                .antMatchers("/find/**").hasAnyAuthority("ADMIN")
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .and()
                 .exceptionHandling().accessDeniedPage("/access/denied")
                 .and()
                 .formLogin();
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("h2-console/**").permitAll()
-                .and()
-                .headers()
-                .frameOptions().disable();
     }
 
 }

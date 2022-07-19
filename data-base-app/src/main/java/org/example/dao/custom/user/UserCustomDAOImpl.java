@@ -1,6 +1,10 @@
 package org.example.dao.custom.user;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.entity.AirCompany;
+import org.example.model.entity.AirPlane;
+import org.example.model.entity.Ticket;
+import org.example.model.entity.User;
 import org.example.model.entity.*;
 import org.springframework.stereotype.Repository;
 

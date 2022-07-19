@@ -1,9 +1,9 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.AirCompanyDTO;
+import org.example.dto.models.AirCompanyDTO;
 import org.example.mapper.modelsMapper.AirCompanyMapper;
-import org.example.service.interfaces.models.AirCompanyService;
+import org.example.service.models.api.AirCompanyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -46,15 +46,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="buisnessObj : ${buisnessObjListFind}">
-            <td><span th:text="${buisnessObj.idAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.typeAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.routeStartAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.routeEndAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.ticketPriceAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.numberPassangerAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.flightDateStartAirPlane}"></span></td>
-            <td><span th:text="${buisnessObj.flightDateEndAirPlane}"></span></td>
+        <tr th:each="airPlaneObj : ${airPlaneObjListFind}">
+            <td><span th:text="${airPlaneObj.idAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.typeAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.routeStartAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.routeEndAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.ticketPriceAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.numberPassangerAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.flightDateStartAirPlane}"></span></td>
+            <td><span th:text="${airPlaneObj.flightDateEndAirPlane}"></span></td>
         </tr>
         </tbody>
     </table>
@@ -68,11 +68,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="buisnessObj : ${buisnessObjListFind}">
-            <td><span th:text="${buisnessObj.idTicket}"></span></td>
-            <td><span th:text="${buisnessObj.passengerSeatTicket}"></span></td>
-            <td><span th:text="${buisnessObj.isEmptySeatTicket}"></span></td>
-            <td><span th:text="${buisnessObj.isActiveTicket}"></span></td>
+        <tr th:each="airPlaneObj : ${airPlaneObjListFind}">
+            <td><span th:text="${airPlaneObj.idTicket}"></span></td>
+            <td><span th:text="${airPlaneObj.passengerSeatTicket}"></span></td>
+            <td><span th:text="${airPlaneObj.isEmptySeatTicket}"></span></td>
+            <td><span th:text="${airPlaneObj.isActiveTicket}"></span></td>
         </tr>
         </tbody>
     </table>

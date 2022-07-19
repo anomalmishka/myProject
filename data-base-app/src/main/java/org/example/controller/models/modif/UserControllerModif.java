@@ -1,9 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.UserDTOModif;
+import org.example.dto.models.modif.UserDTOModif;
 import org.example.mapper.modelsMapper.modif.UserMapperModif;
-import org.example.service.interfaces.models.UserService;
+import org.example.service.models.api.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.AirPlaneDTOModif;
+import org.example.dto.models.modif.AirPlaneDTOModif;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.filter.FilterObj;
 import org.example.service.interfaces.RestTemplateService;

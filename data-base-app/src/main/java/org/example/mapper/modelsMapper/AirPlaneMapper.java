@@ -1,6 +1,6 @@
 package org.example.mapper.modelsMapper;
 
-import org.example.dto.modelsDTO.AirPlaneDTO;
+import org.example.dto.models.AirPlaneDTO;
 import org.example.model.entity.AirPlane;
 import org.springframework.stereotype.Component;
 
