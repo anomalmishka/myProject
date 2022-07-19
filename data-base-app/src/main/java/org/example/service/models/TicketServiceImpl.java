@@ -5,7 +5,7 @@ import org.example.dao.models.TicketDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.Ticket;
-import org.example.service.models.api.TicketService;
+import org.example.service.api.TicketService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

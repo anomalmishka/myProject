@@ -4,7 +4,7 @@ import org.example.dao.models.AirPlaneDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.AirPlane;
-import org.example.service.models.api.AirPlaneService;
+import org.example.service.api.AirPlaneService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;

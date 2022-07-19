@@ -2,7 +2,7 @@ package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.UserDTO;
 import org.example.mapper.modelsMapper.UserMapper;
-import org.example.service.models.api.UserService;
+import org.example.service.api.UserService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

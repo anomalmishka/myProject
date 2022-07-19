@@ -6,7 +6,7 @@ import org.example.dao.models.UserDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.User;
-import org.example.service.models.api.UserService;
+import org.example.service.api.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.example.service.models.api;
+package org.example.service.api;
 import org.example.model.entity.AirCompany;
 import java.util.List;
 

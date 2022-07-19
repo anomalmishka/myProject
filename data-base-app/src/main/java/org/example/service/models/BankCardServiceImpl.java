@@ -4,7 +4,7 @@ import org.example.dao.models.BankCardDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.BankCard;
-import org.example.service.models.api.BankCardService;
+import org.example.service.api.BankCardService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
