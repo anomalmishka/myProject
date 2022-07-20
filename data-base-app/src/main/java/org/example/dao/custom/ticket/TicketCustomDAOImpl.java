@@ -19,12 +19,12 @@ public class TicketCustomDAOImpl implements TicketCustomDAO{
     private final EntityManagerFactory entityManagerFactory;
 
     @Override
-    public List<Ticket> findAllTicketWhereUser(Long idUser) {
+    public List<Ticket> findAllTicketWherePassengerProfile(Long idPassengerProfile) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = criteriaBuilder.createQuery(Ticket.class);
         Root<Ticket> root = query.from(Ticket.class);
-        Predicate predicate = criteriaBuilder.equal(root.get(Ticket_.user), idUser);
+        Predicate predicate = criteriaBuilder.equal(root.get(Ticket_.passengerProfile), idPassengerProfile);
         query.where(predicate);
         return entityManager.createQuery(query).getResultList();
     }

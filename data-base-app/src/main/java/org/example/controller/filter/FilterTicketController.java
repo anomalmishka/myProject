@@ -18,9 +18,9 @@ public class FilterTicketController {
     private final FilterTicketService filterTicketService;
     private final TicketMapper ticketMapper;
 
-    @GetMapping(path = "find/ticket/where/user/{id}/", produces = "application/json", consumes = "application/json")
-    public List<TicketDTO> findAllTicketWhereUser(@PathVariable("id") Long id) {
-        return ticketMapper.toDTO(filterTicketService.findAllTicketWhereUser(id));
+    @GetMapping(path = "find/ticket/where/passenger/profile/{id}/", produces = "application/json", consumes = "application/json")
+    public List<TicketDTO> findAllTicketWherePassengerProfile(@PathVariable("id") Long id) {
+        return ticketMapper.toDTO(filterTicketService.findAllTicketWherePassengerProfile(id));
     }
 }
 

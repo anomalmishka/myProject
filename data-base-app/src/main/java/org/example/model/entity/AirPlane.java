@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,15 +16,12 @@ import java.util.List;
 public class AirPlane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "TYPE")
     private String type;
-    private String routeStart;
-    private String routeEnd;
-    private Integer ticketPrice;
-    private Integer numberPassanger;
-    private Date flightDateStart;
-    private Date flightDateEnd;
+    @Column(name = "NUMBER_SEAT")
+    private Integer numberSeat;
 
     @ManyToOne
     private AirCompany airCompany;
@@ -35,5 +31,12 @@ public class AirPlane {
             fetch = FetchType.LAZY
     )
     @JoinColumn(name="AIR_PLANE_ID")
-    private List<Ticket> tickets;
+    private List<FlightRoute> flightRouteList;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name="AIR_PLANE_ID")
+    private List<Seat> seatList;
 }

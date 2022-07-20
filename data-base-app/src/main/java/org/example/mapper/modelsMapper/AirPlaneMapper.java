@@ -14,12 +14,7 @@ public class AirPlaneMapper {
         return AirPlaneDTO.builder()
                 .id(airPlane.getId())
                 .type(airPlane.getType())
-                .routeStart(airPlane.getRouteStart())
-                .routeEnd(airPlane.getRouteEnd())
-                .ticketPrice(airPlane.getTicketPrice())
-                .numberPassanger(airPlane.getNumberPassanger())
-                .flightDateStart(airPlane.getFlightDateStart())
-                .flightDateEnd(airPlane.getFlightDateEnd())
+                .numberSeat(airPlane.getNumberSeat())
                 .build();
     }
 
@@ -34,12 +29,7 @@ public class AirPlaneMapper {
         return AirPlane.builder()
                 .id(airPlaneDTO.getId())
                 .type(airPlaneDTO.getType())
-                .routeStart(airPlaneDTO.getRouteStart())
-                .routeEnd(airPlaneDTO.getRouteEnd())
-                .ticketPrice(airPlaneDTO.getTicketPrice())
-                .numberPassanger(airPlaneDTO.getNumberPassanger())
-                .flightDateStart(airPlaneDTO.getFlightDateStart())
-                .flightDateEnd(airPlaneDTO.getFlightDateEnd())
+                .numberSeat(airPlaneDTO.getNumberSeat())
                 .build();
     }
 }

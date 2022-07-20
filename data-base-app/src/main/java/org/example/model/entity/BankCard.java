@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,15 +15,11 @@ import java.util.Date;
 public class BankCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
-    private CardType cardType;
-    private Bank bank;
-    private String holderName;
-    private String holderLastname;
+    @Column(name = "CARD_NUMBER")
     private Long cardNumber;
-    private Date serviceEndDate;
 
     @ManyToOne
-    private User user;
+    private UserProfile userProfile;
 }

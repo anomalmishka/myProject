@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TicketDTO {
     private Long id;
-    private Integer passengerSeat;
-    private Boolean isEmptySeat;
     private Boolean isActive;
 }

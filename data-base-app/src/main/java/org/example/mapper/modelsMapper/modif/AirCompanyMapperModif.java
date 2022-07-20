@@ -18,7 +18,7 @@ public class AirCompanyMapperModif {
                 .id(airCompany.getId())
                 .nameCompany(airCompany.getNameCompany())
                 .countryLocation(airCompany.getCountryLocation())
-                .airPlaneDTOModifs(airPlaneMapperModif.toDTO(airCompany.getAirPlanes()))
+                .airPlaneDTOModifList(airPlaneMapperModif.toDTO(airCompany.getAirPlaneList()))
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class AirCompanyMapperModif {
                 .id(airCompanyDTOModif.getId())
                 .nameCompany(airCompanyDTOModif.getNameCompany())
                 .countryLocation(airCompanyDTOModif.getCountryLocation())
-                .airPlanes(airPlaneMapperModif.toModel(airCompanyDTOModif.getAirPlaneDTOModifs()))
+                .airPlaneList(airPlaneMapperModif.toModel(airCompanyDTOModif.getAirPlaneDTOModifList()))
                 .build();
     }
 }

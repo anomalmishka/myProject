@@ -1,6 +1,5 @@
 package org.example.service.config;
 
-
 import org.example.dao.custom.airPlane.AirPlaneCustomDAO;
 import org.example.dao.custom.airPlane.AirPlaneCustomDAOImpl;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -13,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 public class UnitTestConfig {
     @Bean
     @Profile("test")
-    AirPlaneCustomDAO airPlaneCustomDAOImpl(EntityManagerFactory managerFactory){
+    AirPlaneCustomDAO airPlaneCustomDAOImpl(EntityManagerFactory managerFactory) {
         return new AirPlaneCustomDAOImpl(managerFactory);
     }
 }

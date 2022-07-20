@@ -2,7 +2,6 @@ package org.example.service.models;
 
 import org.example.dao.models.AirCompanyDAO;
 import org.example.model.entity.AirCompany;
-import org.example.service.models.AirCompanyServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ class AirCompanyServiceImplTest {
     AirCompanyServiceImpl airCompanyService;
 
     @Test
-    void whenCreate_thenReturnEntity() {
+    public void whenCreate_thenReturnEntity() {
         AirCompany GIVEN = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
@@ -48,7 +47,7 @@ class AirCompanyServiceImplTest {
     }
 
     @Test
-    void whenReadAll_thenReturnEntityList() {
+    public void whenReadAll_thenReturnEntityList() {
         AirCompany ANSWER = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
@@ -69,7 +68,7 @@ class AirCompanyServiceImplTest {
     }
 
     @Test
-    void whenReadById_thenReturnEntity(){
+    public void whenReadById_thenReturnEntity() {
         Long GIVEN_ID = 1L;
         AirCompany ANSWER = AirCompany.builder()
                 .id(1L)
@@ -89,7 +88,7 @@ class AirCompanyServiceImplTest {
     }
 
     @Test
-    void whenReadAllById_thenReturnEntityList() {
+    public void whenReadAllById_thenReturnEntityList() {
         Long GIVEN_ID = 1L;
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         AirCompany ANSWER = AirCompany.builder()
@@ -112,7 +111,7 @@ class AirCompanyServiceImplTest {
     }
 
     @Test
-    void whenDeleteById_thenReturnEntityList() {
+    public void whenDeleteById_thenReturnEntityList() {
         Long GIVEN_ID = 1L;
         AirCompany ANSWER = AirCompany.builder()
                 .id(1L)
@@ -132,10 +131,10 @@ class AirCompanyServiceImplTest {
     }
 
     @Test
-    void deleteAllByIds() {
+    public void deleteAllByIds() {
     }
 
     @Test
-    void update() {
+    public void update() {
     }
 }

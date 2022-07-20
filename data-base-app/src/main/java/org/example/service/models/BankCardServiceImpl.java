@@ -18,10 +18,10 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public BankCard create(BankCard bankCard) {
-        if (bankCard.getCardType() != null) {
+        if (bankCard.getCardNumber() != null) {
             return bankCardDAO.save(bankCard);
         } else {
-            throw new ErrorInvalidData("CardType must not be null");
+            throw new ErrorInvalidData("CardNumber must not be null");
         }
     }
 
@@ -62,10 +62,10 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public BankCard update(BankCard bankCard) {
-        if (bankCard.getCardType() != null) {
+        if (bankCard.getCardNumber() != null) {
             return bankCardDAO.save(bankCard);
         } else {
-            throw new ErrorInvalidData("CardType must not be null");
+            throw new ErrorInvalidData("CardNumber must not be null");
         }
     }
 }

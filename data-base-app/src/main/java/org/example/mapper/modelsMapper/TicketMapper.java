@@ -1,6 +1,5 @@
 package org.example.mapper.modelsMapper;
 
-
 import org.example.dto.models.TicketDTO;
 import org.example.model.entity.Ticket;
 import org.springframework.stereotype.Component;
@@ -13,8 +12,6 @@ public class TicketMapper {
     public TicketDTO toDTO(Ticket ticket) {
         return TicketDTO.builder()
                 .id(ticket.getId())
-                .passengerSeat(ticket.getPassengerSeat())
-                .isEmptySeat(ticket.getIsEmptySeat())
                 .isActive(ticket.getIsActive())
                 .build();
     }
@@ -29,8 +26,6 @@ public class TicketMapper {
     public Ticket toModel(TicketDTO ticketDTO) {
         return Ticket.builder()
                 .id(ticketDTO.getId())
-                .passengerSeat(ticketDTO.getPassengerSeat())
-                .isEmptySeat(ticketDTO.getIsEmptySeat())
                 .isActive(ticketDTO.getIsActive())
                 .build();
     }

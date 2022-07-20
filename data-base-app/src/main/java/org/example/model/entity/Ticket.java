@@ -15,13 +15,17 @@ import javax.persistence.*;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
-    private Integer passengerSeat;
-    private Boolean isEmptySeat;
+    @Column(name = "IS_ACTIVE")
     private Boolean isActive;
+
+    @OneToOne
+    private Seat seat;
+
     @ManyToOne
-    private AirPlane airPlane;
-    @ManyToOne
-    private User user;
+    private UserOrder userOrder;
+
+    @OneToOne
+    private PassengerProfile passengerProfile;
 }

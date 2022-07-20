@@ -16,9 +16,11 @@ import java.util.List;
 public class AirCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "NAME_COMPANY")
     private String nameCompany;
+    @Column(name = "COUNTRY_LOCATION")
     private String countryLocation;
 
     @OneToMany(
@@ -26,5 +28,12 @@ public class AirCompany {
             fetch = FetchType.LAZY
     )
     @JoinColumn(name="AIR_COMPANY_ID")
-    private List<AirPlane> airPlanes;
+    private List<AirPlane> airPlaneList;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name="AIR_COMPANY_ID")
+    private List<FlightRoute> flightRouteList;
 }

@@ -14,9 +14,8 @@ public class FilterTicketServiceImpl implements FilterTicketService {
 
     private final TicketCustomDAO ticketCustomDAO;
 
-
     @Override
-    public List<Ticket> findAllTicketWhereUser(Long idUser) {
-        return ticketCustomDAO.findAllTicketWhereUser(idUser);
+    public List<Ticket> findAllTicketWherePassengerProfile(Long idPassengerProfile) {
+        return ticketCustomDAO.findAllTicketWherePassengerProfile(idPassengerProfile);
     }
 }

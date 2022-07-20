@@ -1,6 +1,5 @@
 package org.example.mapper.modelsMapper;
 
-
 import org.example.dto.models.BankCardDTO;
 import org.example.model.entity.BankCard;
 import org.springframework.stereotype.Component;
@@ -13,12 +12,7 @@ public class BankCardMapper {
     public BankCardDTO toDTO(BankCard bankCard) {
         return BankCardDTO.builder()
                 .id(bankCard.getId())
-                .cardType(bankCard.getCardType())
-                .bank(bankCard.getBank())
-                .holderName(bankCard.getHolderName())
-                .holderLastname(bankCard.getHolderLastname())
                 .cardNumber(bankCard.getCardNumber())
-                .serviceEndDate(bankCard.getServiceEndDate())
                 .build();
     }
 
@@ -32,12 +26,7 @@ public class BankCardMapper {
     public BankCard toModel(BankCardDTO bankCardDTO) {
         return BankCard.builder()
                 .id(bankCardDTO.getId())
-                .cardType(bankCardDTO.getCardType())
-                .bank(bankCardDTO.getBank())
-                .holderName(bankCardDTO.getHolderName())
-                .holderLastname(bankCardDTO.getHolderLastname())
                 .cardNumber(bankCardDTO.getCardNumber())
-                .serviceEndDate(bankCardDTO.getServiceEndDate())
                 .build();
     }
 }

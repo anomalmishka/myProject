@@ -5,5 +5,5 @@ import org.example.model.entity.Ticket;
 import java.util.List;
 
 public interface TicketCustomDAO {
-    List<Ticket> findAllTicketWhereUser(Long idUser);
+    List<Ticket> findAllTicketWherePassengerProfile(Long idPassengerProfile);
 }
