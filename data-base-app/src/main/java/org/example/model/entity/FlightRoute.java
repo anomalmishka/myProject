@@ -27,6 +27,8 @@ public class FlightRoute {
     private Date flightDateStart;
     @Column(name = "FLIGHT_DATE_END")
     private Date flightDateEnd;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
 
     @ManyToOne
     private AirPlane airPlane;
@@ -35,16 +37,9 @@ public class FlightRoute {
     private AirCompany airCompany;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
     @JoinColumn(name="FLIGHT_ROUTE_ID")
     private List<UserOrder> userOrderList;
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name="FLIGHT_ROUTE_ID")
-    private List<Seat> seatList;
 }

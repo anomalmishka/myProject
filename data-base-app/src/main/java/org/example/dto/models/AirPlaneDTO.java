@@ -12,5 +12,10 @@ import lombok.NoArgsConstructor;
 public class AirPlaneDTO {
     private Long id;
     private String type;
-    private Integer numberSeat;
+    private String status;
+    private Integer numberSeatLowcost;
+    private Integer numberSeatBuisness;
+    private Integer priceLowcost;
+    private Integer priceBuisness;
+    private Boolean isActive;
 }

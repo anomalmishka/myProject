@@ -16,4 +16,5 @@ public class FlightRouteDTO {
     private String routeEnd;
     private Date flightDateStart;
     private Date flightDateEnd;
+    private Boolean isActive;
 }

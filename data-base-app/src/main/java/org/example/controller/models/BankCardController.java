@@ -1,7 +1,7 @@
 package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.BankCardDTO;
-import org.example.mapper.modelsMapper.BankCardMapper;
+import org.example.mapper.models.BankCardMapper;
 import org.example.service.api.BankCardService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

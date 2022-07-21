@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.filter.FilterDTO;
 import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.filter.FilterMapper;
-import org.example.mapper.modelsMapper.modif.FlightRouteMapperModif;
+import org.example.mapper.models.modif.FlightRouteMapperModif;
 import org.example.service.filter.api.FilterFlightRouteService;
 import org.springframework.web.bind.annotation.*;
 

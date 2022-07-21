@@ -15,6 +15,5 @@ public class SeatDTOModif {
     private Integer rowSeat;
     private Integer place;
     private String type;
-    private Integer price;
     private TicketDTO ticketDTO;
 }

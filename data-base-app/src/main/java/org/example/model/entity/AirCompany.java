@@ -24,16 +24,16 @@ public class AirCompany {
     private String countryLocation;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="AIR_COMPANY_ID")
+    @JoinColumn(name = "AIR_COMPANY_ID")
     private List<AirPlane> airPlaneList;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="AIR_COMPANY_ID")
+    @JoinColumn(name = "AIR_COMPANY_ID")
     private List<FlightRoute> flightRouteList;
 }

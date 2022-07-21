@@ -2,7 +2,7 @@ package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.FlightRouteDTO;
-import org.example.mapper.modelsMapper.FlightRouteMapper;
+import org.example.mapper.models.FlightRouteMapper;
 import org.example.service.api.FlightRouteService;
 import org.springframework.web.bind.annotation.*;
 

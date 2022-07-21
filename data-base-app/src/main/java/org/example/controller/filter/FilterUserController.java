@@ -2,7 +2,7 @@ package org.example.controller.filter;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.PassengerProfileDTO;
-import org.example.mapper.modelsMapper.PassengerProfileMapper;
+import org.example.mapper.models.PassengerProfileMapper;
 import org.example.service.filter.api.FilterPassengerProfileService;
 import org.springframework.web.bind.annotation.*;
 

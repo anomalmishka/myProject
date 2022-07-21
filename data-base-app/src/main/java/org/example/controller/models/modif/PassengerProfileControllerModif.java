@@ -2,7 +2,7 @@ package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.PassengerProfileDTOModif;
-import org.example.mapper.modelsMapper.modif.PassengerProfileMapperModif;
+import org.example.mapper.models.modif.PassengerProfileMapperModif;
 import org.example.service.api.PassengerProfileService;
 import org.springframework.web.bind.annotation.*;
 

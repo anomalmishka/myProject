@@ -23,14 +23,9 @@ public class Seat {
     private Integer place;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "PRICE")
-    private Integer price;
 
     @ManyToOne
     private AirPlane airPlane;
-
-    @ManyToOne
-    private FlightRoute flightRoute;
 
     @OneToOne(
             cascade = CascadeType.ALL,

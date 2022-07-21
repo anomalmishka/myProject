@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.dto.models.FlightRouteDTO;
+import org.example.dto.models.SeatDTO;
 
 import java.util.List;
 
@@ -14,7 +16,12 @@ import java.util.List;
 public class AirPlaneDTOModif {
     private Long id;
     private String type;
-    private Integer numberSeat;
-    private List<FlightRouteDTOModif> flightRouteDTOModifList;
-    private List<SeatDTOModif> seatDTOModifList;
+    private String status;
+    private Integer numberSeatLowcost;
+    private Integer numberSeatBuisness;
+    private Integer priceLowcost;
+    private Integer priceBuisness;
+    private Boolean isActive;
+    private List<FlightRouteDTO> flightRouteDTOList;
+    private List<SeatDTO> seatDTOList;
 }

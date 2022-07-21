@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.ZonedDateTime;
 
 
-@ControllerAdvice
+//@ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ExceptionHandlerBodyDTO sendBodyException(String text, HttpStatus httpStatus) {

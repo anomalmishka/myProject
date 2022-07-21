@@ -45,5 +45,12 @@ public class UserProfile {
     )
     @JoinColumn(name="USER_PROFILE_ID")
     private List<BankCard> bankCardList;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name="USER_PROFILE_ID")
+    private List<PassengerProfile> passengerProfileList;
 }
 

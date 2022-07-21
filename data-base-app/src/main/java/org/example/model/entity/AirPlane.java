@@ -20,23 +20,33 @@ public class AirPlane {
     private Long id;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "NUMBER_SEAT")
-    private Integer numberSeat;
+    @Column(name = "STATUS")
+    private String status;
+    @Column(name = "NUMBER_SEAT_LOWCOST")
+    private Integer numberSeatLowcost;
+    @Column(name = "NUMBER_SEAT_BUISNESS")
+    private Integer numberSeatBuisness;
+    @Column(name = "PRICE_LOWCOST")
+    private Integer priceLowcost;
+    @Column(name = "PRICE_BUISNESS")
+    private Integer priceBuisness;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
 
     @ManyToOne
     private AirCompany airCompany;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="AIR_PLANE_ID")
+    @JoinColumn(name = "AIR_PLANE_ID")
     private List<FlightRoute> flightRouteList;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="AIR_PLANE_ID")
+    @JoinColumn(name = "AIR_PLANE_ID")
     private List<Seat> seatList;
 }

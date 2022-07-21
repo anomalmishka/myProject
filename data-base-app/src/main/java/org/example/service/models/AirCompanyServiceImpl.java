@@ -5,9 +5,10 @@ import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.AirCompany;
 import org.example.service.api.AirCompanyService;
+import org.example.service.api.AirPlaneService;
+import org.example.service.api.FlightRouteService;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 

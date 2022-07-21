@@ -2,7 +2,7 @@ package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.TicketDTO;
-import org.example.mapper.modelsMapper.TicketMapper;
+import org.example.mapper.models.TicketMapper;
 import org.example.service.api.TicketService;
 import org.springframework.web.bind.annotation.*;
 

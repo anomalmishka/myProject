@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.dto.models.OrderDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,6 @@ public class FlightRouteDTOModif {
     private String routeEnd;
     private Date flightDateStart;
     private Date flightDateEnd;
-    private List<OrderDTOModif> orderDTOModifList;
-    private List<SeatDTOModif> seatDTOModifList;
+    private Boolean isActive;
+    private List<OrderDTO> orderDTOList;
 }

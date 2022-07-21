@@ -1,10 +1,7 @@
 package org.example.dao.custom.flightRoute;
 
 import lombok.RequiredArgsConstructor;
-import org.example.model.entity.FlightRoute;
-import org.example.model.entity.FlightRoute_;
-import org.example.model.entity.Seat;
-import org.example.model.entity.Seat_;
+import org.example.model.entity.*;
 import org.example.model.filter.FilterObj;
 import org.springframework.stereotype.Repository;
 
@@ -69,11 +66,11 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
         Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, Seat> seatListJoin = root.join(FlightRoute_.seatList);
+        Join<FlightRoute, AirPlane> airPlaneJoin = root.join(FlightRoute_.airPlane);
         Integer priceStart = filterObj.getPriceStart();
         Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicatePriceStart = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceEnd);
+        Predicate predicatePriceStart = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceStart);
+        Predicate predicatePriceEnd = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceEnd);
         query.where(criteriaBuilder.and(predicatePriceStart, predicatePriceEnd));
         return entityManager.createQuery(query).getResultList();
     }
@@ -107,11 +104,11 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         Root<FlightRoute> root = query.from(FlightRoute.class);
         String routeStart = filterObj.getRouteStart();
         String routeEnd = filterObj.getRouteEnd();
-        Join<FlightRoute, Seat> seatListJoin = root.join(FlightRoute_.seatList);
+        Join<FlightRoute, AirPlane> airPlaneJoin = root.join(FlightRoute_.airPlane);
         Integer priceStart = filterObj.getPriceStart();
         Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicatePriceStart = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceEnd);
+        Predicate predicatePriceStart = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceStart);
+        Predicate predicatePriceEnd = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceEnd);
         Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
         Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
         List<Predicate> predicateList = new ArrayList<>();
@@ -129,11 +126,11 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         Root<FlightRoute> root = query.from(FlightRoute.class);
         Date dateStart = filterObj.getDateStart();
         Date dateEnd = filterObj.getDateEnd();
-        Join<FlightRoute, Seat> seatListJoin = root.join(FlightRoute_.seatList);
+        Join<FlightRoute, AirPlane> airPlaneJoin = root.join(FlightRoute_.airPlane);
         Integer priceStart = filterObj.getPriceStart();
         Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicatePriceStart = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceEnd);
+        Predicate predicatePriceStart = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceStart);
+        Predicate predicatePriceEnd = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceEnd);
         Predicate predicateDateStart = criteriaBuilder.equal(root.get(FlightRoute_.flightDateStart), dateStart);
         Predicate predicateDateEnd = criteriaBuilder.equal(root.get(FlightRoute_.flightDateEnd), dateEnd);
         List<Predicate> predicateList = new ArrayList<>();
@@ -149,7 +146,7 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
         Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, Seat> seatListJoin = root.join(FlightRoute_.seatList);
+        Join<FlightRoute, AirPlane> airPlaneJoin = root.join(FlightRoute_.airPlane);
         String routeStart = filterObj.getRouteStart();
         String routeEnd = filterObj.getRouteEnd();
         Date dateStart = filterObj.getDateStart();
@@ -160,8 +157,8 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
         Predicate predicateDateStart = criteriaBuilder.equal(root.get(FlightRoute_.flightDateStart), dateStart);
         Predicate predicateDateEnd = criteriaBuilder.equal(root.get(FlightRoute_.flightDateEnd), dateEnd);
-        Predicate predicatePriceStart = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.equal(seatListJoin.get(Seat_.price), priceEnd);
+        Predicate predicatePriceStart = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceStart);
+        Predicate predicatePriceEnd = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.priceLowcost), priceEnd);
         List<Predicate> predicateList = new ArrayList<>();
         predicateList.add(criteriaBuilder.and(predicateRouteStart, predicateRouteEnd));
         predicateList.add(criteriaBuilder.and(predicateDateStart, predicateDateEnd));

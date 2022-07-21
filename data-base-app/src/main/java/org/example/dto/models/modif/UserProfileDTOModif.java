@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.dto.models.BankCardDTO;
-
+import org.example.dto.models.PassengerProfileDTO;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,5 +22,6 @@ public class UserProfileDTOModif {
     private Long userId;
     private List<OrderDTOModif> orderDTOModifList;
     private List<BankCardDTO> bankCardDTOList;
+    private List<PassengerProfileDTO> passengerProfileDTOList;
 }
 

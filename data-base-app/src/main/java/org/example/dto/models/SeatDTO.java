@@ -14,5 +14,4 @@ public class SeatDTO {
     private Integer rowSeat;
     private Integer place;
     private String type;
-    private Integer price;
 }
