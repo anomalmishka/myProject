@@ -2,7 +2,7 @@ package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.PassengerProfileDTOModif;
-import org.example.mapper.models.TicketMapper;
+import org.example.mapper.models.UserOrderMapper;
 import org.example.model.entity.PassengerProfile;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class PassengerProfileMapperModif {
-    private final TicketMapper ticketMapperModif;
+    private final UserOrderMapper userOrderMapper;
 
     public PassengerProfileDTOModif toDTO(PassengerProfile passengerProfile) {
         return PassengerProfileDTOModif.builder()
@@ -20,7 +20,7 @@ public class PassengerProfileMapperModif {
                 .name(passengerProfile.getName())
                 .lastname(passengerProfile.getLastname())
                 .passportNumber(passengerProfile.getPassportNumber())
-                .ticketDTO(ticketMapperModif.toDTO(passengerProfile.getTicket()))
+                .userOrderDTOList(userOrderMapper.toDTO(passengerProfile.getUserOrderList()))
                 .build();
     }
 
@@ -38,7 +38,7 @@ public class PassengerProfileMapperModif {
                 .name(passengerProfileDTOModif.getName())
                 .lastname(passengerProfileDTOModif.getLastname())
                 .passportNumber(passengerProfileDTOModif.getPassportNumber())
-                .ticket(ticketMapperModif.toModel(passengerProfileDTOModif.getTicketDTO()))
+                .userOrderList(userOrderMapper.toModel(passengerProfileDTOModif.getUserOrderDTOList()))
                 .build();
     }
 }

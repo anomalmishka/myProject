@@ -4,6 +4,7 @@ import org.example.dto.models.FlightRouteDTO;
 import org.example.model.entity.FlightRoute;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ public class FlightRouteMapper {
                 .id(flightRoute.getId())
                 .routeStart(flightRoute.getRouteStart())
                 .routeEnd(flightRoute.getRouteEnd())
+                .distance(flightRoute.getDistance())
                 .flightDateStart(flightRoute.getFlightDateStart())
                 .flightDateEnd(flightRoute.getFlightDateEnd())
                 .isActive(flightRoute.getIsActive())
@@ -33,6 +35,7 @@ public class FlightRouteMapper {
                 .id(flightRouteDTO.getId())
                 .routeStart(flightRouteDTO.getRouteStart())
                 .routeEnd(flightRouteDTO.getRouteEnd())
+                .distance(flightRouteDTO.getDistance())
                 .flightDateStart(flightRouteDTO.getFlightDateStart())
                 .flightDateEnd(flightRouteDTO.getFlightDateEnd())
                 .isActive(flightRouteDTO.getIsActive())

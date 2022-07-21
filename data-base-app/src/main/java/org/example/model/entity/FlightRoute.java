@@ -23,6 +23,8 @@ public class FlightRoute {
     private String routeStart;
     @Column(name = "ROUTE_END")
     private String routeEnd;
+    @Column(name = "DISTANCE")
+    private Integer distance;
     @Column(name = "FLIGHT_DATE_START")
     private Date flightDateStart;
     @Column(name = "FLIGHT_DATE_END")
@@ -30,16 +32,16 @@ public class FlightRoute {
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
-    @ManyToOne
-    private AirPlane airPlane;
-
-    @ManyToOne
-    private AirCompany airCompany;
+    @ManyToMany(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
+    private List<AirPlane> airPlaneList;
 
     @OneToMany(
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="FLIGHT_ROUTE_ID")
+    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private List<UserOrder> userOrderList;
 }

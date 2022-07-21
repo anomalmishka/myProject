@@ -13,4 +13,6 @@ public class AirCompanyDTO {
     private Long id;
     private String nameCompany;
     private String countryLocation;
+    private Integer priceLowcostIndex;
+    private Integer priceBuisnessIndex;
 }

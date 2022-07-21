@@ -17,6 +17,7 @@ public class AirCompanyDTOModif {
     private Long id;
     private String nameCompany;
     private String countryLocation;
+    private Integer priceLowcostIndex;
+    private Integer priceBuisnessIndex;
     private List<AirPlaneDTO> airPlaneDTOList;
-    private List<FlightRouteDTO> flightRouteDTOList;
 }

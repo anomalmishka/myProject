@@ -1,8 +1,6 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.OrderDTOModif;
-import org.example.mapper.models.modif.OrderMapperModif;
 import org.example.service.api.UserOrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,41 +11,41 @@ import java.util.List;
 @RequestMapping(path = "modif/order")
 public class OrderControllerModif {
     private final UserOrderService userOrderService;
-    private final OrderMapperModif orderMapperModif;
+    private final UserOrderMapperModif userOrderMapperModif;
 
     @GetMapping(path = "read/all", produces = "application/json", consumes = "application/json")
-    public List<OrderDTOModif> readAll() {
-        return orderMapperModif.toDTO(userOrderService.readAll());
+    public List<UserOrderDTOModif> readAll() {
+        return userOrderMapperModif.toDTO(userOrderService.readAll());
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public OrderDTOModif readSingleId(@PathVariable("id") Long id) {
-        return orderMapperModif.toDTO(userOrderService.readById(id));
+    public UserOrderDTOModif readSingleId(@PathVariable("id") Long id) {
+        return userOrderMapperModif.toDTO(userOrderService.readById(id));
     }
 
     @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
-    public List<OrderDTOModif> readAllById(@RequestBody List<Long> ids) {
-        return orderMapperModif.toDTO(userOrderService.readAllByIds(ids));
+    public List<UserOrderDTOModif> readAllById(@RequestBody List<Long> ids) {
+        return userOrderMapperModif.toDTO(userOrderService.readAllByIds(ids));
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
-    public OrderDTOModif create(@RequestBody OrderDTOModif orderDTOModif) {
-        return orderMapperModif.toDTO(userOrderService.create(orderMapperModif.toModel(orderDTOModif)));
+    public UserOrderDTOModif create(@RequestBody UserOrderDTOModif userOrderDTOModif) {
+        return userOrderMapperModif.toDTO(userOrderService.create(userOrderMapperModif.toModel(userOrderDTOModif)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
-    public OrderDTOModif update(@RequestBody OrderDTOModif orderDTOModif) {
-        return orderMapperModif.toDTO(userOrderService.update(orderMapperModif.toModel(orderDTOModif)));
+    public UserOrderDTOModif update(@RequestBody UserOrderDTOModif userOrderDTOModif) {
+        return userOrderMapperModif.toDTO(userOrderService.update(userOrderMapperModif.toModel(userOrderDTOModif)));
     }
 
     @DeleteMapping(path = "delete/{id}/", produces = "application/json", consumes = "application/json")
-    public OrderDTOModif deleteById(@PathVariable("id") Long id) {
-        return orderMapperModif.toDTO(userOrderService.deleteById(id));
+    public UserOrderDTOModif deleteById(@PathVariable("id") Long id) {
+        return userOrderMapperModif.toDTO(userOrderService.deleteById(id));
     }
 
     @DeleteMapping(path = "delete/all/id", produces = "application/json", consumes = "application/json")
-    public List<OrderDTOModif> deleteAllById(@RequestBody List<Long> ids) {
-        return orderMapperModif.toDTO(userOrderService.deleteAllByIds(ids));
+    public List<UserOrderDTOModif> deleteAllById(@RequestBody List<Long> ids) {
+        return userOrderMapperModif.toDTO(userOrderService.deleteAllByIds(ids));
     }
 }
 

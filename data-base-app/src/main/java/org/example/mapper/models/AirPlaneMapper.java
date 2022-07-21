@@ -17,8 +17,7 @@ public class AirPlaneMapper {
                 .status(airPlane.getStatus())
                 .numberSeatLowcost(airPlane.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlane.getNumberSeatBuisness())
-                .priceLowcost(airPlane.getPriceLowcost())
-                .priceBuisness(airPlane.getPriceBuisness())
+                .pricePerKilometer(airPlane.getPricePerKilometer())
                 .isActive(airPlane.getIsActive())
                 .build();
     }
@@ -37,8 +36,7 @@ public class AirPlaneMapper {
                 .status(airPlaneDTO.getStatus())
                 .numberSeatLowcost(airPlaneDTO.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlaneDTO.getNumberSeatBuisness())
-                .priceLowcost(airPlaneDTO.getPriceLowcost())
-                .priceBuisness(airPlaneDTO.getPriceBuisness())
+                .pricePerKilometer(airPlaneDTO.getPricePerKilometer())
                 .isActive(airPlaneDTO.getIsActive())
                 .build();
     }

@@ -26,21 +26,24 @@ public class AirPlane {
     private Integer numberSeatLowcost;
     @Column(name = "NUMBER_SEAT_BUISNESS")
     private Integer numberSeatBuisness;
-    @Column(name = "PRICE_LOWCOST")
-    private Integer priceLowcost;
-    @Column(name = "PRICE_BUISNESS")
-    private Integer priceBuisness;
+    @Column(name = "PRICE_PER_KILOMETER")
+    private Integer pricePerKilometer;
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
     @ManyToOne
     private AirCompany airCompany;
 
-    @OneToMany(
+    @ManyToMany(
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "AIR_PLANE_ID")
+    @JoinTable(name="AIR_PLANE_FLIGHT_ROUTE",
+            joinColumns=
+            @JoinColumn(name="AIR_PLANE_ID", referencedColumnName="ID"),
+            inverseJoinColumns=
+            @JoinColumn(name="FLIGHT_ROUTE_ID", referencedColumnName="ID")
+    )
     private List<FlightRoute> flightRouteList;
 
     @OneToMany(

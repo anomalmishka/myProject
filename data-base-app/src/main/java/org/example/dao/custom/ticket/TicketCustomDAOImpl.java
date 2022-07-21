@@ -1,7 +1,6 @@
 package org.example.dao.custom.ticket;
 
 import lombok.RequiredArgsConstructor;
-import org.example.model.entity.Ticket;
 import org.example.model.entity.Ticket_;
 import org.springframework.stereotype.Repository;
 

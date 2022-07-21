@@ -23,8 +23,8 @@ public class AirPlaneMapperModif {
                 .status(airPlane.getStatus())
                 .numberSeatLowcost(airPlane.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlane.getNumberSeatBuisness())
-                .priceLowcost(airPlane.getPriceLowcost())
-                .priceBuisness(airPlane.getPriceBuisness())                .isActive(airPlane.getIsActive())
+                .pricePerKilometer(airPlane.getPricePerKilometer())
+                .isActive(airPlane.getIsActive())
                 .flightRouteDTOList(flightRouteMapper.toDTO(airPlane.getFlightRouteList()))
                 .seatDTOList(seatMapper.toDTO(airPlane.getSeatList()))
                 .build();
@@ -45,8 +45,8 @@ public class AirPlaneMapperModif {
                 .status(airPlaneDTOModif.getStatus())
                 .numberSeatLowcost(airPlaneDTOModif.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlaneDTOModif.getNumberSeatBuisness())
-                .priceLowcost(airPlaneDTOModif.getPriceLowcost())
-                .priceBuisness(airPlaneDTOModif.getPriceBuisness())                .isActive(airPlaneDTOModif.getIsActive())
+                .pricePerKilometer(airPlaneDTOModif.getPricePerKilometer())
+                .isActive(airPlaneDTOModif.getIsActive())
                 .flightRouteList(flightRouteMapper.toModel(airPlaneDTOModif.getFlightRouteDTOList()))
                 .seatList(seatMapper.toModel(airPlaneDTOModif.getSeatDTOList()))
                 .build();

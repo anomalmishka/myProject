@@ -1,8 +1,6 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.SeatDTOModif;
-import org.example.mapper.models.modif.SeatMapperModif;
 import org.example.service.api.SeatService;
 import org.springframework.web.bind.annotation.*;
 

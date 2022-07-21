@@ -1,8 +1,6 @@
 package org.example.controller.filter;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.TicketDTO;
-import org.example.mapper.models.TicketMapper;
 import org.example.service.filter.api.FilterTicketService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

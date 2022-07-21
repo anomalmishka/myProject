@@ -11,6 +11,7 @@ import org.example.service.api.SeatService;
 import org.example.service.models.modif.api.AirPlaneServiceModif;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,9 +26,26 @@ public class AirPlaneServiceImplModif implements AirPlaneServiceModif {
 
     @Override
     public AirPlane create(AirPlane airPlane) {
+        Integer seatPerRow = 6;
         if (airPlane.getType() != null) {
             Integer numberSeatLowcost = airPlane.getNumberSeatLowcost();
             Integer numberSeatBuisness = airPlane.getNumberSeatBuisness();
+            List<Seat> seatList = new ArrayList<>();
+            for (int i = 1; i < numberSeatLowcost + 1; i++) {
+                seatList.add(Seat.builder()
+                        .rowSeat(numberSeatLowcost / seatPerRow + 1)
+                        .place(i % seatPerRow)
+                        .type("Lowcost")
+                        .build());
+            }
+            for (int i = 1; i < numberSeatBuisness + 1; i++) {
+                seatList.add(Seat.builder()
+                        .rowSeat(numberSeatBuisness / seatPerRow + 1)
+                        .place(i % seatPerRow)
+                        .type("Buisness")
+                        .build());
+            }
+            airPlane.setSeatList(seatList);
             return airPlaneDAO.save(airPlane);
         } else {
             throw new ErrorInvalidData("Type must not be null");

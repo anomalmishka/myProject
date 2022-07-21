@@ -28,16 +28,8 @@ public class UserProfile {
     private String email;
     @Column(name = "IS_BLOCKET_PROFILE")
     private Boolean isBlockedProfile;
-
     @Column(name = "USER_ID")
     private Long userId;
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name="USER_PROFILE_ID")
-    private List<UserOrder> userOrderList;
 
     @OneToMany(
             cascade = CascadeType.ALL,

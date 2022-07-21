@@ -20,7 +20,6 @@ public class UserProfileDTOModif {
     private String email;
     private Boolean isBlockedProfile;
     private Long userId;
-    private List<OrderDTOModif> orderDTOModifList;
     private List<BankCardDTO> bankCardDTOList;
     private List<PassengerProfileDTO> passengerProfileDTOList;
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SeatDTO {
     private Long id;
-    private Integer rowSeat;
-    private Integer place;
+    private String place;
     private String type;
+    private Boolean isOrdered;
 }

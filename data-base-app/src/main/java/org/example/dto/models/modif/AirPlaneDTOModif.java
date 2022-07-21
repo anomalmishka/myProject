@@ -19,8 +19,7 @@ public class AirPlaneDTOModif {
     private String status;
     private Integer numberSeatLowcost;
     private Integer numberSeatBuisness;
-    private Integer priceLowcost;
-    private Integer priceBuisness;
+    private Integer pricePerKilometer;
     private Boolean isActive;
     private List<FlightRouteDTO> flightRouteDTOList;
     private List<SeatDTO> seatDTOList;

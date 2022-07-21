@@ -15,7 +15,6 @@ public class AirPlaneDTO {
     private String status;
     private Integer numberSeatLowcost;
     private Integer numberSeatBuisness;
-    private Integer priceLowcost;
-    private Integer priceBuisness;
+    private Integer pricePerKilometer;
     private Boolean isActive;
 }

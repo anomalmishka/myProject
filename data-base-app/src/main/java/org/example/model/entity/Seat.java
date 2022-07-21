@@ -17,20 +17,13 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "ROW_SEAT")
-    private Integer rowSeat;
     @Column(name = "PLACE")
-    private Integer place;
+    private String place;
     @Column(name = "TYPE")
     private String type;
+    @Column(name = "IS_ORDERED")
+    private Boolean isOrdered;
 
     @ManyToOne
     private AirPlane airPlane;
-
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name="TICKET_ID")
-    private Ticket ticket;
 }

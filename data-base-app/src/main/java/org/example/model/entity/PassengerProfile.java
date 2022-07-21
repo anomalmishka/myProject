@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,11 +28,11 @@ public class PassengerProfile {
     @ManyToOne
     private UserProfile userProfile;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
+    @OneToMany(
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="TICKET_ID")
-    private Ticket ticket;
+    @JoinColumn(name="USER_ORDER_ID")
+    private List<UserOrder> userOrderList;
 }
 

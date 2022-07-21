@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
 public class AirCompanyMapperModif {
 
     private final AirPlaneMapper airPlaneMapper;
-    private final FlightRouteMapper flightRouteMapper;
 
     public AirCompanyDTOModif toDTO(AirCompany airCompany) {
         return AirCompanyDTOModif.builder()
                 .id(airCompany.getId())
                 .nameCompany(airCompany.getNameCompany())
                 .countryLocation(airCompany.getCountryLocation())
+                .priceLowcostIndex(airCompany.getPriceLowcostIndex())
+                .priceBuisnessIndex(airCompany.getPriceBuisnessIndex())
                 .airPlaneDTOList(airPlaneMapper.toDTO(airCompany.getAirPlaneList()))
-                .flightRouteDTOList(flightRouteMapper.toDTO(airCompany.getFlightRouteList()))
                 .build();
     }
 
@@ -38,8 +38,9 @@ public class AirCompanyMapperModif {
                 .id(airCompanyDTOModif.getId())
                 .nameCompany(airCompanyDTOModif.getNameCompany())
                 .countryLocation(airCompanyDTOModif.getCountryLocation())
+                .priceLowcostIndex(airCompanyDTOModif.getPriceLowcostIndex())
+                .priceBuisnessIndex(airCompanyDTOModif.getPriceBuisnessIndex())
                 .airPlaneList(airPlaneMapper.toModel(airCompanyDTOModif.getAirPlaneDTOList()))
-                .flightRouteList(flightRouteMapper.toModel(airCompanyDTOModif.getFlightRouteDTOList()))
                 .build();
     }
 }

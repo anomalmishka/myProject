@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class UserProfileMapperModif {
-    private final OrderMapperModif orderMapperModif;
     private final BankCardMapper bankCardMapper;
     private final PassengerProfileMapper passengerProfileMapper;
 
@@ -26,7 +25,6 @@ public class UserProfileMapperModif {
                 .email(userProfile.getEmail())
                 .isBlockedProfile(userProfile.getIsBlockedProfile())
                 .userId(userProfile.getUserId())
-                .orderDTOModifList(orderMapperModif.toDTO(userProfile.getUserOrderList()))
                 .bankCardDTOList(bankCardMapper.toDTO(userProfile.getBankCardList()))
                 .passengerProfileDTOList(passengerProfileMapper.toDTO(userProfile.getPassengerProfileList()))
                 .build();
@@ -49,7 +47,6 @@ public class UserProfileMapperModif {
                 .email(userProfileDTOModif.getEmail())
                 .isBlockedProfile(userProfileDTOModif.getIsBlockedProfile())
                 .userId(userProfileDTOModif.getUserId())
-                .userOrderList(orderMapperModif.toModel(userProfileDTOModif.getOrderDTOModifList()))
                 .bankCardList(bankCardMapper.toModel(userProfileDTOModif.getBankCardDTOList()))
                 .passengerProfileList(passengerProfileMapper.toModel(userProfileDTOModif.getPassengerProfileDTOList()))
                 .build();

@@ -14,6 +14,8 @@ public class AirCompanyMapper {
                 .id(airCompany.getId())
                 .nameCompany(airCompany.getNameCompany())
                 .countryLocation(airCompany.getCountryLocation())
+                .priceLowcostIndex(airCompany.getPriceLowcostIndex())
+                .priceBuisnessIndex(airCompany.getPriceBuisnessIndex())
                 .build();
     }
 
@@ -29,6 +31,8 @@ public class AirCompanyMapper {
                 .id(airCompanyDTO.getId())
                 .nameCompany(airCompanyDTO.getNameCompany())
                 .countryLocation(airCompanyDTO.getCountryLocation())
+                .priceLowcostIndex(airCompanyDTO.getPriceLowcostIndex())
+                .priceBuisnessIndex(airCompanyDTO.getPriceBuisnessIndex())
                 .build();
     }
 }

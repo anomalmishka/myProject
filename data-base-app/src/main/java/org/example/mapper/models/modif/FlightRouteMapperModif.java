@@ -2,7 +2,7 @@ package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.*;
-import org.example.mapper.models.OrderMapper;
+import org.example.mapper.models.UserOrderMapper;
 import org.example.model.entity.FlightRoute;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +12,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class FlightRouteMapperModif {
-    private final OrderMapper orderMapper;
+    private final UserOrderMapper userOrderMapper;
 
     public FlightRouteDTOModif toDTO(FlightRoute flightRoute) {
         return FlightRouteDTOModif.builder()
                 .id(flightRoute.getId())
                 .routeStart(flightRoute.getRouteStart())
                 .routeEnd(flightRoute.getRouteEnd())
+                .distance(flightRoute.getDistance())
                 .flightDateStart(flightRoute.getFlightDateStart())
                 .flightDateEnd(flightRoute.getFlightDateEnd())
                 .isActive(flightRoute.getIsActive())
-                .orderDTOList(orderMapper.toDTO(flightRoute.getUserOrderList()))
+                .userOrderDTOList(userOrderMapper.toDTO(flightRoute.getUserOrderList()))
                 .build();
     }
 
@@ -39,10 +40,11 @@ public class FlightRouteMapperModif {
                 .id(flightRouteDTOModif.getId())
                 .routeStart(flightRouteDTOModif.getRouteStart())
                 .routeEnd(flightRouteDTOModif.getRouteEnd())
+                .distance(flightRouteDTOModif.getDistance())
                 .flightDateStart(flightRouteDTOModif.getFlightDateStart())
                 .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
                 .isActive(flightRouteDTOModif.getIsActive())
-                .userOrderList(orderMapper.toModel(flightRouteDTOModif.getOrderDTOList()))
+                .userOrderList(userOrderMapper.toModel(flightRouteDTOModif.getUserOrderDTOList()))
                 .build();
     }
 }

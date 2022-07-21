@@ -1,7 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.models.AirPlaneDTO;
 import org.example.dto.models.modif.AirPlaneDTOModif;
+import org.example.mapper.models.AirPlaneMapper;
 import org.example.mapper.models.modif.AirPlaneMapperModif;
 import org.example.service.api.AirPlaneService;
 import org.example.service.models.modif.api.AirPlaneServiceModif;
@@ -30,6 +32,11 @@ public class AirPlaneControllerModif {
     @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<AirPlaneDTOModif> readAllById(@RequestBody List<Long> ids) {
         return airPlaneMapperModif.toDTO(airPlaneService.readAllByIds(ids));
+    }
+
+    @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
+    public AirPlaneDTOModif create(@RequestBody AirPlaneDTOModif airPlaneDTOModif) {
+        return airPlaneMapperModif.toDTO(airPlaneServiceModif.create(airPlaneMapperModif.toModel(airPlaneDTOModif)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")

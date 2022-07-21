@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.dto.models.TicketDTO;
+import org.example.dto.models.UserOrderDTO;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,6 @@ public class PassengerProfileDTOModif {
     private String name;
     private String lastname;
     private String passportNumber;
-    private TicketDTO ticketDTO;
+    private List<UserOrderDTO> userOrderDTOList;
 }
 
