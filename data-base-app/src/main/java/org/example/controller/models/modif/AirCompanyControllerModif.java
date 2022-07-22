@@ -32,6 +32,11 @@ public class AirCompanyControllerModif {
         return airCompanyMapperModif.toDTO(airCompanyService.readAllByIds(ids));
     }
 
+    @PutMapping(path = "create", produces = "application/json", consumes = "application/json")
+    public AirCompanyDTOModif create(@RequestBody AirCompanyDTOModif airCompanyDTOModif) {
+        return airCompanyMapperModif.toDTO(airCompanyServiceModif.create(airCompanyMapperModif.toModel(airCompanyDTOModif)));
+    }
+
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
     public AirCompanyDTOModif update(@RequestBody AirCompanyDTOModif airCompanyDTOModif) {
         return airCompanyMapperModif.toDTO(airCompanyServiceModif.update(airCompanyMapperModif.toModel(airCompanyDTOModif)));

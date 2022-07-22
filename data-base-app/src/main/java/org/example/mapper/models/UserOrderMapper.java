@@ -12,7 +12,6 @@ public class UserOrderMapper {
     public UserOrderDTO toDTO(UserOrder userOrder) {
         return UserOrderDTO.builder()
                 .id(userOrder.getId())
-                .status(userOrder.getStatus())
                 .build();
     }
 
@@ -20,14 +19,13 @@ public class UserOrderMapper {
         return userOrderList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<UserOrder> toModel(List<UserOrderDTO> ticketDTOS) {
-        return ticketDTOS.stream().map(this::toModel).collect(Collectors.toList());
+    public List<UserOrder> toModel(List<UserOrderDTO> userOrderDTOList) {
+        return userOrderDTOList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public UserOrder toModel(UserOrderDTO userOrderDTO) {
         return UserOrder.builder()
                 .id(userOrderDTO.getId())
-                .status(userOrderDTO.getStatus())
                 .build();
     }
 }

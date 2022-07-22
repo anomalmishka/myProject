@@ -17,12 +17,21 @@ public class UserOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "STATUS")
+
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
     private FlightRoute flightRoute;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
     private PassengerProfile passengerProfile;
 }

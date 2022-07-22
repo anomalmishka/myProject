@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderDAO extends CrudRepository<UserOrder, Long> {
+public interface UserOrderDAO extends CrudRepository<UserOrder, Long> {
 }

@@ -24,6 +24,9 @@ public class Seat {
     @Column(name = "IS_ORDERED")
     private Boolean isOrdered;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
     private AirPlane airPlane;
 }

@@ -1,7 +1,7 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.OrderDAO;
+import org.example.dao.models.UserOrderDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.UserOrder;
@@ -15,27 +15,23 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 @Service
 public class UserOrderServiceImpl implements UserOrderService {
-    private final OrderDAO orderDAO;
+    private final UserOrderDAO userOrderDAO;
 
     @Override
     public UserOrder create(UserOrder userOrder) {
-        if (userOrder.getIsActive() != null) {
-            return orderDAO.save(userOrder);
-        } else {
-            throw new ErrorInvalidData("Act must not be null");
-        }
+            return userOrderDAO.save(userOrder);
     }
 
     @Override
     public List<UserOrder> readAll() {
         return StreamSupport
-                .stream(orderDAO.findAll().spliterator(), false)
+                .stream(userOrderDAO.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserOrder readById(Long id) {
-        return orderDAO.findById(id).orElseThrow(() -> {
+        return userOrderDAO.findById(id).orElseThrow(() -> {
             throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
         });
     }
@@ -43,30 +39,30 @@ public class UserOrderServiceImpl implements UserOrderService {
     @Override
     public List<UserOrder> readAllByIds(List<Long> ids) {
         return StreamSupport
-                .stream(orderDAO.findAllById(ids).spliterator(), false)
+                .stream(userOrderDAO.findAllById(ids).spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserOrder deleteById(Long id) {
         UserOrder deleteEntity = readById(id);
-        orderDAO.deleteById(id);
+        userOrderDAO.deleteById(id);
         return deleteEntity;
     }
 
     @Override
     public List<UserOrder> deleteAllByIds(List<Long> ids) {
         List<UserOrder> deleteEntities = readAllByIds(ids);
-        orderDAO.deleteAllById(ids);
+        userOrderDAO.deleteAllById(ids);
         return deleteEntities;
     }
 
     @Override
     public UserOrder update(UserOrder userOrder) {
-        if (userOrder.getIsActive() != null) {
-            return orderDAO.save(userOrder);
+        if (userOrder.getId() != null) {
+            return userOrderDAO.save(userOrder);
         } else {
-            throw new ErrorInvalidData("Act must not be null");
+            throw new ErrorInvalidData("Id must not be null");
         }
     }
 }

@@ -2,6 +2,7 @@ package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.AirPlaneDTOModif;
+import org.example.mapper.models.AirCompanyMapper;
 import org.example.mapper.models.FlightRouteMapper;
 import org.example.mapper.models.SeatMapper;
 import org.example.model.entity.AirPlane;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class AirPlaneMapperModif {
+    private final AirCompanyMapper airCompanyMapper;
     private final FlightRouteMapper flightRouteMapper;
     private final SeatMapper seatMapper;
 
@@ -25,6 +27,7 @@ public class AirPlaneMapperModif {
                 .numberSeatBuisness(airPlane.getNumberSeatBuisness())
                 .pricePerKilometer(airPlane.getPricePerKilometer())
                 .isActive(airPlane.getIsActive())
+                .airCompanyDTO(airCompanyMapper.toDTO(airPlane.getAirCompany()))
                 .flightRouteDTOList(flightRouteMapper.toDTO(airPlane.getFlightRouteList()))
                 .seatDTOList(seatMapper.toDTO(airPlane.getSeatList()))
                 .build();
@@ -47,6 +50,7 @@ public class AirPlaneMapperModif {
                 .numberSeatBuisness(airPlaneDTOModif.getNumberSeatBuisness())
                 .pricePerKilometer(airPlaneDTOModif.getPricePerKilometer())
                 .isActive(airPlaneDTOModif.getIsActive())
+                .airCompany(airCompanyMapper.toModel(airPlaneDTOModif.getAirCompanyDTO()))
                 .flightRouteList(flightRouteMapper.toModel(airPlaneDTOModif.getFlightRouteDTOList()))
                 .seatList(seatMapper.toModel(airPlaneDTOModif.getSeatDTOList()))
                 .build();

@@ -32,6 +32,10 @@ public class FlightRouteControllerModif {
         return flightRouteMapperModif.toDTO(flightRouteService.readAllByIds(ids));
     }
 
+    @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
+    public FlightRouteDTOModif create(@RequestBody FlightRouteDTOModif flightRouteDTOModif) {
+        return flightRouteMapperModif.toDTO(flightRouteServiceModif.create(flightRouteMapperModif.toModel(flightRouteDTOModif)));
+    }
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
     public FlightRouteDTOModif update(@RequestBody FlightRouteDTOModif flightRouteDTOModif) {
         return flightRouteMapperModif.toDTO(flightRouteServiceModif.update(flightRouteMapperModif.toModel(flightRouteDTOModif)));

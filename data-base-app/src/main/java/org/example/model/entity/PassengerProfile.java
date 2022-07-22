@@ -25,14 +25,17 @@ public class PassengerProfile {
     @Column(name = "PASSPORT_NUMBER")
     private String passportNumber;
 
-    @ManyToOne
-    private UserProfile userProfile;
-
-    @OneToMany(
+    @ManyToOne(
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name="USER_ORDER_ID")
+    private UserProfile userProfile;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "PASSENGER_PROFILE_ID")
     private List<UserOrder> userOrderList;
 }
 

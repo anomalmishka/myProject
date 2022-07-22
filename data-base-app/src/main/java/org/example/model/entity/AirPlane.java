@@ -31,18 +31,24 @@ public class AirPlane {
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
-    @ManyToOne
-    private AirCompany airCompany;
-
-    @ManyToMany(
+    @ManyToOne(
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    @JoinTable(name="AIR_PLANE_FLIGHT_ROUTE",
-            joinColumns=
-            @JoinColumn(name="AIR_PLANE_ID", referencedColumnName="ID"),
-            inverseJoinColumns=
-            @JoinColumn(name="FLIGHT_ROUTE_ID", referencedColumnName="ID")
+    private AirCompany airCompany;
+
+//    @ManyToMany(
+//            cascade = CascadeType.MERGE,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "flightRouteList"
+//    )
+//    @JoinTable(
+//            name = "AIR_PLANE_FLIGHT_ROUTE",
+//            joinColumns = @JoinColumn(name = "AIR_PLANE_ID"),
+//            inverseJoinColumns = @JoinColumn(name = "FLIGHT_ROUTE_ID"))
+    @ManyToMany(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
     )
     private List<FlightRoute> flightRouteList;
 

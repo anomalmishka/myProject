@@ -1,16 +1,20 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.models.modif.UserOrderDTOModif;
+import org.example.mapper.models.modif.UserOrderMapperModif;
 import org.example.service.api.UserOrderService;
+import org.example.service.models.modif.api.UserOrderServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "modif/order")
-public class OrderControllerModif {
+@RequestMapping(path = "modif/user/order")
+public class UserOrderControllerModif {
     private final UserOrderService userOrderService;
+    private final UserOrderServiceModif userOrderServiceModif;
     private final UserOrderMapperModif userOrderMapperModif;
 
     @GetMapping(path = "read/all", produces = "application/json", consumes = "application/json")
@@ -30,22 +34,12 @@ public class OrderControllerModif {
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
     public UserOrderDTOModif create(@RequestBody UserOrderDTOModif userOrderDTOModif) {
-        return userOrderMapperModif.toDTO(userOrderService.create(userOrderMapperModif.toModel(userOrderDTOModif)));
+        return userOrderMapperModif.toDTO(userOrderServiceModif.create(userOrderMapperModif.toModel(userOrderDTOModif)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
     public UserOrderDTOModif update(@RequestBody UserOrderDTOModif userOrderDTOModif) {
-        return userOrderMapperModif.toDTO(userOrderService.update(userOrderMapperModif.toModel(userOrderDTOModif)));
-    }
-
-    @DeleteMapping(path = "delete/{id}/", produces = "application/json", consumes = "application/json")
-    public UserOrderDTOModif deleteById(@PathVariable("id") Long id) {
-        return userOrderMapperModif.toDTO(userOrderService.deleteById(id));
-    }
-
-    @DeleteMapping(path = "delete/all/id", produces = "application/json", consumes = "application/json")
-    public List<UserOrderDTOModif> deleteAllById(@RequestBody List<Long> ids) {
-        return userOrderMapperModif.toDTO(userOrderService.deleteAllByIds(ids));
+        return userOrderMapperModif.toDTO(userOrderServiceModif.update(userOrderMapperModif.toModel(userOrderDTOModif)));
     }
 }
 

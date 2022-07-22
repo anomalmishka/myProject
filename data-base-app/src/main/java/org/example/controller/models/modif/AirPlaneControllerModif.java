@@ -1,9 +1,7 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.AirPlaneDTO;
 import org.example.dto.models.modif.AirPlaneDTOModif;
-import org.example.mapper.models.AirPlaneMapper;
 import org.example.mapper.models.modif.AirPlaneMapperModif;
 import org.example.service.api.AirPlaneService;
 import org.example.service.models.modif.api.AirPlaneServiceModif;

@@ -1,9 +1,9 @@
 package org.example.dao.models;
 
-import org.example.model.entity.Seat;
+import org.example.model.entity.Status;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlaceDAO extends CrudRepository<Seat, Long> {
+public interface StatusDAO extends CrudRepository<Status, Long> {
 }

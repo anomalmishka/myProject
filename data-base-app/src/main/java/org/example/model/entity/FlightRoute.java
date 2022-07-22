@@ -34,7 +34,8 @@ public class FlightRoute {
 
     @ManyToMany(
             cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            mappedBy = "flightRouteList"
     )
     private List<AirPlane> airPlaneList;
 

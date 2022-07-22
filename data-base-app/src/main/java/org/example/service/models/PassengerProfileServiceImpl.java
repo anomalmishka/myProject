@@ -5,7 +5,9 @@ import org.example.dao.models.PassengerProfileDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.PassengerProfile;
+import org.example.model.entity.UserOrder;
 import org.example.service.api.PassengerProfileService;
+import org.example.service.api.UserOrderService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.stream.StreamSupport;
 @Service
 public class PassengerProfileServiceImpl implements PassengerProfileService {
     private final PassengerProfileDAO passengerProfileDAO;
+    private final UserOrderService userOrderService;
 
     @Override
     public PassengerProfile create(PassengerProfile passengerProfile) {

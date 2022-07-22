@@ -20,6 +20,9 @@ public class BankCard {
     @Column(name = "CARD_NUMBER")
     private Long cardNumber;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
     private UserProfile userProfile;
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.dto.models.AirCompanyDTO;
 import org.example.dto.models.FlightRouteDTO;
 import org.example.dto.models.SeatDTO;
 
@@ -21,6 +22,7 @@ public class AirPlaneDTOModif {
     private Integer numberSeatBuisness;
     private Integer pricePerKilometer;
     private Boolean isActive;
+    private AirCompanyDTO airCompanyDTO;
     private List<FlightRouteDTO> flightRouteDTOList;
     private List<SeatDTO> seatDTOList;
 }

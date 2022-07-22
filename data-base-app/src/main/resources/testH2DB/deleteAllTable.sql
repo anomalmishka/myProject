@@ -1,9 +1,10 @@
 drop table if exists air_company CASCADE;
 drop table if exists air_plane CASCADE;
+drop table if exists air_plane_flight_route_list CASCADE;
 drop table if exists bank_card CASCADE;
 drop table if exists flight_route CASCADE;
-drop table if exists user_order CASCADE;
 drop table if exists passenger_profile CASCADE;
 drop table if exists seat CASCADE;
-drop table if exists ticket CASCADE;
+drop table if exists status CASCADE;
+drop table if exists user_order CASCADE;
 drop table if exists user_profile CASCADE;

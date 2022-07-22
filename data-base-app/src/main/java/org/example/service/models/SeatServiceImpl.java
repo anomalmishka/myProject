@@ -1,7 +1,7 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.PlaceDAO;
+import org.example.dao.models.SeatDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.Seat;
@@ -15,12 +15,12 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 @Service
 public class SeatServiceImpl implements SeatService {
-    private final PlaceDAO placeDAO;
+    private final SeatDAO seatDAO;
 
     @Override
     public Seat create(Seat seat) {
         if (seat.getPlace() != null) {
-            return placeDAO.save(seat);
+            return seatDAO.save(seat);
         } else {
             throw new ErrorInvalidData("Place must not be null");
         }
@@ -29,13 +29,13 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<Seat> readAll() {
         return StreamSupport
-                .stream(placeDAO.findAll().spliterator(), false)
+                .stream(seatDAO.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Seat readById(Long id) {
-        return placeDAO.findById(id).orElseThrow(() -> {
+        return seatDAO.findById(id).orElseThrow(() -> {
             throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
         });
     }
@@ -43,28 +43,28 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<Seat> readAllByIds(List<Long> ids) {
         return StreamSupport
-                .stream(placeDAO.findAllById(ids).spliterator(), false)
+                .stream(seatDAO.findAllById(ids).spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Seat deleteById(Long id) {
         Seat deleteEntity = readById(id);
-        placeDAO.deleteById(id);
+        seatDAO.deleteById(id);
         return deleteEntity;
     }
 
     @Override
     public List<Seat> deleteAllByIds(List<Long> ids) {
         List<Seat> deleteEntities = readAllByIds(ids);
-        placeDAO.deleteAllById(ids);
+        seatDAO.deleteAllById(ids);
         return deleteEntities;
     }
 
     @Override
     public Seat update(Seat seat) {
         if (seat.getPlace() != null) {
-            return placeDAO.save(seat);
+            return seatDAO.save(seat);
         } else {
             throw new ErrorInvalidData("Place must not be null");
         }
