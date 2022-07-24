@@ -9,14 +9,5 @@ public interface FlightRouteCustomDAO {
 
     List<FlightRoute> findFlightRouteWhereDateStartAndDateEnd(FilterObj filterObj);
 
-    List<FlightRoute> findFlightRouteWherePriceStartAndPriceEnd(FilterObj filterObj);
-
-    List<FlightRoute> findFlightRouteWhereRouteSEAndDateSE(FilterObj filterObj);
-
-    List<FlightRoute> findFlightRouteWhereRouteSEAndPriceSE(FilterObj filterObj);
-
-    List<FlightRoute> findFlightRouteWhereDateSEAndPriceSE(FilterObj filterObj);
-
-    List<FlightRoute> findFlightRouteWhereRouteSEAndDateSEAndPriceSE(FilterObj filterObj);
     List<FlightRoute> findFlightRouteWhereRouteSEOneWaypoint(FilterObj filterObj);
 }

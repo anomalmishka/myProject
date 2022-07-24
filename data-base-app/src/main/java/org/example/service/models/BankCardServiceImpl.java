@@ -4,7 +4,7 @@ import org.example.dao.models.BankCardDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.BankCard;
-import org.example.service.api.BankCardService;
+import org.example.service.models.api.BankCardService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +48,9 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public BankCard deleteById(Long id) {
-        BankCard deleteEntity = readById(id);
+        BankCard deleteEntity = bankCardDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         bankCardDAO.deleteById(id);
         return deleteEntity;
     }

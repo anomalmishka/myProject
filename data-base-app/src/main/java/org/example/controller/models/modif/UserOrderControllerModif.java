@@ -3,8 +3,8 @@ package org.example.controller.models.modif;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.UserOrderDTOModif;
 import org.example.mapper.models.modif.UserOrderMapperModif;
-import org.example.service.api.UserOrderService;
-import org.example.service.models.modif.api.UserOrderServiceModif;
+import org.example.service.models.api.UserOrderService;
+import org.example.service.modif.api.UserOrderServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

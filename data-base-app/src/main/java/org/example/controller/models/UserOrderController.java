@@ -3,7 +3,7 @@ package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.UserOrderDTO;
 import org.example.mapper.models.UserOrderMapper;
-import org.example.service.api.UserOrderService;
+import org.example.service.models.api.UserOrderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

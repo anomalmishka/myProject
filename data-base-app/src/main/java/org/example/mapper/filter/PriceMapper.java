@@ -2,9 +2,6 @@ package org.example.mapper.filter;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.filter.PriceDTO;
-import org.example.mapper.models.AirCompanyMapper;
-import org.example.mapper.models.AirPlaneMapper;
-import org.example.mapper.models.FlightRouteMapper;
 import org.example.model.filter.PriceObj;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +10,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class PriceMapper {
-    private final AirCompanyMapper airCompanyMapper;
-    private final AirPlaneMapper airPlaneMapper;
-    private final FlightRouteMapper flightRouteMapper;
 
     public PriceDTO toDTO(PriceObj priceObj) {
         return PriceDTO.builder()
@@ -23,9 +17,8 @@ public class PriceMapper {
                 .idAirPlane(priceObj.getIdAirPlane())
                 .idFlightRoute(priceObj.getIdFlightRoute())
                 .totalPriceFlyList(priceObj.getTotalPriceFlyList())
-                .airCompanyDTOList(airCompanyMapper.toDTO(priceObj.getAirCompanyList()))
-                .airPlaneDTOList(airPlaneMapper.toDTO(priceObj.getAirPlaneList()))
-                .flightRouteDTOList(flightRouteMapper.toDTO(priceObj.getFlightRouteList()))
+                .priceLowcostSeat(priceObj.getPriceLowcostSeat())
+                .priceBuisnessSeat(priceObj.getPriceBuisnessSeat())
                 .build();
     }
 
@@ -43,9 +36,8 @@ public class PriceMapper {
                 .idAirPlane(priceDTO.getIdAirPlane())
                 .idFlightRoute(priceDTO.getIdFlightRoute())
                 .totalPriceFlyList(priceDTO.getTotalPriceFlyList())
-                .airCompanyList(airCompanyMapper.toModel(priceDTO.getAirCompanyDTOList()))
-                .airPlaneList(airPlaneMapper.toModel(priceDTO.getAirPlaneDTOList()))
-                .flightRouteList(flightRouteMapper.toModel(priceDTO.getFlightRouteDTOList()))
+                .priceLowcostSeat(priceDTO.getPriceLowcostSeat())
+                .priceBuisnessSeat(priceDTO.getPriceBuisnessSeat())
                 .build();
     }
 }

@@ -5,9 +5,8 @@ import org.example.dao.models.PassengerProfileDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.PassengerProfile;
-import org.example.model.entity.UserOrder;
-import org.example.service.api.PassengerProfileService;
-import org.example.service.api.UserOrderService;
+import org.example.service.models.api.PassengerProfileService;
+import org.example.service.models.api.UserOrderService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,7 +51,9 @@ public class PassengerProfileServiceImpl implements PassengerProfileService {
 
     @Override
     public PassengerProfile deleteById(Long id) {
-        PassengerProfile deleteEntity = readById(id);
+        PassengerProfile deleteEntity = passengerProfileDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         passengerProfileDAO.deleteById(id);
         return deleteEntity;
     }

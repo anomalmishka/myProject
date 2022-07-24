@@ -3,8 +3,8 @@ package org.example.controller.models.modif;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.StatusDTOModif;
 import org.example.mapper.models.modif.StatusMapperModif;
-import org.example.service.api.StatusService;
-import org.example.service.models.modif.api.StatusServiceModif;
+import org.example.service.models.api.StatusService;
+import org.example.service.modif.api.StatusServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

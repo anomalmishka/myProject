@@ -5,7 +5,7 @@ import org.example.dao.models.FlightRouteDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.FlightRoute;
-import org.example.service.api.FlightRouteService;
+import org.example.service.models.api.FlightRouteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +49,9 @@ public class FlightRouteServiceImpl implements FlightRouteService {
 
     @Override
     public FlightRoute deleteById(Long id) {
-        FlightRoute deleteEntity = readById(id);
+        FlightRoute deleteEntity = flightRouteDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         flightRouteDAO.deleteById(id);
         return deleteEntity;
     }

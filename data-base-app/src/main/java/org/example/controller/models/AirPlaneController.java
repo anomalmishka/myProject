@@ -3,7 +3,7 @@ package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.AirPlaneDTO;
 import org.example.mapper.models.AirPlaneMapper;
-import org.example.service.api.AirPlaneService;
+import org.example.service.models.api.AirPlaneService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
