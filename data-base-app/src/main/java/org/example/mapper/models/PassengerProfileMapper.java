@@ -18,12 +18,12 @@ public class PassengerProfileMapper {
                 .build();
     }
 
-    public List<PassengerProfileDTO> toDTO(List<PassengerProfile> tickets) {
-        return tickets.stream().map(this::toDTO).collect(Collectors.toList());
+    public List<PassengerProfileDTO> toDTO(List<PassengerProfile> passengerProfileList) {
+        return passengerProfileList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<PassengerProfile> toModel(List<PassengerProfileDTO> ticketDTOS) {
-        return ticketDTOS.stream().map(this::toModel).collect(Collectors.toList());
+    public List<PassengerProfile> toModel(List<PassengerProfileDTO> passengerProfileDTOList) {
+        return passengerProfileDTOList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public PassengerProfile toModel(PassengerProfileDTO passengerProfileDTO) {

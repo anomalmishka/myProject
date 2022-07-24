@@ -14,6 +14,7 @@
         margin-top: 100px;
         margin-left: 10px;
         }
+
     </style>
 </head>
 <body>
@@ -23,56 +24,81 @@
         <div th:object="${filterObj}">
             <label>Find</label>
             <p><label>Route Start<input type="text" name="routeStart" value="Minsk"
-                               class="form-control" required><br></label></p>
+                                        class="form-control" required><br></label></p>
             <p><label>Route Start<input type="text" name="routeEnd" value="Moskva"
-                                 class="form-control" required><br></label></p>
+                                        class="form-control" required><br></label></p>
         </div>
         <input type="submit" id="submitButton" th:value="Find">
     </form>
 </div>
-
 <div class="col-1-2">
     <table cellspacing="2" border="1" cellpadding="5">
         <thead>
         <tr align="center">
             <th>id</th>
             <th>type</th>
-            <th>routeStart</th>
-            <th>routeEnd</th>
-            <th>ticketPrice</th>
-            <th>numberPassanger</th>
-            <th>flightDateStart</th>
-            <th>flightDateEnd</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="airPlaneObj : ${airPlaneObjListFind}">
-            <td><span th:text="${airPlaneObj.idAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.typeAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.routeStartAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.routeEndAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.ticketPriceAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.numberPassangerAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.flightDateStartAirPlane}"></span></td>
-            <td><span th:text="${airPlaneObj.flightDateEndAirPlane}"></span></td>
-        </tr>
-        </tbody>
-    </table>
-    <table cellspacing="2" border="1" cellpadding="5">
-        <thead>
-        <tr align="center">
-            <th>id</th>
-            <th>passengerSeat</th>
-            <th>isEmptySeat</th>
+            <th>status</th>
+            <th>numberSeatLowcost</th>
+            <th>numberSeatBuisness</th>
+            <th>pricePerKilometer</th>
             <th>isActive</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="airPlaneObj : ${airPlaneObjListFind}">
-            <td><span th:text="${airPlaneObj.idTicket}"></span></td>
-            <td><span th:text="${airPlaneObj.passengerSeatTicket}"></span></td>
-            <td><span th:text="${airPlaneObj.isEmptySeatTicket}"></span></td>
-            <td><span th:text="${airPlaneObj.isActiveTicket}"></span></td>
+        <tr th:each="airPlane : ${airPlaneDTOModifPageList}">
+            <td><span th:text="${airPlane.idAirPlane}"></span></td>
+            <td><span th:text="${airPlane.typeAirPlane}"></span></td>
+            <td><span th:text="${airPlane.statusAirPlane}"></span></td>
+            <td><span th:text="${airPlane.numberSeatLowcostAirPlane}"></span></td>
+            <td><span th:text="${airPlane.numberSeatBuisnessAirPlane}"></span></td>
+            <td><span th:text="${airPlane.pricePerKilometerAirPlane}"></span></td>
+            <td><span th:text="${airPlane.isActiveAirPlane}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table cellspacing="2" border="1" cellpadding="5">
+        <thead>
+        <tr align="center">
+            <th>id</th>
+            <th>name</th>
+            <th>countryLocation</th>
+            <th>priceLowcostIndex</th>
+            <th>priceBuisnessIndex</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="airPlane : ${airPlaneDTOModifPageList}">
+            <td><span th:text="${airPlane.idAirCompany}"></span></td>
+            <td><span th:text="${airPlane.nameAirCompany}"></span></td>
+            <td><span th:text="${airPlane.countryLocationAirCompany}"></span></td>
+            <td><span th:text="${airPlane.priceLowcostIndexAirCompany}"></span></td>
+            <td><span th:text="${airPlane.priceBuisnessIndexAirCompany}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table cellspacing="2" border="1" cellpadding="5">
+        <thead>
+        <tr align="center">
+            <th>id</th>
+            <th>routeStart</th>
+            <th>routeEnd</th>
+            <th>distance</th>
+            <th>flightDateStart</th>
+            <th>flightDateEnd</th>
+            <th>isActive</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="airPlane : ${airPlaneDTOModifPageList}">
+            <td><span th:text="${airPlane.idFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.routeStartFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.routeEndFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.distanceFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.flightDateStartFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.flightDateEndFlightRoute}"></span></td>
+            <td><span th:text="${airPlane.isActiveFlightRoute}"></span></td>
         </tr>
         </tbody>
     </table>

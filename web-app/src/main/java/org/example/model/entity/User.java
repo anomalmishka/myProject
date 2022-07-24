@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,8 +26,8 @@ public class User implements UserDetails {
     @Column(name = "PASSWORD_CONFIRM")
     private String passwordConfirm;
 
-    @OneToOne
-    private Authorities authorities;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Authorities> authorities;
 
     @Override
     public boolean isAccountNonExpired() {

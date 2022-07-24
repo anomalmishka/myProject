@@ -26,11 +26,11 @@ public class AirCompanyMapperModif {
                 .build();
     }
 
-    public List<AirCompanyDTOModif> toDTO(List<AirCompany> airCompanies) {
-        return airCompanies.stream().map(this::toDTO).collect(Collectors.toList());
+    public List<AirCompanyDTOModif> toDTO(List<AirCompany> airCompanyList) {
+        return airCompanyList.stream().map(this::toDTO).collect(Collectors.toList());
     }
-    public List<AirCompany> toModel(List<AirCompanyDTOModif> airCompanyDTOModifs) {
-        return airCompanyDTOModifs.stream().map(this::toModel).collect(Collectors.toList());
+    public List<AirCompany> toModel(List<AirCompanyDTOModif> airCompanyDTOModifList) {
+        return airCompanyDTOModifList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public AirCompany toModel(AirCompanyDTOModif airCompanyDTOModif) {
