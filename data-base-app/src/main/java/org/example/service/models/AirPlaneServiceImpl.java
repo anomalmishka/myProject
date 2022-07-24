@@ -4,7 +4,7 @@ import org.example.dao.models.AirPlaneDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.AirPlane;
-import org.example.service.api.AirPlaneService;
+import org.example.service.models.api.AirPlaneService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +48,9 @@ public class AirPlaneServiceImpl implements AirPlaneService {
 
     @Override
     public AirPlane deleteById(Long id) {
-        AirPlane deleteEntity = readById(id);
+        AirPlane deleteEntity = airPlaneDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         airPlaneDAO.deleteById(id);
         return deleteEntity;
     }

@@ -1,8 +1,8 @@
 package org.example.config.docker;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.UserRepository;
-import org.example.service.MyUserDetailsService;
+import org.example.dao.UserDAO;
+import org.example.service.api.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Profile("docker")
 public class SecurityConfigDocker extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepository;
+    private final UserDAO userDAO;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -31,7 +31,7 @@ public class SecurityConfigDocker extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService(userRepository);
+        return new CustomUserDetailsService(userDAO);
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -3,8 +3,8 @@ package org.example.controller.models.modif;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.AirPlaneDTOModif;
 import org.example.mapper.models.modif.AirPlaneMapperModif;
-import org.example.service.api.AirPlaneService;
-import org.example.service.models.modif.api.AirPlaneServiceModif;
+import org.example.service.models.api.AirPlaneService;
+import org.example.service.modif.api.AirPlaneServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

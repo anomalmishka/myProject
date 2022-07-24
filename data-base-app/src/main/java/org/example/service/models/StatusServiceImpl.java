@@ -5,7 +5,7 @@ import org.example.dao.models.StatusDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.Status;
-import org.example.service.api.StatusService;
+import org.example.service.models.api.StatusService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +49,9 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public Status deleteById(Long id) {
-        Status deleteEntity = readById(id);
+        Status deleteEntity = statusDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         statusDAO.deleteById(id);
         return deleteEntity;
     }

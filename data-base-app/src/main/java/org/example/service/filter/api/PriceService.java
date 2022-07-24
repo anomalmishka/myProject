@@ -4,6 +4,5 @@ import org.example.model.filter.PriceObj;
 
 
 public interface PriceService {
-//    PriceObj getTotalFlyPriceWhereAirCompany(PriceObj priceObj);
-    PriceObj getTotalFlyPriceWhereAirPlane(PriceObj priceObj);
+    PriceObj getPriceWhereFlightRoute(PriceObj priceObj);
 }

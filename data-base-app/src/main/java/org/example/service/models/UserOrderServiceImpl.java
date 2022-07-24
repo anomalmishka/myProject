@@ -5,7 +5,7 @@ import org.example.dao.models.UserOrderDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.UserOrder;
-import org.example.service.api.UserOrderService;
+import org.example.service.models.api.UserOrderService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +45,9 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public UserOrder deleteById(Long id) {
-        UserOrder deleteEntity = readById(id);
+        UserOrder deleteEntity = userOrderDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         userOrderDAO.deleteById(id);
         return deleteEntity;
     }

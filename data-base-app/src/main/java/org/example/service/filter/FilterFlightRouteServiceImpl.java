@@ -2,6 +2,7 @@ package org.example.service.filter;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dao.custom.flightRoute.FlightRouteCustomDAO;
+import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.FlightRoute;
 import org.example.model.filter.FilterObj;
 import org.example.service.filter.api.FilterFlightRouteService;
@@ -18,41 +19,28 @@ public class FilterFlightRouteServiceImpl implements FilterFlightRouteService {
 
     @Override
     public List<FlightRoute> findFlightRouteWhereRouteStartAndRouteEnd(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereRouteStartAndRouteEnd(filterObj);
+        if (filterObj.getRouteStart() != null) {
+            return flightRouteCustomDAO.findFlightRouteWhereRouteStartAndRouteEnd(filterObj);
+        } else {
+            throw new ErrorInvalidData("RouteStart must not be null");
+        }
     }
 
     @Override
     public List<FlightRoute> findFlightRouteWhereDateStartAndDateEnd(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereDateStartAndDateEnd(filterObj);
-    }
-
-    @Override
-    public List<FlightRoute> findFlightRouteWherePriceStartAndPriceEnd(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWherePriceStartAndPriceEnd(filterObj);
-    }
-
-    @Override
-    public List<FlightRoute> findFlightRouteWhereRouteSEAndDateSE(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereRouteSEAndDateSE(filterObj);
-    }
-
-    @Override
-    public List<FlightRoute> findFlightRouteWhereRouteSEAndPriceSE(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereRouteSEAndPriceSE(filterObj);
-    }
-
-    @Override
-    public List<FlightRoute> findFlightRouteWhereDateSEAndPriceSE(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereDateSEAndPriceSE(filterObj);
-    }
-
-    @Override
-    public List<FlightRoute> findFlightRouteWhereRouteSEAndDateSEAndPriceSE(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereRouteSEAndDateSEAndPriceSE(filterObj);
+        if (filterObj.getDateStart() != null) {
+            return flightRouteCustomDAO.findFlightRouteWhereDateStartAndDateEnd(filterObj);
+        } else {
+            throw new ErrorInvalidData("DateStart must not be null");
+        }
     }
 
     @Override
     public List<FlightRoute> findFlightRouteWhereRouteSEOneWaypoint(FilterObj filterObj) {
-        return flightRouteCustomDAO.findFlightRouteWhereRouteSEOneWaypoint(filterObj);
+        if (filterObj.getRouteStart() != null) {
+            return flightRouteCustomDAO.findFlightRouteWhereRouteSEOneWaypoint(filterObj);
+        } else {
+            throw new ErrorInvalidData("RouteStart must not be null");
+        }
     }
 }

@@ -13,9 +13,9 @@ public class PriceController {
     private final PriceService priceService;
     private final PriceMapper priceMapper;
 
-    @PostMapping(path = "find/total/price/where/air/plane", produces = "application/json", consumes = "application/json")
-    public PriceDTO findAllUserWhereAirPlane(@RequestBody PriceDTO priceDTO) {
-        return priceMapper.toDTO(priceService.getTotalFlyPriceWhereAirPlane(priceMapper.toModel(priceDTO)));
+    @PostMapping(path = "find/total/price/where/flight/route", produces = "application/json", consumes = "application/json")
+    public PriceDTO getPriceWhereFlightRoute(@RequestBody PriceDTO priceDTO) {
+        return priceMapper.toDTO(priceService.getPriceWhereFlightRoute(priceMapper.toModel(priceDTO)));
     }
 }
 

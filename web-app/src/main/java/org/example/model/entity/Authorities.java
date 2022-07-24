@@ -7,24 +7,21 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "AUTORITIES")
+@Entity(name = "AUTHORITIES")
 public class Authorities implements GrantedAuthority {
     @Id
     private Long id;
     @Column(name = "NAME")
     private String name;
     @Transient
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name="USER_ID")
-    private User user;
+    @ManyToMany(mappedBy = "AUTHORITIES")
+    private List<User> users;
 
     @Override
     public String getAuthority() {

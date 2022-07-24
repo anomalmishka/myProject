@@ -3,7 +3,7 @@ package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.StatusDTO;
 import org.example.mapper.models.StatusMapper;
-import org.example.service.api.StatusService;
+import org.example.service.models.api.StatusService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

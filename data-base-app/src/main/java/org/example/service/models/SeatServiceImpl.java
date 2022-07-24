@@ -5,7 +5,7 @@ import org.example.dao.models.SeatDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.Seat;
-import org.example.service.api.SeatService;
+import org.example.service.models.api.SeatService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +49,9 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public Seat deleteById(Long id) {
-        Seat deleteEntity = readById(id);
+        Seat deleteEntity = seatDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         seatDAO.deleteById(id);
         return deleteEntity;
     }

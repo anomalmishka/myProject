@@ -5,7 +5,7 @@ import org.example.dao.models.UserProfileDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.entity.UserProfile;
-import org.example.service.api.UserProfileService;
+import org.example.service.models.api.UserProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,7 +50,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile deleteById(Long id) {
-        UserProfile deleteEntity = readById(id);
+        UserProfile deleteEntity = userProfileDAO.findById(id).orElseThrow(() -> {
+            throw new ErrorDataNotFound(String.format("This id = %d not found!", id));
+        });
         userProfileDAO.deleteById(id);
         return deleteEntity;
     }

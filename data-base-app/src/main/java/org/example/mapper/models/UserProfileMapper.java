@@ -20,11 +20,11 @@ public class UserProfileMapper {
                 .build();
     }
 
-    public List<UserProfileDTO> toDTO(List<UserProfile> userProfile) {
-        return userProfile.stream().map(this::toDTO).collect(Collectors.toList());
+    public List<UserProfileDTO> toDTO(List<UserProfile> userProfileList) {
+        return userProfileList.stream().map(this::toDTO).collect(Collectors.toList());
     }
-    public List<UserProfile> toModel(List<UserProfileDTO> userProfileDTOS) {
-        return userProfileDTOS.stream().map(this::toModel).collect(Collectors.toList());
+    public List<UserProfile> toModel(List<UserProfileDTO> userProfileDTOList) {
+        return userProfileDTOList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public UserProfile toModel(UserProfileDTO userProfileDTO) {

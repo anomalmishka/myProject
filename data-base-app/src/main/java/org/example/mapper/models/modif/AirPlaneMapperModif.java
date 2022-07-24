@@ -33,12 +33,12 @@ public class AirPlaneMapperModif {
                 .build();
     }
 
-    public List<AirPlaneDTOModif> toDTO(List<AirPlane> airPlanes) {
-        return airPlanes.stream().map(this::toDTO).collect(Collectors.toList());
+    public List<AirPlaneDTOModif> toDTO(List<AirPlane> airPlaneList) {
+        return airPlaneList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<AirPlane> toModel(List<AirPlaneDTOModif> airPlaneDTOModifs) {
-        return airPlaneDTOModifs.stream().map(this::toModel).collect(Collectors.toList());
+    public List<AirPlane> toModel(List<AirPlaneDTOModif> airPlaneDTOModifList) {
+        return airPlaneDTOModifList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public AirPlane toModel(AirPlaneDTOModif airPlaneDTOModif) {
