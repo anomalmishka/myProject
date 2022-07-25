@@ -47,7 +47,8 @@ public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/find/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+                .antMatchers("/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+//                .antMatchers("/find/**").hasAnyAuthority("ADMIN","MANAGER","USER")
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .and()

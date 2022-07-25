@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.AirPlaneDTO;
-import org.example.model.obj.database.model.AirPlane;
+import org.example.model.database.AirPlane;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,12 +22,12 @@ public class AirPlaneMapper {
                 .build();
     }
 
-    public List<AirPlaneDTO> toDTO(List<AirPlane> airPlanes) {
-        return airPlanes.stream().map(this::toDTO).collect(Collectors.toList());
+    public List<AirPlaneDTO> toDTO(List<AirPlane> airPlaneList) {
+        return airPlaneList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    public List<AirPlane> toModel(List<AirPlaneDTO> airPlaneDTOS) {
-        return airPlaneDTOS.stream().map(this::toModel).collect(Collectors.toList());
+    public List<AirPlane> toModel(List<AirPlaneDTO> airPlaneDTOList) {
+        return airPlaneDTOList.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public AirPlane toModel(AirPlaneDTO airPlaneDTO) {

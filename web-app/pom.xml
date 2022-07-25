@@ -48,6 +48,11 @@
             <artifactId>spring-security-core</artifactId>
             <version>5.7.1</version>
         </dependency>
+        <!--WEB-CLIENT-CONFIG-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
         <!--DATA BASE-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.FlightRouteDTO;
-import org.example.model.obj.database.model.FlightRoute;
+import org.example.model.database.FlightRoute;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

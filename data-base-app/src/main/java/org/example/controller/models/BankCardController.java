@@ -23,7 +23,7 @@ public class BankCardController {
         return bankCardMapper.toDTO(bankCardService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<BankCardDTO> readAllById(@RequestBody List<Long> ids) {
         return bankCardMapper.toDTO(bankCardService.readAllByIds(ids));
     }

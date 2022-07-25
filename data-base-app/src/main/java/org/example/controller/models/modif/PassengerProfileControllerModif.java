@@ -27,7 +27,7 @@ public class PassengerProfileControllerModif {
         return passengerProfileMapperModif.toDTO(passengerProfileService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<PassengerProfileDTOModif> readAllById(@RequestBody List<Long> ids) {
         return passengerProfileMapperModif.toDTO(passengerProfileService.readAllByIds(ids));
     }

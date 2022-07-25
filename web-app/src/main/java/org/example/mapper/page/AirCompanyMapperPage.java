@@ -1,8 +1,9 @@
 package org.example.mapper.page;
 
+import org.example.dto.models.AirCompanyDTO;
 import org.example.dto.models.AirPlaneDTO;
 import org.example.dto.models.modif.AirCompanyDTOModif;
-import org.example.dto.models.page.AirCompanyDTOModifPage;
+import org.example.dto.page.AirCompanyPage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,9 +11,23 @@ import java.util.stream.Collectors;
 
 @Component
 public class AirCompanyMapperPage {
-    public AirCompanyDTOModifPage toPageDTO(AirCompanyDTOModif airCompanyDTOModif) {
+    public AirCompanyPage toDTO(AirCompanyDTO airCompanyDTO) {
+        return AirCompanyPage.builder()
+                .idAirCompany(airCompanyDTO.getId())
+                .nameAirCompany(airCompanyDTO.getNameCompany())
+                .countryLocationAirCompany(airCompanyDTO.getCountryLocation())
+                .priceLowcostIndexAirCompany(airCompanyDTO.getPriceLowcostIndex())
+                .priceBuisnessIndexAirCompany(airCompanyDTO.getPriceBuisnessIndex())
+                .build();
+    }
+
+    public List<AirCompanyPage> toDTO(List<AirCompanyDTO> airCompanyDTOList) {
+        return airCompanyDTOList.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    public AirCompanyPage toDTOModif(AirCompanyDTOModif airCompanyDTOModif) {
         List<AirPlaneDTO> airPlaneList = airCompanyDTOModif.getAirPlaneDTOList();
-        return AirCompanyDTOModifPage.builder()
+        return AirCompanyPage.builder()
                 .idAirCompany(airCompanyDTOModif.getId())
                 .nameAirCompany(airCompanyDTOModif.getNameCompany())
                 .countryLocationAirCompany(airCompanyDTOModif.getCountryLocation())
@@ -28,7 +43,7 @@ public class AirCompanyMapperPage {
                 .build();
     }
 
-    public List<AirCompanyDTOModifPage> toPageDTO(List<AirCompanyDTOModif> airCompanyDTOModifList) {
-        return airCompanyDTOModifList.stream().map(this::toPageDTO).collect(Collectors.toList());
+    public List<AirCompanyPage> toDTOModif(List<AirCompanyDTOModif> airCompanyDTOModifList) {
+        return airCompanyDTOModifList.stream().map(this::toDTOModif).collect(Collectors.toList());
     }
 }

@@ -27,7 +27,7 @@ public class FlightRouteControllerModif {
         return flightRouteMapperModif.toDTO(flightRouteService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<FlightRouteDTOModif> readAllById(@RequestBody List<Long> ids) {
         return flightRouteMapperModif.toDTO(flightRouteService.readAllByIds(ids));
     }

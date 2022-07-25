@@ -405,19 +405,16 @@
 									]
 								},
 								{
-									"name": "ticket",
+									"name": "price",
 									"item": [
 										{
-											"name": "find/ticket/where/user/1/",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
+											"name": "find/total/price/where/air/plane/1/",
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{}",
+													"raw": "\r\n{\r\n    \"idAirPlane\": 1,\r\n    \"idAirCompany\": 1,\r\n    \"idFlightRoute\": 1\r\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -425,7 +422,7 @@
 													}
 												},
 												"url": {
-													"raw": "http://localhost:8003/data-base-app/buisness/filter/ticket/find/ticket/where/user/1/",
+													"raw": "http://localhost:8003/data-base-app/buisness/filter/price/find/total/price/where/flight/route",
 													"protocol": "http",
 													"host": [
 														"localhost"
@@ -435,13 +432,13 @@
 														"data-base-app",
 														"buisness",
 														"filter",
-														"ticket",
+														"price",
 														"find",
-														"ticket",
+														"total",
+														"price",
 														"where",
-														"user",
-														"1",
-														""
+														"flight",
+														"route"
 													]
 												}
 											},
@@ -537,11 +534,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -684,11 +678,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -863,11 +854,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -893,38 +881,6 @@
 														"read",
 														"all",
 														"id"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "update",
-											"request": {
-												"method": "PUT",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"id\": 1,\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"isActive\": true,\n    \"airPlaneDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ],\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/flight/route/update",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"flight",
-														"route",
-														"update"
 													]
 												}
 											},
@@ -957,6 +913,38 @@
 														"flight",
 														"route",
 														"create"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": 1,\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"isActive\": true,\n    \"airPlaneDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ],\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/flight/route/update",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"flight",
+														"route",
+														"update"
 													]
 												}
 											},
@@ -1042,11 +1030,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -1219,11 +1204,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -1395,11 +1377,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -1574,11 +1553,8 @@
 										},
 										{
 											"name": "read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -1756,11 +1732,8 @@
 										},
 										{
 											"name": "air/company/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -2003,11 +1976,8 @@
 										},
 										{
 											"name": "air/plane/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -2250,11 +2220,8 @@
 										},
 										{
 											"name": "ticket/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -2497,11 +2464,8 @@
 										},
 										{
 											"name": "air/company/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -2744,11 +2708,8 @@
 										},
 										{
 											"name": "passenger/profile/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -2989,11 +2950,8 @@
 										},
 										{
 											"name": "seat/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -3229,11 +3187,8 @@
 										},
 										{
 											"name": "status/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -3471,11 +3426,8 @@
 										},
 										{
 											"name": "user/order/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -3718,11 +3670,8 @@
 										},
 										{
 											"name": "user/profile/read/all/id",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
 											"request": {
-												"method": "GET",
+												"method": "POST",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -3896,7 +3845,7 @@
 			]
 		},
 		{
-			"name": "service-app",
+			"name": "web-app",
 			"item": [
 				{
 					"name": "find user where airplane",
@@ -3940,6 +3889,476 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "find user by id web",
+					"item": [
+						{
+							"name": "find/user/air/plane/1/ Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/web-app/user/profile/id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"web-app",
+										"user",
+										"profile",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "find/user/air/plane/1/ Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/web-app/user/profile/id/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"web-app",
+										"user",
+										"profile",
+										"id",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "models controller",
+					"item": [
+						{
+							"name": "airCompany",
+							"item": [
+								{
+									"name": "air/company/read/all",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/read/all",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"read",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/read/2/",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/read/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"read",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/read/all/id",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[1,2,10]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/read/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"read",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "id",
+												"value": "2",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\",\r\n    \"priceLowcostIndex\": 3,\r\n    \"priceBuisnessIndex\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 4,\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\",\r\n    \"priceLowcostIndex\": 3,\r\n    \"priceBuisnessIndex\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/delete/1/",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8001/web-app/models/air/company/delete/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8001",
+											"path": [
+												"web-app",
+												"models",
+												"air",
+												"company",
+												"delete",
+												"id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "air/company/delete/all/id",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[5,6]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8003/data-base-app/air/company/delete/all/id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8003",
+											"path": [
+												"data-base-app",
+												"air",
+												"company",
+												"delete",
+												"all",
+												"id"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/web-app/login?username=admin&password=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"web-app",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login manger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/web-app/login?username=manager&password=manager",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"web-app",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "manager"
+								},
+								{
+									"key": "password",
+									"value": "manager"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/web-app/login?username=user&password=user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"web-app",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "user"
+								},
+								{
+									"key": "password",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/web-app/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"web-app",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -4,7 +4,7 @@ import org.example.dto.models.AirCompanyDTO;
 import org.example.dto.models.FlightRouteDTO;
 import org.example.dto.models.SeatDTO;
 import org.example.dto.models.modif.AirPlaneDTOModif;
-import org.example.dto.models.page.AirPlaneDTOModifPage;
+import org.example.dto.page.AirPlanePage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Component
 public class AirPlaneMapperPage {
 
-    public AirPlaneDTOModifPage toPageDTO(AirPlaneDTOModif airPlaneDTOModif) {
+    public AirPlanePage toPageDTO(AirPlaneDTOModif airPlaneDTOModif) {
         AirCompanyDTO airCompanyDTO = airPlaneDTOModif.getAirCompanyDTO();
         List<FlightRouteDTO> flightRouteDTOList = airPlaneDTOModif.getFlightRouteDTOList();
         List<SeatDTO> seatDTOList = airPlaneDTOModif.getSeatDTOList();
-        return AirPlaneDTOModifPage.builder()
+        return AirPlanePage.builder()
                 .idAirPlane(airPlaneDTOModif.getId())
                 .typeAirPlane(airPlaneDTOModif.getType())
                 .statusAirPlane(airPlaneDTOModif.getStatus())
@@ -46,7 +46,7 @@ public class AirPlaneMapperPage {
                 .build();
     }
 
-    public List<AirPlaneDTOModifPage> toPageDTO(List<AirPlaneDTOModif> airPlaneDTOModifList) {
+    public List<AirPlanePage> toPageDTO(List<AirPlaneDTOModif> airPlaneDTOModifList) {
         return airPlaneDTOModifList.stream().map(this::toPageDTO).collect(Collectors.toList());
     }
 }

@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.AirCompanyDTO;
-import org.example.model.obj.database.model.AirCompany;
+import org.example.model.database.AirCompany;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

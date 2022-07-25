@@ -25,7 +25,7 @@ public class UserOrderController {
         return userOrderMapper.toDTO(userOrderService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<UserOrderDTO> readAllById(@RequestBody List<Long> ids) {
         return userOrderMapper.toDTO(userOrderService.readAllByIds(ids));
     }
