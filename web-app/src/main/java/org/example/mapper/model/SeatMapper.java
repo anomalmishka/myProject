@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.SeatDTO;
-import org.example.model.obj.database.model.Seat;
+import org.example.model.database.Seat;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.UserProfileDTO;
-import org.example.model.obj.database.model.UserProfile;
+import org.example.model.database.UserProfile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

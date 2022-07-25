@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.UserOrderDTO;
-import org.example.model.obj.database.model.UserOrder;
+import org.example.model.database.UserOrder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

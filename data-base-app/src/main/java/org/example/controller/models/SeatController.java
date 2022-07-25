@@ -25,7 +25,7 @@ public class SeatController {
         return seatMapper.toDTO(seatService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<SeatDTO> readAllById(@RequestBody List<Long> ids) {
         return seatMapper.toDTO(seatService.readAllByIds(ids));
     }

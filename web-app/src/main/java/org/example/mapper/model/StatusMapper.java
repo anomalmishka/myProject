@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.StatusDTO;
-import org.example.model.obj.database.model.Status;
+import org.example.model.database.Status;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

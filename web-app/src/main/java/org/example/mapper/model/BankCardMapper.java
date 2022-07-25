@@ -1,7 +1,7 @@
 package org.example.mapper.model;
 
 import org.example.dto.models.BankCardDTO;
-import org.example.model.obj.database.model.BankCard;
+import org.example.model.database.BankCard;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

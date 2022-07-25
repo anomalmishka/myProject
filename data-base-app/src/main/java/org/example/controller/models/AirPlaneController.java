@@ -25,7 +25,7 @@ public class AirPlaneController {
         return airPlaneMapper.toDTO(airPlaneService.readById(id));
     }
 
-    @GetMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
+    @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<AirPlaneDTO> readAllById(@RequestBody List<Long> ids) {
         return airPlaneMapper.toDTO(airPlaneService.readAllByIds(ids));
     }
