@@ -44,7 +44,7 @@ public class ThymeleafConfig implements WebMvcConfigurer {
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:templates/images/");
+                .addResourceLocations("classpath:/templates/images/");
     }
 
     @Bean
