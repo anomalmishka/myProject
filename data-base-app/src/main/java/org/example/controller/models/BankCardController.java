@@ -19,7 +19,7 @@ public class BankCardController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public BankCardDTO readSingleId(@PathVariable("id") Long id) {
+    public BankCardDTO readById(@PathVariable("id") Long id) {
         return bankCardMapper.toDTO(bankCardService.readById(id));
     }
 

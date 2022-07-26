@@ -23,7 +23,7 @@ public class FlightRouteControllerModif {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public FlightRouteDTOModif readSingleId(@PathVariable("id") Long id) {
+    public FlightRouteDTOModif readById(@PathVariable("id") Long id) {
         return flightRouteMapperModif.toDTO(flightRouteService.readById(id));
     }
 

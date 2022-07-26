@@ -4,6 +4,7 @@ import org.example.dto.models.AirCompanyDTO;
 import org.example.dto.models.AirPlaneDTO;
 import org.example.dto.models.modif.AirCompanyDTOModif;
 import org.example.dto.page.AirCompanyPage;
+import org.example.model.database.AirCompany;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,6 +24,20 @@ public class AirCompanyMapperPage {
 
     public List<AirCompanyPage> toDTO(List<AirCompanyDTO> airCompanyDTOList) {
         return airCompanyDTOList.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    public AirCompanyPage toDTOFromModel(AirCompany airCompany) {
+        return AirCompanyPage.builder()
+                .idAirCompany(airCompany.getId())
+                .nameAirCompany(airCompany.getNameCompany())
+                .countryLocationAirCompany(airCompany.getCountryLocation())
+                .priceLowcostIndexAirCompany(airCompany.getPriceLowcostIndex())
+                .priceBuisnessIndexAirCompany(airCompany.getPriceBuisnessIndex())
+                .build();
+    }
+
+    public List<AirCompanyPage> toDTOFromModel(List<AirCompany> airCompanyList) {
+        return airCompanyList.stream().map(this::toDTOFromModel).collect(Collectors.toList());
     }
 
     public AirCompanyPage toDTOModif(AirCompanyDTOModif airCompanyDTOModif) {

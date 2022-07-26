@@ -21,7 +21,7 @@ public class UserProfileController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public UserProfileDTO readSingleId(@PathVariable("id") Long id) {
+    public UserProfileDTO readById(@PathVariable("id") Long id) {
         return userProfileMapper.toDTO(userProfileService.readById(id));
     }
 

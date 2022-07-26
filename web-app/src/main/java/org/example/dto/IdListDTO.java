@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-public class GetIdDTO {
-    private Long id;
-    private List<Long> idlist;
+public class IdListDTO {
+    private List<Long> id;
 }

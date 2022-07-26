@@ -21,7 +21,7 @@ public class AirPlaneController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public AirPlaneDTO readSingleId(@PathVariable("id") Long id) {
+    public AirPlaneDTO readById(@PathVariable("id") Long id) {
         return airPlaneMapper.toDTO(airPlaneService.readById(id));
     }
 

@@ -21,7 +21,7 @@ public class PassengerProfileController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public PassengerProfileDTO readSingleId(@PathVariable("id") Long id) {
+    public PassengerProfileDTO readById(@PathVariable("id") Long id) {
         return passengerProfileMapper.toDTO(passengerProfileService.readById(id));
     }
 
