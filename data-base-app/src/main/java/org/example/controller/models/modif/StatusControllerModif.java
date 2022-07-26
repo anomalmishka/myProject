@@ -23,7 +23,7 @@ public class StatusControllerModif {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public StatusDTOModif readSingleId(@PathVariable("id") Long id) {
+    public StatusDTOModif readById(@PathVariable("id") Long id) {
         return statusMapperModif.toDTO(statusService.readById(id));
     }
 

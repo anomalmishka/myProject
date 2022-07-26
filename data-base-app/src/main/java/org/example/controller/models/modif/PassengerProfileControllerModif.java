@@ -23,7 +23,7 @@ public class PassengerProfileControllerModif {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public PassengerProfileDTOModif readSingleId(@PathVariable("id") Long id) {
+    public PassengerProfileDTOModif readById(@PathVariable("id") Long id) {
         return passengerProfileMapperModif.toDTO(passengerProfileService.readById(id));
     }
 

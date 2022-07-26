@@ -21,7 +21,7 @@ public class SeatController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public SeatDTO readSingleId(@PathVariable("id") Long id) {
+    public SeatDTO readById(@PathVariable("id") Long id) {
         return seatMapper.toDTO(seatService.readById(id));
     }
 

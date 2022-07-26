@@ -23,7 +23,7 @@ public class AirCompanyControllerModif {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public AirCompanyDTOModif readSingleId(@PathVariable("id") Long id) {
+    public AirCompanyDTOModif readById(@PathVariable("id") Long id) {
         return airCompanyMapperModif.toDTO(airCompanyService.readById(id));
     }
 

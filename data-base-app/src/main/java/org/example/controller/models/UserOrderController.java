@@ -21,7 +21,7 @@ public class UserOrderController {
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
-    public UserOrderDTO readSingleId(@PathVariable("id") Long id) {
+    public UserOrderDTO readById(@PathVariable("id") Long id) {
         return userOrderMapper.toDTO(userOrderService.readById(id));
     }
 
