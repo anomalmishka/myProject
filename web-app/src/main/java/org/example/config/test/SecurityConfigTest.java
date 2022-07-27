@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Profile("test")
-public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
+public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
     private final UserDAO userDAO;
 
@@ -46,8 +46,10 @@ public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+//                .antMatchers("/").permitAll()
+                .antMatchers("/**").permitAll()
+//                .antMatchers("/resources/**").permitAll()
+//                .antMatchers("/**").hasAnyAuthority("ADMIN","MANAGER","USER")
 //                .antMatchers("/find/**").hasAnyAuthority("ADMIN","MANAGER","USER")
                 .and()
                 .logout().logoutSuccessUrl("/")

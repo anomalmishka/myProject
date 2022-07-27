@@ -42,11 +42,12 @@ public class ThymeleafConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
     }
 
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/templates/images/");
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/templates/content/**")
+                .addResourceLocations("classpath:/templates/content/");
     }
-
     @Bean
     public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
