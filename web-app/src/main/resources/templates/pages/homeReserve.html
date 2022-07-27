@@ -68,113 +68,79 @@
     </div>
     <!--    ====================================================================================================================-->
     <div class="container-fluid">
-        <div class="row top-step">
-        </div>
-        <div class="row">
-            <div class="col">
-                <form action="#" th:formaction="@{'/'}" th:object="${filterDTO}" method="post">
-                    <table cellspacing="2" border="1" cellpadding="5">
-                        <thead>
-                        <tr align="center">
-                            <th>routeStart</th>
-                            <th>routeEnd</th>
-                            <th>dateStart</th>
-                            <th>dateEnd</th>
-                            <th>priceStart</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><input type="text" class="form-control" name="routeStart" id="routeStart"
-                                       th:value="Minsk"></td>
-                            <td><input type="text" class="form-control" name="routeEnd" id="routeEnd" th:value="Moskva">
-                            </td>
-<!--                            <td><input type="date" name="dateStart" id="dateStart"-->
-<!--                                       ></td>-->
-<!--                            min="2022-06-01" max="2050-12-31" th:text="2022-07-27"-->
-<!--                            <td><input type="date" name="dateEnd" id="dateEnd" th:value="2022-07-27" min="2022-06-01"-->
-<!--                                       max="2050-12-31"></td>-->
-
-<!--                            <td><input type="text" id="priceStart" value="200" class="form-control">-->
-<!--                                <input type="range" name="rangeInput" min="0" max="1000" step="10"-->
-<!--                                       th:value="200"-->
-<!--                                       onchange="updateTextInput(this.value);"></td>-->
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn btn-success btn-lg" type="submit">Find my route</button>
-                </form>
+        <form action="#" th:action="@{'/find/route/'}" th:object="${filterDTO}" method="post">
+            <div class="row top-step">
             </div>
-        </div>
-    </div>
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Start route</span>-->
-    <!--                        <input type="text" class="form-control" name="routeStart" id="routeStart" th:value="Minsk">-->
-    <!--                        &lt;!&ndash;                        placeholder="Enter start" aria-label="Enter start"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        aria-describedby="basic-addon1"&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                    <button class="btn btn-success btn-lg" type="submit">Find my route</button>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">End route</span>-->
-    <!--                        <input type="text" class="form-control" name="routeEnd" id="routeEnd" th:value="Moskva">-->
-    <!--                        &lt;!&ndash;                        placeholder="Enter end" aria-label="Enter end"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        aria-describedby="basic-addon1"&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Date start</span>-->
-    <!--                        <input type="date" name="dateStart" id="dateStart"-->
-    <!--                               th:value="2022-07-27"-->
-    <!--                               min="2022-06-01" max="2050-12-31">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Date return</span>-->
-    <!--                        <input type="date" name="dateEnd" id="dateEnd"-->
-    <!--                               th:value="2022-07-27"-->
-    <!--                               min="2022-06-01" max="2050-12-31">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Price</span>-->
-    <!--                        <input type="text" id="priceStart" value="200" class="form-control">-->
-    <!--                        <input type="range" name="rangeInput" min="0" max="1000" step="10"-->
-    <!--                               th:value="200"-->
-    <!--                               onchange="updateTextInput(this.value);">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div class="row">-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--            <div class="col to-center">-->
-    <!--                <button class="btn btn-success btn-lg" type="submit">Find my route</button>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        </form>-->
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <form th:object="${filterDTO}">
+                        <div class="input-group">
+                            <span class="input-group-text">Start route</span>
+                            <input type="text" class="form-control" name="routeStart" id="routeStart" th:value="Minsk">
+                            <!--                        placeholder="Enter start" aria-label="Enter start"-->
+                            <!--                        aria-describedby="basic-addon1"-->
+                        </div>
+                        <button class="btn btn-success btn-lg" type="submit">Find my route</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <form th:object="${filterDTO}">
+                        <div class="input-group">
+                            <span class="input-group-text">End route</span>
+                            <input type="text" class="form-control" name="routeEnd" id="routeEnd" th:value="Moskva">
+                            <!--                        placeholder="Enter end" aria-label="Enter end"-->
+                            <!--                        aria-describedby="basic-addon1"-->
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form th:object="${filterDTO}">
+                        <div class="input-group">
+                            <span class="input-group-text">Date start</span>
+                            <input type="date" name="dateStart" id="dateStart"
+                                   th:value="2022-07-27"
+                                   min="2022-06-01" max="2050-12-31">
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form th:object="${filterDTO}">
+                        <div class="input-group">
+                            <span class="input-group-text">Date return</span>
+                            <input type="date" name="dateEnd" id="dateEnd"
+                                   th:value="2022-07-27"
+                                   min="2022-06-01" max="2050-12-31">
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form th:object="${filterDTO}">
+                        <div class="input-group">
+                            <span class="input-group-text">Price</span>
+                            <input type="text" id="priceStart" value="200" class="form-control">
+                            <input type="range" name="rangeInput" min="0" max="1000" step="10"
+                                   th:value="200"
+                                   onchange="updateTextInput(this.value);">
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col to-center">
+                    <button class="btn btn-success btn-lg" type="submit">Find my route</button>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </form>
 
-    <!--    </div>-->
+    </div>
 
     <div class="container-fluid">
         <div class="row footer">
@@ -186,6 +152,7 @@
                 <table cellspacing="2" border="1" cellpadding="5">
                     <thead>
                     <tr align="center">
+                        <th></th>
                         <th>id</th>
                         <th>routeStart</th>
                         <th>routeEnd</th>
@@ -196,7 +163,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="flightRoute : ${flightRoutePageList}">
+                    <tr th:each="flightRoute : ${flightRouteDTOModifPageList}">
                         <td><span th:text="${flightRoute.idFlightRoute}"></span></td>
                         <td><span th:text="${flightRoute.routeStartFlightRoute}"></span></td>
                         <td><span th:text="${flightRoute.routeEndFlightRoute}"></span></td>
