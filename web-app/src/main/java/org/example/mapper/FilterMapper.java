@@ -18,6 +18,10 @@ public class FilterMapper {
                 .dateEnd(filter.getDateEnd())
                 .priceStart(filter.getPriceStart())
                 .priceEnd(filter.getPriceEnd())
+                .airCompany(filter.getAirCompany())
+                .transfers(filter.getTransfers())
+                .durationStart(filter.getDurationStart())
+                .durationEnd(filter.getDurationEnd())
                 .build();
     }
 

@@ -6,7 +6,10 @@ import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.filter.FilterMapper;
 import org.example.mapper.models.modif.FlightRouteMapperModif;
 import org.example.service.filter.api.FilterFlightRouteService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -33,4 +36,3 @@ public class FilterFlightRouteController {
         return flightRouteMapperModif.toDTO(filterFlightRouteService.findFlightRouteWhereRouteSEOneWaypoint(filterMapper.toModel(filterDTO)));
     }
 }
-

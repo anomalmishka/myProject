@@ -5,6 +5,6 @@ import org.example.model.database.FlightRoute;
 
 import java.util.List;
 
-public interface FlightRouteChoiceService {
+public interface HomeService {
     List<FlightRoute> selectFilter(Filter filter);
 }

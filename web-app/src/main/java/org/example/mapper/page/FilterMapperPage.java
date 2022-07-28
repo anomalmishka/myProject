@@ -23,14 +23,25 @@ public class FilterMapperPage {
         try {
             Date parsedDateStart = format.parse(filterPage.getDateStart());
             Date parsedDateEnd = format.parse(filterPage.getDateEnd());
-            filterPage.setPriceStart("0");
             return Filter.builder()
                     .routeStart(filterPage.getRouteStart())
                     .routeEnd(filterPage.getRouteEnd())
                     .dateStart(parsedDateStart)
                     .dateEnd(parsedDateEnd)
-                    .priceStart(Integer.valueOf(filterPage.getPriceStart()))
+                    .priceStart(0)
                     .priceEnd(Integer.valueOf(filterPage.getPriceEnd()))
+                    .airCompany(filterPage.getAirCompany())
+                    .transfers(filterPage.getTransfers())
+                    .durationStart(0)
+                    .durationEnd(Integer.valueOf(filterPage.getDurationEnd()))
+                    .routeStartCheckbox(filterPage.getRouteStartCheckbox() != null)
+                    .routeEndCheckbox(filterPage.getRouteEndCheckbox() != null)
+                    .dateStartCheckbox(filterPage.getDateStartCheckbox() != null)
+                    .dateEndCheckbox(filterPage.getDateEndCheckbox() != null)
+                    .priceStartCheckbox(filterPage.getPriceStartCheckbox() != null)
+                    .airCompanyCheckbox(filterPage.getAirCompanyCheckbox() != null)
+                    .transfersCheckbox(filterPage.getTransfersCheckbox() != null)
+                    .flightDurationCheckbox(filterPage.getFlightDurationCheckbox() != null)
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);

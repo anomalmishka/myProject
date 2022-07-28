@@ -14,10 +14,12 @@ import java.util.Date;
 public class FilterObj {
     private String routeStart;
     private String routeEnd;
-
     private Date dateStart;
     private Date dateEnd;
-
     private Integer priceStart;
     private Integer priceEnd;
+    private String airCompany;
+    private String transfers;
+    private Integer durationStart;
+    private Integer durationEnd;
 }

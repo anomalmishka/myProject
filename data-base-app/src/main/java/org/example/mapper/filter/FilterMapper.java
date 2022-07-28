@@ -18,6 +18,10 @@ public class FilterMapper {
                 .dateEnd(filterObj.getDateEnd())
                 .priceStart(filterObj.getPriceStart())
                 .priceEnd(filterObj.getPriceEnd())
+                .airCompany(filterObj.getAirCompany())
+                .transfers(filterObj.getTransfers())
+                .durationStart(filterObj.getDurationStart())
+                .durationEnd(filterObj.getDurationEnd())
                 .build();
     }
 
@@ -37,6 +41,10 @@ public class FilterMapper {
                 .dateEnd(filterDTO.getDateEnd())
                 .priceStart(filterDTO.getPriceStart())
                 .priceEnd(filterDTO.getPriceEnd())
+                .airCompany(filterDTO.getAirCompany())
+                .transfers(filterDTO.getTransfers())
+                .durationStart(filterDTO.getDurationStart())
+                .durationEnd(filterDTO.getDurationEnd())
                 .build();
     }
 }
