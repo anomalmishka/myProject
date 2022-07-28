@@ -36,15 +36,15 @@ public class UserOrderServiceImplModif implements UserOrderServiceModif {
     }
 
     private UserOrder setForgetValueOnId(UserOrder userOrder) {
-        Long flightRouteID = userOrder.getFlightRoute().getId();
-        FlightRoute flightRoute = flightRouteService.readById(flightRouteID);
-        userOrder.setFlightRoute(flightRoute);
-        Long passangerProfileId = userOrder.getPassengerProfile().getId();
-        PassengerProfile passengerProfile = passengerProfileService.readById(passangerProfileId);
-        userOrder.setPassengerProfile(passengerProfile);
-        Long statusId = userOrder.getStatus().getId();
-        Status status = statusService.readById(statusId);
-        userOrder.setStatus(status);
+//        Long flightRouteID = userOrder.getFlightRoute().getId();
+//        FlightRoute flightRoute = flightRouteService.readById(flightRouteID);
+//        userOrder.setFlightRoute(flightRoute);
+//        Long passangerProfileId = userOrder.getPassengerProfile().getId();
+//        PassengerProfile passengerProfile = passengerProfileService.readById(passangerProfileId);
+//        userOrder.setPassengerProfile(passengerProfile);
+//        Long statusId = userOrder.getStatus().getId();
+//        Status status = statusService.readById(statusId);
+//        userOrder.setStatus(status);
         return userOrder;
     }
 }

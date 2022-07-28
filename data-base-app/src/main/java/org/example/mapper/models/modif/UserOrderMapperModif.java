@@ -21,9 +21,9 @@ public class UserOrderMapperModif {
     public UserOrderDTOModif toDTO(UserOrder userOrder) {
         return UserOrderDTOModif.builder()
                 .id(userOrder.getId())
-                .flightRouteDTO(flightRouteMapper.toDTO(userOrder.getFlightRoute()))
-                .passengerProfileDTO(passengerProfileMapper.toDTO(userOrder.getPassengerProfile()))
-                .statusDTO(statusMapper.toDTO(userOrder.getStatus()))
+//                .flightRouteDTO(flightRouteMapper.toDTO(userOrder.getFlightRoute()))
+//                .passengerProfileDTO(passengerProfileMapper.toDTO(userOrder.getPassengerProfile()))
+//                .statusDTO(statusMapper.toDTO(userOrder.getStatus()))
                 .build();
     }
 
@@ -38,9 +38,9 @@ public class UserOrderMapperModif {
     public UserOrder toModel(UserOrderDTOModif userOrderDTOModif) {
         return UserOrder.builder()
                 .id(userOrderDTOModif.getId())
-                .flightRoute(flightRouteMapper.toModel(userOrderDTOModif.getFlightRouteDTO()))
-                .passengerProfile(passengerProfileMapper.toModel(userOrderDTOModif.getPassengerProfileDTO()))
-                .status(statusMapper.toModel(userOrderDTOModif.getStatusDTO()))
+//                .flightRoute(flightRouteMapper.toModel(userOrderDTOModif.getFlightRouteDTO()))
+//                .passengerProfile(passengerProfileMapper.toModel(userOrderDTOModif.getPassengerProfileDTO()))
+//                .status(statusMapper.toModel(userOrderDTOModif.getStatusDTO()))
                 .build();
     }
 }

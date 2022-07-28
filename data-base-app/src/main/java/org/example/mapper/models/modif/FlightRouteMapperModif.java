@@ -25,7 +25,7 @@ public class FlightRouteMapperModif {
                 .flightDateStart(flightRoute.getFlightDateStart())
                 .flightDateEnd(flightRoute.getFlightDateEnd())
                 .isActive(flightRoute.getIsActive())
-                .airPlaneDTOList(airPlaneMapper.toDTO(flightRoute.getAirPlaneList()))
+//                .airPlaneDTOList(airPlaneMapper.toDTO(flightRoute.getAirPlaneList()))
                 .userOrderDTOList(userOrderMapper.toDTO(flightRoute.getUserOrderList()))
                 .build();
     }
@@ -47,7 +47,7 @@ public class FlightRouteMapperModif {
                 .flightDateStart(flightRouteDTOModif.getFlightDateStart())
                 .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
                 .isActive(flightRouteDTOModif.getIsActive())
-                .airPlaneList(airPlaneMapper.toModel(flightRouteDTOModif.getAirPlaneDTOList()))
+//                .airPlaneList(airPlaneMapper.toModel(flightRouteDTOModif.getAirPlaneDTOList()))
                 .userOrderList(userOrderMapper.toModel(flightRouteDTOModif.getUserOrderDTOList()))
                 .build();
     }

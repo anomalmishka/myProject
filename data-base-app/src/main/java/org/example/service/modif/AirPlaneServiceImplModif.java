@@ -78,9 +78,9 @@ public class AirPlaneServiceImplModif implements AirPlaneServiceModif {
 
     private AirPlane setForgetValueOnId(AirPlane airPlane) {
         if (airPlane.getType() != null) {
-            Long airCompanyId = airPlane.getAirCompany().getId();
-            AirCompany airCompany = airCompanyService.readById(airCompanyId);
-            airPlane.setAirCompany(airCompany);
+//            Long airCompanyId = airPlane.getAirCompany().getId();
+//            AirCompany airCompany = airCompanyService.readById(airCompanyId);
+//            airPlane.setAirCompany(airCompany);
             List<Long> flightRouteIdList = airPlane.getFlightRouteList().stream().map(FlightRoute::getId).collect(Collectors.toList());
             List<FlightRoute> flightRouteList = flightRouteService.readAllByIds(flightRouteIdList);
             airPlane.setFlightRouteList(flightRouteList);

@@ -18,20 +18,20 @@ public class UserOrder {
     @Column(name = "ID")
     private Long id;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
-    private Status status;
-
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    private FlightRoute flightRoute;
-
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    private PassengerProfile passengerProfile;
+//    @ManyToOne(
+//            fetch = FetchType.LAZY
+//    )
+//    private Status status;
+//
+//    @ManyToOne(
+//            cascade = CascadeType.MERGE,
+//            fetch = FetchType.LAZY
+//    )
+//    private FlightRoute flightRoute;
+//
+//    @ManyToOne(
+//            cascade = CascadeType.MERGE,
+//            fetch = FetchType.LAZY
+//    )
+//    private PassengerProfile passengerProfile;
 }

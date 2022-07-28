@@ -22,6 +22,6 @@ public class FlightRouteDTOModif {
     private Date flightDateStart;
     private Date flightDateEnd;
     private Boolean isActive;
-    private List<AirPlaneDTO> airPlaneDTOList;
+//    private List<AirPlaneDTO> airPlaneDTOList;
     private List<UserOrderDTO> userOrderDTOList;
 }

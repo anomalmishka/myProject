@@ -32,9 +32,9 @@ public class FlightRouteServiceImplModif implements FlightRouteServiceModif {
 
     private FlightRoute setForgetValueOnId(FlightRoute flightRoute) {
         if (flightRoute.getRouteStart() != null) {
-            List<Long> airPlaneIdList = flightRoute.getAirPlaneList().stream().map(AirPlane::getId).collect(Collectors.toList());
-            List<AirPlane> airPlaneList = airPlaneService.readAllByIds(airPlaneIdList);
-            flightRoute.setAirPlaneList(airPlaneList);
+//            List<Long> airPlaneIdList = flightRoute.getAirPlaneList().stream().map(AirPlane::getId).collect(Collectors.toList());
+//            List<AirPlane> airPlaneList = airPlaneService.readAllByIds(airPlaneIdList);
+//            flightRoute.setAirPlaneList(airPlaneList);
             List<Long> userOrderIdList = flightRoute.getUserOrderList().stream().map(UserOrder::getId).collect(Collectors.toList());
             List<UserOrder> userOrderFindList = userOrderService.readAllByIds(userOrderIdList);
             flightRoute.setUserOrderList(userOrderFindList);

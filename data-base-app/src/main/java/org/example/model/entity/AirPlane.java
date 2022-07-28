@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,25 +32,26 @@ public class AirPlane {
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
-    @ManyToOne(
+//    @ManyToOne(
+//            cascade = CascadeType.MERGE,
+//            fetch = FetchType.LAZY
+//    )
+//    private AirCompany airCompany;
+
+    @ManyToMany(targetEntity = FlightRoute.class,
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    private AirCompany airCompany;
-
+    @JoinTable(
+            name = "AIR_PLANE_FLIGHT_ROUTE",
+            joinColumns = @JoinColumn(name = "AIR_PLANE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FLIGHT_ROUTE_ID"))
 //    @ManyToMany(
 //            cascade = CascadeType.MERGE,
-//            fetch = FetchType.LAZY,
-//            mappedBy = "flightRouteList"
+//            fetch = FetchType.LAZY
+//            ,
+//            mappedBy = "airPlaneList"
 //    )
-//    @JoinTable(
-//            name = "AIR_PLANE_FLIGHT_ROUTE",
-//            joinColumns = @JoinColumn(name = "AIR_PLANE_ID"),
-//            inverseJoinColumns = @JoinColumn(name = "FLIGHT_ROUTE_ID"))
-    @ManyToMany(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
     private List<FlightRoute> flightRouteList;
 
     @OneToMany(

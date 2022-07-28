@@ -22,7 +22,7 @@ public class AirPlaneDTOModif {
     private Integer numberSeatBuisness;
     private Integer pricePerKilometer;
     private Boolean isActive;
-    private AirCompanyDTO airCompanyDTO;
+//    private AirCompanyDTO airCompanyDTO;
     private List<FlightRouteDTO> flightRouteDTOList;
     private List<SeatDTO> seatDTOList;
 }

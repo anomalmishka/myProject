@@ -29,7 +29,7 @@ public class AirCompanyCustomDAOImpl implements AirCompanyCustomDAO{
         String routeEnd = filterObj.getRouteEnd();
         Predicate predicateRouteStart = criteriaBuilder.equal(flightRouteJoin.get(FlightRoute_.routeStart), routeStart);
         Predicate predicateRouteEnd = criteriaBuilder.equal(flightRouteJoin.get(FlightRoute_.routeEnd), routeEnd);
-        query.where(criteriaBuilder.and(predicateRouteStart, predicateRouteEnd));
+        query.where(criteriaBuilder.and(predicateRouteStart, predicateRouteEnd)).distinct(true);
         List<AirCompany> resultList = entityManager.createQuery(query).getResultList();
         System.out.println(resultList);
         return resultList;

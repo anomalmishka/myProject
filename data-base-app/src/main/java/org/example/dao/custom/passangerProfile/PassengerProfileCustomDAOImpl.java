@@ -21,11 +21,11 @@ public class PassengerProfileCustomDAOImpl implements PassengerProfileCustomDAO 
         CriteriaQuery<PassengerProfile> query = criteriaBuilder.createQuery(PassengerProfile.class);
         Root<PassengerProfile> root = query.from(PassengerProfile.class);
         Join<PassengerProfile, UserOrder> userOrderJoin = root.join(PassengerProfile_.userOrderList, JoinType.LEFT);
-        Join<UserOrder, FlightRoute> flightRouteJoin = userOrderJoin.join(UserOrder_.flightRoute, JoinType.LEFT);
-        Join<FlightRoute, AirPlane> airPlaneJoin = flightRouteJoin.join(FlightRoute_.airPlaneList, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Predicate predicate = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.id), idAirCompany);
-        query.where(predicate).distinct(true);
+//        Join<UserOrder, FlightRoute> flightRouteJoin = userOrderJoin.join(UserOrder_.flightRoute, JoinType.LEFT);
+//        Join<FlightRoute, AirPlane> airPlaneJoin = flightRouteJoin.join(FlightRoute_.airPlaneList, JoinType.LEFT);
+//        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
+//        Predicate predicate = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.id), idAirCompany);
+//        query.where(predicate).distinct(true);
         return entityManager.createQuery(query).getResultList();
     }
 
@@ -36,10 +36,10 @@ public class PassengerProfileCustomDAOImpl implements PassengerProfileCustomDAO 
         CriteriaQuery<PassengerProfile> query = criteriaBuilder.createQuery(PassengerProfile.class);
         Root<PassengerProfile> root = query.from(PassengerProfile.class);
         Join<PassengerProfile, UserOrder> userOrderJoin = root.join(PassengerProfile_.userOrderList, JoinType.LEFT);
-        Join<UserOrder, FlightRoute> flightRouteJoin = userOrderJoin.join(UserOrder_.flightRoute, JoinType.LEFT);
-        Join<FlightRoute, AirPlane> airPlaneJoin = flightRouteJoin.join(FlightRoute_.airPlaneList, JoinType.LEFT);
-        Predicate predicate = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.id), idAirPlane);
-        query.where(predicate).distinct(true);
+//        Join<UserOrder, FlightRoute> flightRouteJoin = userOrderJoin.join(UserOrder_.flightRoute, JoinType.LEFT);
+//        Join<FlightRoute, AirPlane> airPlaneJoin = flightRouteJoin.join(FlightRoute_.airPlaneList, JoinType.LEFT);
+//        Predicate predicate = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.id), idAirPlane);
+//        query.where(predicate).distinct(true);
         return entityManager.createQuery(query).getResultList();
     }
 }

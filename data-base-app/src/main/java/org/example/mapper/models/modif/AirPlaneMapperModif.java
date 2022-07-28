@@ -27,7 +27,7 @@ public class AirPlaneMapperModif {
                 .numberSeatBuisness(airPlane.getNumberSeatBuisness())
                 .pricePerKilometer(airPlane.getPricePerKilometer())
                 .isActive(airPlane.getIsActive())
-                .airCompanyDTO(airCompanyMapper.toDTO(airPlane.getAirCompany()))
+//                .airCompanyDTO(airCompanyMapper.toDTO(airPlane.getAirCompany()))
                 .flightRouteDTOList(flightRouteMapper.toDTO(airPlane.getFlightRouteList()))
                 .seatDTOList(seatMapper.toDTO(airPlane.getSeatList()))
                 .build();
@@ -50,7 +50,7 @@ public class AirPlaneMapperModif {
                 .numberSeatBuisness(airPlaneDTOModif.getNumberSeatBuisness())
                 .pricePerKilometer(airPlaneDTOModif.getPricePerKilometer())
                 .isActive(airPlaneDTOModif.getIsActive())
-                .airCompany(airCompanyMapper.toModel(airPlaneDTOModif.getAirCompanyDTO()))
+//                .airCompany(airCompanyMapper.toModel(airPlaneDTOModif.getAirCompanyDTO()))
                 .flightRouteList(flightRouteMapper.toModel(airPlaneDTOModif.getFlightRouteDTOList()))
                 .seatList(seatMapper.toModel(airPlaneDTOModif.getSeatDTOList()))
                 .build();

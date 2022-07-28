@@ -73,7 +73,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();
@@ -85,7 +85,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();
@@ -97,7 +97,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();
@@ -159,7 +159,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();
@@ -171,7 +171,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();
@@ -183,7 +183,7 @@ class AirPlaneServiceImplModifTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .flightRouteList(flightRouteList)
                 .seatList(seatList)
                 .build();

@@ -62,21 +62,21 @@ class UserOrderServiceImplModifTest {
                 .build();
         UserOrder GIVEN = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         UserOrder ANSWER = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         UserOrder EXPECTED = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         Mockito.when(userOrderDAO.save(GIVEN)).thenReturn(ANSWER);
         UserOrder ACTUAL = userOrderServiceImplModif.create(GIVEN);
@@ -116,21 +116,21 @@ class UserOrderServiceImplModifTest {
                 .build();
         UserOrder GIVEN = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         UserOrder ANSWER = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         UserOrder EXPECTED = UserOrder.builder()
                 .id(1L)
-                .flightRoute(flightRoute)
-                .passengerProfile(passengerProfile)
-                .status(status)
+//                .flightRoute(flightRoute)
+//                .passengerProfile(passengerProfile)
+//                .status(status)
                 .build();
         Mockito.when(userOrderDAO.save(GIVEN)).thenReturn(ANSWER);
         UserOrder ACTUAL = userOrderServiceImplModif.update(GIVEN);

@@ -58,7 +58,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         FlightRoute ANSWER = FlightRoute.builder()
@@ -69,7 +69,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         FlightRoute EXPECTED = FlightRoute.builder()
@@ -80,7 +80,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         Mockito.when(flightRouteDAO.save(GIVEN)).thenReturn(ANSWER);
@@ -129,7 +129,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         FlightRoute ANSWER = FlightRoute.builder()
@@ -140,7 +140,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         FlightRoute EXPECTED = FlightRoute.builder()
@@ -151,7 +151,7 @@ class FlightRouteServiceImplModifTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .userOrderList(userOrderList)
                 .build();
         Mockito.when(flightRouteDAO.save(GIVEN)).thenReturn(ANSWER);

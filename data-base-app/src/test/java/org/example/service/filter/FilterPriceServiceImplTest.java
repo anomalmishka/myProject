@@ -53,7 +53,7 @@ class FilterPriceServiceImplTest {
                 .numberSeatBuisness(1)
                 .pricePerKilometer(5)
                 .isActive(true)
-                .airCompany(airCompany)
+//                .airCompany(airCompany)
                 .build();
         List<AirPlane> airPlaneList = List.of(airPlane);
         FlightRoute ANSWER = FlightRoute.builder()
@@ -64,7 +64,7 @@ class FilterPriceServiceImplTest {
                 .flightDateStart(flightDateStart)
                 .flightDateEnd(flightDateEnd)
                 .isActive(true)
-                .airPlaneList(airPlaneList)
+//                .airPlaneList(airPlaneList)
                 .build();
         PriceObj EXPECTED = PriceObj.builder()
                 .idAirCompany(null)

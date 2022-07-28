@@ -25,13 +25,13 @@ public class FlightRouteMapperPage {
                 .flightDateEndFlightRoute(flightRoute.getFlightDateEnd())
                 .isActiveFlightRoute(flightRoute.getIsActive())
 
-                .idAirPlane(airPlaneList.stream().map(AirPlane::getId).collect(Collectors.toList()))
-                .typeAirPlane(airPlaneList.stream().map(AirPlane::getType).collect(Collectors.toList()))
-                .statusAirPlane(airPlaneList.stream().map(AirPlane::getStatus).collect(Collectors.toList()))
-                .numberSeatLowcostAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatLowcost).collect(Collectors.toList()))
-                .numberSeatBuisnessAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatBuisness).collect(Collectors.toList()))
-                .pricePerKilometerAirPlane(airPlaneList.stream().map(AirPlane::getPricePerKilometer).collect(Collectors.toList()))
-                .isActiveAirPlane(airPlaneList.stream().map(AirPlane::getIsActive).collect(Collectors.toList()))
+//                .idAirPlane(airPlaneList.stream().map(AirPlane::getId).collect(Collectors.toList()))
+//                .typeAirPlane(airPlaneList.stream().map(AirPlane::getType).collect(Collectors.toList()))
+//                .statusAirPlane(airPlaneList.stream().map(AirPlane::getStatus).collect(Collectors.toList()))
+//                .numberSeatLowcostAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatLowcost).collect(Collectors.toList()))
+//                .numberSeatBuisnessAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatBuisness).collect(Collectors.toList()))
+//                .pricePerKilometerAirPlane(airPlaneList.stream().map(AirPlane::getPricePerKilometer).collect(Collectors.toList()))
+//                .isActiveAirPlane(airPlaneList.stream().map(AirPlane::getIsActive).collect(Collectors.toList()))
 
                 .idUserOrder(userOrderList.stream().map(UserOrder::getId).collect(Collectors.toList()))
                 .build();
