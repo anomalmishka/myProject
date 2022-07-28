@@ -3,8 +3,8 @@ package org.example.service.rest.filter.userProfile;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.UserProfileDTOModif;
 import org.example.mapper.model.modif.UserProfileMapperModif;
+import org.example.model.Filter;
 import org.example.model.database.UserProfile;
-import org.example.model.FilterObj;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -47,8 +47,8 @@ public class UserProfileRestTemplateFilterImpl implements UserProfileRestTemplat
 //    }
 
     @Override
-    public List<UserProfile> exchange(FilterObj filterObj, String uriVar, HttpMethod httpMethod) {
-        ResponseEntity<UserProfileDTOModif[]> responseEntity = restTemplate.exchange(URL + uriVar, httpMethod, new HttpEntity<>(filterObj), UserProfileDTOModif[].class);
+    public List<UserProfile> exchange(Filter filter, String uriVar, HttpMethod httpMethod) {
+        ResponseEntity<UserProfileDTOModif[]> responseEntity = restTemplate.exchange(URL + uriVar, httpMethod, new HttpEntity<>(filter), UserProfileDTOModif[].class);
         List<UserProfileDTOModif> userProfileDTOModifList = Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
         return userProfileMapperModif.toModel(userProfileDTOModifList);
     }

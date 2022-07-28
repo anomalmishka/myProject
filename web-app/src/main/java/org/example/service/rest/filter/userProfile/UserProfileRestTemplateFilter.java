@@ -1,7 +1,7 @@
 package org.example.service.rest.filter.userProfile;
 
+import org.example.model.Filter;
 import org.example.model.database.UserProfile;
-import org.example.model.FilterObj;
 import org.springframework.http.HttpMethod;
 
 import java.util.List;
@@ -13,5 +13,5 @@ public interface UserProfileRestTemplateFilter {
 //
 //    AirPlaneModif exchangeAirPlaneModif(String uriVar, Long id, HttpMethod httpMethod);
 
-    List<UserProfile> exchange(FilterObj filterObj, String uriVar, HttpMethod httpMethod);
+    List<UserProfile> exchange(Filter filter, String uriVar, HttpMethod httpMethod);
 }

@@ -12,58 +12,22 @@
     <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
     <link rel="stylesheet" type="text/css"
           href="http://localhost:8001/web-app/templates/content/css/carousel/style.css">
-
+    <link rel="stylesheet" type="text/css"
+          href="http://localhost:8001/web-app/templates/content/css/clock/style.css">
 </head>
-<body class="background-image-home">
+<body class="background-image-home" onload="clockTimer();">
 <main>
     <header th:replace="fragments/header :: header"></header>
     <div class="container-fluid">
         <div class="row footer">
         </div>
-        <div class="ant-carousel">
-            <div class="ant-carousel-hider">
-                <ul class="ant-carousel-list">
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-1.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-1.jpg"
-                                 width="360" height="240" alt="0"></a>
-                        <p>Do you want to fly?</p>
-                    </li>
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-2.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-2.jpg"
-                                 width="360" height="240" alt="1"></a>
-                        <p>Hello World! From Minsk!</p>
-                    </li>
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-3.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-3.jpg"
-                                 width="360" height="240" alt="2"></a>
-                        <p>Need a ticket to Seychelles?</p>
-                    </li>
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-4.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-4.jpg"
-                                 width="360" height="240" alt="3"></a>
-                        <p>Look at the beauty of the Georgian mountains</p>
-                    </li>
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-5.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-5.jpg"
-                                 width="360" height="240" alt="4"></a>
-                        <p>Ah Paris...</p>
-                    </li>
-                    <li class="ant-carousel-element">
-                        <a href="http://localhost:8001/web-app/templates/content/images/carousel/carousel-6.jpg">
-                            <img src="http://localhost:8001/web-app/templates/content/images/carousel/carousel-6.jpg"
-                                 width="360" height="240" alt="5"></a>
-                        <p>Sí, Señor, es España...</p>
-                    </li>
-                </ul>
+        <div class="row align-items-start">
+            <div class="col-lg-2 align-self-end">
+                <div class="clockpage">
+                    <span id="clock"></span>
+                    <span id="dayOfWeek"></span>
+                </div>
             </div>
-            <div class="ant-carousel-arrow-left"></div>
-            <div class="ant-carousel-arrow-right"></div>
-            <div class="ant-carousel-dots"></div>
         </div>
     </div>
     <!--    ====================================================================================================================-->
@@ -73,32 +37,71 @@
         <div class="row">
             <div class="col">
                 <form action="#" th:formaction="@{'/'}" th:object="${filterDTO}" method="post">
-                    <table cellspacing="2" border="1" cellpadding="5">
+                    <table cellspacing="1" border="0" cellpadding="1">
                         <thead>
-                        <tr align="center">
-                            <th>routeStart</th>
-                            <th>routeEnd</th>
-                            <th>dateStart</th>
-                            <th>dateEnd</th>
-                            <th>priceStart</th>
+                        <tr>
+                            <th>Route Start</th>
+                            <th>Route End</th>
+                            <th>Date start fly</th>
+                            <th>Date end fle</th>
+                            <th>Price</th>
+                            <th>AirCompany</th>
+                            <th>Transfers</th>
+                            <th>Flight duration</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><input type="text" class="form-control" name="routeStart" id="routeStart"
-                                       th:value="Minsk"></td>
-                            <td><input type="text" class="form-control" name="routeEnd" id="routeEnd" th:value="Moskva">
+                            <td>
+                                <input th:type="checkbox" id="routeStartCheckbox" name="routeStartCheckbox"
+                                       value="routeStart">
+                                <input type="text" name="routeStart" id="routeStart"
+                                       th:value="Minsk">
                             </td>
-<!--                            <td><input type="date" name="dateStart" id="dateStart"-->
-<!--                                       ></td>-->
-<!--                            min="2022-06-01" max="2050-12-31" th:text="2022-07-27"-->
-<!--                            <td><input type="date" name="dateEnd" id="dateEnd" th:value="2022-07-27" min="2022-06-01"-->
-<!--                                       max="2050-12-31"></td>-->
-
-<!--                            <td><input type="text" id="priceStart" value="200" class="form-control">-->
-<!--                                <input type="range" name="rangeInput" min="0" max="1000" step="10"-->
-<!--                                       th:value="200"-->
-<!--                                       onchange="updateTextInput(this.value);"></td>-->
+                            <td>
+                                <input th:type="checkbox" id="routeEndCheckbox" name="routeEndCheckbox"
+                                       value="routeEnd">
+                                <input type="text" name="routeEnd" id="routeEnd"
+                                       th:value="Moskva">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="dateStartCheckbox" name="dateStartCheckbox"
+                                       value="dateStart">
+                                <input type="date" name="dateStart" id="dateStart"
+                                       min="2022-06-01" max="2050-12-31" th:value="2022-07-27">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="dateEndCheckbox" name="dateEndCheckbox"
+                                       value="dateEnd">
+                                <input type="date" name="dateEnd" id="dateEnd"
+                                       min="2022-06-01" max="2050-12-31" th:value="2022-07-27">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="priceStartCheckbox" name="priceStartCheckbox"
+                                       value="priceStart">
+                                <input type="range" name="priceEnd" min="0" max="1000" step="10"
+                                       th:value="200" onchange="updateRangeInput(this.value);">
+                                <input type="text" id="rangeInput" value="200">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="AirCompanyCheckbox" name="AirCompanyCheckbox"
+                                       value="AirCompany">
+                                <input type="text" name="AirCompany" id="AirCompany"
+                                       th:value="AirCompany">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="TransfersCheckbox" name="TransfersCheckbox"
+                                       value="Transfers">
+                                <input type="text" name="Transfers" id="Transfers"
+                                       th:value="Minsk">
+                            </td>
+                            <td>
+                                <input th:type="checkbox" id="FlightDurationCheckbox" name="FlightDurationCheckbox"
+                                       value="FlightDuration">
+                                <input type="range" name="durationEnd" min="0" max="1000" step="10"
+                                       th:value="200" onchange="updateDurationInput(this.value);">
+                                <input type="text" id="Duration" value="200">
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -107,75 +110,7 @@
             </div>
         </div>
     </div>
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Start route</span>-->
-    <!--                        <input type="text" class="form-control" name="routeStart" id="routeStart" th:value="Minsk">-->
-    <!--                        &lt;!&ndash;                        placeholder="Enter start" aria-label="Enter start"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        aria-describedby="basic-addon1"&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                    <button class="btn btn-success btn-lg" type="submit">Find my route</button>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">End route</span>-->
-    <!--                        <input type="text" class="form-control" name="routeEnd" id="routeEnd" th:value="Moskva">-->
-    <!--                        &lt;!&ndash;                        placeholder="Enter end" aria-label="Enter end"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        aria-describedby="basic-addon1"&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Date start</span>-->
-    <!--                        <input type="date" name="dateStart" id="dateStart"-->
-    <!--                               th:value="2022-07-27"-->
-    <!--                               min="2022-06-01" max="2050-12-31">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Date return</span>-->
-    <!--                        <input type="date" name="dateEnd" id="dateEnd"-->
-    <!--                               th:value="2022-07-27"-->
-    <!--                               min="2022-06-01" max="2050-12-31">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--                <form th:object="${filterDTO}">-->
-    <!--                    <div class="input-group">-->
-    <!--                        <span class="input-group-text">Price</span>-->
-    <!--                        <input type="text" id="priceStart" value="200" class="form-control">-->
-    <!--                        <input type="range" name="rangeInput" min="0" max="1000" step="10"-->
-    <!--                               th:value="200"-->
-    <!--                               onchange="updateTextInput(this.value);">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div class="row">-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--            <div class="col to-center">-->
-    <!--                <button class="btn btn-success btn-lg" type="submit">Find my route</button>-->
-    <!--            </div>-->
-    <!--            <div class="col">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        </form>-->
-
-    <!--    </div>-->
-
+    <!--    ====================================================================================================================-->
     <div class="container-fluid">
         <div class="row footer">
         </div>
@@ -213,6 +148,8 @@
         </div>
     </div>
 </main>
+<script src="http://localhost:8001/web-app/templates/content/css/date/script.js"></script>
+<script src="http://localhost:8001/web-app/templates/content/css/clock/script.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/range/script.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/carousel/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

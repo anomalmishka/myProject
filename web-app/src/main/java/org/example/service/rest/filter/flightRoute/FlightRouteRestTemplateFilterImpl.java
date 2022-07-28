@@ -2,13 +2,15 @@ package org.example.service.rest.filter.flightRoute;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.FlightRouteDTOModif;
+import org.example.mapper.FilterMapper;
 import org.example.mapper.model.modif.FlightRouteMapperModif;
+import org.example.model.Filter;
 import org.example.model.database.FlightRoute;
-import org.example.model.FilterObj;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,9 +20,9 @@ import java.util.stream.Collectors;
 @Service
 public class FlightRouteRestTemplateFilterImpl implements FlightRouteRestTemplateFilter {
     private final FlightRouteMapperModif flightRouteMapperModif;
+    private final FilterMapper filterMapper;
 
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
-
     private final String URL = "http://localhost:8003/data-base-app/buisness/filter/flight/route/";
 
 //    @Override
@@ -44,9 +46,12 @@ public class FlightRouteRestTemplateFilterImpl implements FlightRouteRestTemplat
 //    }
 
     @Override
-    public List<FlightRoute> exchangeFilterObj(FilterObj filterObj, String uriVar, HttpMethod httpMethod) {
-        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(URL + uriVar, httpMethod, new HttpEntity<>(filterObj), FlightRouteDTOModif[].class);
-        List<FlightRouteDTOModif> flightRouteDTOModifList = Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
+    public List<FlightRoute> exchangeFilterObj(Filter filter, String uriVar, HttpMethod httpMethod) {
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity =
+                restTemplate.exchange(URL + uriVar, httpMethod,
+                        new HttpEntity<>(filterMapper.toDTO(filter)), FlightRouteDTOModif[].class);
+        List<FlightRouteDTOModif> flightRouteDTOModifList =
+                Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
         return flightRouteMapperModif.toModel(flightRouteDTOModifList);
     }
 }

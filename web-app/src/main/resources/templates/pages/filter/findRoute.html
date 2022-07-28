@@ -21,7 +21,7 @@
 <header th:replace="fragments/header :: header"></header>
 <div class="col-1-2">
     <form method="post" th:action="@{http://localhost:8001/web-app/find/route}">
-        <div th:object="${filterObj}">
+        <div th:object="${filter}">
             <label>Find</label>
             <p><label>Route Start<input type="text" name="routeStart" value="Minsk"
                                         class="form-control" required><br></label></p>

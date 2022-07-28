@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.dto.page.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Builder
-public class FilterObj {
+public class FilterPage {
     private String routeStart;
     private String routeEnd;
 
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
 
-    private Integer priceStart;
-    private Integer priceEnd;
+    private String priceEnd;
+    private String durationEnd;
 }

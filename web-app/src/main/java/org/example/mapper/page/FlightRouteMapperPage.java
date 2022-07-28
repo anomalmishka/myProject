@@ -1,10 +1,10 @@
 package org.example.mapper.page;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.AirPlaneDTO;
-import org.example.dto.models.UserOrderDTO;
-import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.dto.page.FlightRoutePage;
+import org.example.model.database.AirPlane;
+import org.example.model.database.FlightRoute;
+import org.example.model.database.UserOrder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,32 +13,31 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class FlightRouteMapperPage {
-
-    public FlightRoutePage toPageDTO(FlightRouteDTOModif flightRouteDTOModif) {
-        List<AirPlaneDTO> airPlaneDTOList = flightRouteDTOModif.getAirPlaneDTOList();
-        List<UserOrderDTO> userOrderDTOList = flightRouteDTOModif.getUserOrderDTOList();
+    public FlightRoutePage toPageDTO(FlightRoute flightRoute) {
+        List<AirPlane> airPlaneList = flightRoute.getAirPlaneList();
+        List<UserOrder> userOrderList = flightRoute.getUserOrderList();
         return FlightRoutePage.builder()
-                .idFlightRoute(flightRouteDTOModif.getId())
-                .routeStartFlightRoute(flightRouteDTOModif.getRouteStart())
-                .routeEndFlightRoute(flightRouteDTOModif.getRouteEnd())
-                .distanceFlightRoute(flightRouteDTOModif.getDistance())
-                .flightDateStartFlightRoute(flightRouteDTOModif.getFlightDateStart())
-                .flightDateEndFlightRoute(flightRouteDTOModif.getFlightDateEnd())
-                .isActiveFlightRoute(flightRouteDTOModif.getIsActive())
+                .idFlightRoute(flightRoute.getId())
+                .routeStartFlightRoute(flightRoute.getRouteStart())
+                .routeEndFlightRoute(flightRoute.getRouteEnd())
+                .distanceFlightRoute(flightRoute.getDistance())
+                .flightDateStartFlightRoute(flightRoute.getFlightDateStart())
+                .flightDateEndFlightRoute(flightRoute.getFlightDateEnd())
+                .isActiveFlightRoute(flightRoute.getIsActive())
 
-                .idAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getId).collect(Collectors.toList()))
-                .typeAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getType).collect(Collectors.toList()))
-                .statusAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getStatus).collect(Collectors.toList()))
-                .numberSeatLowcostAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getNumberSeatLowcost).collect(Collectors.toList()))
-                .numberSeatBuisnessAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getNumberSeatBuisness).collect(Collectors.toList()))
-                .pricePerKilometerAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getPricePerKilometer).collect(Collectors.toList()))
-                .isActiveAirPlane(airPlaneDTOList.stream().map(AirPlaneDTO::getIsActive).collect(Collectors.toList()))
+                .idAirPlane(airPlaneList.stream().map(AirPlane::getId).collect(Collectors.toList()))
+                .typeAirPlane(airPlaneList.stream().map(AirPlane::getType).collect(Collectors.toList()))
+                .statusAirPlane(airPlaneList.stream().map(AirPlane::getStatus).collect(Collectors.toList()))
+                .numberSeatLowcostAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatLowcost).collect(Collectors.toList()))
+                .numberSeatBuisnessAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatBuisness).collect(Collectors.toList()))
+                .pricePerKilometerAirPlane(airPlaneList.stream().map(AirPlane::getPricePerKilometer).collect(Collectors.toList()))
+                .isActiveAirPlane(airPlaneList.stream().map(AirPlane::getIsActive).collect(Collectors.toList()))
 
-                .idUserOrder(userOrderDTOList.stream().map(UserOrderDTO::getId).collect(Collectors.toList()))
+                .idUserOrder(userOrderList.stream().map(UserOrder::getId).collect(Collectors.toList()))
                 .build();
     }
 
-    public List<FlightRoutePage> toPageDTO(List<FlightRouteDTOModif> flightRouteDTOModifList) {
-        return flightRouteDTOModifList.stream().map(this::toPageDTO).collect(Collectors.toList());
+    public List<FlightRoutePage> toPageDTO(List<FlightRoute> flightRouteList) {
+        return flightRouteList.stream().map(this::toPageDTO).collect(Collectors.toList());
     }
 }

@@ -3,8 +3,8 @@ package org.example.service.rest.models.flightRoute;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.model.modif.FlightRouteMapperModif;
+import org.example.model.Filter;
 import org.example.model.database.FlightRoute;
-import org.example.model.FilterObj;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -47,8 +47,8 @@ public class FlightRouteRestTemplateImpl implements FlightRouteRestTemplate {
 //    }
 
     @Override
-    public List<FlightRoute> exchangeFilterObj(FilterObj filterObj, String uriVar, HttpMethod httpMethod) {
-        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(URL + uriVar, httpMethod, new HttpEntity<>(filterObj), FlightRouteDTOModif[].class);
+    public List<FlightRoute> exchangeFilterObj(Filter filter, String uriVar, HttpMethod httpMethod) {
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(URL + uriVar, httpMethod, new HttpEntity<>(filter), FlightRouteDTOModif[].class);
         List<FlightRouteDTOModif> flightRouteDTOModifList = Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
         return flightRouteMapperModif.toModel(flightRouteDTOModifList);
     }
