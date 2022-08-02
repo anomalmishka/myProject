@@ -1,15 +1,15 @@
 package org.example.service.models.airCompany;
 
-import org.example.model.database.AirCompany;
+import org.example.dto.modelsDTO.AirCompanyDTO;
 
 import java.util.List;
 
 public interface AirCompanyService {
-    AirCompany create(AirCompany airCompany);
-    List<AirCompany> readAll();
-    AirCompany readById(Long id);
-    List<AirCompany> readAllByIds(List<Long> ids);
-    AirCompany deleteById(Long id);
-    List<AirCompany> deleteAllByIds(List<Long> ids);
-    AirCompany update(AirCompany airCompany);
+    AirCompanyDTO create(AirCompanyDTO airCompanyDTO);
+    List<AirCompanyDTO> readAll();
+    AirCompanyDTO readById(Long id);
+    List<AirCompanyDTO> readAllByIds(List<Long> ids);
+    AirCompanyDTO deleteById(Long id);
+    List<AirCompanyDTO> deleteAllByIds(List<Long> ids);
+    AirCompanyDTO update(AirCompanyDTO airCompanyDTO);
 }

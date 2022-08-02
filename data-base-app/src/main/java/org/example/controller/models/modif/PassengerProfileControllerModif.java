@@ -1,10 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.PassengerProfileDTOModif;
+import org.example.dto.modelsDTO.modif.PassengerProfileDTOModif;
 import org.example.mapper.models.modif.PassengerProfileMapperModif;
-import org.example.service.models.api.PassengerProfileService;
-import org.example.service.modif.api.PassengerProfileServiceModif;
+import org.example.service.models.modif.api.PassengerProfileServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,22 +13,31 @@ import java.util.List;
 @RequestMapping(path = "modif/passenger/profile")
 public class PassengerProfileControllerModif {
     private final PassengerProfileServiceModif passengerProfileServiceModif;
-    private final PassengerProfileService passengerProfileService;
     private final PassengerProfileMapperModif passengerProfileMapperModif;
 
     @GetMapping(path = "read/all", produces = "application/json", consumes = "application/json")
     public List<PassengerProfileDTOModif> readAll() {
-        return passengerProfileMapperModif.toDTO(passengerProfileService.readAll());
+        return passengerProfileMapperModif.toDTO(passengerProfileServiceModif.readAll());
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
     public PassengerProfileDTOModif readById(@PathVariable("id") Long id) {
-        return passengerProfileMapperModif.toDTO(passengerProfileService.readById(id));
+        return passengerProfileMapperModif.toDTO(passengerProfileServiceModif.readById(id));
     }
 
     @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<PassengerProfileDTOModif> readAllById(@RequestBody List<Long> ids) {
-        return passengerProfileMapperModif.toDTO(passengerProfileService.readAllByIds(ids));
+        return passengerProfileMapperModif.toDTO(passengerProfileServiceModif.readAllByIds(ids));
+    }
+
+    @DeleteMapping(path = "delete/{id}/", produces = "application/json", consumes = "application/json")
+    public PassengerProfileDTOModif deleteById(@PathVariable("id") Long id) {
+        return passengerProfileMapperModif.toDTO(passengerProfileServiceModif.deleteById(id));
+    }
+
+    @DeleteMapping(path = "delete/all/id", produces = "application/json", consumes = "application/json")
+    public List<PassengerProfileDTOModif> deleteAllByIds(@RequestBody List<Long> ids) {
+        return passengerProfileMapperModif.toDTO(passengerProfileServiceModif.deleteAllByIds(ids));
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")

@@ -1,9 +1,8 @@
 package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.PassengerProfileDTOModif;
+import org.example.dto.modelsDTO.modif.PassengerProfileDTOModif;
 import org.example.mapper.models.UserOrderMapper;
-import org.example.mapper.models.UserProfileMapper;
 import org.example.model.entity.PassengerProfile;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class PassengerProfileMapperModif {
-    private final UserProfileMapper userProfileMapper;
     private final UserOrderMapper userOrderMapper;
 
     public PassengerProfileDTOModif toDTO(PassengerProfile passengerProfile) {
@@ -22,7 +20,6 @@ public class PassengerProfileMapperModif {
                 .name(passengerProfile.getName())
                 .lastname(passengerProfile.getLastname())
                 .passportNumber(passengerProfile.getPassportNumber())
-                .userProfileDTO(userProfileMapper.toDTO(passengerProfile.getUserProfile()))
                 .userOrderDTOList(userOrderMapper.toDTO(passengerProfile.getUserOrderList()))
                 .build();
     }
@@ -41,7 +38,6 @@ public class PassengerProfileMapperModif {
                 .name(passengerProfileDTOModif.getName())
                 .lastname(passengerProfileDTOModif.getLastname())
                 .passportNumber(passengerProfileDTOModif.getPassportNumber())
-                .userProfile(userProfileMapper.toModel(passengerProfileDTOModif.getUserProfileDTO()))
                 .userOrderList(userOrderMapper.toModel(passengerProfileDTOModif.getUserOrderDTOList()))
                 .build();
     }

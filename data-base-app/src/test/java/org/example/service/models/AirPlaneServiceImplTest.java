@@ -4,8 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.example.dao.models.AirPlaneDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.AirPlane;
-import org.example.service.models.AirPlaneServiceImpl;
+import org.example.model.entity.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,6 +26,19 @@ class AirPlaneServiceImplTest {
     @InjectMocks
     AirPlaneServiceImpl airPlaneService;
 
+    private final AirCompany airCompany = AirCompany.builder()
+            .id(1L)
+            .nameCompany("Aeroflot")
+            .countryLocation("Russia")
+            .build();
+    private final Seat seat = Seat.builder()
+            .id(1L)
+            .type("Lowcost")
+            .place("1A")
+            .isOrdered(true)
+            .build();
+    private final List<Seat> seatList = List.of(seat);
+
     @Test
     public void whenCreate_thenReturnEntity() {
         AirPlane GIVEN = AirPlane.builder()
@@ -35,8 +47,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane ANSWER = AirPlane.builder()
                 .id(1L)
@@ -44,8 +57,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane EXPECTED = AirPlane.builder()
                 .id(1L)
@@ -53,8 +67,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         Mockito.when(airPlaneDAO.save(GIVEN)).thenReturn(ANSWER);
         AirPlane ACTUAL = airPlaneService.create(GIVEN);
@@ -71,8 +86,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> airPlaneService.create(GIVEN));
     }
@@ -85,8 +101,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> ANSWER_LIST = List.of(ANSWER);
         AirPlane EXPECTED = AirPlane.builder()
@@ -95,8 +112,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airPlaneDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -115,8 +133,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(airPlaneDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -132,8 +151,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane EXPECTED = AirPlane.builder()
                 .id(1L)
@@ -141,8 +161,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         Mockito.when(airPlaneDAO.findById(GIVEN_ID)).thenReturn(Optional.ofNullable(ANSWER));
         AirPlane ACTUAL = airPlaneService.readById(GIVEN_ID);
@@ -168,8 +189,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> ANSWER_LIST = List.of(ANSWER);
         AirPlane EXPECTED = AirPlane.builder()
@@ -178,8 +200,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airPlaneDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -200,8 +223,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(airPlaneDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -217,8 +241,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane EXPECTED = AirPlane.builder()
                 .id(1L)
@@ -226,8 +251,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         Mockito.when(airPlaneDAO.findById(GIVEN_ID)).thenReturn(Optional.of(ANSWER));
         AirPlane ACTUAL = airPlaneService.deleteById(GIVEN_ID);
@@ -252,8 +278,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> ANSWER_LIST = List.of(ANSWER);
         AirPlane EXPECTED = AirPlane.builder()
@@ -262,8 +289,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         List<AirPlane> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airPlaneDAO.findAllById(GIVEN_LIST)).thenReturn(ANSWER_LIST);
@@ -290,8 +318,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane ANSWER = AirPlane.builder()
                 .id(1L)
@@ -299,8 +328,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         AirPlane EXPECTED = AirPlane.builder()
                 .id(1L)
@@ -308,8 +338,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         Mockito.when(airPlaneDAO.save(GIVEN)).thenReturn(ANSWER);
         AirPlane ACTUAL = airPlaneService.update(GIVEN);
@@ -326,8 +357,9 @@ class AirPlaneServiceImplTest {
                 .status("Ready to fly")
                 .numberSeatLowcost(5)
                 .numberSeatBuisness(1)
-                .pricePerKilometer(5)
                 .isActive(true)
+                .seatList(seatList)
+                .airCompany(airCompany)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> airPlaneService.update(GIVEN));
     }

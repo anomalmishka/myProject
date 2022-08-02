@@ -19,19 +19,15 @@ public class UserOrder {
     private Long id;
 
     @ManyToOne(
-            fetch = FetchType.LAZY
+            cascade = CascadeType.MERGE
     )
-    private Status status;
-
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
+    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private FlightRoute flightRoute;
 
     @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.MERGE
     )
-    private PassengerProfile passengerProfile;
+    @JoinColumn(name = "STATUS_ID")
+    private Status status;
+
 }

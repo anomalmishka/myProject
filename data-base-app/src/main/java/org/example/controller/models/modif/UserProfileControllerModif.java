@@ -1,10 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.UserProfileDTOModif;
+import org.example.dto.modelsDTO.modif.UserProfileDTOModif;
 import org.example.mapper.models.modif.UserProfileMapperModif;
-import org.example.service.models.api.UserProfileService;
-import org.example.service.modif.api.UserProfileServiceModif;
+import org.example.service.models.modif.api.UserProfileServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,23 +12,32 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "modif/user/profile")
 public class UserProfileControllerModif {
-    private final UserProfileService userProfileService;
     private final UserProfileServiceModif userProfileServiceModif;
     private final UserProfileMapperModif userProfileMapperModif;
 
     @GetMapping(path = "read/all", produces = "application/json", consumes = "application/json")
     public List<UserProfileDTOModif> readAll() {
-        return userProfileMapperModif.toDTO(userProfileService.readAll());
+        return userProfileMapperModif.toDTO(userProfileServiceModif.readAll());
     }
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
     public UserProfileDTOModif readById(@PathVariable("id") Long id) {
-        return userProfileMapperModif.toDTO(userProfileService.readById(id));
+        return userProfileMapperModif.toDTO(userProfileServiceModif.readById(id));
     }
 
     @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")
     public List<UserProfileDTOModif> readAllById(@RequestBody List<Long> ids) {
-        return userProfileMapperModif.toDTO(userProfileService.readAllByIds(ids));
+        return userProfileMapperModif.toDTO(userProfileServiceModif.readAllByIds(ids));
+    }
+
+    @DeleteMapping(path = "delete/{id}/", produces = "application/json", consumes = "application/json")
+    public UserProfileDTOModif deleteById(@PathVariable("id") Long id) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.deleteById(id));
+    }
+
+    @DeleteMapping(path = "delete/all/id", produces = "application/json", consumes = "application/json")
+    public List<UserProfileDTOModif> deleteAllByIds(@RequestBody List<Long> ids) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.deleteAllByIds(ids));
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")

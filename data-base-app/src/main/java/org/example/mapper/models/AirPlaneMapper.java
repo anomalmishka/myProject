@@ -1,6 +1,6 @@
 package org.example.mapper.models;
 
-import org.example.dto.models.AirPlaneDTO;
+import org.example.dto.modelsDTO.AirPlaneDTO;
 import org.example.model.entity.AirPlane;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,6 @@ public class AirPlaneMapper {
                 .status(airPlane.getStatus())
                 .numberSeatLowcost(airPlane.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlane.getNumberSeatBuisness())
-                .pricePerKilometer(airPlane.getPricePerKilometer())
                 .isActive(airPlane.getIsActive())
                 .build();
     }
@@ -25,6 +24,7 @@ public class AirPlaneMapper {
     public List<AirPlaneDTO> toDTO(List<AirPlane> airPlaneList) {
         return airPlaneList.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
     public List<AirPlane> toModel(List<AirPlaneDTO> airPlaneDTOList) {
         return airPlaneDTOList.stream().map(this::toModel).collect(Collectors.toList());
     }
@@ -36,7 +36,6 @@ public class AirPlaneMapper {
                 .status(airPlaneDTO.getStatus())
                 .numberSeatLowcost(airPlaneDTO.getNumberSeatLowcost())
                 .numberSeatBuisness(airPlaneDTO.getNumberSeatBuisness())
-                .pricePerKilometer(airPlaneDTO.getPricePerKilometer())
                 .isActive(airPlaneDTO.getIsActive())
                 .build();
     }

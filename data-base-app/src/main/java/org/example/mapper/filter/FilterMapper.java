@@ -10,26 +10,12 @@ import java.util.stream.Collectors;
 @Component
 public class FilterMapper {
 
-    public FilterDTO toDTO(FilterObj filterObj) {
-        return FilterDTO.builder()
-                .routeStart(filterObj.getRouteStart())
-                .routeEnd(filterObj.getRouteEnd())
-                .dateStart(filterObj.getDateStart())
-                .dateEnd(filterObj.getDateEnd())
-                .priceStart(filterObj.getPriceStart())
-                .priceEnd(filterObj.getPriceEnd())
-                .build();
-    }
-
-    public List<FilterDTO> toDTO(List<FilterObj> filterObjs) {
-        return filterObjs.stream().map(this::toDTO).collect(Collectors.toList());
-    }
-
     public List<FilterObj> toModel(List<FilterDTO> filterDTOS) {
         return filterDTOS.stream().map(this::toModel).collect(Collectors.toList());
     }
 
     public FilterObj toModel(FilterDTO filterDTO) {
+        System.out.println(filterDTO);
         return FilterObj.builder()
                 .routeStart(filterDTO.getRouteStart())
                 .routeEnd(filterDTO.getRouteEnd())
@@ -37,6 +23,19 @@ public class FilterMapper {
                 .dateEnd(filterDTO.getDateEnd())
                 .priceStart(filterDTO.getPriceStart())
                 .priceEnd(filterDTO.getPriceEnd())
+                .airCompanyName(filterDTO.getAirCompanyName())
+                .transfers(filterDTO.getTransfers())
+                .durationStart(filterDTO.getDurationStart())
+                .durationEnd(filterDTO.getDurationEnd())
                 .build();
     }
+
+//    @SneakyThrows
+//    private Timestamp parseStringToLong(String stringToTimestamp) {
+//        if (stringToTimestamp != null) {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            return new Timestamp(dateFormat.parse(stringToTimestamp).getTime());
+//        }
+//        return null;
+//    }
 }

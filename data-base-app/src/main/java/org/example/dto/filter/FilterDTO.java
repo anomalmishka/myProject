@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -14,10 +15,12 @@ import java.util.Date;
 public class FilterDTO {
     private String routeStart;
     private String routeEnd;
-
-    private Date dateStart;
-    private Date dateEnd;
-
+    private Timestamp dateStart;
+    private Timestamp dateEnd;
     private Integer priceStart;
     private Integer priceEnd;
+    private String airCompanyName;
+    private String transfers;
+    private Integer durationStart;
+    private Integer durationEnd;
 }

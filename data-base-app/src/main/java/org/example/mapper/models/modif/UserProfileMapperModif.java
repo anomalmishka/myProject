@@ -1,7 +1,7 @@
 package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.UserProfileDTOModif;
+import org.example.dto.modelsDTO.modif.UserProfileDTOModif;
 import org.example.mapper.models.BankCardMapper;
 import org.example.mapper.models.PassengerProfileMapper;
 import org.example.model.entity.UserProfile;

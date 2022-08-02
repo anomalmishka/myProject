@@ -1,17 +1,9 @@
 package org.example.service.rest.filter.userProfile;
 
-import org.example.model.database.UserProfile;
-import org.example.model.FilterObj;
-import org.springframework.http.HttpMethod;
 
-import java.util.List;
+import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
 
 public interface UserProfileRestTemplateFilter {
-//    AirPlaneModif postAirPlaneModif(AirPlaneModif airPlaneDTOModif, String uriVar);
-//
-//    AirPlaneModif exchangeAirPlaneModif(AirPlaneModif airPlaneDTOModif, String uriVar, HttpMethod httpMethod);
-//
-//    AirPlaneModif exchangeAirPlaneModif(String uriVar, Long id, HttpMethod httpMethod);
+    UserProfileDTOModif2 findWhereNameLastnameEmail(UserProfileDTOModif2 userProfileDTOModif2);
 
-    List<UserProfile> exchange(FilterObj filterObj, String uriVar, HttpMethod httpMethod);
 }

@@ -1,22 +1,22 @@
 package org.example.service.rest.models.airCompany;
 
-import org.example.model.database.AirCompany;
+import org.example.dto.modelsDTO.AirCompanyDTO;
 
 import java.util.List;
 
 public interface AirCompanyRestTemplateService {
-    List<AirCompany> readAll();
+    List<AirCompanyDTO> readAll();
 
-    AirCompany readById(Long id);
+    AirCompanyDTO readById(Long id);
 
-    List<AirCompany> readAllByIds(List<Long> ids);
+    List<AirCompanyDTO> readAllByIds(List<Long> ids);
 
-    AirCompany create(AirCompany airCompany);
+    AirCompanyDTO create(AirCompanyDTO airCompany);
 
-    AirCompany update(AirCompany airCompany);
+    AirCompanyDTO update(AirCompanyDTO airCompany);
 
-    AirCompany deleteById(Long id);
+    AirCompanyDTO deleteById(Long id);
 
-    List<AirCompany> deleteAllByIds(List<Long> ids);
+    List<AirCompanyDTO> deleteAllByIds(List<Long> ids);
 
 }

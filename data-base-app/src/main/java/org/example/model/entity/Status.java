@@ -20,11 +20,4 @@ public class Status {
     private Long id;
     @Column(name = "STATUS")
     private String status;
-
-    @OneToMany(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "STATUS_ID")
-    private List<UserOrder> userOrderList;
 }

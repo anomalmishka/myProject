@@ -31,20 +31,16 @@
                             <th>id</th>
                             <th>nameCompany</th>
                             <th>countryLocation</th>
-                            <th>priceLowcostIndex</th>
-                            <th>priceBuisnessIndex</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="airCompany : ${airCompanyPageList}"
                             th:with="baseUrl=('/models/air/company/read/')">
-                            <td><input th:type="checkbox" name="id" th:value="${airCompany.idAirCompany}"></td>
-                            <td><a th:href="@{${baseUrl}+${airCompany.idAirCompany}}"
-                                   th:text="${airCompany.idAirCompany}"></a></td>
-                            <td><span th:text="${airCompany.nameAirCompany}"></span></td>
-                            <td><span th:text="${airCompany.countryLocationAirCompany}"></span></td>
-                            <td><span th:text="${airCompany.priceLowcostIndexAirCompany}"></span></td>
-                            <td><span th:text="${airCompany.priceBuisnessIndexAirCompany}"></span></td>
+                            <td><input th:type="checkbox" name="id" th:value="${airCompany.id}"></td>
+                            <td><a th:href="@{${baseUrl}+${airCompany.id}}"
+                                   th:text="${airCompany.id}"></a></td>
+                            <td><span th:text="${airCompany.nameCompany}"></span></td>
+                            <td><span th:text="${airCompany.countryLocation}"></span></td>
                         </tr>
                         </tbody>
                     </table>

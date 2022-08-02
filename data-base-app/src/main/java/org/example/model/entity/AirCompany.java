@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,15 +21,4 @@ public class AirCompany {
     private String nameCompany;
     @Column(name = "COUNTRY_LOCATION")
     private String countryLocation;
-    @Column(name = "PRICE_LOWCOST_INDEX")
-    private Integer priceLowcostIndex;
-    @Column(name = "PRICE_BUISNESS_INDEX")
-    private Integer priceBuisnessIndex;
-
-    @OneToMany(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "AIR_COMPANY_ID")
-    private List<AirPlane> airPlaneList;
 }

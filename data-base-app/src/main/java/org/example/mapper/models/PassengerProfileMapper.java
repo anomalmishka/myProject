@@ -1,6 +1,6 @@
 package org.example.mapper.models;
 
-import org.example.dto.models.PassengerProfileDTO;
+import org.example.dto.modelsDTO.PassengerProfileDTO;
 import org.example.model.entity.PassengerProfile;
 import org.springframework.stereotype.Component;
 

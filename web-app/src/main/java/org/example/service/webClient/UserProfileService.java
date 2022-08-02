@@ -2,8 +2,7 @@ package org.example.service.webClient;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.models.UserProfileDTO;
-import org.example.model.database.UserProfile;
+import org.example.dto.modelsDTO.UserProfileDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -39,28 +38,28 @@ public class UserProfileService {
                 .block();
     }
 
-    public UserProfile getUserWithRetry(final String id) {
+    public UserProfileDTO getUserWithRetry(final String id) {
         return webClient
                 .get()
                 .uri(BROKEN_URL_TEMPLATE, id)
                 .retrieve()
-                .bodyToMono(UserProfile.class)
+                .bodyToMono(UserProfileDTO.class)
                 .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPTS, Duration.ofMillis(DELAY_MILLIS)))
                 .block();
     }
 
-    public UserProfile getUserWithFallback(final String id) {
+    public UserProfileDTO getUserWithFallback(final String id) {
         return webClient
                 .get()
                 .uri(BROKEN_URL_TEMPLATE, id)
                 .retrieve()
-                .bodyToMono(UserProfile.class)
+                .bodyToMono(UserProfileDTO.class)
                 .doOnError(error -> log.error("An error has occurred {}", error.getMessage()))
-                .onErrorResume(error -> Mono.just(new UserProfile()))
+                .onErrorResume(error -> Mono.just(new UserProfileDTO()))
                 .block();
     }
 
-    public UserProfile getUserWithErrorHandling(final String id) {
+    public UserProfileDTO getUserWithErrorHandling(final String id) {
         return webClient
                 .get()
                 .uri(BROKEN_URL_TEMPLATE, id)
@@ -69,7 +68,7 @@ public class UserProfileService {
                         error -> Mono.error(new RuntimeException("API not found")))
                 .onStatus(HttpStatus::is5xxServerError,
                         error -> Mono.error(new RuntimeException("Server is not responding")))
-                .bodyToMono(UserProfile.class)
+                .bodyToMono(UserProfileDTO.class)
                 .block();
     }
 }

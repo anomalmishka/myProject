@@ -1,6 +1,6 @@
 package org.example.mapper.models;
 
-import org.example.dto.models.StatusDTO;
+import org.example.dto.modelsDTO.StatusDTO;
 import org.example.model.entity.Status;
 import org.springframework.stereotype.Component;
 
