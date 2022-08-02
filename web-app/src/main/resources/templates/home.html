@@ -11,8 +11,6 @@
     <!--My CSS-->
     <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
     <link rel="stylesheet" type="text/css"
-          href="http://localhost:8001/web-app/templates/content/css/carousel/style.css">
-    <link rel="stylesheet" type="text/css"
           href="http://localhost:8001/web-app/templates/content/css/clock/style.css">
 </head>
 <body class="background-image-home" onload="clockTimer();">
@@ -21,6 +19,18 @@
     <div class="container-fluid">
         <div class="row footer">
         </div>
+<!--        <div class="row">-->
+<!--            <div class="col to-center">-->
+<!--                <table cellspacing="2" border="1" cellpadding="5">-->
+<!--                    <tbody th:each="user : ${userDTO}">-->
+<!--                    <tr>-->
+<!--                        <td><span>Login:</span></td>-->
+<!--                        <td><span th:text="${user.username}"></span></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="row align-items-start">
             <div class="col-lg-2 align-self-end">
                 <div class="clockpage">
@@ -36,14 +46,14 @@
         </div>
         <div class="row">
             <div class="col">
-                <form action="#" th:formaction="@{'/'}" th:object="${filterDTO}" method="post">
+                <form action="#" th:action="@{'/'}" th:object="${filterDTO}" method="post">
                     <table cellspacing="1" border="0" cellpadding="1">
                         <thead>
                         <tr>
                             <th>Route Start</th>
                             <th>Route End</th>
                             <th>Date start fly</th>
-                            <th>Date end fle</th>
+                            <th>Date end fly</th>
                             <th>Price</th>
                             <th>AirCompany</th>
                             <th>Transfers</th>
@@ -84,9 +94,9 @@
                                 <input type="text" id="rangeInput" value="200">
                             </td>
                             <td>
-                                <input th:type="checkbox" id="AirCompanyCheckbox" name="airCompanyCheckbox"
+                                <input th:type="checkbox" id="AirCompanyCheckbox" name="airCompanyNameCheckbox"
                                        value="airCompanyCheckbox">
-                                <input type="text" id="AirCompany" name="airCompany"
+                                <input type="text" id="AirCompany" name="airCompanyName"
                                        th:value="Belavia">
                             </td>
                             <td>
@@ -128,18 +138,23 @@
                         <th>distance</th>
                         <th>flightDateStart</th>
                         <th>flightDateEnd</th>
+                        <th>price</th>
                         <th>isActive</th>
+
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="flightRoute : ${flightRoutePageList}">
-                        <td><span th:text="${flightRoute.idFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.routeStartFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.routeEndFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.distanceFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.flightDateStartFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.flightDateEndFlightRoute}"></span></td>
-                        <td><span th:text="${flightRoute.isActiveFlightRoute}"></span></td>
+                    <tbody th:each="flightRoute : ${flightRoutePageList}"
+                           th:with="baseUrl=('/models/flight/route/read/')">
+                    <tr>
+                        <td><a th:href="@{${baseUrl}+${flightRoute.id}}"
+                               th:text="${flightRoute.id}"></a></td>
+                        <td><span th:text="${flightRoute.routeStart}"></span></td>
+                        <td><span th:text="${flightRoute.routeEnd}"></span></td>
+                        <td><span th:text="${flightRoute.distance}"></span></td>
+                        <td><span th:text="${flightRoute.flightDateStart}"></span></td>
+                        <td><span th:text="${flightRoute.flightDateEnd}"></span></td>
+                        <td><span th:text="${flightRoute.price}"></span></td>
+                        <td><span th:text="${flightRoute.isActive}"></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -149,10 +164,22 @@
         </div>
     </div>
 </main>
-<script src="http://localhost:8001/web-app/templates/content/css/date/script.js"></script>
+<!--<tbody>-->
+<!--<tr th:each="flightRoute : ${flightRoutePageList}">-->
+<!--    <td><span th:text="${flightRoute.id}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.routeStart}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.routeEnd}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.distance}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.flightDateStart}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.flightDateEnd}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.price}"></span></td>-->
+<!--    <td><span th:text="${flightRoute.isActive}"></span></td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptStart.js"></script>
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptEnd.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/clock/script.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/range/script.js"></script>
-<script src="http://localhost:8001/web-app/templates/content/css/carousel/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

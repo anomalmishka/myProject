@@ -16,19 +16,19 @@
 							"name": "filter",
 							"item": [
 								{
-									"name": "airPlane",
+									"name": "flightRoute",
 									"item": [
 										{
-											"name": "simple filter",
+											"name": "1",
 											"item": [
 												{
-													"name": "find/route",
+													"name": "name",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\"\n}\n\n",
+															"raw": "{\n\"airCompanyName\": \"Belavia\"\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -36,7 +36,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/name",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -46,9 +46,83 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
+																"route",
+																"where",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route/start",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\":\"Minsk\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/start",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"start"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "2",
+											"item": [
+												{
+													"name": "route",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
 																"route"
 															]
 														}
@@ -56,13 +130,13 @@
 													"response": []
 												},
 												{
-													"name": "find/date",
+													"name": "date",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\"\n}\n\n",
+															"raw": "{\n    \"dateStart\": \"2022-07-03 12:00:00\",\n    \"dateEnd\": \"2022-07-03 14:00:00\"\n}\n\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -70,7 +144,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/date",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -80,9 +154,9 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
+																"route",
+																"where",
 																"date"
 															]
 														}
@@ -90,13 +164,13 @@
 													"response": []
 												},
 												{
-													"name": "find/price",
+													"name": "price",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"raw": "{\n    \"priceStart\": 0,\n    \"priceEnd\": 200\n}\n\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -104,7 +178,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/price",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/price",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -114,10 +188,44 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
+																"route",
+																"where",
 																"price"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"durationStart\": 0,\n    \"durationEnd\": 3600\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"duration"
 															]
 														}
 													},
@@ -126,16 +234,16 @@
 											]
 										},
 										{
-											"name": "hard filter",
+											"name": "3",
 											"item": [
 												{
-													"name": "find/route/and/date",
+													"name": "route name",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\",\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\"\n}",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"airCompanyName\": \"Belavia\"\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -143,7 +251,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/date",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/name",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -153,11 +261,155 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
 																"route",
-																"and",
+																"where",
+																"route",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"dateStart\": \"2022-07-03 12:00:00\",\n    \"dateEnd\": \"2022-07-03 14:00:00\",\n    \"airCompanyName\": \"Belavia\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"date",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "price name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"priceStart\": 0,\n    \"priceEnd\": 200,\n    \"airCompanyName\": \"Belavia\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/price/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"price",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"transfers\": \"London\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "4",
+											"item": [
+												{
+													"name": "route date",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
 																"date"
 															]
 														}
@@ -165,13 +417,13 @@
 													"response": []
 												},
 												{
-													"name": "find/route/and/price",
+													"name": "route price",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"routeStart\": \"Moskva\",\n    \"routeEnd\": \"Minsk\",\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 200\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -179,7 +431,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/price",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -189,11 +441,10 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
 																"route",
-																"and",
+																"where",
+																"route",
 																"price"
 															]
 														}
@@ -201,13 +452,13 @@
 													"response": []
 												},
 												{
-													"name": "find/date/and/price",
+													"name": "date price",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"dateStart\": \"1656838800000\",\n    \"dateEnd\": \"1656846000000\",\n    \"priceStart\": 200,\n    \"priceEnd\": 200\n}",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -215,7 +466,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/date/and/price",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/price",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -225,11 +476,10 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
+																"route",
+																"where",
 																"date",
-																"and",
 																"price"
 															]
 														}
@@ -237,13 +487,13 @@
 													"response": []
 												},
 												{
-													"name": "find/route/and/date/and/price",
+													"name": "route duration",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"routeStart\": \"London\",\n    \"routeEnd\": \"Minsk\",\n    \"dateStart\": \"1656846000000\",\n    \"dateEnd\": \"1656853200000\",\n    \"priceStart\": 300,\n    \"priceEnd\": 300\n}\n// {\n//     \"routeStart\": \"Moskva\",\n//     \"routeEnd\": \"Minsk\",\n//     \"dateStart\": \"1656838800000\",\n//     \"dateEnd\": \"1656846000000\",\n//     \"priceStart\": 200,\n//     \"priceEnd\": 200\n// }",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -251,7 +501,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/and/date/and/price",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/duration",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -261,14 +511,81 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
 																"route",
-																"and",
+																"where",
+																"route",
+																"duration"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
 																"date",
-																"and",
-																"price"
+																"duration"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "price duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/price/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"price",
+																"duration"
 															]
 														}
 													},
@@ -277,16 +594,16 @@
 											]
 										},
 										{
-											"name": "waypoint",
+											"name": "5",
 											"item": [
 												{
-													"name": "find/route/one/waypoint",
+													"name": "route date name",
 													"request": {
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"routeStart\": \"Paris\",\n    \"routeEnd\": \"London\"\n}\n",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"airCompanyName\": \"Belavia\"\n}\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -294,7 +611,7 @@
 															}
 														},
 														"url": {
-															"raw": "http://localhost:8003/data-base-app/buisness/filter/air/plane/find/route/one/waypoint",
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/name",
 															"protocol": "http",
 															"host": [
 																"localhost"
@@ -304,145 +621,886 @@
 																"data-base-app",
 																"buisness",
 																"filter",
-																"air",
-																"plane",
-																"find",
+																"flight",
 																"route",
-																"one",
-																"waypoint"
+																"where",
+																"route",
+																"date",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route price name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"price",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date price name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/price/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"date",
+																"price",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"date",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "price duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/price/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"price",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route date transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route price transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 900,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"price",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route duration transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"durationStart\": 0,\n\"durationEnd\": 100000,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/duration/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"duration",
+																"transfer"
 															]
 														}
 													},
 													"response": []
 												}
 											]
-										}
-									]
-								},
-								{
-									"name": "user",
-									"item": [
-										{
-											"name": "find/user/air/plane/1/",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/buisness/filter/user/find/user/air/plane/1/",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"buisness",
-														"filter",
-														"user",
-														"find",
-														"user",
-														"air",
-														"plane",
-														"1",
-														""
-													]
-												}
-											},
-											"response": []
 										},
 										{
-											"name": "find/user/air/company/1/",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{}",
-													"options": {
-														"raw": {
-															"language": "json"
+											"name": "6",
+											"item": [
+												{
+													"name": "route date price",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price"
+															]
 														}
-													}
+													},
+													"response": []
 												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/buisness/filter/user/find/user/air/company/1/",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"buisness",
-														"filter",
-														"user",
-														"find",
-														"user",
-														"air",
-														"company",
-														"1",
-														""
-													]
+												{
+													"name": "route date duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"duration"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route price duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"price",
+																"duration"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date price duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/price/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"date",
+																"price",
+																"duration"
+															]
+														}
+													},
+													"response": []
 												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
-									"name": "price",
-									"item": [
+											]
+										},
 										{
-											"name": "find/total/price/where/air/plane/1/",
-											"request": {
-												"method": "POST",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "\r\n{\r\n    \"idAirPlane\": 1,\r\n    \"idAirCompany\": 1,\r\n    \"idFlightRoute\": 1\r\n}",
-													"options": {
-														"raw": {
-															"language": "json"
+											"name": "7",
+											"item": [
+												{
+													"name": "route date price name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"name"
+															]
 														}
-													}
+													},
+													"response": []
 												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/buisness/filter/price/find/total/price/where/flight/route",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"buisness",
-														"filter",
-														"price",
-														"find",
-														"total",
-														"price",
-														"where",
-														"flight",
-														"route"
-													]
+												{
+													"name": "route date duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route price duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"price",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "date price duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/date/price/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"date",
+																"price",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route date price transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 10:00:00\",\n\"dateEnd\": \"2022-07-09 20:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 2000,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route date duration transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-05 20:00:00\",\n\"durationStart\": 0,\n\"durationEnd\": 100000,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/duration/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"duration",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route price duration transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"priceStart\": 0,\n\"priceEnd\": 900,\n\"durationStart\": 0,\n\"durationEnd\": 100000,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/price/duration/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"price",
+																"duration",
+																"transfer"
+															]
+														}
+													},
+													"response": []
 												}
-											},
-											"response": []
+											]
+										},
+										{
+											"name": "8",
+											"item": [
+												{
+													"name": "route date price duration",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/duration",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"duration"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "9",
+											"item": [
+												{
+													"name": "route date price duration name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-03 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 200,\n\"durationStart\": 0,\n\"durationEnd\": 3600,\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/duration/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"duration",
+																"name"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "route date price duration transfer",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-06 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 900,\n\"durationStart\": 0,\n\"durationEnd\": 100000,\n\"transfers\": \"London\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/duration/transfer",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"duration",
+																"transfer"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "10",
+											"item": [
+												{
+													"name": "route date price duration transfer name",
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n\"routeStart\": \"Minsk\",\n\"routeEnd\": \"Moskva\",\n\"dateStart\": \"2022-07-03 12:00:00\",\n\"dateEnd\": \"2022-07-06 14:00:00\",\n\"priceStart\": 0,\n\"priceEnd\": 900,\n\"durationStart\": 0,\n\"durationEnd\": 100000,\n\"transfers\": \"London\",\n\"airCompanyName\": \"Belavia\"\n}\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "http://localhost:8003/data-base-app/buisness/filter/flight/route/where/route/date/price/duration/transfer/name",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8003",
+															"path": [
+																"data-base-app",
+																"buisness",
+																"filter",
+																"flight",
+																"route",
+																"where",
+																"route",
+																"date",
+																"price",
+																"duration",
+																"transfer",
+																"name"
+															]
+														}
+													},
+													"response": []
+												}
+											]
 										}
 									]
 								}
@@ -457,151 +1515,7 @@
 							"name": "modif",
 							"item": [
 								{
-									"name": "air/company",
-									"item": [
-										{
-											"name": "read/all",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/all",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"air",
-														"company",
-														"read",
-														"all"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "read/1/",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/1/",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"air",
-														"company",
-														"read",
-														"1",
-														""
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "read/all/id",
-											"request": {
-												"method": "POST",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "[1,2,5]\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/all/id",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"air",
-														"company",
-														"read",
-														"all",
-														"id"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "update",
-											"request": {
-												"method": "PUT",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"id\": 4,\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"priceLowcostIndex\": 1,\n    \"priceBuisnessIndex\": 2,\n    \"airPlaneDTOList\": [\n        {\n            \"id\": 13\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/air/company/update",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"air",
-														"company",
-														"update"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
-									"name": "air/plane",
+									"name": "airPlane",
 									"item": [
 										{
 											"name": "read/all",
@@ -717,7 +1631,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"type\": \"Boing747\",\n    \"status\": \"Ready to fly\",\n    \"numberSeatLowcost\": 5,\n    \"numberSeatBuisness\": 1,\n    \"pricePerKilometer\": 5,\n    \"isActive\": true,\n    \"airCompanyDTO\": {\n        \"id\": 1\n    },\n    \"flightRouteDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ],\n    \"seatDTOList\": [\n    ]\n}",
+													"raw": "{\n    \"type\": \"Boing747\",\n    \"status\": \"Ready to fly\",\n    \"numberSeatLowcost\": 5,\n    \"numberSeatBuisness\": 1,\n    \"pricePerKilometer\": 5,\n    \"isActive\": true,\n    \"airCompanyDTO\": {\n        \"id\": 1\n    },\n    \"seatDTOList\": [\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -769,6 +1683,332 @@
 														"air",
 														"plane",
 														"update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"delete",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "airPlaneFlightRoute",
+									"item": [
+										{
+											"name": "read/all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/read/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/2/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/read/2/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"2",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "read/all/id",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,10]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/read/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"id\": 35,\r\n    \"airPlaneDTO\":\r\n        {\r\n            \"id\": 2\r\n        }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/create",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"create"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"id\": 35,\r\n    \"airPlaneDTO\":\r\n        {\r\n            \"id\": 2\r\n        }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/update",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/air/plane/flight/route/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"delete",
+														"all",
+														"id"
 													]
 												}
 											},
@@ -867,7 +2107,7 @@
 													}
 												},
 												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/air/company/read/all/id",
+													"raw": "http://localhost:8003/data-base-app/modif/flight/route/read/all/id",
 													"protocol": "http",
 													"host": [
 														"localhost"
@@ -876,8 +2116,8 @@
 													"path": [
 														"data-base-app",
 														"modif",
-														"air",
-														"company",
+														"flight",
+														"route",
 														"read",
 														"all",
 														"id"
@@ -893,7 +2133,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"isActive\": true,\n    \"airPlaneDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ],\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
+													"raw": "{\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"price\": 200,\n    \"isActive\": true,\n    \"airPlaneFlightRouteDTOList\": \n    [\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -925,7 +2165,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"id\": 1,\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"isActive\": true,\n    \"airPlaneDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ],\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
+													"raw": "{\n    \"id\": 13,\n    \"routeStart\": \"Minsk\",\n    \"routeEnd\": \"Moskva\",\n    \"distance\": 1000,\n    \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\n    \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\n    \"price\": 200,\n    \"isActive\": true,\n    \"airPlaneFlightRouteDTOList\": \n        [\n            {\n                \"id\": 35\n            }\n        ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -945,6 +2185,74 @@
 														"flight",
 														"route",
 														"update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/ Copy",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/flight/route/delete/11/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"flight",
+														"route",
+														"delete",
+														"11",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id Copy",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/flight/route/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"flight",
+														"route",
+														"delete",
+														"all",
+														"id"
 													]
 												}
 											},
@@ -1069,7 +2377,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"Maksim\",\n    \"lastname\": \"Yazvinski\",\n    \"passportNumber\": \"KK1100110\",\n    \"userProfileDTO\": {\n        \"id\": 1\n    },\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
+													"raw": "{\n    \"name\": \"Maksim\",\n    \"lastname\": \"Yazvinski\",\n    \"passportNumber\": \"KK1100110\",\n    \"userOrderDTOList\": [\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1101,7 +2409,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"id\": 3,\n    \"name\": \"Maksim\",\n    \"lastname\": \"Yazvinski\",\n    \"passportNumber\": \"KK1100110\",\n    \"userProfileDTO\": {\n        \"id\": 1\n    },\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
+													"raw": "{\n    \"id\": 3,\n    \"name\": \"Maksim\",\n    \"lastname\": \"Yazvinski\",\n    \"passportNumber\": \"KK1100110\",\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1125,19 +2433,11 @@
 												}
 											},
 											"response": []
-										}
-									]
-								},
-								{
-									"name": "status",
-									"item": [
+										},
 										{
-											"name": "read/all",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
+											"name": "delete/1/",
 											"request": {
-												"method": "GET",
+												"method": "DELETE",
 												"header": [],
 												"body": {
 													"mode": "raw",
@@ -1149,7 +2449,7 @@
 													}
 												},
 												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/status/read/all",
+													"raw": "http://localhost:8003/data-base-app/modif/passenger/profile/delete/1/",
 													"protocol": "http",
 													"host": [
 														"localhost"
@@ -1158,43 +2458,9 @@
 													"path": [
 														"data-base-app",
 														"modif",
-														"status",
-														"read",
-														"all"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "read/1/",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "\n{\n    \"nameCompany\": \"Belavia\",\n    \"countryLocation\": \"Minsk\",\n    \"airPlaneDTOModifs\":\n            [\n               {\n                \"type\": \"Boing747\",\n                \"routeStart\": \"Minsk\",\n                \"routeEnd\": \"Moskva\",\n                \"numberPassanger\": \"3\",\n                \"flightDate\": 1656838800000,\n                \"tickets\":\n                        [\n                            {\n                        \"passengerSeat\": 1,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 2,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            },\n                            {\n                        \"passengerSeat\": 3,\n                        \"ticketPrice\": 400,\n                        \"isEmptySeat\": false,\n                        \"isActive\": true\n                            }\n                        ]\n                }\n            ]\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/status/read/1/",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"status",
-														"read",
+														"passenger",
+														"profile",
+														"delete",
 														"1",
 														""
 													]
@@ -1203,13 +2469,13 @@
 											"response": []
 										},
 										{
-											"name": "read/all/id",
+											"name": "delete/all/id",
 											"request": {
-												"method": "POST",
+												"method": "DELETE",
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "[1,2,5]\n",
+													"raw": "[2,3]",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1217,7 +2483,7 @@
 													}
 												},
 												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/status/read/all/id",
+													"raw": "http://localhost:8003/data-base-app/modif/passenger/profile/delete/all/id",
 													"protocol": "http",
 													"host": [
 														"localhost"
@@ -1226,72 +2492,11 @@
 													"path": [
 														"data-base-app",
 														"modif",
-														"status",
-														"read",
+														"passenger",
+														"profile",
+														"delete",
 														"all",
 														"id"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "create/all",
-											"request": {
-												"method": "POST",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"status\": \"BLOCKED\",\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/status/create",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"status",
-														"create"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "update/all",
-											"request": {
-												"method": "PUT",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"id\": 4,\n    \"status\": \"BLOCKED\",\n    \"userOrderDTOList\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 2\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "http://localhost:8003/data-base-app/modif/status/update",
-													"protocol": "http",
-													"host": [
-														"localhost"
-													],
-													"port": "8003",
-													"path": [
-														"data-base-app",
-														"modif",
-														"status",
-														"update"
 													]
 												}
 											},
@@ -1416,7 +2621,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"statusDTO\": {\n        \"id\": 1\n    },\n    \"flightRouteDTO\": {\n        \"id\": 1\n    },\n    \"passengerProfileDTO\": {\n        \"id\": 1\n    }\n}",
+													"raw": "{\n    \"flightRouteDTO\":\n    {\n        \"id\":1\n    },\n    \"statusDTO\": {\n        \"id\": 1\n    }\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1448,7 +2653,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"id\": 1,\n    \"statusDTO\": {\n        \"id\": 1\n    },\n    \"flightRouteDTO\": {\n        \"id\": 1\n    },\n    \"passengerProfileDTO\": {\n        \"id\": 1\n    }\n}",
+													"raw": "{\n    \"id\": 1,\n    \"statusDTO\": {\n        \"id\": 1\n    }\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1468,6 +2673,74 @@
 														"user",
 														"order",
 														"update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/order/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"order",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/order/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"order",
+														"delete",
+														"all",
+														"id"
 													]
 												}
 											},
@@ -1648,6 +2921,74 @@
 												}
 											},
 											"response": []
+										},
+										{
+											"name": "delete/1/ Copy",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/profile/delete/1/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"profile",
+														"delete",
+														"1",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete/all/id Copy",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/modif/user/profile/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"modif",
+														"user",
+														"profile",
+														"delete",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
 										}
 									]
 								}
@@ -1777,7 +3118,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\",\r\n    \"priceLowcostIndex\": 3,\r\n    \"priceBuisnessIndex\": 4\r\n}",
+													"raw": "{\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1808,7 +3149,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"id\": 4,\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\",\r\n    \"priceLowcostIndex\": 3,\r\n    \"priceBuisnessIndex\": 4\r\n}",
+													"raw": "{\r\n    \"id\": 4,\r\n    \"nameCompany\": \"BELAVIA\",\r\n    \"countryLocation\": \"Minsk\"\r\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -2145,6 +3486,264 @@
 									]
 								},
 								{
+									"name": "airPlaneFlightRoute",
+									"item": [
+										{
+											"name": "air/plane/flight/route/read/all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/read/all",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"all"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/flight/route/read/2/",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/read/2/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"2",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/flight/routeread/all/id",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[1,2,10]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/read/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"read",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/flight/route/create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "id",
+														"value": "2",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/create",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"create"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/flight/route",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"id\": 13\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/update",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/delete/1/",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/delete/13/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"delete",
+														"13",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "air/plane/delete/all/id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[2,3]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8003/data-base-app/air/plane/flight/route/delete/all/id",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8003",
+													"path": [
+														"data-base-app",
+														"air",
+														"plane",
+														"flight",
+														"route",
+														"delete",
+														"all",
+														"id"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
 									"name": "bankCard",
 									"item": [
 										{
@@ -2444,7 +4043,7 @@
 													}
 												},
 												"url": {
-													"raw": "http://localhost:8003/data-base-app/flight/route/read/2/",
+													"raw": "http://localhost:8003/data-base-app/flight/route/read/1/",
 													"protocol": "http",
 													"host": [
 														"localhost"
@@ -2455,7 +4054,7 @@
 														"flight",
 														"route",
 														"read",
-														"2",
+														"1",
 														""
 													]
 												}
@@ -2509,7 +4108,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"routeStart\": \"Moskva\",\r\n    \"routeEnd\": \"Minsk\",\r\n    \"distance\": 1000,\r\n    \"flightDateStart\": \"2022-07-03T13:00:00.000+00:00\",\r\n    \"flightDateEnd\": \"2022-07-03T15:00:00.000+00:00\",\r\n    \"isActive\": true\r\n}",
+													"raw": "{\r\n        \"routeStart\": \"Minsk\",\r\n        \"routeEnd\": \"Moskva\",\r\n        \"distance\": 1000,\r\n        \"flightDateStart\": \"2022-07-03T09:00:00.000+00:00\",\r\n        \"flightDateEnd\": \"2022-07-03T11:00:00.000+00:00\",\r\n        \"price\": 200,\r\n        \"isActive\": true\r\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -2540,7 +4139,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"id\": 13,\r\n    \"routeStart\": \"Moskva\",\r\n    \"routeEnd\": \"Minsk\",\r\n    \"distance\": 1000,\r\n    \"flightDateStart\": \"2022-07-03T13:00:00.000+00:00\",\r\n    \"flightDateEnd\": \"2022-07-03T15:00:00.000+00:00\",\r\n    \"isActive\": true\r\n}",
+													"raw": "{\r\n    \"id\": 13,\r\n    \"routeStart\": \"Moskva\",\r\n    \"routeEnd\": \"Minsk\",\r\n    \"distance\": 1000,\r\n    \"flightDateStart\": \"2022-07-03T13:00:00.000+00:00\",\r\n    \"flightDateEnd\": \"2022-07-03T15:00:00.000+00:00\",\r\n    \"price\": 200,\r\n    \"isActive\": true\r\n}",
 													"options": {
 														"raw": {
 															"language": "json"

@@ -1,6 +1,6 @@
 package org.example.mapper.models;
 
-import org.example.dto.models.UserOrderDTO;
+import org.example.dto.modelsDTO.UserOrderDTO;
 import org.example.model.entity.UserOrder;
 import org.springframework.stereotype.Component;
 

@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.example.dao.models.AirCompanyDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.AirCompany;
+import org.example.model.entity.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,22 +32,16 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany ANSWER = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         Mockito.when(airCompanyDAO.save(GIVEN)).thenReturn(ANSWER);
         AirCompany ACTUAL = airCompanyService.create(GIVEN);
@@ -62,8 +56,6 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany(null)
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> airCompanyService.create(GIVEN));
     }
@@ -74,16 +66,12 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> ANSWER_LIST = List.of(ANSWER);
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airCompanyDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -100,8 +88,6 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(airCompanyDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -115,15 +101,11 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         Mockito.when(airCompanyDAO.findById(GIVEN_ID)).thenReturn(Optional.ofNullable(ANSWER));
         AirCompany ACTUAL = airCompanyService.readById(GIVEN_ID);
@@ -147,16 +129,12 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> ANSWER_LIST = List.of(ANSWER);
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airCompanyDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -175,8 +153,6 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(airCompanyDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -190,15 +166,11 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         Mockito.when(airCompanyDAO.findById(GIVEN_ID)).thenReturn(Optional.of(ANSWER));
         AirCompany ACTUAL = airCompanyService.deleteById(GIVEN_ID);
@@ -221,16 +193,12 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> ANSWER_LIST = List.of(ANSWER);
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         List<AirCompany> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(airCompanyDAO.findAllById(GIVEN_LIST)).thenReturn(ANSWER_LIST);
@@ -255,22 +223,16 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany ANSWER = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         AirCompany EXPECTED = AirCompany.builder()
                 .id(1L)
                 .nameCompany("Aeroflot")
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         Mockito.when(airCompanyDAO.save(GIVEN)).thenReturn(ANSWER);
         AirCompany ACTUAL = airCompanyService.update(GIVEN);
@@ -285,8 +247,6 @@ class AirCompanyServiceImplTest {
                 .id(1L)
                 .nameCompany(null)
                 .countryLocation("Russia")
-                .priceLowcostIndex(1)
-                .priceBuisnessIndex(2)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> airCompanyService.update(GIVEN));
     }

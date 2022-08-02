@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @NoArgsConstructor
@@ -27,38 +26,18 @@ public class FlightRoute {
     @Column(name = "DISTANCE")
     private Integer distance;
     @Column(name = "FLIGHT_DATE_START")
-    private Date flightDateStart;
+    private Timestamp flightDateStart;
     @Column(name = "FLIGHT_DATE_END")
-    private Date flightDateEnd;
+    private Timestamp flightDateEnd;
+    @Column(name = "PRICE")
+    private Integer price;
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
-//    @ManyToMany(
-//            cascade = CascadeType.MERGE,
-//            fetch = FetchType.LAZY,
-//            mappedBy = "flightRouteList"
-//    )
-//    private List<AirPlane> airPlaneList;
-
-//    @ManyToMany(
-//            cascade = CascadeType.MERGE,
-//            fetch = FetchType.LAZY
-//    )
-//    @JoinTable(
-//            name = "AIR_PLANE_FLIGHT_ROUTE",
-//            joinColumns = @JoinColumn(name = "AIR_PLANE_ID"),
-//            inverseJoinColumns = @JoinColumn(name = "FLIGHT_ROUTE_ID"))
-//    @ManyToMany(
-//            cascade = CascadeType.MERGE,
-//            fetch = FetchType.LAZY,
-//            mappedBy = "flightRouteList"
-//    )
-//    private List<AirPlane> airPlaneList;
-
     @OneToMany(
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "FLIGHT_ROUTE_ID")
-    private List<UserOrder> userOrderList;
+    private List<AirPlaneFlightRoute> airPlaneFlightRouteList;
 }

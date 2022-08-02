@@ -1,9 +1,8 @@
 package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.modif.*;
-import org.example.mapper.models.AirPlaneMapper;
-import org.example.mapper.models.UserOrderMapper;
+import org.example.dto.modelsDTO.modif.FlightRouteDTOModif;
+import org.example.mapper.models.AirPlaneFlightRouteMapper;
 import org.example.model.entity.FlightRoute;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class FlightRouteMapperModif {
-    private final AirPlaneMapper airPlaneMapper;
-    private final UserOrderMapper userOrderMapper;
+    private final AirPlaneFlightRouteMapper airPlaneFlightRouteMapper;
 
     public FlightRouteDTOModif toDTO(FlightRoute flightRoute) {
         return FlightRouteDTOModif.builder()
@@ -24,9 +22,9 @@ public class FlightRouteMapperModif {
                 .distance(flightRoute.getDistance())
                 .flightDateStart(flightRoute.getFlightDateStart())
                 .flightDateEnd(flightRoute.getFlightDateEnd())
+                .price(flightRoute.getPrice())
                 .isActive(flightRoute.getIsActive())
-//                .airPlaneDTOList(airPlaneMapper.toDTO(flightRoute.getAirPlaneList()))
-                .userOrderDTOList(userOrderMapper.toDTO(flightRoute.getUserOrderList()))
+                .airPlaneFlightRouteDTOList(airPlaneFlightRouteMapper.toDTO(flightRoute.getAirPlaneFlightRouteList()))
                 .build();
     }
 
@@ -46,9 +44,9 @@ public class FlightRouteMapperModif {
                 .distance(flightRouteDTOModif.getDistance())
                 .flightDateStart(flightRouteDTOModif.getFlightDateStart())
                 .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
+                .price(flightRouteDTOModif.getPrice())
                 .isActive(flightRouteDTOModif.getIsActive())
-//                .airPlaneList(airPlaneMapper.toModel(flightRouteDTOModif.getAirPlaneDTOList()))
-                .userOrderList(userOrderMapper.toModel(flightRouteDTOModif.getUserOrderDTOList()))
+                .airPlaneFlightRouteList(airPlaneFlightRouteMapper.toModel(flightRouteDTOModif.getAirPlaneFlightRouteDTOList()))
                 .build();
     }
 }

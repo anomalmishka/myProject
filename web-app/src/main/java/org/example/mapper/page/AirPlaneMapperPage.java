@@ -1,52 +1,56 @@
+
 package org.example.mapper.page;
 
-import org.example.dto.models.AirCompanyDTO;
-import org.example.dto.models.FlightRouteDTO;
-import org.example.dto.models.SeatDTO;
-import org.example.dto.models.modif.AirPlaneDTOModif;
-import org.example.dto.page.AirPlanePage;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.modelsDTO.modif.AirPlaneDTOModif;
+import org.example.dto.page.modelPage.AirPlanePage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class AirPlaneMapperPage {
+    private final SeatMapperPage seatMapperPage;
+    private final AirCompanyMapperPage airCompanyMapperPage;
 
-    public AirPlanePage toPageDTO(AirPlaneDTOModif airPlaneDTOModif) {
-        AirCompanyDTO airCompanyDTO = airPlaneDTOModif.getAirCompanyDTO();
-        List<FlightRouteDTO> flightRouteDTOList = airPlaneDTOModif.getFlightRouteDTOList();
-        List<SeatDTO> seatDTOList = airPlaneDTOModif.getSeatDTOList();
-        return AirPlanePage.builder()
-                .idAirPlane(airPlaneDTOModif.getId())
-                .typeAirPlane(airPlaneDTOModif.getType())
-                .statusAirPlane(airPlaneDTOModif.getStatus())
-                .numberSeatLowcostAirPlane(airPlaneDTOModif.getNumberSeatLowcost())
-                .numberSeatBuisnessAirPlane(airPlaneDTOModif.getNumberSeatBuisness())
-                .isActiveAirPlane(airPlaneDTOModif.getIsActive())
-
-                .idAirCompany(airCompanyDTO.getId())
-                .nameAirCompany(airCompanyDTO.getNameCompany())
-                .countryLocationAirCompany(airCompanyDTO.getCountryLocation())
-                .priceLowcostIndexAirCompany(airCompanyDTO.getPriceLowcostIndex())
-                .priceBuisnessIndexAirCompany(airCompanyDTO.getPriceBuisnessIndex())
-
-                .idFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getId).collect(Collectors.toList()))
-                .routeStartFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getRouteStart).collect(Collectors.toList()))
-                .routeEndFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getRouteEnd).collect(Collectors.toList()))
-                .distanceFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getDistance).collect(Collectors.toList()))
-                .flightDateStartFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getFlightDateStart).collect(Collectors.toList()))
-                .flightDateEndFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getFlightDateEnd).collect(Collectors.toList()))
-                .isActiveFlightRoute(flightRouteDTOList.stream().map(FlightRouteDTO::getIsActive).collect(Collectors.toList()))
-
-                .idSeat(seatDTOList.stream().map(SeatDTO::getId).collect(Collectors.toList()))
-                .placeSeat(seatDTOList.stream().map(SeatDTO::getPlace).collect(Collectors.toList()))
-                .typeSeat(seatDTOList.stream().map(SeatDTO::getType).collect(Collectors.toList()))
-                .isOrderedSeat(seatDTOList.stream().map(SeatDTO::getIsOrdered).collect(Collectors.toList()))
+    public AirPlaneDTOModif toDTO(AirPlanePage airPlanePage) {
+        return AirPlaneDTOModif.builder()
+                .id(airPlanePage.getId())
+                .type(airPlanePage.getType())
+                .status(airPlanePage.getStatus())
+                .numberSeatLowcost(airPlanePage.getNumberSeatLowcost())
+                .numberSeatBuisness(airPlanePage.getNumberSeatBuisness())
+                .isActive(airPlanePage.getIsActive())
+                .airCompanyDTO(airCompanyMapperPage.toDTO(airPlanePage.getAirCompanyPage()))
+                .seatDTOList(seatMapperPage.toDTO(airPlanePage.getSeatPageList()))
                 .build();
     }
 
-    public List<AirPlanePage> toPageDTO(List<AirPlaneDTOModif> airPlaneDTOModifList) {
-        return airPlaneDTOModifList.stream().map(this::toPageDTO).collect(Collectors.toList());
+    public List<AirPlaneDTOModif> toDTO(List<AirPlanePage> airPlanePageList) {
+        return Optional.ofNullable(airPlanePageList)
+                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
+    }
+
+    public List<AirPlanePage> toPage(List<AirPlaneDTOModif> airPlaneDTOModifList) {
+        return Optional.ofNullable(airPlaneDTOModifList)
+                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                        .map(this::toPage).collect(Collectors.toList())).orElse(null);
+    }
+
+    public AirPlanePage toPage(AirPlaneDTOModif airPlaneDTOModif) {
+        return AirPlanePage.builder()
+                .id(airPlaneDTOModif.getId())
+                .type(airPlaneDTOModif.getType())
+                .status(airPlaneDTOModif.getStatus())
+                .numberSeatLowcost(airPlaneDTOModif.getNumberSeatLowcost())
+                .numberSeatBuisness(airPlaneDTOModif.getNumberSeatBuisness())
+                .isActive(airPlaneDTOModif.getIsActive())
+                .airCompanyPage(airCompanyMapperPage.toPage(airPlaneDTOModif.getAirCompanyDTO()))
+                .seatPageList(seatMapperPage.toPage(airPlaneDTOModif.getSeatDTOList()))
+                .build();
     }
 }

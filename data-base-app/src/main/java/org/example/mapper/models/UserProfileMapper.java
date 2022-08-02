@@ -1,6 +1,6 @@
 package org.example.mapper.models;
 
-import org.example.dto.models.UserProfileDTO;
+import org.example.dto.modelsDTO.UserProfileDTO;
 import org.example.model.entity.UserProfile;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,7 @@ public class UserProfileMapper {
                 .lastname(userProfile.getLastname())
                 .phone(userProfile.getPhone())
                 .email(userProfile.getEmail())
+                .userId(userProfile.getUserId())
                 .isBlockedProfile(userProfile.getIsBlockedProfile())
                 .build();
     }
@@ -34,6 +35,7 @@ public class UserProfileMapper {
                 .lastname(userProfileDTO.getLastname())
                 .phone(userProfileDTO.getPhone())
                 .email(userProfileDTO.getEmail())
+                .userId(userProfileDTO.getUserId())
                 .isBlockedProfile(userProfileDTO.getIsBlockedProfile())
                 .build();
     }

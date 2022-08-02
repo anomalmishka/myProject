@@ -1,43 +1,59 @@
 package org.example.mapper.page;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.page.FlightRoutePage;
-import org.example.model.database.AirPlane;
-import org.example.model.database.FlightRoute;
-import org.example.model.database.UserOrder;
+import org.example.dto.modelsDTO.modif2.FlightRouteDTOModif2;
+import org.example.dto.page.modelPage.FlightRoutePage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
 public class FlightRouteMapperPage {
-    public FlightRoutePage toPageDTO(FlightRoute flightRoute) {
-        List<AirPlane> airPlaneList = flightRoute.getAirPlaneList();
-        List<UserOrder> userOrderList = flightRoute.getUserOrderList();
-        return FlightRoutePage.builder()
-                .idFlightRoute(flightRoute.getId())
-                .routeStartFlightRoute(flightRoute.getRouteStart())
-                .routeEndFlightRoute(flightRoute.getRouteEnd())
-                .distanceFlightRoute(flightRoute.getDistance())
-                .flightDateStartFlightRoute(flightRoute.getFlightDateStart())
-                .flightDateEndFlightRoute(flightRoute.getFlightDateEnd())
-                .isActiveFlightRoute(flightRoute.getIsActive())
+    private final AirPlaneFlightRouteMapperPage airPlaneFlightRouteMapperPage;
 
-//                .idAirPlane(airPlaneList.stream().map(AirPlane::getId).collect(Collectors.toList()))
-//                .typeAirPlane(airPlaneList.stream().map(AirPlane::getType).collect(Collectors.toList()))
-//                .statusAirPlane(airPlaneList.stream().map(AirPlane::getStatus).collect(Collectors.toList()))
-//                .numberSeatLowcostAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatLowcost).collect(Collectors.toList()))
-//                .numberSeatBuisnessAirPlane(airPlaneList.stream().map(AirPlane::getNumberSeatBuisness).collect(Collectors.toList()))
-//                .pricePerKilometerAirPlane(airPlaneList.stream().map(AirPlane::getPricePerKilometer).collect(Collectors.toList()))
-//                .isActiveAirPlane(airPlaneList.stream().map(AirPlane::getIsActive).collect(Collectors.toList()))
-
-                .idUserOrder(userOrderList.stream().map(UserOrder::getId).collect(Collectors.toList()))
+    public FlightRouteDTOModif2 toDTO(FlightRoutePage flightRoutePage) {
+        return FlightRouteDTOModif2.builder()
+                .id(flightRoutePage.getId())
+                .routeStart(flightRoutePage.getRouteStart())
+                .routeEnd(flightRoutePage.getRouteEnd())
+                .distance(flightRoutePage.getDistance())
+                .flightDateStart(flightRoutePage.getFlightDateStart())
+                .flightDateEnd(flightRoutePage.getFlightDateEnd())
+                .price(flightRoutePage.getPrice())
+                .isActive(flightRoutePage.getIsActive())
+                .airPlaneFlightRouteDTOModif2List(airPlaneFlightRouteMapperPage
+                        .toDTO(flightRoutePage.getAirPlaneFlightRoutePageList()))
                 .build();
     }
 
-    public List<FlightRoutePage> toPageDTO(List<FlightRoute> flightRouteList) {
-        return flightRouteList.stream().map(this::toPageDTO).collect(Collectors.toList());
+    public List<FlightRouteDTOModif2> toDTO(List<FlightRoutePage> flightRoutePageList) {
+        return Optional.ofNullable(flightRoutePageList)
+                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
+    }
+
+
+    public List<FlightRoutePage> toPage(List<FlightRouteDTOModif2> flightRouteDTOModif2List) {
+        return Optional.ofNullable(flightRouteDTOModif2List)
+                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                        .map(this::toPage).collect(Collectors.toList())).orElse(null);
+    }
+
+    public FlightRoutePage toPage(FlightRouteDTOModif2 flightRouteDTOModif2) {
+        return FlightRoutePage.builder()
+                .id(flightRouteDTOModif2.getId())
+                .routeStart(flightRouteDTOModif2.getRouteStart())
+                .routeEnd(flightRouteDTOModif2.getRouteEnd())
+                .distance(flightRouteDTOModif2.getDistance())
+                .flightDateStart(flightRouteDTOModif2.getFlightDateStart())
+                .flightDateEnd(flightRouteDTOModif2.getFlightDateEnd())
+                .price(flightRouteDTOModif2.getPrice())
+                .isActive(flightRouteDTOModif2.getIsActive())
+                .airPlaneFlightRoutePageList(airPlaneFlightRouteMapperPage
+                                .toPage(flightRouteDTOModif2.getAirPlaneFlightRouteDTOModif2List()))
+                .build();
     }
 }

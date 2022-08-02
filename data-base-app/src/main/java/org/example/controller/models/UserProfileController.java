@@ -1,7 +1,7 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.models.UserProfileDTO;
+import org.example.dto.modelsDTO.UserProfileDTO;
 import org.example.mapper.models.UserProfileMapper;
 import org.example.service.models.api.UserProfileService;
 import org.springframework.web.bind.annotation.*;

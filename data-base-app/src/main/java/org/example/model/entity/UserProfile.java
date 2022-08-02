@@ -32,15 +32,13 @@ public class UserProfile {
     private Long userId;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name="USER_PROFILE_ID")
     private List<BankCard> bankCardList;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name="USER_PROFILE_ID")
     private List<PassengerProfile> passengerProfileList;

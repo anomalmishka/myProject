@@ -23,10 +23,4 @@ public class Seat {
     private String type;
     @Column(name = "IS_ORDERED")
     private Boolean isOrdered;
-
-//    @ManyToOne(
-//            cascade = CascadeType.MERGE,
-//            fetch = FetchType.LAZY
-//    )
-//    private AirPlane airPlane;
 }

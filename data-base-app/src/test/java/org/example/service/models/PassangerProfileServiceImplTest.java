@@ -1,11 +1,11 @@
 package org.example.service.models;
 
+import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.example.dao.models.PassengerProfileDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.PassengerProfile;
-import org.example.service.models.PassengerProfileServiceImpl;
+import org.example.model.entity.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,63 @@ class PassangerProfileServiceImplTest {
     @InjectMocks
     PassengerProfileServiceImpl passengerProfileService;
 
+    @SneakyThrows
+    private Long parseStringToLong(String stringToDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.parse(stringToDate).getTime();
+    }
+
+    private final Timestamp flightDateStart = new Timestamp(parseStringToLong("2022-07-03 12:00:00"));
+    private final Timestamp flightDateEnd = new Timestamp(parseStringToLong("2022-07-03 14:00:00"));
+
+    private final Seat seat = Seat.builder()
+            .id(1L)
+            .type("Lowcost")
+            .place("1A")
+            .isOrdered(true)
+            .build();
+    private final List<Seat> seatList = List.of(seat);
+    private final AirCompany airCompany = AirCompany.builder()
+            .id(1L)
+            .nameCompany("Aeroflot")
+            .countryLocation("Russia")
+            .build();
+    private final AirPlane airPlane = AirPlane.builder()
+            .id(1L)
+            .type("747")
+            .status("Landing")
+            .numberSeatLowcost(5)
+            .numberSeatBuisness(1)
+            .isActive(true)
+            .airCompany(airCompany)
+            .seatList(seatList)
+            .build();
+    private final AirPlaneFlightRoute airPlaneFlightRoute = AirPlaneFlightRoute.builder()
+            .id(1L)
+            .airPlane(airPlane)
+            .build();
+    private final List<AirPlaneFlightRoute> airPlaneFlightRouteList = List.of(airPlaneFlightRoute);
+
+    private final FlightRoute flightRoute = FlightRoute.builder()
+            .id(1L)
+            .routeStart("Minsk")
+            .routeEnd("Moskva")
+            .distance(1000)
+            .flightDateStart(flightDateStart)
+            .flightDateEnd(flightDateEnd)
+            .isActive(true)
+            .airPlaneFlightRouteList(airPlaneFlightRouteList)
+            .build();
+    private final Status status = Status.builder()
+            .status("Paid")
+            .build();
+    private final UserOrder userOrder = UserOrder.builder()
+            .id(1L)
+            .status(status)
+            .flightRoute(flightRoute)
+            .build();
+    private final List<UserOrder> userOrderList = List.of(userOrder);
+
     @Test
     public void whenCreate_thenReturnEntity() {
         PassengerProfile GIVEN = PassengerProfile.builder()
@@ -34,18 +93,21 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         Mockito.when(passengerProfileDAO.save(GIVEN)).thenReturn(ANSWER);
         PassengerProfile ACTUAL = passengerProfileService.create(GIVEN);
@@ -61,6 +123,7 @@ class PassangerProfileServiceImplTest {
                 .name(null)
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> passengerProfileService.create(GIVEN));
     }
@@ -72,6 +135,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
@@ -79,6 +143,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(passengerProfileDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -96,6 +161,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(passengerProfileDAO.findAll()).thenReturn(ANSWER_LIST);
@@ -110,12 +176,14 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         Mockito.when(passengerProfileDAO.findById(GIVEN_ID)).thenReturn(Optional.ofNullable(ANSWER));
         PassengerProfile ACTUAL = passengerProfileService.readById(GIVEN_ID);
@@ -140,6 +208,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
@@ -147,6 +216,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(passengerProfileDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -166,6 +236,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         Mockito.when(passengerProfileDAO.findAllById(GIVEN_ID_LIST)).thenReturn(ANSWER_LIST);
@@ -180,12 +251,14 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         Mockito.when(passengerProfileDAO.findById(GIVEN_ID)).thenReturn(Optional.of(ANSWER));
         PassengerProfile ACTUAL = passengerProfileService.deleteById(GIVEN_ID);
@@ -209,6 +282,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
@@ -216,6 +290,7 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> EXPECTED_LIST = List.of(EXPECTED);
         Mockito.when(passengerProfileDAO.findAllById(GIVEN_LIST)).thenReturn(ANSWER_LIST);
@@ -241,18 +316,21 @@ class PassangerProfileServiceImplTest {
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
                 .name("Admin")
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         Mockito.when(passengerProfileDAO.save(GIVEN)).thenReturn(ANSWER);
         PassengerProfile ACTUAL = passengerProfileService.update(GIVEN);
@@ -268,6 +346,7 @@ class PassangerProfileServiceImplTest {
                 .name(null)
                 .lastname("Admin")
                 .passportNumber("KK1112223")
+                .userOrderList(userOrderList)
                 .build();
         assertThrows(ErrorInvalidData.class, () -> passengerProfileService.update(GIVEN));
     }
