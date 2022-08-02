@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 
 services:
   web-app:
@@ -7,14 +7,15 @@ services:
     image: ita:web-app
     ports:
       - "8001:8001"
-    restart: on-failure
-    environment:
-      DB_URL: jdbc:postgresql://web_db:5432/dbWeb
-      DB_DRIVER: org.postgresql.Driver
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      SERVER: http://database-app:8003/data_base-app
-      MAPPING_DATA_BASE_APP: /data-base-app
+    hostname: web-app
+#    restart: on-failure
+#    environment:
+#      DB_URL: jdbc:postgresql://web_db:5432/dbWeb
+#      DB_DRIVER: org.postgresql.Driver
+#      DB_USERNAME: postgres
+#      DB_PASSWORD: postgres
+#      SERVER: http://database-app:8003/data-base-app
+#      MAPPING_DATA_BASE_APP: /data-base-app
 
   data_base-app:
     container_name: database-app
@@ -22,7 +23,8 @@ services:
     image: ita:data-base-app
     ports:
       - "8003:8003"
-    restart: on-failure
+    hostname: data-base-app
+#    restart: on-failure
   database:
     container_name: web-db
     image: postgres:14 # официальный образ базы данных
@@ -33,11 +35,11 @@ services:
       - ./web-db/data:/var/lib/postgresql/data/ # путь к папке для хранения состояния данных
     ports:
       - "5438:5432"
-    restart: always
-    depends_on:
-      - web-db
-      - web-app
-      - database-app
+#    restart: always
+#    depends_on:
+#      - web-db
+#      - web-app
+#      - database-app
 
 #  docker-compose -f docker-compose.yml up -d --build
 #  docker-compose -f docker-compose.yml down            - команда останавливает и удаляет контейнеры.
