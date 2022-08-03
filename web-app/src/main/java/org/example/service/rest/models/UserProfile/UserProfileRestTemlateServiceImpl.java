@@ -1,6 +1,7 @@
 package org.example.service.rest.models.UserProfile;
 
 import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlateService {
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
-
-    private final String URL = "http://localhost:8003/data-base-app/user/profile/";
+    @Value(value = "${server.data-base-app.url}")
+    private String DATA_BASE_APP_URL;
+    @Value(value = "${server.data-base-app.url}")
+    private final String PATH = "/user/profile/";
 
     @Override
     public List<UserProfileDTOModif2> readAll() {
@@ -23,7 +26,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<UserProfileDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.GET, httpEntity, UserProfileDTOModif2[].class);
+        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, UserProfileDTOModif2[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
@@ -33,7 +37,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<UserProfileDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.GET, httpEntity, UserProfileDTOModif2.class);
+        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, UserProfileDTOModif2.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -41,7 +46,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
     public List<UserProfileDTOModif2> readAllByIds(List<Long> ids) {
         String uriVar = "read/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.POST, httpEntity, UserProfileDTOModif2[].class);
+        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, UserProfileDTOModif2[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
@@ -49,7 +55,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
     public UserProfileDTOModif2 create(UserProfileDTOModif2 userProfileDTOModif2) {
         String uriVar = "create";
         HttpEntity<UserProfileDTOModif2> httpEntity = new HttpEntity<>(userProfileDTOModif2);
-        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.POST, httpEntity, UserProfileDTOModif2.class);
+        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, UserProfileDTOModif2.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -57,7 +64,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
     public UserProfileDTOModif2 update(UserProfileDTOModif2 userProfileDTOModif2) {
         String uriVar = "update";
         HttpEntity<UserProfileDTOModif2> httpEntity = new HttpEntity<>(userProfileDTOModif2);
-        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.PUT, httpEntity, UserProfileDTOModif2.class);
+        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.PUT, httpEntity, UserProfileDTOModif2.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -67,7 +75,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<UserProfileDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.DELETE, httpEntity, UserProfileDTOModif2.class);
+        ResponseEntity<UserProfileDTOModif2> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, UserProfileDTOModif2.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -75,7 +84,8 @@ public class UserProfileRestTemlateServiceImpl implements UserProfileRestTemlate
     public List<UserProfileDTOModif2> deleteAllByIds(List<Long> ids) {
         String uriVar = "delete/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.DELETE, httpEntity, UserProfileDTOModif2[].class);
+        ResponseEntity<UserProfileDTOModif2[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, UserProfileDTOModif2[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 }

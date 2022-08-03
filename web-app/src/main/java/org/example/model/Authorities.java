@@ -21,7 +21,7 @@ public class Authorities implements GrantedAuthority {
     private String name;
     @Transient
     @ManyToMany(mappedBy = "AUTHORITIES")
-    private List<User> users;
+    private List<Login> logins;
 
     @Override
     public String getAuthority() {

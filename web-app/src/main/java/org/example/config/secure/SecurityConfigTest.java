@@ -3,8 +3,8 @@ package org.example.config.secure;
 import lombok.RequiredArgsConstructor;
 import org.example.config.CustomAuthenticationFailureHandler;
 import org.example.config.MyLogoutSuccessHandler;
-import org.example.dao.UserDAO;
-import org.example.service.models.userDetails.CustomUserDetailsService;
+import org.example.dao.LoginDAO;
+import org.example.service.models.loginDetails.CustomLoginDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Profile("test")
 public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
-    private final UserDAO userDAO;
+    private final LoginDAO loginDAO;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -35,7 +35,7 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userDAO);
+        return new CustomLoginDetailsService(loginDAO);
     }
 
     @Bean

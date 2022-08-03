@@ -1,10 +1,10 @@
 package org.example.controller.serviceControllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.UserDTO;
+import org.example.dto.LoginDTO;
 import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
-import org.example.mapper.user.UserMapper;
-import org.example.model.User;
+import org.example.mapper.login.LoginMapper;
+import org.example.model.Login;
 import org.example.service.models.restorePassword.RestorePasswordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RestorePasswordController {
     private final RestorePasswordService restorePasswordService;
-    private final UserMapper userMapper;
+    private final LoginMapper loginMapper;
 
     @GetMapping("/restore/password")
     public String restorePassword() {
@@ -25,11 +25,11 @@ public class RestorePasswordController {
 
     @PostMapping("/restore/password")
     public String restorePassword(Model model,
-                                  @ModelAttribute UserProfileDTOModif2 userProfileDTOModif2, @ModelAttribute UserDTO userDTO) {
+                                  @ModelAttribute UserProfileDTOModif2 userProfileDTOModif2, @ModelAttribute LoginDTO loginDTO) {
         System.out.println(userProfileDTOModif2);
-        System.out.println(userDTO);
-        User user = restorePasswordService.restorePassword(userProfileDTOModif2, userMapper.toModel(userDTO));
-        model.addAttribute("user", user);
+        System.out.println(loginDTO);
+        Login login = restorePasswordService.restorePassword(userProfileDTOModif2, loginMapper.toModel(loginDTO));
+        model.addAttribute("user", login);
         String redirectUrl = "http://localhost:8001/web-app/login";
         return "redirect:" + redirectUrl;
     }

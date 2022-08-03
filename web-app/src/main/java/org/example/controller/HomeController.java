@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.UserDTO;
+import org.example.dto.LoginDTO;
 import org.example.dto.page.filterPage.FilterPage;
 import org.example.dto.page.modelPage.FlightRoutePage;
 import org.example.mapper.page.FlightRouteMapperPage;
@@ -23,8 +23,8 @@ private final FlightRouteMapperPage flightRouteMapperPage;
 
     @GetMapping("/")
     public String homeGet(Model model,
-                          @ModelAttribute UserDTO userDTO) {
-        model.addAttribute("userDTO", userDTO);
+                          @ModelAttribute LoginDTO loginDTO) {
+        model.addAttribute("userDTO", loginDTO);
         return "home";
     }
 

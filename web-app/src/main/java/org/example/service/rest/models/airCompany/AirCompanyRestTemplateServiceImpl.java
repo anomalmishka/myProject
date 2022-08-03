@@ -1,6 +1,7 @@
 package org.example.service.rest.models.airCompany;
 
 import org.example.dto.modelsDTO.AirCompanyDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,9 @@ import java.util.stream.Collectors;
 @Service
 public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplateService {
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
-
-    private final String URL = "http://localhost:8003/data-base-app/air/company/";
+    @Value(value = "${server.data-base-app.url}")
+    private String DATA_BASE_APP_URL;
+    private final String PATH = "/air/company/";
 
     @Override
     public List<AirCompanyDTO> readAll() {
@@ -23,7 +25,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.GET, httpEntity, AirCompanyDTO[].class);
+        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, AirCompanyDTO[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
@@ -33,7 +36,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.GET, httpEntity, AirCompanyDTO.class);
+        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, AirCompanyDTO.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -41,7 +45,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
     public List<AirCompanyDTO> readAllByIds(List<Long> ids) {
         String uriVar = "read/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.POST, httpEntity, AirCompanyDTO[].class);
+        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, AirCompanyDTO[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
@@ -49,7 +54,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
     public AirCompanyDTO create(AirCompanyDTO airCompanyDTO) {
         String uriVar = "create";
         HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(airCompanyDTO);
-        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.POST, httpEntity, AirCompanyDTO.class);
+        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, AirCompanyDTO.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -57,7 +63,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
     public AirCompanyDTO update(AirCompanyDTO airCompanyDTO) {
         String uriVar = "update";
         HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(airCompanyDTO);
-        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.PUT, httpEntity, AirCompanyDTO.class);
+        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.PUT, httpEntity, AirCompanyDTO.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -67,7 +74,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.DELETE, httpEntity, AirCompanyDTO.class);
+        ResponseEntity<AirCompanyDTO> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, AirCompanyDTO.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
@@ -75,7 +83,8 @@ public class AirCompanyRestTemplateServiceImpl implements AirCompanyRestTemplate
     public List<AirCompanyDTO> deleteAllByIds(List<Long> ids) {
         String uriVar = "delete/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(URL + uriVar, HttpMethod.DELETE, httpEntity, AirCompanyDTO[].class);
+        ResponseEntity<AirCompanyDTO[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, AirCompanyDTO[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 }

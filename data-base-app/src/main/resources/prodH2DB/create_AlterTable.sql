@@ -1,0 +1,9 @@
+alter table air_plane add constraint FKor6b30umeovr2tltbp3mo17c7 foreign key (air_company_id) references air_company;
+alter table air_plane_flight_route add constraint FKld4p9f6snqbc689rst99eboxy foreign key (air_plane_id) references air_plane;
+alter table air_plane_flight_route add constraint FK8usry5yfs6b6symx9ou1c0lhx foreign key (flight_route_id) references flight_route;
+alter table bank_card add constraint FKg03auw65t3fm5x8s9orbncj1x foreign key (user_profile_id) references user_profile;
+alter table passenger_profile add constraint FK5pogumd4gnx81yhtjfc5xhw78 foreign key (user_profile_id) references user_profile;
+alter table seat add constraint FKbedpgiibtqurewoxbermx41i5 foreign key (air_plane_id) references air_plane;
+alter table user_order add constraint FKmnkfw5ay2hght5xqp51a7oe94 foreign key (flight_route_id) references flight_route;
+alter table user_order add constraint FKahaarjxatrv2hlawivwilgkad foreign key (status_id) references status;
+alter table user_order add constraint FKt2kyveq81viy16pe1o8xp8edd foreign key (passenger_profile_id) references passenger_profile;
