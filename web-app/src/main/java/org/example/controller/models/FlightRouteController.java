@@ -2,8 +2,8 @@ package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.IdListDTO;
-import org.example.dto.modelsDTO.modif2.FlightRouteDTOModif2;
-import org.example.dto.page.modelPage.FlightRoutePage;
+import org.example.dto.models.modif.FlightRouteDTOModif;
+import org.example.dto.page.FlightRoutePage;
 import org.example.mapper.page.FlightRouteMapperPage;
 import org.example.service.models.flightRoute.FlightRouteService;
 import org.springframework.stereotype.Controller;
@@ -50,7 +50,7 @@ public class FlightRouteController {
 
     @GetMapping("create")
     public String createGet(Model model,
-                            @ModelAttribute FlightRouteDTOModif2 flightRouteDTOModif2) {
+                            @ModelAttribute FlightRouteDTOModif flightRouteDTOModif2) {
         FlightRoutePage flightRoutePage = flightRouteMapperPage.toPage(flightRouteDTOModif2);
         model.addAttribute("flightRoutePage", flightRoutePage);
         return "pages/models/flightRoute/controller/create";
@@ -58,7 +58,7 @@ public class FlightRouteController {
 
     @PostMapping("create")
     public String createPost(Model model,
-                             @ModelAttribute FlightRouteDTOModif2 flightRouteDTOModif2) {
+                             @ModelAttribute FlightRouteDTOModif flightRouteDTOModif2) {
         FlightRoutePage flightRoutePage = flightRouteMapperPage.toPage(flightRouteService.create(flightRouteDTOModif2));
         model.addAttribute("flightRoutePage", flightRoutePage);
         return "pages/models/flightRoute/controller/create";
@@ -66,7 +66,7 @@ public class FlightRouteController {
 
     @GetMapping("update")
     public String updateGet(Model model,
-                            @ModelAttribute FlightRouteDTOModif2 flightRouteDTOModif2) {
+                            @ModelAttribute FlightRouteDTOModif flightRouteDTOModif2) {
         FlightRoutePage flightRoutePage = flightRouteMapperPage.toPage(flightRouteDTOModif2);
         model.addAttribute("flightRoutePage", flightRoutePage);
         return "pages/models/flightRoute/controller/update";
@@ -74,7 +74,7 @@ public class FlightRouteController {
 
     @PostMapping("update")
     public String updatePost(Model model,
-                             @ModelAttribute FlightRouteDTOModif2 flightRouteDTOModif2) {
+                             @ModelAttribute FlightRouteDTOModif flightRouteDTOModif2) {
         FlightRoutePage flightRoutePage = flightRouteMapperPage.toPage(flightRouteService.update(flightRouteDTOModif2));
         model.addAttribute("flightRoutePage", flightRoutePage);
         return "pages/models/flightRoute/controller/update";
@@ -91,7 +91,6 @@ public class FlightRouteController {
     @GetMapping("delete/all/{ids}")
     public String deleteAllById(Model model,
                                 @ModelAttribute IdListDTO ids) {
-        System.out.println(ids.getId());
         List<FlightRoutePage> flightRoutePageList = flightRouteMapperPage.toPage(flightRouteService.deleteAllByIds(ids.getId()));
         model.addAttribute("flightRoutePageList", flightRoutePageList);
         return "pages/models/flightRoute/controller/deleteAllById";

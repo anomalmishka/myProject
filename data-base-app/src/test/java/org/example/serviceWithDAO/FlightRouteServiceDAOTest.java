@@ -2,8 +2,8 @@ package org.example.serviceWithDAO;
 
 import lombok.SneakyThrows;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.*;
-import org.example.model.filter.FilterObj;
+import org.example.model.*;
+import org.example.dto.filter.FilterObj;
 import org.example.service.filter.api.FilterFlightRouteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

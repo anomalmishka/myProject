@@ -1,9 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.AirPlaneFlightRouteDTOModif;
+import org.example.dto.models.modif.AirPlaneFlightRouteDTOModif;
 import org.example.mapper.models.modif.AirPlaneFlightRouteMapperModif;
-import org.example.service.models.modif.api.AirPlaneFlightRouteServiceModif;
+import org.example.service.modif.api.AirPlaneFlightRouteServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

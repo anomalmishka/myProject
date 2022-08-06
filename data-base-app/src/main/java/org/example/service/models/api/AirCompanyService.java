@@ -1,5 +1,5 @@
 package org.example.service.models.api;
-import org.example.model.entity.AirCompany;
+import org.example.model.AirCompany;
 import java.util.List;
 
 public interface AirCompanyService {

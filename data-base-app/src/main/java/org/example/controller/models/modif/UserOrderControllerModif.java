@@ -1,9 +1,11 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.UserOrderDTOModif;
+import org.example.dto.models.modif.UserOrderDTOModif;
+import org.example.dto.models.modif.UserOrderDTOtoSave;
 import org.example.mapper.models.modif.UserOrderMapperModif;
-import org.example.service.models.modif.UserOrderServiceImplModif;
+import org.example.mapper.models.modif.UserOrderMapperToSave;
+import org.example.service.modif.UserOrderServiceImplModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 public class UserOrderControllerModif {
     private final UserOrderServiceImplModif userOrderServiceImplModif;
     private final UserOrderMapperModif userOrderMapperModif;
+    private final UserOrderMapperToSave userOrderMapperToSave;
 
     @GetMapping(path = "read/all", produces = "application/json", consumes = "application/json")
     public List<UserOrderDTOModif> readAll() {
@@ -41,8 +44,9 @@ public class UserOrderControllerModif {
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
-    public UserOrderDTOModif create(@RequestBody UserOrderDTOModif userOrderDTOModif) {
-        return userOrderMapperModif.toDTO(userOrderServiceImplModif.create(userOrderMapperModif.toModel(userOrderDTOModif)));
+    public UserOrderDTOModif create(@RequestBody UserOrderDTOtoSave userOrderDTOtoSave) {
+        System.out.println("userOrderDTOtoSave " + userOrderDTOtoSave);
+        return userOrderMapperModif.toDTO(userOrderServiceImplModif.create(userOrderMapperToSave.toModel(userOrderDTOtoSave)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")

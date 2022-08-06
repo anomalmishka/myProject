@@ -1,38 +1,36 @@
 package org.example.mapper.page;
 
-import org.example.dto.modelsDTO.StatusDTO;
-import org.example.dto.page.modelPage.StatusPage;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.StatusDTO;
+import org.example.dto.page.StatusPage;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class StatusMapperPage {
+    private final ModelMapper modelMapper;
     public StatusDTO toDTO(StatusPage statusPage) {
-        return StatusDTO.builder()
-                .id(statusPage.getId())
-                .status(statusPage.getStatus())
-                .build();
+        return modelMapper.map(statusPage, StatusDTO.class);
     }
 
     public List<StatusDTO> toDTO(List<StatusPage> statusPageList) {
         return Optional.ofNullable(statusPageList)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                .map(list -> list.stream()
                         .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<StatusPage> toPage(List<StatusDTO> statusDTOList) {
         return Optional.ofNullable(statusDTOList)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                .map(list -> list.stream()
                         .map(this::toPage).collect(Collectors.toList())).orElse(null);
     }
 
     public StatusPage toPage(StatusDTO statusDTO) {
-        return StatusPage.builder()
-                .id(statusDTO.getId())
-                .status(statusDTO.getStatus())
-                .build();
+        return modelMapper.map(statusDTO, StatusPage.class);
     }
 }

@@ -1,8 +1,8 @@
 package org.example.service.models.restorePassword;
 
-import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
-import org.example.model.Login;
+import org.example.dto.models.modif.UserProfileDTOModif;
+import org.example.model.UserLogin;
 
 public interface RestorePasswordService {
-    Login restorePassword(UserProfileDTOModif2 userProfileDTOModif2, Login login);
+    UserLogin restorePassword(UserProfileDTOModif userProfileDTOModif2, UserLogin userLogin);
 }

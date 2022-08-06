@@ -1,11 +1,12 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.FlightRouteDTO;
-import org.example.dto.modelsDTO.modif.FlightRouteDTOModif;
+import org.example.dto.models.FlightRouteDTO;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.models.FlightRouteMapper;
 import org.example.mapper.models.modif.FlightRouteMapperModif;
-import org.example.service.models.modif.api.FlightRouteServiceModif;
+import org.example.model.FlightRoute;
+import org.example.service.modif.api.FlightRouteServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,11 @@ public class FlightRouteControllerModif {
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
     public FlightRouteDTOModif readById(@PathVariable("id") Long id) {
-        return flightRouteMapperModif.toDTO(flightRouteServiceModif.readById(id));
+        FlightRoute flightRoute = flightRouteServiceModif.readById(id);
+        System.out.println(flightRoute);
+        FlightRouteDTOModif flightRouteDTOModif = flightRouteMapperModif.toDTO(flightRoute);
+        System.out.println(flightRouteDTOModif);
+        return flightRouteDTOModif;
     }
 
     @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")

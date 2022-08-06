@@ -1,7 +1,7 @@
 package org.example.service.models.airCompany;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.AirCompanyDTO;
+import org.example.dto.models.AirCompanyDTO;
 import org.example.service.rest.models.airCompany.AirCompanyRestTemplateService;
 import org.springframework.stereotype.Service;
 

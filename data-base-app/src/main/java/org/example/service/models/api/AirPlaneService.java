@@ -1,7 +1,6 @@
 package org.example.service.models.api;
-import org.example.model.entity.AirPlane;
+import org.example.model.AirPlane;
 import java.util.List;
-import java.util.Set;
 
 public interface AirPlaneService {
 

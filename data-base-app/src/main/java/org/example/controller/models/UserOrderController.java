@@ -1,17 +1,18 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.UserOrderDTO;
+import org.example.dto.models.UserOrderDTO;
 import org.example.mapper.models.UserOrderMapper;
 import org.example.service.models.api.UserOrderService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "user/order")
-public class UserOrderController {
+public class UserOrderController implements Serializable {
     private final UserOrderService userOrderService;
     private final UserOrderMapper userOrderMapper;
 

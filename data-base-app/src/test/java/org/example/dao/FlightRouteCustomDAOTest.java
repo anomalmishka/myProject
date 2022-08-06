@@ -2,8 +2,8 @@ package org.example.dao;
 
 import lombok.SneakyThrows;
 import org.example.dao.custom.flightRoute.FlightRouteCustomDAO;
-import org.example.model.entity.*;
-import org.example.model.filter.FilterObj;
+import org.example.model.*;
+import org.example.dto.filter.FilterObj;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

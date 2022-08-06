@@ -61,6 +61,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.6.7.Final</version>
         </dependency>
+        <!--MODELMAPPER-->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.0</version>
+        </dependency>
         <!--METAMODEL-->
         <dependency>
             <groupId>org.hibernate</groupId>

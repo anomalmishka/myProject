@@ -1,9 +1,8 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.FlightRoute;
+import org.example.model.FlightRoute;
 
 import java.util.List;
-import java.util.Set;
 
 public interface FlightRouteService {
 

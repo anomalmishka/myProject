@@ -4,10 +4,11 @@ import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.*;
+import org.example.model.*;
 import org.example.service.models.api.BankCardService;
 import org.example.service.models.api.PassengerProfileService;
 import org.example.service.models.api.UserProfileService;
+import org.example.service.modif.UserProfileServiceImplModif;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -92,7 +93,7 @@ class UserProfileServiceImplModifTest {
     private final List<UserOrder> userOrderList = List.of(userOrder);
     private final PassengerProfile passengerProfile = PassengerProfile.builder()
             .id(1L)
-            .name("Admin")
+            .username("Admin")
             .lastname("Admin")
             .passportNumber("KK1112223")
             .userOrderList(userOrderList)
@@ -108,7 +109,7 @@ class UserProfileServiceImplModifTest {
     public void whenCreate_thenReturnEntity() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -118,7 +119,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -128,7 +129,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -147,7 +148,7 @@ class UserProfileServiceImplModifTest {
     void whenCreate_thenThrowErrorInvalidDataException() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .name(null)
+                .username(null)
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -163,7 +164,7 @@ class UserProfileServiceImplModifTest {
     public void whenReadAll_thenReturnEntityList() {
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -174,7 +175,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -195,7 +196,7 @@ class UserProfileServiceImplModifTest {
         Integer EXPECTED = 1;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -213,7 +214,7 @@ class UserProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -223,7 +224,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -251,7 +252,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -262,7 +263,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -285,7 +286,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -303,7 +304,7 @@ class UserProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -313,7 +314,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -341,7 +342,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -352,7 +353,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -380,7 +381,7 @@ class UserProfileServiceImplModifTest {
     public void whenUpdate_thenReturnEntityList() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -390,7 +391,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -400,7 +401,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .name("Admin")
+                .username("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -419,7 +420,7 @@ class UserProfileServiceImplModifTest {
     void whenUpdate_thenThrowErrorInvalidDataException() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .name(null)
+                .username(null)
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")

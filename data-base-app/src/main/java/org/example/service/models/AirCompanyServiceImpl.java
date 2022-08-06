@@ -1,9 +1,10 @@
 package org.example.service.models;
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.AirCompanyDAO;
+import org.example.dao.crud.AirCompanyDAO;
+import org.example.dao.custom.seat.SeatCustomDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.AirCompany;
+import org.example.model.AirCompany;
 import org.example.service.models.api.AirCompanyService;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.StreamSupport;
 public class AirCompanyServiceImpl implements AirCompanyService {
 
     private final AirCompanyDAO airCompanyDAO;
+    private final SeatCustomDAO seatCustomDAO;
 
     @Override
     public AirCompany create(AirCompany airCompany) {

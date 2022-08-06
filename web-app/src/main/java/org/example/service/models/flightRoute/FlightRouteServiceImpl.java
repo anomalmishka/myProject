@@ -1,7 +1,7 @@
 package org.example.service.models.flightRoute;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif2.FlightRouteDTOModif2;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.service.rest.models.flightRoute.FlightRouteRestTemplateService;
 import org.springframework.stereotype.Service;
 
@@ -15,37 +15,37 @@ public class FlightRouteServiceImpl implements FlightRouteService {
 
 
     @Override
-    public List<FlightRouteDTOModif2> readAll() {
+    public List<FlightRouteDTOModif> readAll() {
         return flightRouteRestTemplateService.readAll();
     }
 
     @Override
-    public FlightRouteDTOModif2 readById(Long id) {
+    public FlightRouteDTOModif readById(Long id) {
         return flightRouteRestTemplateService.readById(id);
     }
 
     @Override
-    public List<FlightRouteDTOModif2> readAllByIds(List<Long> ids) {
+    public List<FlightRouteDTOModif> readAllByIds(List<Long> ids) {
         return flightRouteRestTemplateService.readAllByIds(ids);
     }
 
     @Override
-    public FlightRouteDTOModif2 create(FlightRouteDTOModif2 flightRouteDTOModif2) {
+    public FlightRouteDTOModif create(FlightRouteDTOModif flightRouteDTOModif2) {
         return flightRouteRestTemplateService.create(flightRouteDTOModif2);
     }
 
     @Override
-    public FlightRouteDTOModif2 update(FlightRouteDTOModif2 flightRouteDTOModif2) {
+    public FlightRouteDTOModif update(FlightRouteDTOModif flightRouteDTOModif2) {
         return flightRouteRestTemplateService.update(flightRouteDTOModif2);
     }
 
     @Override
-    public FlightRouteDTOModif2 deleteById(Long id) {
+    public FlightRouteDTOModif deleteById(Long id) {
         return flightRouteRestTemplateService.deleteById(id);
     }
 
     @Override
-    public List<FlightRouteDTOModif2> deleteAllByIds(List<Long> ids) {
+    public List<FlightRouteDTOModif> deleteAllByIds(List<Long> ids) {
         return flightRouteRestTemplateService.deleteAllByIds(ids);
     }
 }

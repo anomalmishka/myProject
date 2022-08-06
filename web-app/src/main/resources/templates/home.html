@@ -19,18 +19,18 @@
     <div class="container-fluid">
         <div class="row footer">
         </div>
-<!--        <div class="row">-->
-<!--            <div class="col to-center">-->
-<!--                <table cellspacing="2" border="1" cellpadding="5">-->
-<!--                    <tbody th:each="user : ${userDTO}">-->
-<!--                    <tr>-->
-<!--                        <td><span>Login:</span></td>-->
-<!--                        <td><span th:text="${user.username}"></span></td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="row">-->
+        <!--            <div class="col to-center">-->
+        <!--                <table cellspacing="2" border="1" cellpadding="5">-->
+        <!--                    <tbody th:each="user : ${userDTO}">-->
+        <!--                    <tr>-->
+        <!--                        <td><span>Login:</span></td>-->
+        <!--                        <td><span th:text="${user.username}"></span></td>-->
+        <!--                    </tr>-->
+        <!--                    </tbody>-->
+        <!--                </table>-->
+        <!--            </div>-->
+        <!--        </div>-->
         <div class="row align-items-start">
             <div class="col-lg-2 align-self-end">
                 <div class="clockpage">
@@ -64,53 +64,53 @@
                         <tr>
                             <td>
                                 <input th:type="checkbox" id="routeStartCheckbox" name="routeStartCheckbox"
-                                       value="routeStartCheckbox">
+                                       value="true">
                                 <input type="text" name="routeStart" id="routeStart"
                                        th:value="Minsk">
                             </td>
                             <td>
                                 <input th:type="checkbox" id="routeEndCheckbox" name="routeEndCheckbox"
-                                       value="routeStartCheckbox">
+                                       value="true">
                                 <input type="text" name="routeEnd" id="routeEnd"
                                        th:value="Moskva">
                             </td>
                             <td>
                                 <input th:type="checkbox" id="dateStartCheckbox" name="dateStartCheckbox"
-                                       value="dateStartCheckbox">
+                                       value="true">
                                 <input type="date" name="dateStart" id="dateStart"
-                                       min="2022-06-01" max="2050-12-31" th:value="2022-07-27">
+                                       min="2022-06-01" max="2050-12-31" th:value="2022-08-09">
                             </td>
                             <td>
                                 <input th:type="checkbox" id="dateEndCheckbox" name="dateEndCheckbox"
-                                       value="dateEndCheckbox">
+                                       value="true">
                                 <input type="date" name="dateEnd" id="dateEnd"
-                                       min="2022-06-01" max="2050-12-31" th:value="2022-07-27">
+                                       min="2022-06-01" max="2050-12-31" th:value="2022-08-10">
                             </td>
                             <td>
-                                <input th:type="checkbox" id="priceStartCheckbox" name="priceStartCheckbox"
-                                       value="priceStartCheckbox">
-                                <input type="range" name="priceEnd" min="0" max="1000" step="10"
-                                       th:value="200" onchange="updateRangeInput(this.value);">
-                                <input type="text" id="rangeInput" value="200">
+                                <input th:type="checkbox" id="priceCheckbox" name="priceCheckbox"
+                                       value="true">
+                                <input type="range" name="price" min="0" max="1000" step="10"
+                                       th:value="900" onchange="updateRangeInput(this.value);">
+                                <input type="text" id="rangeInput" value="900">
                             </td>
                             <td>
-                                <input th:type="checkbox" id="AirCompanyCheckbox" name="airCompanyNameCheckbox"
-                                       value="airCompanyCheckbox">
-                                <input type="text" id="AirCompany" name="airCompanyName"
+                                <input th:type="checkbox" id="airCompanyNameCheckbox" name="airCompanyNameCheckbox"
+                                       value="true">
+                                <input type="text" id="airCompanyName" name="airCompanyName"
                                        th:value="Belavia">
                             </td>
                             <td>
-                                <input th:type="checkbox" id="TransfersCheckbox" name="transfersCheckbox"
-                                       value="transfersCheckbox">
-                                <input type="text" id="Transfers" name="transfers"
+                                <input th:type="checkbox" id="TransferCheckbox" name="transferCheckbox"
+                                       value="true">
+                                <input type="text" id="transfer" name="transfer"
                                        th:value="London">
                             </td>
                             <td>
-                                <input th:type="checkbox" id="FlightDurationCheckbox" name="flightDurationCheckbox"
-                                       value="flightDurationCheckbox">
-                                <input type="range" name="durationEnd" min="0" max="600" step="60"
+                                <input th:type="checkbox" id="durationCheckbox" name="durationCheckbox"
+                                       value="true">
+                                <input type="range" name="duration" min="0" max="1000" step="60"
                                        th:value="120" onchange="updateDurationInput(this.value);">
-                                <input type="text" id="Duration" value="120">
+                                <input type="text" id="duration" value="120">
                             </td>
                         </tr>
                         </tbody>
@@ -138,21 +138,23 @@
                         <th>distance</th>
                         <th>flightDateStart</th>
                         <th>flightDateEnd</th>
+                        <th>duration</th>
                         <th>price</th>
                         <th>isActive</th>
-
                     </tr>
                     </thead>
                     <tbody th:each="flightRoute : ${flightRoutePageList}"
-                           th:with="baseUrl=('/models/flight/route/read/')">
+                           th:with="baseUrl=('/view/flight/information/')">
                     <tr>
                         <td><a th:href="@{${baseUrl}+${flightRoute.id}}"
-                               th:text="${flightRoute.id}"></a></td>
+                               th:text="${flightRoute.id}"
+                               th:object="${idFlightRoute}"></a></td>
                         <td><span th:text="${flightRoute.routeStart}"></span></td>
                         <td><span th:text="${flightRoute.routeEnd}"></span></td>
                         <td><span th:text="${flightRoute.distance}"></span></td>
                         <td><span th:text="${flightRoute.flightDateStart}"></span></td>
                         <td><span th:text="${flightRoute.flightDateEnd}"></span></td>
+                        <td><span th:text="${flightRoute.duration}"></span></td>
                         <td><span th:text="${flightRoute.price}"></span></td>
                         <td><span th:text="${flightRoute.isActive}"></span></td>
                     </tr>
@@ -164,18 +166,6 @@
         </div>
     </div>
 </main>
-<!--<tbody>-->
-<!--<tr th:each="flightRoute : ${flightRoutePageList}">-->
-<!--    <td><span th:text="${flightRoute.id}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.routeStart}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.routeEnd}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.distance}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.flightDateStart}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.flightDateEnd}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.price}"></span></td>-->
-<!--    <td><span th:text="${flightRoute.isActive}"></span></td>-->
-<!--</tr>-->
-<!--</tbody>-->
 <script src="http://localhost:8001/web-app/templates/content/css/date/scriptStart.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/date/scriptEnd.js"></script>
 <script src="http://localhost:8001/web-app/templates/content/css/clock/script.js"></script>

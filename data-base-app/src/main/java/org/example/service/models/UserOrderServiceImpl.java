@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.UserOrderDAO;
+import org.example.dao.crud.UserOrderDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.UserOrder;
+import org.example.model.UserOrder;
 import org.example.service.models.api.UserOrderService;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public UserOrder create(UserOrder userOrder) {
-            return userOrderDAO.save(userOrder);
+        return userOrderDAO.save(userOrder);
     }
 
     @Override

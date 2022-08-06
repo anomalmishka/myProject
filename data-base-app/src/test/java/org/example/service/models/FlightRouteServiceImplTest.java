@@ -2,10 +2,10 @@ package org.example.service.models;
 
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
-import org.example.dao.models.FlightRouteDAO;
+import org.example.dao.crud.FlightRouteDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.*;
+import org.example.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

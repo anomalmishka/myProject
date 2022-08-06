@@ -2,9 +2,9 @@ package org.example.config.secure;
 
 import lombok.RequiredArgsConstructor;
 import org.example.config.CustomAuthenticationFailureHandler;
-import org.example.config.MyLogoutSuccessHandler;
-import org.example.dao.LoginDAO;
-import org.example.service.models.loginDetails.CustomLoginDetailsService;
+import org.example.config.CustomLogoutSuccessHandler;
+import org.example.dao.UserLoginDAO;
+import org.example.service.models.userLoginDetails.CustomUserLoginDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Profile("test")
 public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
-    private final LoginDAO loginDAO;
+    private final UserLoginDAO userLoginDAO;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -35,7 +35,7 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomLoginDetailsService(loginDAO);
+        return new CustomUserLoginDetailsService(userLoginDAO);
     }
 
     @Bean
@@ -44,7 +44,7 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler() {
-        return new MyLogoutSuccessHandler();
+        return new CustomLogoutSuccessHandler();
     }
 
     @Bean
@@ -61,10 +61,12 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/templates/**").permitAll()
                 .antMatchers("/registration/**").permitAll()
                 .antMatchers("/restore/password/**").permitAll()
                 .antMatchers("/models/**").hasAnyAuthority("ADMIN","MANAGER")
-                .antMatchers("/templates/**").permitAll()
+                .antMatchers("/order/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+                .antMatchers("/profile/**").hasAnyAuthority("ADMIN","MANAGER","USER")
 //                .anyRequest().authenticated()
                 .and()
                 .formLogin()

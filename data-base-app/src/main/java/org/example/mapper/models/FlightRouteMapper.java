@@ -1,45 +1,38 @@
 package org.example.mapper.models;
 
-import org.example.dto.modelsDTO.FlightRouteDTO;
-import org.example.model.entity.FlightRoute;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.FlightRouteDTO;
+import org.example.model.FlightRoute;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
 @Component
 public class FlightRouteMapper {
+
+    private final ModelMapper modelMapper;
+
     public FlightRouteDTO toDTO(FlightRoute flightRoute) {
-        return FlightRouteDTO.builder()
-                .id(flightRoute.getId())
-                .routeStart(flightRoute.getRouteStart())
-                .routeEnd(flightRoute.getRouteEnd())
-                .distance(flightRoute.getDistance())
-                .flightDateStart(flightRoute.getFlightDateStart())
-                .flightDateEnd(flightRoute.getFlightDateEnd())
-                .price(flightRoute.getPrice())
-                .isActive(flightRoute.getIsActive())
-                .build();
+        return modelMapper.map(flightRoute, FlightRouteDTO.class);
+
     }
 
     public List<FlightRouteDTO> toDTO(List<FlightRoute> flightRouteList) {
-        return flightRouteList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(flightRouteList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<FlightRoute> toModel(List<FlightRouteDTO> flightRouteDTOList) {
-        return flightRouteDTOList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(flightRouteDTOList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public FlightRoute toModel(FlightRouteDTO flightRouteDTO) {
-        return FlightRoute.builder()
-                .id(flightRouteDTO.getId())
-                .routeStart(flightRouteDTO.getRouteStart())
-                .routeEnd(flightRouteDTO.getRouteEnd())
-                .distance(flightRouteDTO.getDistance())
-                .flightDateStart(flightRouteDTO.getFlightDateStart())
-                .flightDateEnd(flightRouteDTO.getFlightDateEnd())
-                .price(flightRouteDTO.getPrice())
-                .isActive(flightRouteDTO.getIsActive())
-                .build();
+        return modelMapper.map(flightRouteDTO, FlightRoute.class);
     }
 }

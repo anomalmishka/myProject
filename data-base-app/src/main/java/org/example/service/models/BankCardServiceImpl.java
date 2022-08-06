@@ -1,9 +1,9 @@
 package org.example.service.models;
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.BankCardDAO;
+import org.example.dao.crud.BankCardDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.BankCard;
+import org.example.model.BankCard;
 import org.example.service.models.api.BankCardService;
 import org.springframework.stereotype.Service;
 import java.util.List;

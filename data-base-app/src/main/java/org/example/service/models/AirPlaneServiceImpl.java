@@ -1,9 +1,9 @@
 package org.example.service.models;
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.AirPlaneDAO;
+import org.example.dao.crud.AirPlaneDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.AirPlane;
+import org.example.model.AirPlane;
 import org.example.service.models.api.AirPlaneService;
 import org.springframework.stereotype.Service;
 import java.util.List;

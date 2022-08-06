@@ -1,17 +1,18 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.SeatDTO;
+import org.example.dto.models.SeatDTO;
 import org.example.mapper.models.SeatMapper;
 import org.example.service.models.api.SeatService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "seat")
-public class SeatController {
+public class SeatController implements Serializable {
     private final SeatService seatService;
     private final SeatMapper seatMapper;
 

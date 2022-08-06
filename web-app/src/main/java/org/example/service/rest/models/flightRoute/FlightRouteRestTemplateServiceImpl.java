@@ -1,6 +1,6 @@
 package org.example.service.rest.models.flightRoute;
 
-import org.example.dto.modelsDTO.modif2.FlightRouteDTOModif2;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
@@ -20,71 +20,71 @@ public class FlightRouteRestTemplateServiceImpl implements FlightRouteRestTempla
     private final String PATH = "/modif/flight/route/";
 
     @Override
-    public List<FlightRouteDTOModif2> readAll() {
+    public List<FlightRouteDTOModif> readAll() {
         String uriVar = "read/all";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<FlightRouteDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<FlightRouteDTOModif2[]> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, FlightRouteDTOModif2[].class);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, FlightRouteDTOModif[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
     @Override
-    public FlightRouteDTOModif2 readById(Long id) {
+    public FlightRouteDTOModif readById(Long id) {
         String uriVar = "read/" + id + "/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<FlightRouteDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<FlightRouteDTOModif2> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, FlightRouteDTOModif2.class);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<FlightRouteDTOModif> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.GET, httpEntity, FlightRouteDTOModif.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
     @Override
-    public List<FlightRouteDTOModif2> readAllByIds(List<Long> ids) {
+    public List<FlightRouteDTOModif> readAllByIds(List<Long> ids) {
         String uriVar = "read/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<FlightRouteDTOModif2[]> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, FlightRouteDTOModif2[].class);
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, FlightRouteDTOModif[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 
     @Override
-    public FlightRouteDTOModif2 create(FlightRouteDTOModif2 airCompanyDTO) {
+    public FlightRouteDTOModif create(FlightRouteDTOModif flightRouteDTOModif) {
         String uriVar = "create";
-        HttpEntity<FlightRouteDTOModif2> httpEntity = new HttpEntity<>(airCompanyDTO);
-        ResponseEntity<FlightRouteDTOModif2> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, FlightRouteDTOModif2.class);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(flightRouteDTOModif);
+        ResponseEntity<FlightRouteDTOModif> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST, httpEntity, FlightRouteDTOModif.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
     @Override
-    public FlightRouteDTOModif2 update(FlightRouteDTOModif2 airCompanyDTO) {
+    public FlightRouteDTOModif update(FlightRouteDTOModif flightRouteDTOModif) {
         String uriVar = "update";
-        HttpEntity<FlightRouteDTOModif2> httpEntity = new HttpEntity<>(airCompanyDTO);
-        ResponseEntity<FlightRouteDTOModif2> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.PUT, httpEntity, FlightRouteDTOModif2.class);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(flightRouteDTOModif);
+        ResponseEntity<FlightRouteDTOModif> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.PUT, httpEntity, FlightRouteDTOModif.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
     @Override
-    public FlightRouteDTOModif2 deleteById(Long id) {
+    public FlightRouteDTOModif deleteById(Long id) {
         String uriVar = "delete/" + id + "/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<FlightRouteDTOModif2> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<FlightRouteDTOModif2> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, FlightRouteDTOModif2.class);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<FlightRouteDTOModif> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, FlightRouteDTOModif.class);
         return Objects.requireNonNull(responseEntity.getBody());
     }
 
     @Override
-    public List<FlightRouteDTOModif2> deleteAllByIds(List<Long> ids) {
+    public List<FlightRouteDTOModif> deleteAllByIds(List<Long> ids) {
         String uriVar = "delete/all/id";
         HttpEntity<List<Long>> httpEntity = new HttpEntity<>(ids);
-        ResponseEntity<FlightRouteDTOModif2[]> responseEntity = restTemplate.exchange(
-                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, FlightRouteDTOModif2[].class);
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity = restTemplate.exchange(
+                DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.DELETE, httpEntity, FlightRouteDTOModif[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
 }

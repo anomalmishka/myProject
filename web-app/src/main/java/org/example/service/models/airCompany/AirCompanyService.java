@@ -1,6 +1,6 @@
 package org.example.service.models.airCompany;
 
-import org.example.dto.modelsDTO.AirCompanyDTO;
+import org.example.dto.models.AirCompanyDTO;
 
 import java.util.List;
 

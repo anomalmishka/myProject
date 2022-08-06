@@ -1,44 +1,37 @@
 package org.example.mapper.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.PassengerProfileDTOModif;
-import org.example.mapper.models.UserOrderMapper;
-import org.example.model.entity.PassengerProfile;
+import org.example.dto.models.modif.PassengerProfileDTOModif;
+import org.example.model.PassengerProfile;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
 public class PassengerProfileMapperModif {
-    private final UserOrderMapper userOrderMapper;
+    private final ModelMapper modelMapper;
 
     public PassengerProfileDTOModif toDTO(PassengerProfile passengerProfile) {
-        return PassengerProfileDTOModif.builder()
-                .id(passengerProfile.getId())
-                .name(passengerProfile.getName())
-                .lastname(passengerProfile.getLastname())
-                .passportNumber(passengerProfile.getPassportNumber())
-                .userOrderDTOList(userOrderMapper.toDTO(passengerProfile.getUserOrderList()))
-                .build();
+        return modelMapper.map(passengerProfile, PassengerProfileDTOModif.class);
     }
 
     public List<PassengerProfileDTOModif> toDTO(List<PassengerProfile> passengerProfileList) {
-        return passengerProfileList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(passengerProfileList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<PassengerProfile> toModel(List<PassengerProfileDTOModif> passengerProfileDTOModifList) {
-        return passengerProfileDTOModifList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(passengerProfileDTOModifList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public PassengerProfile toModel(PassengerProfileDTOModif passengerProfileDTOModif) {
-        return PassengerProfile.builder()
-                .id(passengerProfileDTOModif.getId())
-                .name(passengerProfileDTOModif.getName())
-                .lastname(passengerProfileDTOModif.getLastname())
-                .passportNumber(passengerProfileDTOModif.getPassportNumber())
-                .userOrderList(userOrderMapper.toModel(passengerProfileDTOModif.getUserOrderDTOList()))
-                .build();
+        return modelMapper.map(passengerProfileDTOModif, PassengerProfile.class);
     }
 }

@@ -1,17 +1,18 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.UserProfileDTO;
+import org.example.dto.models.UserProfileDTO;
 import org.example.mapper.models.UserProfileMapper;
 import org.example.service.models.api.UserProfileService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "user/profile")
-public class UserProfileController {
+public class UserProfileController implements Serializable {
     private final UserProfileService userProfileService;
     private final UserProfileMapper userProfileMapper;
 

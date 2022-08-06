@@ -1,8 +1,9 @@
 package org.example.mapper.page;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif2.PassengerProfileDTOModif2;
-import org.example.dto.page.modelPage.PassengerProfilePage;
+import org.example.dto.models.modif.PassengerProfileDTOModif;
+import org.example.dto.page.PassengerProfilePage;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,37 +13,26 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class PassengerProfileMapperPage {
-    private final UserOrderMapperPage userOrderMapperPage;
+    private final ModelMapper modelMapper;
 
-    public PassengerProfileDTOModif2 toDTO(PassengerProfilePage passengerProfilePage) {
-        return PassengerProfileDTOModif2.builder()
-                .id(passengerProfilePage.getId())
-                .name(passengerProfilePage.getName())
-                .lastname(passengerProfilePage.getLastname())
-                .passportNumber(passengerProfilePage.getPassportNumber())
-                .userOrderDTOModif2List(userOrderMapperPage.toDTO(passengerProfilePage.getUserOrderPageList()))
-                .build();
+
+    public PassengerProfileDTOModif toDTO(PassengerProfilePage passengerProfilePage) {
+        return modelMapper.map(passengerProfilePage, PassengerProfileDTOModif.class);
     }
 
-    public List<PassengerProfileDTOModif2> toDTO(List<PassengerProfilePage> passengerProfilePageList) {
+    public List<PassengerProfileDTOModif> toDTO(List<PassengerProfilePage> passengerProfilePageList) {
         return Optional.ofNullable(passengerProfilePageList)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                .map(list -> list.stream()
                         .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
-    public List<PassengerProfilePage> toPage(List<PassengerProfileDTOModif2> passengerProfileDTOModif2List) {
-        return Optional.ofNullable(passengerProfileDTOModif2List)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+    public List<PassengerProfilePage> toPage(List<PassengerProfileDTOModif> passengerProfileDTOModifList) {
+        return Optional.ofNullable(passengerProfileDTOModifList)
+                .map(list -> list.stream()
                         .map(this::toPage).collect(Collectors.toList())).orElse(null);
     }
 
-    public PassengerProfilePage toPage(PassengerProfileDTOModif2 passengerProfileDTOModif2) {
-        return PassengerProfilePage.builder()
-                .id(passengerProfileDTOModif2.getId())
-                .name(passengerProfileDTOModif2.getName())
-                .lastname(passengerProfileDTOModif2.getLastname())
-                .passportNumber(passengerProfileDTOModif2.getPassportNumber())
-                .userOrderPageList(userOrderMapperPage.toPage(passengerProfileDTOModif2.getUserOrderDTOModif2List()))
-                .build();
+    public PassengerProfilePage toPage(PassengerProfileDTOModif passengerProfileDTOModif) {
+        return modelMapper.map(passengerProfileDTOModif, PassengerProfilePage.class);
     }
 }
