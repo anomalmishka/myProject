@@ -10,6 +10,8 @@ import org.example.service.modif.api.UserProfileServiceModif;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -19,13 +21,6 @@ public class UserProfileServiceImplModif implements UserProfileServiceModif {
 
     @Override
     public UserProfile create(UserProfile userProfile) {
-        PassengerProfile passengerProfile = PassengerProfile.builder()
-                .passengername(userProfile.getProfilename())
-                .passengerlastname(userProfile.getLastname())
-                .build();
-        BankCard bankCard = BankCard.builder().build();
-        userProfile.setPassengerProfileList(List.of(passengerProfile));
-        userProfile.setBankCardList(List.of(bankCard));
         return userProfileService.create(userProfile);
     }
 
@@ -60,14 +55,21 @@ public class UserProfileServiceImplModif implements UserProfileServiceModif {
     }
 
     private UserProfile setForgetValueOnId(UserProfile userProfile) {
-        System.out.println(userProfile);
         if (userProfile.getProfilename() != null) {
             Long id = userProfile.getId();
+            List<PassengerProfile> getPassengerProfileList = userProfile.getPassengerProfileList();
+            List<BankCard> getBankCardList = userProfile.getBankCardList();
             UserProfile readById = userProfileService.readById(id);
             readById.setProfilename(userProfile.getProfilename());
             readById.setLastname(userProfile.getLastname());
             readById.setPhone(userProfile.getPhone());
             readById.setEmail(userProfile.getEmail());
+            if (getPassengerProfileList != null) {
+                readById.setPassengerProfileList(getPassengerProfileList);
+            }
+            if (getBankCardList != null) {
+                readById.setBankCardList(getBankCardList);
+            }
             return readById;
         } else {
             throw new ErrorInvalidData("Name must not be null");

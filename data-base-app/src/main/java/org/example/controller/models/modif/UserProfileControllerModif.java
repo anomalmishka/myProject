@@ -41,13 +41,13 @@ public class UserProfileControllerModif {
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
-    public UserProfileDTOModif create(@RequestBody UserProfileDTOModif userDTOModif) {
-        return userProfileMapperModif.toDTO(userProfileServiceModif.create(userProfileMapperModif.toModel(userDTOModif)));
+    public UserProfileDTOModif create(@RequestBody UserProfileDTOModif userProfileDTOModif) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.create(userProfileMapperModif.toModel(userProfileDTOModif)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
-    public UserProfileDTOModif update(@RequestBody UserProfileDTOModif userDTOModif) {
-        return userProfileMapperModif.toDTO(userProfileServiceModif.update(userProfileMapperModif.toModel(userDTOModif)));
+    public UserProfileDTOModif update(@RequestBody UserProfileDTOModif userProfileDTOModif) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.update(userProfileMapperModif.toModel(userProfileDTOModif)));
     }
 }
 

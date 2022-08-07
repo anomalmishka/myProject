@@ -18,25 +18,12 @@ public class AirPlaneFlightRoute {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.EAGER
-    )
+    @ManyToOne
     private AirPlane airPlane;
-
-//    public AirPlane getAirPlane() {
-//        return airPlane;
-//    }
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne
     private FlightRoute flightRoute;
 
-//    public FlightRoute getFlightRoute() {
-//        return flightRoute;
-//    }
 }

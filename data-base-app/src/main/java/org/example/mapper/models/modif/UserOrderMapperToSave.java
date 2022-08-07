@@ -37,14 +37,6 @@ public class UserOrderMapperToSave {
                         .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
-    //    public UserOrder toModel(UserOrderDTOtoSave userOrderDTOtoSave) {
-//        return UserOrder.builder()
-//                .id(userOrderDTOtoSave.getId())
-//                .flightRoute(flightRouteMapper.toModel(userOrderDTOtoSave.getFlightRouteDTO()))
-//                .status(statusMapper.toModel(userOrderDTOtoSave.getStatusDTO()))
-//                .passengerProfile(passengerProfileMapper.toModel(userOrderDTOtoSave.getPassengerProfileDTO()))
-//                .build();
-//    }
     public UserOrder toModel(UserOrderDTOtoSave userOrderDTOtoSave) {
         return modelMapper.map(userOrderDTOtoSave, UserOrder.class);
     }

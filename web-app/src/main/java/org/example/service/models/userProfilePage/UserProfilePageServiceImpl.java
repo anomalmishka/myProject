@@ -1,4 +1,4 @@
-package org.example.service.models.userProfileCustom;
+package org.example.service.models.userProfilePage;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.BankCardDTO;
@@ -7,11 +7,10 @@ import org.example.dto.models.modif.UserProfileDTOModif;
 import org.example.model.UserLogin;
 import org.example.service.models.userLoginCustom.UserLoginCustomService;
 import org.example.service.models.userProfile.UserProfileService;
-import org.example.service.models.userProfilePage.UserProfileServiceCustom;
+import org.example.service.models.userProfileCustom.UserProfileCustomService;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +18,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 @Service
 public class UserProfilePageServiceImpl implements UserProfilePageService {
-    private final UserProfileServiceCustom userProfileServiceCustom;
+    private final UserProfileCustomService userProfileCustomService;
     private final UserProfileService userProfileService;
     private final UserLoginCustomService userLoginCustomService;
 
@@ -27,7 +26,7 @@ public class UserProfilePageServiceImpl implements UserProfilePageService {
     public UserProfileDTOModif findWhereName(Principal principal) {
         UserLogin userLogin = userLoginCustomService.findByUsername(principal.getName());
         Long loginId = userLogin.getId();
-        return userProfileServiceCustom.findWhereUserId(loginId);
+        return userProfileCustomService.findWhereUserId(loginId);
     }
 
     @Override
@@ -36,27 +35,18 @@ public class UserProfilePageServiceImpl implements UserProfilePageService {
         List<BankCardDTO> getBankCardList = userProfileDTOModif.getBankCardList();
         UserLogin userLogin = userLoginCustomService.findByUsername(principal.getName());
         Long loginId = userLogin.getId();
-        UserProfileDTOModif findUserProfileDTOModif = userProfileServiceCustom.findWhereUserId(loginId);
-        List<PassengerProfileDTOModif> findPassengerProfileList = findUserProfileDTOModif.getPassengerProfileList();
-        List<BankCardDTO> findBankCardList = findUserProfileDTOModif.getBankCardList();
+        UserProfileDTOModif findUserProfileDTOModif = userProfileCustomService.findWhereUserId(loginId);
         findUserProfileDTOModif.setProfilename(userProfileDTOModif.getProfilename());
         findUserProfileDTOModif.setLastname(userProfileDTOModif.getLastname());
         findUserProfileDTOModif.setPhone(userProfileDTOModif.getPhone());
         findUserProfileDTOModif.setEmail(userProfileDTOModif.getEmail());
-        findUserProfileDTOModif.setPassengerProfileList(
-                Stream.concat(findPassengerProfileList.stream(), getPassengerProfileList.stream()).parallel()
-                .collect(Collectors.toList()));
-        findUserProfileDTOModif.setBankCardList(
-                Stream.concat(findBankCardList.stream(), getBankCardList.stream()).parallel()
-                        .collect(Collectors.toList()));
+        System.out.println(getPassengerProfileList);
+        if (getPassengerProfileList != null) {
+            findUserProfileDTOModif.setPassengerProfileList(getPassengerProfileList);
+        }
+        if (getBankCardList != null) {
+            findUserProfileDTOModif.setBankCardList(getBankCardList);
+        }
         return userProfileService.update(findUserProfileDTOModif);
-    }
-
-    @Override
-    public List<PassengerProfileDTOModif> getPassanger(Principal principal) {
-        UserLogin userLogin = userLoginCustomService.findByUsername(principal.getName());
-        Long loginId = userLogin.getId();
-        UserProfileDTOModif userProfileDTOModif = userProfileServiceCustom.findWhereUserId(loginId);
-        return userProfileDTOModif.getPassengerProfileList();
     }
 }

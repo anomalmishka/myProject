@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.config.CustomAuthenticationFailureHandler;
 import org.example.config.CustomLogoutSuccessHandler;
 import org.example.dao.UserLoginDAO;
-import org.example.service.models.userLoginDetails.CustomUserLoginDetailsService;
+import org.example.service.models.userLoginDetails.UserLoginDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,7 +35,7 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserLoginDetailsService(userLoginDAO);
+        return new UserLoginDetailsService(userLoginDAO);
     }
 
     @Bean

@@ -1,7 +1,7 @@
-package org.example.service.models.userProfilePage;
+package org.example.service.models.userProfileCustom;
 
 import org.example.dto.models.modif.UserProfileDTOModif;
 
-public interface UserProfileServiceCustom {
+public interface UserProfileCustomService {
     UserProfileDTOModif findWhereUserId(Long userId);
 }

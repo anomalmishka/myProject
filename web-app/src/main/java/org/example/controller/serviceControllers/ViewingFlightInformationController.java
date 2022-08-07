@@ -30,7 +30,8 @@ public class ViewingFlightInformationController {
     public String viewFlightInfo(Model model,
                                  @PathVariable("idFlightRoute") Long idFlightRoute) {
 
-        List<ViewingFlightInformationPage> viewingFlightInformationPageList = viewingFlightInformationMapperPage.toPage(findFlightRouteByFilterService.findById(idFlightRoute));
+        List<ViewingFlightInformationPage> viewingFlightInformationPageList =
+                viewingFlightInformationMapperPage.toPage(findFlightRouteByFilterService.findById(idFlightRoute));
         model.addAttribute("viewingFlightInformationPageList", viewingFlightInformationPageList);
         ID_FLIGHTROUTE = idFlightRoute;
         model.addAttribute("idFlightRoute", idFlightRoute);

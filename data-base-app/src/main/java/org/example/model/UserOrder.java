@@ -17,27 +17,16 @@ public class UserOrder {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE
-    )
-    @JoinColumn(name = "FLIGHT_ROUTE_ID")
+    @ManyToOne
     private FlightRoute flightRoute;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE
-    )
-    @JoinColumn(name = "STATUS_ID")
+    @ManyToOne
     private Status status;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "PASSENGER_PROFILE_ID")
+    @ManyToOne
     private PassengerProfile passengerProfile;
-
 }

@@ -19,10 +19,6 @@ public class BankCard {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "USER_PROFILE_ID")
+    @ManyToOne
     private UserProfile userProfile;
 }

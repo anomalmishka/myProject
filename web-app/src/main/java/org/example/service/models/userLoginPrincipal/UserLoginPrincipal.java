@@ -1,7 +1,6 @@
 package org.example.service.models.userLoginPrincipal;
 
 import lombok.RequiredArgsConstructor;
-import org.example.exception.ErrorInvalidData;
 import org.example.model.Authorities;
 import org.example.model.UserLogin;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class CustomUserLoginPrincipal implements UserDetails {
+public class UserLoginPrincipal implements UserDetails {
 
     private final UserLogin userLogin;
 

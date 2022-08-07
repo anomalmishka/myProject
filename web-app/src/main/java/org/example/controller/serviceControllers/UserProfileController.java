@@ -1,13 +1,13 @@
 package org.example.controller.serviceControllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.OrderDataPage;
 import org.example.dto.page.PassengerProfilePage;
 import org.example.dto.page.UserProfilePage;
 import org.example.mapper.page.PassengerProfileMapperPage;
 import org.example.mapper.page.UserProfileMapperPage;
 import org.example.service.models.passengerProfile.PassengerProfileService;
-import org.example.service.models.userProfileCustom.UserProfilePageService;
+import org.example.service.models.passengerProfileCustom.PassengerProfileCustomService;
+import org.example.service.models.userProfilePage.UserProfilePageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,8 @@ public class UserProfileController {
     private final UserProfilePageService userProfilePageService;
     private final UserProfileMapperPage userProfileMapperPage;
     private final PassengerProfileMapperPage passengerProfileMapperPage;
-    private  final PassengerProfileService passengerProfileService;
+    private final PassengerProfileService passengerProfileService;
+    private final PassengerProfileCustomService passengerProfileCustomService;
 
     @GetMapping("/profile")
     public String getProfile(Model model, Principal principal) {
@@ -34,7 +35,7 @@ public class UserProfileController {
 
     @PostMapping("/profile/update")
     public String updateUserProfile(Model model,
-                                @ModelAttribute UserProfilePage userProfilePage, Principal principal
+                                    @ModelAttribute UserProfilePage userProfilePage, Principal principal
     ) {
         System.out.println("userProfilePage update " + userProfilePage);
         UserProfilePage profilePage = userProfileMapperPage.toPage(userProfilePageService.updateProfile(userProfileMapperPage.toDTO(userProfilePage), principal));
@@ -44,17 +45,19 @@ public class UserProfileController {
 
     @GetMapping("/profile/passenger")
     public String getPassengerProfile(Model model, Principal principal) {
-        List<PassengerProfilePage> passengerProfilePageList = passengerProfileMapperPage.toPage(userProfilePageService.getPassanger(principal));
+        List<PassengerProfilePage> passengerProfilePageList = passengerProfileMapperPage.toPage(passengerProfileCustomService.getPassanger(principal));
         model.addAttribute("passengerProfilePageList", passengerProfilePageList);
         return "pages/userProfile/passengerProfile";
     }
 
     @PostMapping("/profile/passenger")
     public String createPassengerProfile(Model model,
-                                @ModelAttribute PassengerProfilePage passengerProfilePage, Principal principal) {
-        PassengerProfilePage passengerProfilePageCreated =
-                passengerProfileMapperPage.toPage(passengerProfileService.create(passengerProfileMapperPage.toDTO(passengerProfilePage)));
-        model.addAttribute("passengerProfilePageCreated", passengerProfilePageCreated);
+                                         @ModelAttribute PassengerProfilePage createPassengerProfilePage, Principal principal) {
+        List<PassengerProfilePage> passengerProfilePageList =
+                passengerProfileMapperPage.toPage(
+                        passengerProfileCustomService.create(
+                                passengerProfileMapperPage.toDTO(createPassengerProfilePage), principal));
+        model.addAttribute("passengerProfilePageList", passengerProfilePageList);
         return "pages/userProfile/passengerProfile";
     }
 }

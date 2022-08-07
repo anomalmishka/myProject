@@ -1,4 +1,4 @@
-package org.example.service.models.userProfilePage;
+package org.example.service.models.userProfileCustom;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.UserProfileDTOModif;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class UserProfileServiceCustomImpl implements UserProfileServiceCustom {
+public class UserProfileCustomServiceImpl implements UserProfileCustomService {
     private final UserProfileRestTemplateFilter userProfileRestTemplateFilter;
 
     @Override

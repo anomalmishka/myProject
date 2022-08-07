@@ -23,10 +23,6 @@ public class Seat {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "AIR_PLANE_ID")
+    @ManyToOne
     private AirPlane airPlane;
 }

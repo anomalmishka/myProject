@@ -3,7 +3,6 @@ package org.example.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -30,9 +29,7 @@ public class AirPlane {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(
-            cascade = CascadeType.MERGE
-    )
+    @ManyToOne
     private AirCompany airCompany;
 
 

@@ -3,7 +3,7 @@ package org.example.service.models.userLoginDetails;
 import lombok.RequiredArgsConstructor;
 import org.example.dao.UserLoginDAO;
 import org.example.model.UserLogin;
-import org.example.service.models.userLoginPrincipal.CustomUserLoginPrincipal;
+import org.example.service.models.userLoginPrincipal.UserLoginPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CustomUserLoginDetailsService implements UserDetailsService {
+public class UserLoginDetailsService implements UserDetailsService {
 
     private final UserLoginDAO userLoginDAO;
 
@@ -22,6 +22,6 @@ public class CustomUserLoginDetailsService implements UserDetailsService {
             System.out.println("user not found");
             throw new UsernameNotFoundException("Could not find user");
         }
-        return new CustomUserLoginPrincipal(userLogin);
+        return new UserLoginPrincipal(userLogin);
     }
 }

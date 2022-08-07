@@ -12,6 +12,6 @@ import org.example.dto.models.StatusDTO;
 @Builder
 public class UserOrderDTOModif {
     private Long id;
-    private StatusDTO statusDTO;
+    private StatusDTO status;
     private FlightRouteDTOModif flightRoute;
 }

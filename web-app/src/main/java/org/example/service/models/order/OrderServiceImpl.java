@@ -11,8 +11,7 @@ import org.example.model.UserLogin;
 import org.example.service.models.seat.SeatService;
 import org.example.service.models.userLoginCustom.UserLoginCustomService;
 import org.example.service.models.userOrder.UserOrderService;
-import org.example.service.models.userProfileCustom.UserProfilePageService;
-import org.example.service.models.userProfilePage.UserProfileServiceCustom;
+import org.example.service.models.userProfileCustom.UserProfileCustomService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     private final UserOrderService userOrderService;
     private final SeatService seatService;
     private final UserLoginCustomService userLoginCustomService;
-    private final UserProfileServiceCustom userProfileServiceCustom;
+    private final UserProfileCustomService userProfileCustomService;
 
     @Override
     public UserOrderDTOModif create(OrderDataDTO orderDataDTO) {
@@ -49,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     public UserProfileDTOModif readUserProfile(String username) {
         UserLogin userLogin = userLoginCustomService.findByUsername(username);
         Long userLoginId = userLogin.getId();
-        return userProfileServiceCustom.findWhereUserId(userLoginId);
+        return userProfileCustomService.findWhereUserId(userLoginId);
     }
 
     @Override

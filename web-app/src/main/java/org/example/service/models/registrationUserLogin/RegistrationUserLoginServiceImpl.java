@@ -6,7 +6,7 @@ import org.example.exception.ErrorInvalidData;
 import org.example.model.Authorities;
 import org.example.model.UserLogin;
 import org.example.service.models.userLoginCustom.UserLoginCustomService;
-import org.example.service.models.userLoginDetails.CustomUserLoginDetailsService;
+import org.example.service.models.userLoginDetails.UserLoginDetailsService;
 import org.example.service.models.authorities.AuthoritiesService;
 import org.example.service.models.userLogin.UserLoginService;
 import org.example.service.models.userProfile.UserProfileService;
@@ -22,7 +22,7 @@ public class RegistrationUserLoginServiceImpl implements RegistrationUserLoginSe
 
     private final UserProfileService userProfileService;
     private final UserLoginService userLoginService;
-    private final CustomUserLoginDetailsService customUserLoginDetailsService;
+    private final UserLoginDetailsService userLoginDetailsService;
     private final UserLoginCustomService userLoginCustomService;
     private final AuthoritiesService authoritiesService;
     private final PasswordEncoder passwordEncoder;
@@ -41,7 +41,7 @@ public class RegistrationUserLoginServiceImpl implements RegistrationUserLoginSe
             authorities.stream().map(authoritiesService::create).close();
             userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
             UserLogin createUserLogin = userLoginService.create(userLogin);
-            customUserLoginDetailsService.loadUserByUsername(userLogin.getUsername());
+            userLoginDetailsService.loadUserByUsername(userLogin.getUsername());
             userProfileDTOModif.setUserId(createUserLogin.getId());
             userProfileDTOModif.setIsBlockedProfile(!createUserLogin.getIsEnabled());
             return userProfileService.create(userProfileDTOModif);

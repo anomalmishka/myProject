@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,15 +23,30 @@ public class HomeController {
     private final FlightRouteMapperPage flightRouteMapperPage;
 
     @GetMapping("/")
-    public String homeGet() {
+    public String homeGet(Model model, Principal principal) {
+        String userPrincipalName;
+        if (principal != null) {
+            userPrincipalName = principal.getName();
+        } else {
+            userPrincipalName = "None";
+        }
+
+        model.addAttribute("userPrincipalName", userPrincipalName);
         return "home";
     }
 
     @PostMapping("/")
     public String homePost(Model model,
-                           @ModelAttribute FilterPage filterPage) {
+                           @ModelAttribute FilterPage filterPage, Principal principal) {
+        String userPrincipalName;
+        if (principal != null) {
+            userPrincipalName = principal.getName();
+        } else {
+            userPrincipalName = "None";
+        }
         List<FlightRoutePage> flightRoutePageList = flightRouteMapperPage.toPage(findFlightRouteByFilterService.findByCondition(filterMapper.toDTO(filterPage)));
         model.addAttribute("flightRoutePageList", flightRoutePageList);
+        model.addAttribute("userPrincipalName", userPrincipalName);
         return "home";
     }
 }

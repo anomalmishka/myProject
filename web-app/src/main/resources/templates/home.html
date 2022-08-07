@@ -19,18 +19,18 @@
     <div class="container-fluid">
         <div class="row footer">
         </div>
-        <!--        <div class="row">-->
-        <!--            <div class="col to-center">-->
-        <!--                <table cellspacing="2" border="1" cellpadding="5">-->
-        <!--                    <tbody th:each="user : ${userDTO}">-->
-        <!--                    <tr>-->
-        <!--                        <td><span>Login:</span></td>-->
-        <!--                        <td><span th:text="${user.username}"></span></td>-->
-        <!--                    </tr>-->
-        <!--                    </tbody>-->
-        <!--                </table>-->
-        <!--            </div>-->
-        <!--        </div>-->
+                <div class="row">
+                    <div class="col to-center">
+                        <table cellspacing="2" border="1" cellpadding="5">
+                            <tbody th:each="user : ${userPrincipalName}">
+                            <tr>
+                                <td><span>Login:</span></td>
+                                <td><span th:text="${user}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
         <div class="row align-items-start">
             <div class="col-lg-2 align-self-end">
                 <div class="clockpage">

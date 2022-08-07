@@ -57,10 +57,10 @@ public class ViewingFlightInformationMapperPage {
                 .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
                 .duration(flightRouteDTOModif.getDuration())
                 .price(flightRouteDTOModif.getPrice())
-                .isActive(flightRouteDTOModif.getIsActive())
                 .airPlaneFlightRouteList(airPlaneFlightRouteMapperPage.toPage(airPlaneFlightRouteDTOModifList))
                 .airPlaneList(airPlaneMapperPage.toPage(airPlaneDTOModifList))
                 .airCompanyList(airCompanyMapperPage.toPage(airCompanyDTOList))
+                .isActive(flightRouteDTOModif.getIsActive())
                 .build();
     }
 

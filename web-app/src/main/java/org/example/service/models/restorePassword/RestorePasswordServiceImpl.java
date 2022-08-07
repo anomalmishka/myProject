@@ -6,7 +6,7 @@ import org.example.exception.ErrorInvalidData;
 import org.example.model.UserLogin;
 import org.example.service.models.userLogin.UserLoginService;
 import org.example.service.models.userLoginCustom.UserLoginCustomService;
-import org.example.service.models.userProfilePage.UserProfileServiceCustom;
+import org.example.service.models.userProfileCustom.UserProfileCustomService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Service
 public class RestorePasswordServiceImpl implements RestorePasswordService {
 
-    private final UserProfileServiceCustom userProfileServiceCustom;
+    private final UserProfileCustomService userProfileCustomService;
     private final UserLoginService userLoginService;
     private final UserLoginCustomService userLoginCustomService;
     private final PasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class RestorePasswordServiceImpl implements RestorePasswordService {
             throw new ErrorInvalidData("User with this login not exists");
         } else {
             Long loginId = findUserLogin.getId();
-            UserProfileDTOModif findUserProfileDTOModif = userProfileServiceCustom.findWhereUserId(loginId);
+            UserProfileDTOModif findUserProfileDTOModif = userProfileCustomService.findWhereUserId(loginId);
             String getPofilename = userProfileDTOModif.getProfilename();
             String getLastname = userProfileDTOModif.getLastname();
             String getEmail = userProfileDTOModif.getEmail();
