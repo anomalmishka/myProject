@@ -13,14 +13,14 @@ import java.util.List;
 @Data
 @Builder
 public class FlightRoutePage {
-    private Long id;
+    private String id;
     private String routeStart;
     private String routeEnd;
-    private Integer distance;
-    private Timestamp flightDateStart;
-    private Timestamp flightDateEnd;
-    private Long duration;
-    private Integer price;
+    private String distance;
+    private String flightDateStart;
+    private String flightDateEnd;
+    private String duration;
+    private String price;
     private List<AirPlaneFlightRoutePage> airPlaneFlightRouteList;
-    private Boolean isActive;
+    private String isActive;
 }

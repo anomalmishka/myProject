@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <form action="#" th:with="baseUrl=('/models/flight/route/')" th:object="${flightRouteDTO}">
+            <form action="#" th:with="baseUrl=('/models/flight/route/')" th:object="${flightRoutePage}">
                 <table cellspacing="2" border="1" cellpadding="5">
                     <thead>
                     <tr align="center">
@@ -34,15 +34,26 @@
                     </thead>
                     <tbody th:each="flightRoute : ${flightRoutePage}">
                     <tr>
-                        <td><span th:text="${flightRoute.id}"></span></td>
-                        <td><span th:text="${flightRoute.routeStart}"></span></td>
-                        <td><span th:text="${flightRoute.routeEnd}"></span></td>
-                        <td><span th:text="${flightRoute.distance}"></span></td>
-                        <td><span th:text="${flightRoute.flightDateStart}"></span></td>
-                        <td><span th:text="${flightRoute.flightDateEnd}"></span></td>
-                        <td><span th:text="${flightRoute.duration}"></span></td>
-                        <td><span th:text="${flightRoute.price}"></span></td>
-                        <td><span th:text="${flightRoute.isActive}"></span></td>
+                        <td><input type="number" name="id" th:value="${flightRoute.id}"></td>
+                        <td><input type="text" name="routeStart"
+                                   th:value="${flightRoute.routeStart}"
+                                   required></td>
+                        <td><input type="text" name="routeEnd"
+                                   th:value="${flightRoute.routeEnd}"></td>
+                        <td><input type="number" name="distance"
+                                   th:value="${flightRoute.distance}"></td>
+                        <td><input type="date" id="dateStart" name="flightDateStart"
+                                   min="2022-06-01" max="2050-12-31"
+                                   th:value="${flightRoute.flightDateStart}"></td>
+                        <td><input type="date" id="dateEnd" name="flightDateEnd"
+                                   min="2022-06-01" max="2050-12-31"
+                                   th:value="${flightRoute.flightDateEnd}"></td>
+                        <td><input type="text" name="duration"
+                                   th:value="${flightRoute.duration}"></td>
+                        <td><input type="text" name="price"
+                                   th:value="${flightRoute.price}"></td>
+                        <td><input type="text" name="isActive"
+                                   th:value="${flightRoute.isActive}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -60,6 +71,8 @@
         </div>
     </div>
 </div>
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptStart.js"></script>
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptEnd.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

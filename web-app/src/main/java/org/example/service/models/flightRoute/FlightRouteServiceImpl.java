@@ -30,13 +30,13 @@ public class FlightRouteServiceImpl implements FlightRouteService {
     }
 
     @Override
-    public FlightRouteDTOModif create(FlightRouteDTOModif flightRouteDTOModif2) {
-        return flightRouteRestTemplateService.create(flightRouteDTOModif2);
+    public FlightRouteDTOModif create(FlightRouteDTOModif flightRouteDTOModif) {
+        return flightRouteRestTemplateService.create(flightRouteDTOModif);
     }
 
     @Override
-    public FlightRouteDTOModif update(FlightRouteDTOModif flightRouteDTOModif2) {
-        return flightRouteRestTemplateService.update(flightRouteDTOModif2);
+    public FlightRouteDTOModif update(FlightRouteDTOModif flightRouteDTOModif) {
+        return flightRouteRestTemplateService.update(flightRouteDTOModif);
     }
 
     @Override

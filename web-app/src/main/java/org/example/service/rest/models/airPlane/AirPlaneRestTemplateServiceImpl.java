@@ -17,7 +17,7 @@ public class AirPlaneRestTemplateServiceImpl implements AirPlaneRestTemplateServ
     private final RestTemplate restTemplate = new RestTemplateBuilder().build();
     @Value(value = "${server.data-base-app.url}")
     private String DATA_BASE_APP_URL;
-    private final String PATH = "/air/company/";
+    private final String PATH = "/air/plane/";
 
     @Override
     public List<AirPlaneDTOModif> readAll() {

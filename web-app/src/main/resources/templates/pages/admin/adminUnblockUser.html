@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Block UserLogin</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<div class="container-fluid">
+    <div class="row footer">
+    </div>
+    <div class="row">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                    <label>Edit profileUser</label>
+                    <table cellspacing="2" border="1" cellpadding="5">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>username</th>
+                            <th>isAccountNonLocked</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="userLogin : ${userLoginDTOList}"
+                               th:with="baseUrl=('/admin/block/user/')">
+                        <tr>
+                            <td><a th:href="@{${baseUrl}+${userLogin.id}}"
+                                   th:text="${userLogin.id}"></a>
+                            </td>
+                            <td><input th:value="${userLogin.username}"
+                                       name="username" required>
+                            </td>
+                            <td><input th:value="${userLogin.isAccountNonLocked}"
+                                       name="isAccountNonLocked" required>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

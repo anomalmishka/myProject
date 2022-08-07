@@ -67,6 +67,7 @@ public class SecurityConfigTest extends WebSecurityConfigurerAdapter {
                 .antMatchers("/models/**").hasAnyAuthority("ADMIN","MANAGER")
                 .antMatchers("/order/**").hasAnyAuthority("ADMIN","MANAGER","USER")
                 .antMatchers("/profile/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
 //                .anyRequest().authenticated()
                 .and()
                 .formLogin()
