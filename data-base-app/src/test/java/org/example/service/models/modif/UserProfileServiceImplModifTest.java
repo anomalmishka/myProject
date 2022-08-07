@@ -109,7 +109,7 @@ class UserProfileServiceImplModifTest {
     public void whenCreate_thenReturnEntity() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -119,7 +119,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -129,7 +129,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -148,7 +148,7 @@ class UserProfileServiceImplModifTest {
     void whenCreate_thenThrowErrorInvalidDataException() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .username(null)
+                .profilename(null)
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -164,7 +164,7 @@ class UserProfileServiceImplModifTest {
     public void whenReadAll_thenReturnEntityList() {
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -175,7 +175,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -196,7 +196,7 @@ class UserProfileServiceImplModifTest {
         Integer EXPECTED = 1;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -214,7 +214,7 @@ class UserProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -224,7 +224,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -252,7 +252,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -263,7 +263,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -286,7 +286,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -304,7 +304,7 @@ class UserProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -314,7 +314,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -342,7 +342,7 @@ class UserProfileServiceImplModifTest {
         List<Long> GIVEN_LIST = List.of(GIVEN_ID);
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -353,7 +353,7 @@ class UserProfileServiceImplModifTest {
         List<UserProfile> ANSWER_LIST = List.of(ANSWER);
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -381,7 +381,7 @@ class UserProfileServiceImplModifTest {
     public void whenUpdate_thenReturnEntityList() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -391,7 +391,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile ANSWER = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -401,7 +401,7 @@ class UserProfileServiceImplModifTest {
                 .build();
         UserProfile EXPECTED = UserProfile.builder()
                 .id(1L)
-                .username("Admin")
+                .profilename("Admin")
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")
@@ -410,6 +410,7 @@ class UserProfileServiceImplModifTest {
                 .bankCardList(bankCardList)
                 .build();
         Mockito.when(userProfileService.update(GIVEN)).thenReturn(ANSWER);
+        Mockito.when(userProfileService.readById(GIVEN.getId())).thenReturn(ANSWER);
         UserProfile ACTUAL = userProfileServiceImplModif.update(GIVEN);
         assertEquals(EXPECTED, ACTUAL);
         Mockito.verify(userProfileService, Mockito.times(1))
@@ -420,7 +421,7 @@ class UserProfileServiceImplModifTest {
     void whenUpdate_thenThrowErrorInvalidDataException() {
         UserProfile GIVEN = UserProfile.builder()
                 .id(1L)
-                .username(null)
+                .profilename(null)
                 .lastname("Admin")
                 .phone(5566778)
                 .email("admin@gmail.com")

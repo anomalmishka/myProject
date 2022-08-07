@@ -6,9 +6,11 @@ import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.model.*;
 import org.example.service.models.api.FlightRouteService;
+import org.example.service.models.api.PassengerProfileService;
 import org.example.service.models.api.StatusService;
 import org.example.service.models.api.UserOrderService;
 import org.example.service.modif.UserOrderServiceImplModif;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,6 +34,8 @@ class UserOrderServiceImplModifTest {
     StatusService statusService;
     @Mock
     FlightRouteService flightRouteService;
+    @Mock
+    PassengerProfileService passengerProfileService;
 
     @InjectMocks
     UserOrderServiceImplModif userOrderServiceImplModif;
@@ -87,6 +91,12 @@ class UserOrderServiceImplModifTest {
     private final Status status = Status.builder()
             .status("Paid")
             .build();
+    private final PassengerProfile passengerProfile = PassengerProfile.builder()
+            .id(1L)
+            .passengername("Admin")
+            .passengerlastname("Admin")
+            .passportNumber("KK1112223")
+            .build();
 
     @Test
     public void whenCreate_thenReturnEntity() {
@@ -94,16 +104,19 @@ class UserOrderServiceImplModifTest {
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
         UserOrder ANSWER = UserOrder.builder()
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
         UserOrder EXPECTED = UserOrder.builder()
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
         Mockito.when(userOrderService.create(GIVEN)).thenReturn(ANSWER);
         UserOrder ACTUAL = userOrderServiceImplModif.create(GIVEN);
@@ -119,8 +132,7 @@ class UserOrderServiceImplModifTest {
                 .status(status)
                 .flightRoute(flightRoute)
                 .build();
-        Mockito.when(userOrderService.create(GIVEN)).thenThrow(ErrorInvalidData.class);
-        assertThrows(ErrorInvalidData.class, () -> userOrderServiceImplModif.create(GIVEN));
+        assertThrows(NullPointerException.class, () -> userOrderServiceImplModif.create(GIVEN));
     }
 
     @Test
@@ -286,17 +298,21 @@ class UserOrderServiceImplModifTest {
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
         UserOrder ANSWER = UserOrder.builder()
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
         UserOrder EXPECTED = UserOrder.builder()
                 .id(1L)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
+        Mockito.when(userOrderService.readById(GIVEN.getId())).thenReturn(ANSWER);
         Mockito.when(userOrderService.update(GIVEN)).thenReturn(ANSWER);
         UserOrder ACTUAL = userOrderServiceImplModif.update(GIVEN);
         assertEquals(EXPECTED, ACTUAL);
@@ -310,7 +326,8 @@ class UserOrderServiceImplModifTest {
                 .id(null)
                 .status(status)
                 .flightRoute(flightRoute)
+                .passengerProfile(passengerProfile)
                 .build();
-        assertThrows(ErrorInvalidData.class, () -> userOrderServiceImplModif.update(GIVEN));
+        assertThrows(NullPointerException.class, () -> userOrderServiceImplModif.update(GIVEN));
     }
 }

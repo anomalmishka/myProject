@@ -25,4 +25,7 @@ public class Seat {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private AirPlane airPlane;
+    public AirPlane getAirPlane(){
+        return airPlane;
+    }
 }

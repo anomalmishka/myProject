@@ -30,7 +30,6 @@ public class HomeController {
         } else {
             userPrincipalName = "None";
         }
-
         model.addAttribute("userPrincipalName", userPrincipalName);
         return "home";
     }

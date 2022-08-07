@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class PassengerProfileCustomServiceImpl implements PassengerProfileCustomService {
-
     private final UserProfilePageService userProfilePageService;
     private final UserLoginCustomService userLoginCustomService;
     private final UserProfileCustomService userProfileCustomService;
@@ -40,6 +39,11 @@ public class PassengerProfileCustomServiceImpl implements PassengerProfileCustom
         UserLogin userLogin = userLoginCustomService.findByUsername(principal.getName());
         Long loginId = userLogin.getId();
         UserProfileDTOModif userProfileDTOModif = userProfileCustomService.findWhereUserId(loginId);
+        return userProfileDTOModif.getPassengerProfileList();
+    }
+
+    @Override
+    public List<PassengerProfileDTOModif> readPassangerProfile(UserProfileDTOModif userProfileDTOModif) {
         return userProfileDTOModif.getPassengerProfileList();
     }
 }

@@ -22,13 +22,19 @@
                     <table cellspacing="2" border="1" cellpadding="5">
                         <thead>
                         <tr>
+                            <th>id</th>
                             <th>passengername</th>
                             <th>passengerlastname</th>
                             <th>passportNumber</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="passenger : ${passengerProfilePageList}">
+                        <tr th:each="passenger : ${passengerProfilePageList}"
+                            th:with="baseUrl=('/order/')">
+                            <td>
+                                <a th:href="@{${baseUrl}+${passenger.id}}"
+                                   th:text="${passenger.id}"></a>
+                            </td>
                             <td>
                                 <input th:value="${passenger.passengername}" disabled>
                             </td>
@@ -58,28 +64,6 @@
                     </table>
                     <button class="btn btn-success btn-lg" type="submit">Create</button>
                 </form>
-                <table cellspacing="2" border="1" cellpadding="5">
-                    <thead>
-                    <tr>
-                        <th>passengername</th>
-                        <th>passengerlastname</th>
-                        <th>passportNumber</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="created : ${passengerProfilePageCreated}">
-                        <td>
-                            <input th:value="${created.passengername}" disabled>
-                        </td>
-                        <td>
-                            <input th:value="${created.passengerlastname}" disabled>
-                        </td>
-                        <td>
-                            <input th:value="${created.passportNumber}" disabled>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

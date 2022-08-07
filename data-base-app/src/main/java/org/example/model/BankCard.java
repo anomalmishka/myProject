@@ -21,4 +21,7 @@ public class BankCard {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private UserProfile userProfile;
+    public UserProfile getUserProfile(){
+        return userProfile;
+    }
 }

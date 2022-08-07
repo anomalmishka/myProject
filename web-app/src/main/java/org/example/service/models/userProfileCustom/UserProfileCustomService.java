@@ -4,4 +4,6 @@ import org.example.dto.models.modif.UserProfileDTOModif;
 
 public interface UserProfileCustomService {
     UserProfileDTOModif findWhereUserId(Long userId);
+
+    UserProfileDTOModif readUserProfile(String username);
 }

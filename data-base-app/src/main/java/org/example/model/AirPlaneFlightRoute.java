@@ -3,7 +3,6 @@ package org.example.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,10 +19,15 @@ public class AirPlaneFlightRoute {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private AirPlane airPlane;
-
+    public AirPlane getAirPlane(){
+        return airPlane;
+    }
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private FlightRoute flightRoute;
+    public FlightRoute getFlightRoute(){
+        return flightRoute;
+    }
 
 }

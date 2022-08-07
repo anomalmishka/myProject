@@ -253,6 +253,7 @@ class SeatServiceImplTest {
                 .type("Lowcost")
                 .isOrdered(false)
                 .build();
+        Mockito.when(seatDAO.findById(GIVEN.getId())).thenReturn(Optional.of(ANSWER));
         Mockito.when(seatDAO.save(GIVEN)).thenReturn(ANSWER);
         Seat ACTUAL = seatService.update(GIVEN);
         assertEquals(EXPECTED, ACTUAL);
@@ -268,6 +269,6 @@ class SeatServiceImplTest {
                 .type("Lowcost")
                 .isOrdered(false)
                 .build();
-        assertThrows(ErrorInvalidData.class, () -> seatService.update(GIVEN));
+        assertThrows(ErrorDataNotFound.class, () -> seatService.update(GIVEN));
     }
 }

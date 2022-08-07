@@ -31,6 +31,9 @@ public class AirPlane {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private AirCompany airCompany;
+    public AirCompany getAirCompany(){
+        return airCompany;
+    }
 
 
     @ToString.Exclude

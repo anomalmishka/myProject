@@ -22,7 +22,7 @@ public class Status {
     @EqualsAndHashCode.Exclude
     @OneToMany(
             cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "STATUS_ID")
     private List<UserOrder> userOrder;

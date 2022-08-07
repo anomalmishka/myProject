@@ -67,7 +67,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public Seat update(Seat seat) {
-            Seat seatById = readById(seat.getId());
+        Seat seatById = readById(seat.getId());
             seatById.setIsOrdered(seat.getIsOrdered());
             return seatDAO.save(seatById);
     }
