@@ -1,6 +1,6 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.Seat;
+import org.example.model.Seat;
 
 import java.util.List;
 

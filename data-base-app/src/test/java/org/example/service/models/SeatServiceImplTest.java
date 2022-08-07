@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import org.assertj.core.api.Assertions;
-import org.example.dao.models.SeatDAO;
+import org.example.dao.crud.SeatDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.Seat;
+import org.example.model.Seat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -253,6 +253,7 @@ class SeatServiceImplTest {
                 .type("Lowcost")
                 .isOrdered(false)
                 .build();
+        Mockito.when(seatDAO.findById(GIVEN.getId())).thenReturn(Optional.of(ANSWER));
         Mockito.when(seatDAO.save(GIVEN)).thenReturn(ANSWER);
         Seat ACTUAL = seatService.update(GIVEN);
         assertEquals(EXPECTED, ACTUAL);
@@ -268,6 +269,6 @@ class SeatServiceImplTest {
                 .type("Lowcost")
                 .isOrdered(false)
                 .build();
-        assertThrows(ErrorInvalidData.class, () -> seatService.update(GIVEN));
+        assertThrows(ErrorDataNotFound.class, () -> seatService.update(GIVEN));
     }
 }

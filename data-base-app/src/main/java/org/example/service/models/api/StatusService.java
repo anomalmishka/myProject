@@ -1,6 +1,6 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.Status;
+import org.example.model.Status;
 
 import java.util.List;
 

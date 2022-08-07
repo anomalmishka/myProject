@@ -1,6 +1,6 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.UserOrder;
+import org.example.model.UserOrder;
 
 import java.util.List;
 

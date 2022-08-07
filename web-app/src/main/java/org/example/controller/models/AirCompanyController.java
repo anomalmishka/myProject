@@ -2,8 +2,8 @@ package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.IdListDTO;
-import org.example.dto.modelsDTO.AirCompanyDTO;
-import org.example.dto.page.modelPage.AirCompanyPage;
+import org.example.dto.models.AirCompanyDTO;
+import org.example.dto.page.AirCompanyPage;
 import org.example.mapper.page.AirCompanyMapperPage;
 import org.example.service.models.airCompany.AirCompanyService;
 import org.springframework.stereotype.Controller;
@@ -91,7 +91,6 @@ public class AirCompanyController {
     @GetMapping("delete/all/{ids}")
     public String deleteAllById(Model model,
                                 @ModelAttribute IdListDTO ids) {
-        System.out.println(ids.getId());
         List<AirCompanyPage> airCompanyPageList = airCompanyMapperPage.toPage(airCompanyService.deleteAllByIds(ids.getId()));
         model.addAttribute("airCompanyPageList", airCompanyPageList);
         return "pages/models/airCompany/controller/deleteAllById";

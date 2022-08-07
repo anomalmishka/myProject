@@ -626,7 +626,7 @@
             <mxRectangle width="160" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ByXMqL2nuS13DQ-3L9kz-98" value="user" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fontSize=16;spacing=2;" parent="1" vertex="1">
+        <mxCell id="ByXMqL2nuS13DQ-3L9kz-98" value="userLogin" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fontSize=16;spacing=2;" parent="1" vertex="1">
           <mxGeometry x="960" y="-979" width="360" height="140" as="geometry">
             <mxRectangle x="45" y="480" width="70" height="30" as="alternateBounds" />
           </mxGeometry>

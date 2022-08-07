@@ -1,5 +1,5 @@
 package org.example.service.models.api;
-import org.example.model.entity.UserProfile;
+import org.example.model.UserProfile;
 
 import java.util.List;
 

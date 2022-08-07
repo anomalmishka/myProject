@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.UserProfileDAO;
+import org.example.dao.crud.UserProfileDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.UserProfile;
+import org.example.model.UserProfile;
 import org.example.service.models.api.UserProfileService;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile create(UserProfile userProfile) {
-        if (userProfile.getName() != null) {
+        if (userProfile.getProfilename() != null) {
             return userProfileDAO.save(userProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");
@@ -66,7 +66,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile update(UserProfile userProfile) {
-        if (userProfile.getName() != null) {
+        if (userProfile.getProfilename() != null) {
             return userProfileDAO.save(userProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");

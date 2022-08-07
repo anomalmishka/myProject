@@ -1,12 +1,12 @@
 package org.example.service.models.restorePassword;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.UserProfileDTO;
-import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
+import org.example.dto.models.modif.UserProfileDTOModif;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.User;
-import org.example.service.models.user.UserService;
-import org.example.service.models.userProfile.UserProfileService;
+import org.example.model.UserLogin;
+import org.example.service.models.userLogin.UserLoginService;
+import org.example.service.models.userLoginCustom.UserLoginCustomService;
+import org.example.service.models.userProfileCustom.UserProfileCustomService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +16,36 @@ import java.util.Objects;
 @Service
 public class RestorePasswordServiceImpl implements RestorePasswordService {
 
-    private final UserProfileService userProfileService;
-    private final UserService userService;
+    private final UserProfileCustomService userProfileCustomService;
+    private final UserLoginService userLoginService;
+    private final UserLoginCustomService userLoginCustomService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User restorePassword(UserProfileDTOModif2 userProfileDTOModif2, User user) {
-        if (!Objects.equals(user.getPassword(), user.getPasswordConfirm())) {
+    public UserLogin restorePassword(UserProfileDTOModif userProfileDTOModif, UserLogin userLogin) {
+        if (!Objects.equals(userLogin.getPassword(), userLogin.getPasswordConfirm())) {
             throw new ErrorInvalidData("Passwords don't match");
         }
-        UserProfileDTOModif2 userProfileWhereNameLastnameEmail = userProfileService.findWhereNameLastnameEmail(userProfileDTOModif2);
-        Long userId = userProfileWhereNameLastnameEmail.getUserId();
-        User findUser = userService.readById(userId);
-        findUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userService.update(findUser);
+        UserLogin findUserLogin = userLoginCustomService.findByUsername(userLogin.getUsername());
+        if (findUserLogin == null) {
+            throw new ErrorInvalidData("User with this login not exists");
+        } else {
+            Long loginId = findUserLogin.getId();
+            UserProfileDTOModif findUserProfileDTOModif = userProfileCustomService.findWhereUserId(loginId);
+            String getPofilename = userProfileDTOModif.getProfilename();
+            String getLastname = userProfileDTOModif.getLastname();
+            String getEmail = userProfileDTOModif.getEmail();
+            String findProfilename = findUserProfileDTOModif.getProfilename();
+            String findLastname = findUserProfileDTOModif.getLastname();
+            String findEmail = findUserProfileDTOModif.getEmail();
+            if (getPofilename.equals(findProfilename) && getLastname.equals(findLastname) && getEmail.equals(findEmail))
+            {
+                findUserLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
+                return userLoginService.update(findUserLogin);
+            }
+            else {
+                throw new ErrorInvalidData("Given Name or Lastname or Email not equals");
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.AirPlaneFlightRoute;
+import org.example.model.AirPlaneFlightRoute;
 
 import java.util.List;
 

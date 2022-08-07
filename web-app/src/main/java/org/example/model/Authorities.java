@@ -17,14 +17,14 @@ import java.util.List;
 public class Authorities implements GrantedAuthority {
     @Id
     private Long id;
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "AUTHORITIES_NAME")
+    private String authorities_name;
     @Transient
     @ManyToMany(mappedBy = "AUTHORITIES")
-    private List<User> users;
+    private List<UserLogin> userLoginList;
 
     @Override
     public String getAuthority() {
-        return getName();
+        return getAuthorities_name();
     }
 }

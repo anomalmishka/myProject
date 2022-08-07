@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import org.assertj.core.api.Assertions;
-import org.example.dao.models.BankCardDAO;
+import org.example.dao.crud.BankCardDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.BankCard;
+import org.example.model.BankCard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

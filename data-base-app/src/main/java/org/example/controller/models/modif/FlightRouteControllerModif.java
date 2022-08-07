@@ -1,11 +1,11 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.FlightRouteDTO;
-import org.example.dto.modelsDTO.modif.FlightRouteDTOModif;
+import org.example.dto.models.FlightRouteDTO;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.models.FlightRouteMapper;
 import org.example.mapper.models.modif.FlightRouteMapperModif;
-import org.example.service.models.modif.api.FlightRouteServiceModif;
+import org.example.service.modif.api.FlightRouteServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

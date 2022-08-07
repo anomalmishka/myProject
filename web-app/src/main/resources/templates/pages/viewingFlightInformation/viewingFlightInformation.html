@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Viewing Flight Information</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<div class="container-fluid">
+    <div class="row footer">
+    </div>
+    <div class="row">
+        <div class="col to-center">
+            <form th:object="${orderDataPage}">
+                <label>Flight Route</label>
+                <table cellspacing="2" border="1" cellpadding="5">
+                    <thead>
+                    <tr align="center">
+                        <th>id</th>
+                        <th>routeStart</th>
+                        <th>routeEnd</th>
+                        <th>distance</th>
+                        <th>flightDateStart</th>
+                        <th>flightDateEnd</th>
+                        <th>duration</th>
+                        <th>price</th>
+                        <th>isActive</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="view : ${viewingFlightInformationPageList}">
+                        <td><span th:text="${view.id}"></span></td>
+                        <td><span th:text="${view.routeStart}"></span></td>
+                        <td><span th:text="${view.routeEnd}"></span></td>
+                        <td><span th:text="${view.distance}"></span></td>
+                        <td><span th:text="${view.flightDateStart}"></span></td>
+                        <td><span th:text="${view.flightDateEnd}"></span></td>
+                        <td><span th:text="${view.duration}"></span></td>
+                        <td><span th:text="${view.price}"></span></td>
+                        <td><span th:text="${view.isActive}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table cellspacing="2" border="1" cellpadding="5" align="center">
+                    <thead>
+                    <tr>
+                        <th colspan="6">
+                            Air Plane
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>id</th>
+                        <th>type</th>
+                        <th>status</th>
+                        <th>numberSeatLowcost</th>
+                        <th>numberSeatBuisness</th>
+                        <th>isActive</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="view : ${viewingFlightInformationPageList}">
+                    <tr th:each="airPlane : ${view.airPlaneList}">
+                        <td>
+                            <a th:with="baseUrl=('/view/flight/information/seat/')"
+                               th:href="@{${baseUrl}+${airPlane.id}}"
+                               th:text="${airPlane.id}"
+                               name="${idAirPlane}"></a>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.type}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.status}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.numberSeatLowcost}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.numberSeatBuisness}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.isActive}"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table cellspacing="2" border="1" cellpadding="5" align="center">
+                    <thead>
+                    <tr>
+                        <th colspan="3">Air Company</th>
+                    </tr>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>countryLocation</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="view : ${viewingFlightInformationPageList}">
+                    <tr th:each="airCompany : ${view.airCompanyList}">
+                        <td><span th:text="${airCompany.id}"></span></td>
+                        <td><span th:text="${airCompany.nameCompany}"></span></td>
+                        <td><span th:text="${airCompany.countryLocation}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

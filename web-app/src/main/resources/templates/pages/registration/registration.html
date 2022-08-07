@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home work</title>
+    <title>Registration Account</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,11 +24,11 @@
                     <div class="col-md-12">
                         <h2>Register</h2>
                         <p>Please fill this form to create an account.</p>
-                        <form action="#" th:action="@{'/registration/create'}" th:object="${userProfilePage}"
+                        <form action="#" th:action="@{'/registration/create'}" th:object="${userProfileDTOModif}"
                               method="post">
                             <div class="form-group">
                                 <label>Full Name</label>
-                                <input type="text" name="name" class="form-control" value="User"
+                                <input type="text" name="profilename" class="form-control" value="User"
                                        minlength="3" maxlength="20" required>
                             </div>
                             <div class="form-group">
@@ -43,10 +43,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input type="email" name="email" class="form-control" value="user@mail.ru"
+                                <input type="email" name="email" class="form-control" value="userLogin@mail.ru"
                                        minlength="3" maxlength="30" required/>
                             </div>
-                            <form th:object="${userDTO}">
+                            <form th:object="${userLoginDTO}">
                                 <div class="form-group">
                                     <label>Login</label>
                                     <input type="text" name="username" class="form-control" value="maxim"
@@ -71,8 +71,23 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>isAccountNonExpired</label>
+                                    <input th:type="checkbox" id="checkbox1" checked name="isAccountNonExpired"
+                                           value="true" onclick="checkedFunction()">
+                                </div>
+                                <div class="form-group">
+                                    <label>isAccountNonLocked</label>
+                                    <input th:type="checkbox" id="checkbox2" checked name="isAccountNonLocked"
+                                           value="true">
+                                </div>
+                                <div class="form-group">
+                                    <label>isCredentialsNonExpired</label>
+                                    <input th:type="checkbox" id="checkbox3" checked name="isCredentialsNonExpired"
+                                           value="true">
+                                </div>
+                                <div class="form-group">
                                     <label>isEnabled</label>
-                                    <input th:type="checkbox" checked name="isEnabled"
+                                    <input th:type="checkbox" id="checkbox" checked name="isEnabled"
                                            value="true">
                                 </div>
                                 <div class="form-group">
@@ -88,6 +103,7 @@
         </div>
     </div>
 </main>
+<script src="http://localhost:8001/web-app/templates/content/css/checkbox/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

@@ -1,42 +1,36 @@
 package org.example.mapper.page;
 
-import org.example.dto.modelsDTO.SeatDTO;
-import org.example.dto.page.modelPage.SeatPage;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.SeatDTO;
+import org.example.dto.page.SeatPage;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class SeatMapperPage {
+    private final ModelMapper modelMapper;
     public SeatDTO toDTO(SeatPage seatPage) {
-        return SeatDTO.builder()
-                .id(seatPage.getId())
-                .place(seatPage.getPlace())
-                .type(seatPage.getType())
-                .isOrdered(seatPage.getIsOrdered())
-                .build();
+        return modelMapper.map(seatPage, SeatDTO.class);
     }
 
     public List<SeatDTO> toDTO(List<SeatPage> seatPageList) {
         return Optional.ofNullable(seatPageList)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                .map(list -> list.stream()
                         .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<SeatPage> toPage(List<SeatDTO> seatDTOList) {
         return Optional.ofNullable(seatDTOList)
-                .map(airCompanyDTOList1 -> airCompanyDTOList1.stream()
+                .map(list -> list.stream()
                         .map(this::toPage).collect(Collectors.toList())).orElse(null);
     }
 
     public SeatPage toPage(SeatDTO seatDTO) {
-        return SeatPage.builder()
-                .id(seatDTO.getId())
-                .place(seatDTO.getPlace())
-                .type(seatDTO.getType())
-                .isOrdered(seatDTO.getIsOrdered())
-                .build();
+        return modelMapper.map(seatDTO, SeatPage.class);
     }
 }

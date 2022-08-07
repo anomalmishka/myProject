@@ -1,6 +1,6 @@
 package org.example.controller.advice;
 
-import org.example.dto.advice.ExceptionHandlerBodyDTO;
+import org.example.dto.advice.AdviceExceptionDTO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
 import org.example.exception.ErrorTransaction;
@@ -17,11 +17,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.ZonedDateTime;
 
 
-//@ControllerAdvice
+@ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private ExceptionHandlerBodyDTO sendBodyException(String text, HttpStatus httpStatus) {
-        return ExceptionHandlerBodyDTO.builder()
+    private AdviceExceptionDTO sendBodyException(String text, HttpStatus httpStatus) {
+        return AdviceExceptionDTO.builder()
                 .error(text)
                 .httpStatus(httpStatus)
                 .timestamp(ZonedDateTime.now())

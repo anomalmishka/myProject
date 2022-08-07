@@ -1,32 +1,37 @@
 package org.example.mapper.models;
 
-import org.example.dto.modelsDTO.BankCardDTO;
-import org.example.model.entity.BankCard;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.BankCardDTO;
+import org.example.model.BankCard;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class BankCardMapper {
+    private final ModelMapper modelMapper;
+
     public BankCardDTO toDTO(BankCard bankCard) {
-        return BankCardDTO.builder()
-                .id(bankCard.getId())
-                .cardNumber(bankCard.getCardNumber())
-                .build();
+        return modelMapper.map(bankCard, BankCardDTO.class);
+
     }
 
     public List<BankCardDTO> toDTO(List<BankCard> bankCardList) {
-        return bankCardList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(bankCardList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
     public List<BankCard> toModel(List<BankCardDTO> bankCardDTOList) {
-        return bankCardDTOList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(bankCardDTOList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public BankCard toModel(BankCardDTO bankCardDTO) {
-        return BankCard.builder()
-                .id(bankCardDTO.getId())
-                .cardNumber(bankCardDTO.getCardNumber())
-                .build();
+        return modelMapper.map(bankCardDTO, BankCard.class);
     }
 }

@@ -1,23 +1,21 @@
 package org.example.service.models.userProfile;
 
-import org.example.dto.modelsDTO.modif2.UserProfileDTOModif2;
+import org.example.dto.models.modif.UserProfileDTOModif;
 
 import java.util.List;
 
 public interface UserProfileService {
-    List<UserProfileDTOModif2> readAll();
+    List<UserProfileDTOModif> readAll();
 
-    UserProfileDTOModif2 readById(Long id);
+    UserProfileDTOModif readById(Long id);
 
-    List<UserProfileDTOModif2> readAllByIds(List<Long> ids);
+    List<UserProfileDTOModif> readAllByIds(List<Long> ids);
 
-    UserProfileDTOModif2 create(UserProfileDTOModif2 userProfileDTOModif2);
+    UserProfileDTOModif create(UserProfileDTOModif userProfileDTOModif);
 
-    UserProfileDTOModif2 update(UserProfileDTOModif2 userProfileDTOModif2);
+    UserProfileDTOModif update(UserProfileDTOModif userProfileDTOModif);
 
-    UserProfileDTOModif2 deleteById(Long id);
+    UserProfileDTOModif deleteById(Long id);
 
-    List<UserProfileDTOModif2> deleteAllByIds(List<Long> ids);
-
-    UserProfileDTOModif2 findWhereNameLastnameEmail(UserProfileDTOModif2 userProfileDTOModif2);
+    List<UserProfileDTOModif> deleteAllByIds(List<Long> ids);
 }

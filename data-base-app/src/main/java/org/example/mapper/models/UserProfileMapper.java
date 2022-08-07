@@ -1,42 +1,38 @@
 package org.example.mapper.models;
 
-import org.example.dto.modelsDTO.UserProfileDTO;
-import org.example.model.entity.UserProfile;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.UserProfileDTO;
+import org.example.model.UserProfile;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class UserProfileMapper {
+
+    private final ModelMapper modelMapper;
+
     public UserProfileDTO toDTO(UserProfile userProfile) {
-        return UserProfileDTO.builder()
-                .id(userProfile.getId())
-                .name(userProfile.getName())
-                .lastname(userProfile.getLastname())
-                .phone(userProfile.getPhone())
-                .email(userProfile.getEmail())
-                .userId(userProfile.getUserId())
-                .isBlockedProfile(userProfile.getIsBlockedProfile())
-                .build();
+        return modelMapper.map(userProfile, UserProfileDTO.class);
     }
 
     public List<UserProfileDTO> toDTO(List<UserProfile> userProfileList) {
-        return userProfileList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(userProfileList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
+
     public List<UserProfile> toModel(List<UserProfileDTO> userProfileDTOList) {
-        return userProfileDTOList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(userProfileDTOList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public UserProfile toModel(UserProfileDTO userProfileDTO) {
-        return UserProfile.builder()
-                .id(userProfileDTO.getId())
-                .name(userProfileDTO.getName())
-                .lastname(userProfileDTO.getLastname())
-                .phone(userProfileDTO.getPhone())
-                .email(userProfileDTO.getEmail())
-                .userId(userProfileDTO.getUserId())
-                .isBlockedProfile(userProfileDTO.getIsBlockedProfile())
-                .build();
+        return modelMapper.map(userProfileDTO, UserProfile.class);
     }
 }

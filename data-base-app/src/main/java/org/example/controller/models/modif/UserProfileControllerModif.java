@@ -1,9 +1,9 @@
 package org.example.controller.models.modif;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.modif.UserProfileDTOModif;
+import org.example.dto.models.modif.UserProfileDTOModif;
 import org.example.mapper.models.modif.UserProfileMapperModif;
-import org.example.service.models.modif.api.UserProfileServiceModif;
+import org.example.service.modif.api.UserProfileServiceModif;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,13 +41,13 @@ public class UserProfileControllerModif {
     }
 
     @PostMapping(path = "create", produces = "application/json", consumes = "application/json")
-    public UserProfileDTOModif create(@RequestBody UserProfileDTOModif userDTOModif) {
-        return userProfileMapperModif.toDTO(userProfileServiceModif.create(userProfileMapperModif.toModel(userDTOModif)));
+    public UserProfileDTOModif create(@RequestBody UserProfileDTOModif userProfileDTOModif) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.create(userProfileMapperModif.toModel(userProfileDTOModif)));
     }
 
     @PutMapping(path = "update", produces = "application/json", consumes = "application/json")
-    public UserProfileDTOModif update(@RequestBody UserProfileDTOModif userDTOModif) {
-        return userProfileMapperModif.toDTO(userProfileServiceModif.update(userProfileMapperModif.toModel(userDTOModif)));
+    public UserProfileDTOModif update(@RequestBody UserProfileDTOModif userProfileDTOModif) {
+        return userProfileMapperModif.toDTO(userProfileServiceModif.update(userProfileMapperModif.toModel(userProfileDTOModif)));
     }
 }
 

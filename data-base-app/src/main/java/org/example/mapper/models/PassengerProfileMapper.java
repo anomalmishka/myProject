@@ -1,37 +1,37 @@
 package org.example.mapper.models;
 
-import org.example.dto.modelsDTO.PassengerProfileDTO;
-import org.example.model.entity.PassengerProfile;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.PassengerProfileDTO;
+import org.example.model.PassengerProfile;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class PassengerProfileMapper {
+    private final ModelMapper modelMapper;
+
     public PassengerProfileDTO toDTO(PassengerProfile passengerProfile) {
-        return PassengerProfileDTO.builder()
-                .id(passengerProfile.getId())
-                .name(passengerProfile.getName())
-                .lastname(passengerProfile.getLastname())
-                .passportNumber(passengerProfile.getPassportNumber())
-                .build();
+        return modelMapper.map(passengerProfile, PassengerProfileDTO.class);
     }
 
     public List<PassengerProfileDTO> toDTO(List<PassengerProfile> passengerProfileList) {
-        return passengerProfileList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(passengerProfileList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<PassengerProfile> toModel(List<PassengerProfileDTO> passengerProfileDTOList) {
-        return passengerProfileDTOList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(passengerProfileDTOList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public PassengerProfile toModel(PassengerProfileDTO passengerProfileDTO) {
-        return PassengerProfile.builder()
-                .id(passengerProfileDTO.getId())
-                .name(passengerProfileDTO.getName())
-                .lastname(passengerProfileDTO.getLastname())
-                .passportNumber(passengerProfileDTO.getPassportNumber())
-                .build();
+        return modelMapper.map(passengerProfileDTO, PassengerProfile.class);
     }
 }

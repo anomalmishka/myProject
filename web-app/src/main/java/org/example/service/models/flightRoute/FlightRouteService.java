@@ -1,21 +1,21 @@
 package org.example.service.models.flightRoute;
 
-import org.example.dto.modelsDTO.modif2.FlightRouteDTOModif2;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 
 import java.util.List;
 
 public interface FlightRouteService {
-    List<FlightRouteDTOModif2> readAll();
+    List<FlightRouteDTOModif> readAll();
 
-    FlightRouteDTOModif2 readById(Long id);
+    FlightRouteDTOModif readById(Long id);
 
-    List<FlightRouteDTOModif2> readAllByIds(List<Long> ids);
+    List<FlightRouteDTOModif> readAllByIds(List<Long> ids);
 
-    FlightRouteDTOModif2 create(FlightRouteDTOModif2 flightRouteDTOModif2);
+    FlightRouteDTOModif create(FlightRouteDTOModif flightRouteDTOModif);
 
-    FlightRouteDTOModif2 update(FlightRouteDTOModif2 flightRouteDTOModif2);
+    FlightRouteDTOModif update(FlightRouteDTOModif flightRouteDTOModif);
 
-    FlightRouteDTOModif2 deleteById(Long id);
+    FlightRouteDTOModif deleteById(Long id);
 
-    List<FlightRouteDTOModif2> deleteAllByIds(List<Long> ids);
+    List<FlightRouteDTOModif> deleteAllByIds(List<Long> ids);
 }

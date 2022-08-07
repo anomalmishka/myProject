@@ -1,16 +1,16 @@
 package org.example.dao.custom.flightRoute;
 
 import lombok.RequiredArgsConstructor;
-import org.example.model.entity.*;
-import org.example.model.filter.FilterObj;
+import org.example.model.*;
+import org.example.dto.filter.FilterObj;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,332 +19,8 @@ import java.util.List;
 public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
     private final EntityManagerFactory entityManagerFactory;
 
-    //**************************************1***************************************************
     @Override
-    public List<FlightRoute> findWhereName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicate = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        query.where(predicate);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteStart(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        query.where(predicateRouteStart).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************2***************************************************
-    @Override
-    public List<FlightRoute> findWhereRoute(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicate = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDate(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWherePrice(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        query.where(predicatePrice).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Integer durationEnd = filterObj.getDurationEnd();
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************3***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String airCompanyName = filterObj.getAirCompanyName();
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRouteAnd = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicateRouteAnd, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDateName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDateAnd = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicateDateAnd, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWherePriceName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicatePrice, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-        Predicate predicate = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************4***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDate(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRouteAnd = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDateAnd = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicate = criteriaBuilder.and(predicateRouteAnd, predicateDateAnd);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePrice(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicate = criteriaBuilder.and(predicateRoute, predicatePrice);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRoute);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDatePrice(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicate = criteriaBuilder.and(predicateDate, predicatePrice);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDateDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateDate);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWherePriceDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicatePrice);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************5***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDateName(FilterObj filterObj) {
+    public List<FlightRoute> filter(FilterObj filterObj) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
@@ -357,914 +33,334 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         Timestamp flightDateStart = filterObj.getDateStart();
         Timestamp flightDateEnd = filterObj.getDateEnd();
         String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRouteAnd = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDateAnd = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRouteAnd, predicateDateAnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicateRouteDate, predicateName);
+        Integer price = filterObj.getPrice();
+        Integer duration = filterObj.getDuration();
+        String transfer = filterObj.getTransfer();
+        Predicate predicateA = criteriaBuilder.like(root.get(FlightRoute_.routeStart), "%" + routeStart + "%");
+        Predicate predicateB = criteriaBuilder.like(root.get(FlightRoute_.routeEnd), "%" + routeEnd + "%");
+        Predicate predicateC = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
+        Predicate predicateD = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
+        Predicate predicateE = criteriaBuilder.like(airCompanyJoin.get(AirCompany_.nameCompany), "%" + airCompanyName + "%");
+        Predicate predicateF = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), price);
+        Predicate predicateG = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.duration), duration);
+        Predicate predicateHStart1 = criteriaBuilder.like(root.get(FlightRoute_.routeStart), "%" + routeStart + "%");
+        Predicate predicateHEnd1 = criteriaBuilder.like(root.get(FlightRoute_.routeEnd), "%" + transfer + "%");
+        Predicate predicateH1 = criteriaBuilder.and(predicateHStart1, predicateHEnd1);
+        Predicate predicateHStart2 = criteriaBuilder.like(root.get(FlightRoute_.routeStart), "%" + transfer + "%");
+        Predicate predicateHEnd2 = criteriaBuilder.like(root.get(FlightRoute_.routeEnd), "%" + routeEnd + "%");
+        Predicate predicateH2 = criteriaBuilder.and(predicateHStart2, predicateHEnd2);
+        Predicate predicateH = criteriaBuilder.or(predicateH1, predicateH2);
+        Predicate predicate1 = criteriaBuilder.or(
+                predicateA,
+                predicateB,
+                predicateC,
+                predicateD,
+                predicateE,
+                predicateF,
+                predicateG
+        );
+        Predicate predicateAB = criteriaBuilder.and(predicateA, predicateB);
+        Predicate predicateAC = criteriaBuilder.and(predicateA, predicateC);
+        Predicate predicateAD = criteriaBuilder.and(predicateA, predicateD);
+        Predicate predicateAE = criteriaBuilder.and(predicateA, predicateE);
+        Predicate predicateAF = criteriaBuilder.and(predicateA, predicateF);
+        Predicate predicateAG = criteriaBuilder.and(predicateA, predicateG);
+        Predicate predicateBC = criteriaBuilder.and(predicateB, predicateC);
+        Predicate predicateBD = criteriaBuilder.and(predicateB, predicateD);
+        Predicate predicateBE = criteriaBuilder.and(predicateB, predicateE);
+        Predicate predicateBF = criteriaBuilder.and(predicateB, predicateF);
+        Predicate predicateBG = criteriaBuilder.and(predicateB, predicateG);
+        Predicate predicateCD = criteriaBuilder.and(predicateC, predicateD);
+        Predicate predicateCE = criteriaBuilder.and(predicateC, predicateE);
+        Predicate predicateCF = criteriaBuilder.and(predicateC, predicateF);
+        Predicate predicateCG = criteriaBuilder.and(predicateC, predicateG);
+        Predicate predicateDE = criteriaBuilder.and(predicateD, predicateE);
+        Predicate predicateDF = criteriaBuilder.and(predicateD, predicateF);
+        Predicate predicateDG = criteriaBuilder.and(predicateD, predicateG);
+        Predicate predicateEF = criteriaBuilder.and(predicateE, predicateF);
+        Predicate predicateEG = criteriaBuilder.and(predicateE, predicateG);
+        Predicate predicateFG = criteriaBuilder.and(predicateF, predicateG);
+        Predicate predicate2 = criteriaBuilder.or(
+                predicateAB,
+                predicateAC,
+                predicateAD,
+                predicateAE,
+                predicateAF,
+                predicateAG,
+                predicateBC,
+                predicateBD,
+                predicateBE,
+                predicateBF,
+                predicateBG,
+                predicateCD,
+                predicateCE,
+                predicateCF,
+                predicateCG,
+                predicateDE,
+                predicateDF,
+                predicateDG,
+                predicateEF,
+                predicateEG,
+                predicateFG
+        );
+        Predicate predicateABC = criteriaBuilder.and(predicateAB, predicateC);
+        Predicate predicateABD = criteriaBuilder.and(predicateAB, predicateD);
+        Predicate predicateABE = criteriaBuilder.and(predicateAB, predicateE);
+        Predicate predicateABF = criteriaBuilder.and(predicateAB, predicateF);
+        Predicate predicateABG = criteriaBuilder.and(predicateAB, predicateG);
+        Predicate predicateABH = criteriaBuilder.or(predicateAB, predicateH);
+        Predicate predicateACD = criteriaBuilder.and(predicateAC, predicateD);
+        Predicate predicateACE = criteriaBuilder.and(predicateAC, predicateE);
+        Predicate predicateACF = criteriaBuilder.and(predicateAC, predicateG);
+        Predicate predicateADE = criteriaBuilder.and(predicateAD, predicateE);
+        Predicate predicateADF = criteriaBuilder.and(predicateAD, predicateF);
+        Predicate predicateADG = criteriaBuilder.and(predicateAD, predicateG);
+        Predicate predicateAEF = criteriaBuilder.and(predicateAE, predicateF);
+        Predicate predicateAEG = criteriaBuilder.and(predicateAE, predicateG);
+        Predicate predicateAFG = criteriaBuilder.and(predicateAF, predicateG);
+        Predicate predicateBCD = criteriaBuilder.and(predicateBC, predicateD);
+        Predicate predicateBCE = criteriaBuilder.and(predicateBC, predicateE);
+        Predicate predicateBCF = criteriaBuilder.and(predicateBC, predicateF);
+        Predicate predicateBCG = criteriaBuilder.and(predicateBC, predicateG);
+        Predicate predicateBDE = criteriaBuilder.and(predicateBD, predicateE);
+        Predicate predicateBDF = criteriaBuilder.and(predicateBD, predicateF);
+        Predicate predicateBDG = criteriaBuilder.and(predicateBD, predicateG);
+        Predicate predicateBEF = criteriaBuilder.and(predicateBE, predicateF);
+        Predicate predicateBEG = criteriaBuilder.and(predicateBE, predicateG);
+        Predicate predicateBFG = criteriaBuilder.and(predicateBF, predicateG);
+        Predicate predicateCDE = criteriaBuilder.and(predicateCD, predicateE);
+        Predicate predicateCDF = criteriaBuilder.and(predicateCD, predicateF);
+        Predicate predicateCDG = criteriaBuilder.and(predicateCD, predicateG);
+        Predicate predicateCEF = criteriaBuilder.and(predicateCE, predicateF);
+        Predicate predicateCEG = criteriaBuilder.and(predicateCE, predicateG);
+        Predicate predicateCFG = criteriaBuilder.and(predicateCE, predicateG);
+        Predicate predicateDEF = criteriaBuilder.and(predicateDE, predicateF);
+        Predicate predicateDEG = criteriaBuilder.and(predicateDE, predicateG);
+        Predicate predicateDFG = criteriaBuilder.and(predicateDF, predicateG);
+        Predicate predicateEFG = criteriaBuilder.and(predicateEF, predicateG);
+        Predicate predicate3 = criteriaBuilder.or(
+                predicateABC,
+                predicateABD,
+                predicateABE,
+                predicateABF,
+                predicateABG,
+                predicateABH,
+                predicateACD,
+                predicateACE,
+                predicateACF,
+                predicateADE,
+                predicateADF,
+                predicateADG,
+                predicateAEF,
+                predicateAEG,
+                predicateAFG,
+                predicateBCD,
+                predicateBCE,
+                predicateBCF,
+                predicateBCG,
+                predicateBDE,
+                predicateBDF,
+                predicateBDG,
+                predicateBEF,
+                predicateBEG,
+                predicateBFG,
+                predicateCDE,
+                predicateCDF,
+                predicateCDG,
+                predicateCEF,
+                predicateCEG,
+                predicateCFG,
+                predicateDEF,
+                predicateDEG,
+                predicateDFG,
+                predicateEFG
+        );
+        Predicate predicateABCD = criteriaBuilder.and(predicateABC, predicateD);
+        Predicate predicateABCE = criteriaBuilder.and(predicateABC, predicateE);
+        Predicate predicateABCF = criteriaBuilder.and(predicateABC, predicateF);
+        Predicate predicateABCG = criteriaBuilder.and(predicateABC, predicateG);
+        Predicate predicateABCH = criteriaBuilder.or(predicateABC, predicateH);
+        Predicate predicateABDE = criteriaBuilder.and(predicateABD, predicateE);
+        Predicate predicateABDF = criteriaBuilder.and(predicateABD, predicateF);
+        Predicate predicateABDG = criteriaBuilder.and(predicateABD, predicateG);
+        Predicate predicateABDH = criteriaBuilder.or(predicateABD, predicateH);
+        Predicate predicateACDE = criteriaBuilder.and(predicateACD, predicateE);
+        Predicate predicateACDF = criteriaBuilder.and(predicateACD, predicateF);
+        Predicate predicateACDG = criteriaBuilder.and(predicateACD, predicateG);
+        Predicate predicateABEF = criteriaBuilder.and(predicateABE, predicateF);
+        Predicate predicateABEG = criteriaBuilder.and(predicateABE, predicateG);
+        Predicate predicateABEH = criteriaBuilder.or(predicateABE, predicateH);
+        Predicate predicateADEF = criteriaBuilder.and(predicateADE, predicateF);
+        Predicate predicateADEG = criteriaBuilder.and(predicateADE, predicateG);
+        Predicate predicateABFG = criteriaBuilder.and(predicateABF, predicateG);
+        Predicate predicateABFH = criteriaBuilder.or(predicateABF, predicateH);
+        Predicate predicateAEFG = criteriaBuilder.and(predicateAEF, predicateG);
+        Predicate predicateABGH = criteriaBuilder.and(predicateAEF, predicateG);
+        Predicate predicateBCDE = criteriaBuilder.and(predicateBCD, predicateE);
+        Predicate predicateBCDF = criteriaBuilder.and(predicateBCD, predicateF);
+        Predicate predicateBCDG = criteriaBuilder.and(predicateBCD, predicateG);
+        Predicate predicateBDEF = criteriaBuilder.and(predicateBDE, predicateF);
+        Predicate predicateBDEG = criteriaBuilder.and(predicateBDE, predicateG);
+        Predicate predicateBEFG = criteriaBuilder.and(predicateBEF, predicateG);
+        Predicate predicateCDEF = criteriaBuilder.and(predicateCDE, predicateF);
+        Predicate predicateCDEG = criteriaBuilder.and(predicateCDE, predicateG);
+        Predicate predicateCEFG = criteriaBuilder.and(predicateCEF, predicateG);
+        Predicate predicate4 = criteriaBuilder.or(
+                predicateABCD,
+                predicateABCE,
+                predicateABCF,
+                predicateABCG,
+                predicateABCH,
+                predicateABDE,
+                predicateABDF,
+                predicateABDG,
+                predicateABDH,
+                predicateACDE,
+                predicateACDF,
+                predicateACDG,
+                predicateABEF,
+                predicateABEG,
+                predicateABEH,
+                predicateADEF,
+                predicateADEG,
+                predicateABFG,
+                predicateABFH,
+                predicateAEFG,
+                predicateABGH,
+                predicateBCDE,
+                predicateBCDF,
+                predicateBCDG,
+                predicateBDEF,
+                predicateBDEG,
+                predicateBEFG,
+                predicateCDEF,
+                predicateCDEG,
+                predicateCEFG
+        );
+        Predicate predicateABCDE = criteriaBuilder.and(predicateABCD, predicateE);
+        Predicate predicateABCDF = criteriaBuilder.and(predicateABCD, predicateF);
+        Predicate predicateABCDG = criteriaBuilder.and(predicateABCD, predicateF);
+        Predicate predicateABCDH = criteriaBuilder.or(predicateABCD, predicateH);
+        Predicate predicateABCEF = criteriaBuilder.and(predicateABCE, predicateF);
+        Predicate predicateABCEG = criteriaBuilder.and(predicateABCE, predicateG);
+        Predicate predicateABCEH = criteriaBuilder.or(predicateABCE, predicateH);
+        Predicate predicateABCFG = criteriaBuilder.and(predicateABCF, predicateG);
+        Predicate predicateABCFH = criteriaBuilder.or(predicateABCF, predicateH);
+        Predicate predicateABCGH = criteriaBuilder.or(predicateABCG, predicateH);
+        Predicate predicateABDEF = criteriaBuilder.and(predicateABDE, predicateF);
+        Predicate predicateABDEG = criteriaBuilder.and(predicateABDE, predicateG);
+        Predicate predicateABDEH = criteriaBuilder.or(predicateABDE, predicateH);
+        Predicate predicateABDFG = criteriaBuilder.and(predicateABDF, predicateG);
+        Predicate predicateABDFH = criteriaBuilder.or(predicateABDF, predicateH);
+        Predicate predicateABDGH = criteriaBuilder.or(predicateABDG, predicateH);
+        Predicate predicateABEFG = criteriaBuilder.and(predicateABEF, predicateG);
+        Predicate predicateABEFH = criteriaBuilder.or(predicateABEF, predicateH);
+        Predicate predicateABFGH = criteriaBuilder.or(predicateABFG, predicateH);
+        Predicate predicateACDEF = criteriaBuilder.and(predicateACDE, predicateF);
+        Predicate predicateACDEG = criteriaBuilder.and(predicateACDE, predicateG);
+        Predicate predicateACDFG = criteriaBuilder.and(predicateACDF, predicateG);
+        Predicate predicateADEFG = criteriaBuilder.and(predicateADEF, predicateG);
+        Predicate predicateBCDEF = criteriaBuilder.and(predicateBCDE, predicateF);
+        Predicate predicateBCDEG = criteriaBuilder.and(predicateBCDE, predicateG);
+        Predicate predicateBDEFG = criteriaBuilder.and(predicateBDEF, predicateG);
+        Predicate predicateCDEFG = criteriaBuilder.and(predicateCDEF, predicateG);
+        Predicate predicate5 = criteriaBuilder.or(
+                predicateABCDE,
+                predicateABCDF,
+                predicateABCDG,
+                predicateABCDH,
+                predicateABCEF,
+                predicateABCEG,
+                predicateABCEH,
+                predicateABCFG,
+                predicateABCFH,
+                predicateABCGH,
+                predicateABDEF,
+                predicateABDEG,
+                predicateABDEH,
+                predicateABDFG,
+                predicateABDFH,
+                predicateABDGH,
+                predicateABEFG,
+                predicateABEFH,
+                predicateABFGH,
+                predicateACDEF,
+                predicateACDEG,
+                predicateACDFG,
+                predicateADEFG,
+                predicateBCDEF,
+                predicateBCDEG,
+                predicateBDEFG,
+                predicateCDEFG
+        );
+        Predicate predicateABCDEF = criteriaBuilder.and(predicateABCDE, predicateF);
+        Predicate predicateABCDEG = criteriaBuilder.and(predicateABCDE, predicateG);
+        Predicate predicateABCDEH = criteriaBuilder.or(predicateABCDE, predicateH);
+        Predicate predicateACDEFG = criteriaBuilder.and(predicateACDEF, predicateG);
+        Predicate predicateBCDEFG = criteriaBuilder.and(predicateBCDEF, predicateG);
+        Predicate predicate6 = criteriaBuilder.or(
+                predicateABCDEF,
+                predicateABCDEG,
+                predicateABCDEH,
+                predicateACDEFG,
+                predicateBCDEFG
+        );
+        Predicate predicateABCDEFG = criteriaBuilder.and(predicateABCDEF, predicateG);
+        Predicate predicateABCDEFH = criteriaBuilder.or(predicateABCDEF, predicateH);
+        Predicate predicate7 = criteriaBuilder.or(predicateABCDEFG, predicateABCDEFH);
+        Predicate predicate8 = criteriaBuilder.or(predicateABCDEFG, predicateH);
+        Field[] declaredFields = FilterObj.class.getDeclaredFields();
+        int count = 0;
+        for (Field field : declaredFields) {
+            field.setAccessible(true);
+            try {
+                if (field.get(filterObj) != null) {
+                    count++;
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        switch (count) {
+            case 1:
+                query.where(predicate1).distinct(true);
+                break;
+            case 2:
+                query.where(predicate2).distinct(true);
+                break;
+            case 3:
+                query.where(predicate3).distinct(true);
+                break;
+            case 4:
+                query.where(predicate4).distinct(true);
+                break;
+            case 5:
+                query.where(predicate5).distinct(true);
+                break;
+            case 6:
+                query.where(predicate6).distinct(true);
+                break;
+            case 7:
+                query.where(predicate7).distinct(true);
+                break;
+            case 8:
+                query.where(predicate8).distinct(true);
+                break;
+            default:
+                query.select(root).distinct(true);
+                break;
+        }
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<FlightRoute> findById(Long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
+        Root<FlightRoute> root = query.from(FlightRoute.class);
+        Predicate predicate = criteriaBuilder.equal(root.get(FlightRoute_.id), id);
         query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePriceName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateRoutePrice = criteriaBuilder.and(predicateRoute, predicatePrice);
-        Predicate predicate = criteriaBuilder.and(predicateRoutePrice, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRoute);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDatePriceName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicateDatePrice = criteriaBuilder.and(predicateDate, predicatePrice);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicateDatePrice, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDateDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateDateName = criteriaBuilder.and(predicateDate, predicateName);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateDateName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWherePriceDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicatePriceName = criteriaBuilder.and(predicatePrice, predicateName);
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicatePriceName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDateTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-        Predicate predicate = criteriaBuilder.or(predicateTransfer, predicateDate);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePriceTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicate = criteriaBuilder.and(predicateTransfer, predicatePrice);
-
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDurationTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateTransfer);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************6***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePrice(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicate = criteriaBuilder.and(predicateRouteDate, predicatePrice);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDateDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDate);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePriceDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRoutePrice= criteriaBuilder.and(predicateRoute, predicatePrice);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRoutePrice);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDatePriceDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateDatePrice= criteriaBuilder.and(predicateDate, predicatePrice);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateDatePrice);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************7***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteDatePrice = criteriaBuilder.and(predicateRouteDate, predicatePrice);
-
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicate = criteriaBuilder.and(predicateRouteDatePrice, predicateName);
-        query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDateDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateRouteDateName = criteriaBuilder.and(predicateRouteDate, predicateName);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDateName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePriceDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRoutePrice = criteriaBuilder.and(predicateRoute, predicatePrice);
-
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateRoutePriceName = criteriaBuilder.and(predicateRoutePrice, predicateName);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRoutePriceName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereDatePriceDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateDatePrice = criteriaBuilder.and(predicateDate, predicatePrice);
-
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateDatePriceName = criteriaBuilder.and(predicateDatePrice, predicateName);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateDatePriceName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicatePriceDate = criteriaBuilder.and(predicatePrice, predicateDate);
-
-        Predicate predicateRouteTransfer = criteriaBuilder.or(predicateRoute, predicateTransfer);
-
-        Predicate predicateRouteDatePriceTransfer = criteriaBuilder.and(predicateRouteTransfer, predicatePriceDate);
-        query.where(predicateRouteDatePriceTransfer).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDateDurationTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicateRouteTransfer = criteriaBuilder.or(predicateTransfer, predicateRoute);
-
-        Predicate predicateRouteDateTransfer = criteriaBuilder.and(predicateRouteTransfer, predicateDate);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDateTransfer);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRoutePriceDurationTransfer(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        String transfers = filterObj.getTransfers();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicateRouteTransfer = criteriaBuilder.or(predicateRoute, predicateTransfer);
-
-        Predicate predicateRoutePriceTransfer = criteriaBuilder.and(predicateRouteTransfer, predicatePrice);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRoutePriceTransfer);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************8***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceDuration(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Predicate predicateRouteDatePrice = criteriaBuilder.and(predicateRouteDate, predicatePrice);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDatePrice);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************9***************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceDurationName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String airCompanyName = filterObj.getAirCompanyName();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteDate = criteriaBuilder.and(predicateRoute, predicateDate);
-
-        Predicate predicateRouteDatePrice = criteriaBuilder.and(predicateRouteDate, predicatePrice);
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-        Predicate predicateRouteDatePriceName = criteriaBuilder.and(predicateRouteDatePrice, predicateName);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDatePriceName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceDurationTranfser(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String transfers = filterObj.getTransfers();
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicateRouteTransfer = criteriaBuilder.or(predicateRoute, predicateTransfer);
-
-        Predicate predicateDatePrice = criteriaBuilder.and(predicateDate, predicatePrice);
-
-        Predicate predicateRouteDatePriceTransfer = criteriaBuilder.and(predicateRouteTransfer, predicateDatePrice);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDatePriceTransfer);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    //**************************************10**************************************************
-
-    @Override
-    public List<FlightRoute> findWhereRouteDatePriceDurationTranfserName(FilterObj filterObj) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
-        Root<FlightRoute> root = query.from(FlightRoute.class);
-        Join<FlightRoute, AirPlaneFlightRoute> airPlaneFlightRouteJoin = root.join(FlightRoute_.airPlaneFlightRouteList, JoinType.LEFT);
-        Join<AirPlaneFlightRoute, AirPlane> airPlaneJoin = airPlaneFlightRouteJoin.join(AirPlaneFlightRoute_.airPlane, JoinType.LEFT);
-        Join<AirPlane, AirCompany> airCompanyJoin = airPlaneJoin.join(AirPlane_.airCompany, JoinType.LEFT);
-        String routeStart = filterObj.getRouteStart();
-        String routeEnd = filterObj.getRouteEnd();
-        Timestamp flightDateStart = filterObj.getDateStart();
-        Timestamp flightDateEnd = filterObj.getDateEnd();
-        Integer priceStart = filterObj.getPriceStart();
-        Integer priceEnd = filterObj.getPriceEnd();
-        Integer durationEnd = filterObj.getDurationEnd();
-        String transfers = filterObj.getTransfers();
-        String airCompanyName = filterObj.getAirCompanyName();
-
-        Predicate predicateRouteStartEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEndEqual = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateRoute = criteriaBuilder.and(predicateRouteStartEqual, predicateRouteEndEqual);
-
-        Predicate predicateDateStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.flightDateStart), flightDateStart);
-        Predicate predicateDateEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.flightDateEnd), flightDateEnd);
-        Predicate predicateDate = criteriaBuilder.and(predicateDateStart, predicateDateEnd);
-
-        Predicate predicatePriceStart = criteriaBuilder.greaterThanOrEqualTo(root.get(FlightRoute_.price), priceStart);
-        Predicate predicatePriceEnd = criteriaBuilder.lessThanOrEqualTo(root.get(FlightRoute_.price), priceEnd);
-        Predicate predicatePrice = criteriaBuilder.and(predicatePriceStart, predicatePriceEnd);
-
-        Predicate predicateRouteStart = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), routeStart);
-        Predicate predicateRouteEnd = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), transfers);
-        Predicate predicateTransferStart = criteriaBuilder.and(predicateRouteStart, predicateRouteEnd);
-
-        Predicate predicateRouteStart2 = criteriaBuilder.equal(root.get(FlightRoute_.routeStart), transfers);
-        Predicate predicateRouteEnd2 = criteriaBuilder.equal(root.get(FlightRoute_.routeEnd), routeEnd);
-        Predicate predicateTransferEnd = criteriaBuilder.and(predicateRouteStart2, predicateRouteEnd2);
-
-        Predicate predicateTransfer = criteriaBuilder.or(predicateTransferStart, predicateTransferEnd);
-
-        Predicate predicateRouteTransfer = criteriaBuilder.or(predicateRoute, predicateTransfer);
-
-        Predicate predicateDatePrice = criteriaBuilder.and(predicateDate, predicatePrice);
-
-        Predicate predicateRouteDatePriceTransfer = criteriaBuilder.and(predicateRouteTransfer, predicateDatePrice);
-
-        Predicate predicateName = criteriaBuilder.equal(airCompanyJoin.get(AirCompany_.nameCompany), airCompanyName);
-
-        Predicate predicateRouteDatePriceTransferName = criteriaBuilder.and(predicateRouteDatePriceTransfer, predicateName);
-
-        Expression<String> SECOND = new TimestampdiffExpression(null, String.class, "SECOND");
-        Expression<Integer> timeDiff = criteriaBuilder.function(
-                "TIMESTAMPDIFF",
-                Integer.class,
-                SECOND,
-                root.get("flightDateStart"),
-                root.get("flightDateEnd"));
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(predicateRouteDatePriceTransferName);
-        predicateList.add(criteriaBuilder.lessThanOrEqualTo(timeDiff, durationEnd));
-        query.where(predicateList.toArray(new Predicate[]{})).distinct(true);
         return entityManager.createQuery(query).getResultList();
     }
 }

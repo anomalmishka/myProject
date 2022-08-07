@@ -1,8 +1,8 @@
 package org.example.config.secure;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.UserDAO;
-import org.example.service.models.userDetails.CustomUserDetailsService;
+import org.example.dao.UserLoginDAO;
+import org.example.service.models.userLoginDetails.UserLoginDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Profile("prod")
 public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
 
-    private final UserDAO userDAO;
+    private final UserLoginDAO userLoginDAO;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -31,7 +31,7 @@ public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userDAO);
+        return new UserLoginDetailsService(userLoginDAO);
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

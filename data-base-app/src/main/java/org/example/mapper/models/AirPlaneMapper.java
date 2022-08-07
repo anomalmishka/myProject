@@ -1,42 +1,36 @@
 package org.example.mapper.models;
 
-import org.example.dto.modelsDTO.AirPlaneDTO;
-import org.example.model.entity.AirPlane;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.models.AirPlaneDTO;
+import org.example.model.AirPlane;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
 @Component
 public class AirPlaneMapper {
+    private final ModelMapper modelMapper;
 
     public AirPlaneDTO toDTO(AirPlane airPlane) {
-        return AirPlaneDTO.builder()
-                .id(airPlane.getId())
-                .type(airPlane.getType())
-                .status(airPlane.getStatus())
-                .numberSeatLowcost(airPlane.getNumberSeatLowcost())
-                .numberSeatBuisness(airPlane.getNumberSeatBuisness())
-                .isActive(airPlane.getIsActive())
-                .build();
+        return modelMapper.map(airPlane, AirPlaneDTO.class);
     }
 
     public List<AirPlaneDTO> toDTO(List<AirPlane> airPlaneList) {
-        return airPlaneList.stream().map(this::toDTO).collect(Collectors.toList());
+        return Optional.ofNullable(airPlaneList)
+                .map(list -> list.stream()
+                        .map(this::toDTO).collect(Collectors.toList())).orElse(null);
     }
 
     public List<AirPlane> toModel(List<AirPlaneDTO> airPlaneDTOList) {
-        return airPlaneDTOList.stream().map(this::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(airPlaneDTOList)
+                .map(list -> list.stream()
+                        .map(this::toModel).collect(Collectors.toList())).orElse(null);
     }
 
     public AirPlane toModel(AirPlaneDTO airPlaneDTO) {
-        return AirPlane.builder()
-                .id(airPlaneDTO.getId())
-                .type(airPlaneDTO.getType())
-                .status(airPlaneDTO.getStatus())
-                .numberSeatLowcost(airPlaneDTO.getNumberSeatLowcost())
-                .numberSeatBuisness(airPlaneDTO.getNumberSeatBuisness())
-                .isActive(airPlaneDTO.getIsActive())
-                .build();
+        return modelMapper.map(airPlaneDTO, AirPlane.class);
     }
 }

@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.StatusDAO;
+import org.example.dao.crud.StatusDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.Status;
+import org.example.model.Status;
 import org.example.service.models.api.StatusService;
 import org.springframework.stereotype.Service;
 

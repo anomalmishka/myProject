@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit passenger</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<div class="container-fluid">
+    <div class="row footer">
+    </div>
+    <div class="row">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <form action="#" th:action="@{'/profile/passenger/'}" th:object="${passengerProfilePage}" method="post">
+                    <table cellspacing="2" border="1" cellpadding="5">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>passengername</th>
+                            <th>passengerlastname</th>
+                            <th>passportNumber</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="passenger : ${passengerProfilePageList}"
+                            th:with="baseUrl=('/order/')">
+                            <td>
+                                <a th:href="@{${baseUrl}+${passenger.id}}"
+                                   th:text="${passenger.id}"></a>
+                            </td>
+                            <td>
+                                <input th:value="${passenger.passengername}" disabled>
+                            </td>
+                            <td>
+                                <input th:value="${passenger.passengerlastname}" disabled>
+                            </td>
+                            <td>
+                                <input th:value="${passenger.passportNumber}" disabled>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="2" border="1" cellpadding="5">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" name="passengername" th:value="Joe" required>
+                            </td>
+                            <td>
+                                <input type="text" name="passengerlastname" th:value="Baiden" required>
+                            </td>
+                            <td>
+                                <input type="text" name="passportNumber" th:value="KH7788990" required>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success btn-lg" type="submit">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

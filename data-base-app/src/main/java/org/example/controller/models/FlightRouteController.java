@@ -1,17 +1,18 @@
 package org.example.controller.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.FlightRouteDTO;
+import org.example.dto.models.FlightRouteDTO;
 import org.example.mapper.models.FlightRouteMapper;
 import org.example.service.models.api.FlightRouteService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "flight/route")
-public class FlightRouteController {
+public class FlightRouteController implements Serializable {
     private final FlightRouteService flightRouteService;
     private final FlightRouteMapper flightRouteMapper;
 

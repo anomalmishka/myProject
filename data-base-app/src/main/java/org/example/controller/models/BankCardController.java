@@ -1,15 +1,17 @@
 package org.example.controller.models;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.modelsDTO.BankCardDTO;
+import org.example.dto.models.BankCardDTO;
 import org.example.mapper.models.BankCardMapper;
 import org.example.service.models.api.BankCardService;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.Serializable;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "bank/card")
-public class BankCardController {
+public class BankCardController implements Serializable {
     private final BankCardService bankCardService;
     private final BankCardMapper bankCardMapper;
 

@@ -1,14 +1,16 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.SeatDAO;
+import org.example.dao.crud.SeatDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.Seat;
+import org.example.model.AirPlane;
+import org.example.model.Seat;
 import org.example.service.models.api.SeatService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -65,10 +67,8 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public Seat update(Seat seat) {
-        if (seat.getPlace() != null) {
-            return seatDAO.save(seat);
-        } else {
-            throw new ErrorInvalidData("Place must not be null");
-        }
+        Seat seatById = readById(seat.getId());
+            seatById.setIsOrdered(seat.getIsOrdered());
+            return seatDAO.save(seatById);
     }
 }

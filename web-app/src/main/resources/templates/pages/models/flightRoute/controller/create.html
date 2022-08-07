@@ -4,16 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home work</title>
+    <title>Create FlightRoute</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-    .footer {
-    height:56px;
-    margin:0;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8001/web-app/templates/content/css/main/style.css">
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
@@ -23,46 +18,91 @@
         </div>
         <div class="row">
             <div class="col">
-                <form action="#" th:with="baseUrl=('/models/air/company/')" th:action="@{${baseUrl}+'create/'}"
-                      th:object="${airCompanyDTO}" method="post">
+                <form action="#" th:with="baseUrl=('/models/flight/route/')" th:action="@{${baseUrl}+'create/'}"
+                      th:object="${flightRoutePage}" method="post">
                     <table cellspacing="2" border="1" cellpadding="5">
                         <thead>
                         <tr align="center">
-                            <th>nameCompany</th>
-                            <th>countryLocation</th>
+                            <th>routeStart</th>
+                            <th>routeEnd</th>
+                            <th>distance</th>
+                            <th>flightDateStart</th>
+                            <th>flightDateEnd</th>
+                            <th>duration</th>
+                            <th>price</th>
+                            <th>isActive</th>
+                            <th>AirPlane id</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="airCompany : ${airCompanyPage}">
-                            <td><input type="text" name="nameCompany"
-                                       th:value="${airCompany.nameCompany}"
+                        <tr th:each="flightRoute : ${flightRoutePage}">
+                            <td><input type="text" name="routeStart"
+                                       th:value="${flightRoute.routeStart}"
                                        size="5" required></td>
-                            <td><input type="text" name="countryLocation"
-                                       th:value="${airCompany.countryLocation}"></td>
+                            <td><input type="text" name="routeEnd"
+                                       th:value="${flightRoute.routeEnd}"></td>
+                            <td><input type="text" name="distance"
+                                       th:value="${flightRoute.distance}"></td>
+                            <td><input type="date" name="flightDateStart" id="dateStart"
+                                       min="2022-06-01" max="2050-12-31"
+                                       th:value="${flightRoute.flightDateStart}"></td>
+                            <td><input type="date" name="flightDateEnd" id="dateEnd"
+                                       min="2022-06-01" max="2050-12-31"
+                                       th:value="${flightRoute.flightDateEnd}"></td>
+                            <td><input type="text" name="duration"
+                                       th:value="${flightRoute.duration}"></td>
+                            <td><input type="text" name="price"
+                                       th:value="${flightRoute.price}"></td>
+                            <td><input type="text" name="isActive"
+                                       th:value="${flightRoute.isActive}"></td>
+                            <td th:object="${idAirPlane}">
+                                <input type="number" name="id"
+                                       value="2"></td>
                         </tr>
                         </tbody>
                     </table>
                     <button type="submit">Create</button>
                 </form>
-                <form action="#" th:with="baseUrl=('/models/air/company/')" th:action="@{${baseUrl}+'read/all'}"
+                <form action="#" th:with="baseUrl=('/models/flight/route/')" th:action="@{${baseUrl}+'read/all'}"
                       method="get">
                     <button type="submit">Return</button>
                 </form>
-            </div>
-            <div class="col">
-                <table cellspacing="2" border="1" cellpadding="5">
+                <table cellspacing="2" border="1" cellpadding="5" align="center">
                     <thead>
-                    <tr align="center">
+                    <tr>
+                        <th colspan="6">
+                            Air Plane
+                        </th>
+                    </tr>
+                    <tr>
                         <th>id</th>
-                        <th>nameCompany</th>
-                        <th>countryLocation</th>
+                        <th>type</th>
+                        <th>status</th>
+                        <th>numberSeatLowcost</th>
+                        <th>numberSeatBuisness</th>
+                        <th>isActive</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="airCompany : ${airCompanyPage}">
-                        <td><span th:text="${airCompany.id}"></span></td>
-                        <td><span th:text="${airCompany.nameCompany}"></span></td>
-                        <td><span th:text="${airCompany.countryLocation}"></span></td>
+                    <tbody th:each="airPlane : ${airPlanePageList}">
+                    <tr>
+                        <td>
+                            <span th:text="${airPlane.id}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.type}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.status}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.numberSeatLowcost}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.numberSeatBuisness}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${airPlane.isActive}"></span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -70,6 +110,8 @@
         </div>
     </div>
 </main>
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptStart.js"></script>
+<script src="http://localhost:8001/web-app/templates/content/css/date/scriptEnd.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

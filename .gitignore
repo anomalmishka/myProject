@@ -25,3 +25,4 @@
 /.nb-gradle/
 /data-base-app/target/
 /web-app/target/
+/web-db/data/

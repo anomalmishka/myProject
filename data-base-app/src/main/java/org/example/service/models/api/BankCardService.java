@@ -1,5 +1,5 @@
 package org.example.service.models.api;
-import org.example.model.entity.BankCard;
+import org.example.model.BankCard;
 import java.util.List;
 
 public interface BankCardService {

@@ -1,6 +1,6 @@
 package org.example.service.models.api;
 
-import org.example.model.entity.PassengerProfile;
+import org.example.model.PassengerProfile;
 
 import java.util.List;
 

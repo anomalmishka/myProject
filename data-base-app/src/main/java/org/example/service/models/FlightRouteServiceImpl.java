@@ -1,10 +1,10 @@
 package org.example.service.models;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dao.models.FlightRouteDAO;
+import org.example.dao.crud.FlightRouteDAO;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.FlightRoute;
+import org.example.model.FlightRoute;
 import org.example.service.models.api.FlightRouteService;
 import org.springframework.stereotype.Service;
 

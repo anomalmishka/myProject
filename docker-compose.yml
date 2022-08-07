@@ -1,46 +1,53 @@
 version: '3.3'
 
 services:
+  database:
+    container_name: postgre
+#    restart: on-failure
+    image: postgres:14
+    env_file:
+      - ./web-db/database.env
+    volumes:
+      - ./web-db/secure.sql:/docker-entrypoint-initdb.d/secure.sql
+      - ./web-db/data.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./web-db/data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+
+  data_base-app:
+    container_name: data-base-app
+    build: ./data-base-app
+    image: data-base-app:data-base-app
+    ports:
+      - "8003:8003"
+    environment:
+      DB_URL: jdbc:postgresql://postgre:5432/myPostgreSQL
+      DB_DRIVER: org.postgresql.Driver
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      DB_DIALECT: org.hibernate.dialect.PostgreSQL10Dialect
+    #    restart: on-failure
+    depends_on:
+      - web-db
+ 
   web-app:
     container_name: web-app
     build: ./web-app
-    image: ita:web-app
+    image: web-app:web-app
     ports:
       - "8001:8001"
-    hostname: web-app
+    environment:
+      DATA_BASE_APP_URL: http://data-base-app:8003/data-base-app
+      DB_URL: jdbc:postgresql://postgre:5432/myPostgreSQL
+      DB_DRIVER: org.postgresql.Driver
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      DB_DIALECT: org.hibernate.dialect.PostgreSQL10Dialect
+    depends_on:
+      - web-db
+      - data-base-app
 #    restart: on-failure
-#    environment:
-#      DB_URL: jdbc:postgresql://web_db:5432/dbWeb
-#      DB_DRIVER: org.postgresql.Driver
-#      DB_USERNAME: postgres
-#      DB_PASSWORD: postgres
-#      SERVER: http://database-app:8003/data-base-app
-#      MAPPING_DATA_BASE_APP: /data-base-app
 
-  data_base-app:
-    container_name: database-app
-    build: ./data-base-app
-    image: ita:data-base-app
-    ports:
-      - "8003:8003"
-    hostname: data-base-app
-#    restart: on-failure
-  database:
-    container_name: web-db
-    image: postgres:14 # официальный образ базы данных
-    env_file:
-      - ./web-db/database.env # данные для создания пользователя, которым вы будете подключаться приложением
-    volumes:
-      - ./web-db/secure.sql:/docker-entrypoint-initdb.d/secure.sql # путь к скрипту для создания таблиц
-      - ./web-db/data:/var/lib/postgresql/data/ # путь к папке для хранения состояния данных
-    ports:
-      - "5438:5432"
-#    restart: always
-#    depends_on:
-#      - web-db
-#      - web-app
-#      - database-app
 
-#  docker-compose -f docker-compose.yml up -d --build
-#  docker-compose -f docker-compose.yml down            - команда останавливает и удаляет контейнеры.
-#  docker-compose -f docker-compose.yml logs -f         - команда для просмотра логов внутри контейнеров.
+

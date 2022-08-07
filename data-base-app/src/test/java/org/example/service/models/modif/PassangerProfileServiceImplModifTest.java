@@ -4,9 +4,10 @@ import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.example.exception.ErrorDataNotFound;
 import org.example.exception.ErrorInvalidData;
-import org.example.model.entity.*;
+import org.example.model.*;
 import org.example.service.models.api.PassengerProfileService;
 import org.example.service.models.api.UserOrderService;
+import org.example.service.modif.PassengerProfileServiceImplModif;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -93,22 +94,22 @@ class PassangerProfileServiceImplModifTest {
     public void whenCreate_thenReturnEntity() {
         PassengerProfile GIVEN = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -123,8 +124,8 @@ class PassangerProfileServiceImplModifTest {
     void whenCreate_thenThrowErrorInvalidDataException() {
         PassengerProfile GIVEN = PassengerProfile.builder()
                 .id(1L)
-                .name(null)
-                .lastname("Admin")
+                .passengername(null)
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -136,16 +137,16 @@ class PassangerProfileServiceImplModifTest {
     public void whenReadAll_thenReturnEntityList() {
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -162,8 +163,8 @@ class PassangerProfileServiceImplModifTest {
         Integer EXPECTED = 1;
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -177,15 +178,15 @@ class PassangerProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -209,16 +210,16 @@ class PassangerProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -237,8 +238,8 @@ class PassangerProfileServiceImplModifTest {
         List<Long> GIVEN_ID_LIST = List.of(GIVEN_ID);
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -252,15 +253,15 @@ class PassangerProfileServiceImplModifTest {
         Long GIVEN_ID = 1L;
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -284,16 +285,16 @@ class PassangerProfileServiceImplModifTest {
         List<Long> GIVEN_LIST = List.of(GIVEN_ID);
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         List<PassengerProfile> ANSWER_LIST = List.of(ANSWER);
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -317,22 +318,22 @@ class PassangerProfileServiceImplModifTest {
     public void whenUpdate_thenReturnEntityList() {
         PassengerProfile GIVEN = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile ANSWER = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
         PassengerProfile EXPECTED = PassengerProfile.builder()
                 .id(1L)
-                .name("Admin")
-                .lastname("Admin")
+                .passengername("Admin")
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
@@ -347,8 +348,8 @@ class PassangerProfileServiceImplModifTest {
     void whenUpdate_thenThrowErrorInvalidDataException() {
         PassengerProfile GIVEN = PassengerProfile.builder()
                 .id(1L)
-                .name(null)
-                .lastname("Admin")
+                .passengername(null)
+                .passengerlastname("Admin")
                 .passportNumber("KK1112223")
                 .userOrderList(userOrderList)
                 .build();
