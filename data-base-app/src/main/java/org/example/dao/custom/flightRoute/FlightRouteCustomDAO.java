@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FlightRouteCustomDAO {
     List<FlightRoute> filter(FilterObj filterObj);
+    List<FlightRoute> findById(Long id);
 }

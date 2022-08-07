@@ -20,7 +20,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile create(UserProfile userProfile) {
-        if (userProfile.getUsername() != null) {
+        if (userProfile.getProfilename() != null) {
             return userProfileDAO.save(userProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");
@@ -66,7 +66,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile update(UserProfile userProfile) {
-        if (userProfile.getUsername() != null) {
+        if (userProfile.getProfilename() != null) {
             return userProfileDAO.save(userProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");

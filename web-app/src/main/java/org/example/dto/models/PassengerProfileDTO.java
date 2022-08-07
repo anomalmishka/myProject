@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PassengerProfileDTO {
     private Long id;
-    private String username;
-    private String lastname;
+    private String passengername;
+    private String passengerlastname;
     private String passportNumber;
 }
 

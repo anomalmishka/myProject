@@ -5,28 +5,23 @@ import org.example.exception.ErrorInvalidData;
 import org.example.model.BankCard;
 import org.example.model.PassengerProfile;
 import org.example.model.UserProfile;
-import org.example.service.models.api.BankCardService;
-import org.example.service.models.api.PassengerProfileService;
 import org.example.service.models.api.UserProfileService;
 import org.example.service.modif.api.UserProfileServiceModif;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class UserProfileServiceImplModif implements UserProfileServiceModif {
 
     private final UserProfileService userProfileService;
-    private final BankCardService bankCardService;
-    private final PassengerProfileService passengerProfileService;
 
     @Override
     public UserProfile create(UserProfile userProfile) {
         PassengerProfile passengerProfile = PassengerProfile.builder()
-                .username(userProfile.getUsername())
-                .lastname(userProfile.getLastname())
+                .passengername(userProfile.getProfilename())
+                .passengerlastname(userProfile.getLastname())
                 .build();
         BankCard bankCard = BankCard.builder().build();
         userProfile.setPassengerProfileList(List.of(passengerProfile));
@@ -66,10 +61,10 @@ public class UserProfileServiceImplModif implements UserProfileServiceModif {
 
     private UserProfile setForgetValueOnId(UserProfile userProfile) {
         System.out.println(userProfile);
-        if (userProfile.getUsername() != null) {
+        if (userProfile.getProfilename() != null) {
             Long id = userProfile.getId();
             UserProfile readById = userProfileService.readById(id);
-            readById.setUsername(userProfile.getUsername());
+            readById.setProfilename(userProfile.getProfilename());
             readById.setLastname(userProfile.getLastname());
             readById.setPhone(userProfile.getPhone());
             readById.setEmail(userProfile.getEmail());

@@ -1,4 +1,4 @@
-insert into passenger_profile (id, lastname, username, passport_number, user_profile_id)
+insert into passenger_profile (id, passengerlastname, passengername, passport_number, user_profile_id)
 values
 (1, 'Yazvinski', 'Maksim', 'KK1100111', 1),
 (2, 'Lukashenko', 'Aleksandr', 'KK1100112', 1),

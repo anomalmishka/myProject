@@ -2,6 +2,7 @@ package org.example.service.rest.filter.seat;
 
 import org.example.dto.models.AirCompanyDTO;
 import org.example.dto.models.SeatDTO;
+import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
@@ -24,7 +25,7 @@ public class SeatRestTemplateFilterImpl implements SeatRestTemplateFilter {
         String url = DATA_BASE_APP_URL + "/buisness/filter/seat/where/air/plane/" + idAirPlane + "/";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<AirCompanyDTO> httpEntity = new HttpEntity<>(headers);
+        HttpEntity<SeatDTO> httpEntity = new HttpEntity<>(headers);
         ResponseEntity<SeatDTO[]> responseEntity =
                 restTemplate.exchange(url, HttpMethod.GET,
                         httpEntity, SeatDTO[].class);

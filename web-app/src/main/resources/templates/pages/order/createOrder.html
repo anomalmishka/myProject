@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Viewing Flight Information</title>
+    <title>Create order</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -19,25 +19,49 @@
         <div class="row justify-content-md-center">
             <div class="col">
                 <label>Seat</label>
-                <table cellspacing="2" border="1" cellpadding="5">
+                <table cellspacing="2" border="1" cellpadding="5" align="center">
                     <thead>
                     <tr>
                         <th>id</th>
-                        <th>status</th>
+                        <th>seat</th>
                         <th>routeStart</th>
                         <th>routeEnd</th>
                         <th>flightDateStart</th>
                         <th>price</th>
+                        <th>passengerName</th>
+                        <th>passengerLastname</th>
+                        <th>passportNumber</th>
                     </tr>
                     </thead>
-                    <tbody th:each="order : ${userOrderPage}">
+                    <tbody>
                     <tr>
-                        <td><span th:text="${order.id}"></span></td>
-                        <td th:each="status : ${userOrderPage.statusPage}"><span th:text="${status.status}"></span></td>
-                        <td th:each="frp : ${userOrderPage.flightRoutePage}"><span th:text="${frp.routeStart}"></span></td>
-                        <td th:each="frp : ${userOrderPage.flightRoutePage}"><span th:text="${frp.routeEnd}"></span></td>
-                        <td th:each="frp : ${userOrderPage.flightRoutePage}"><span th:text="${frp.flightDateStart}"></span></td>
-                        <td th:each="frp : ${userOrderPage.flightRoutePage}"><span th:text="${frp.price}"></span></td>
+                        <td th:each="id : ${userOrderPage.id}">
+                            <span th:text="${id}"></span>
+                        </td>
+                        <td th:each="place : ${seatPage.place}">
+                            <span th:text="${place}"></span>
+                        </td>
+                        <td th:each="flightRoute : ${userOrderPage.flightRoute}">
+                            <span th:text="${flightRoute.routeStart}"></span>
+                        </td>
+                        <td th:each="flightRoute : ${userOrderPage.flightRoute}">
+                            <span th:text="${flightRoute.routeEnd}"></span>
+                        </td>
+                        <td th:each="flightRoute : ${userOrderPage.flightRoute}">
+                            <span th:text="${flightRoute.flightDateStart}"></span>
+                        </td>
+                        <td th:each="flightRoute : ${userOrderPage.flightRoute}">
+                            <span th:text="${flightRoute.price}"></span>
+                        </td>
+                        <td th:each="passengername : ${passengerProfilePage.passengername}">
+                            <span th:text="${passengername}"></span>
+                        </td>
+                        <td th:each="passengerlastname : ${passengerProfilePage.passengerlastname}">
+                            <span th:text="${passengerlastname}"></span>
+                        </td>
+                        <td th:each="passportNumber : ${passengerProfilePage.passportNumber}">
+                            <span th:text="${passportNumber}"></span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

@@ -18,6 +18,6 @@ public class AirPlanePage {
     private Integer numberSeatLowcost;
     private Integer numberSeatBuisness;
     private Boolean isActive;
-    private AirCompanyPage airCompanyPage;
-    private List<SeatPage> seatPageList;
+    private AirCompanyPage airCompany;
+    private List<SeatPage> seatList;
 }

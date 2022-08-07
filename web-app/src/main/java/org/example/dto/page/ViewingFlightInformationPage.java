@@ -23,9 +23,9 @@ public class ViewingFlightInformationPage {
     private Integer price;
     private Boolean isActive;
 
-    private List<AirPlaneFlightRoutePage> airPlaneFlightRoutePageList;
+    private List<AirPlaneFlightRoutePage> airPlaneFlightRouteList;
 
-    private List<AirPlanePage> airPlanePageList;
+    private List<AirPlanePage> airPlaneList;
 
-    private List<AirCompanyPage> airCompanyPageList;
+    private List<AirCompanyPage> airCompanyList;
 }

@@ -6,5 +6,7 @@ import org.example.dto.models.modif.FlightRouteDTOModif;
 import java.util.List;
 
 public interface FindFlightRouteByFilterService {
-        List<FlightRouteDTOModif> findByCondition(FilterDTO filterDTO);
+    List<FlightRouteDTOModif> findByCondition(FilterDTO filterDTO);
+
+    List<FlightRouteDTOModif> findById(Long id);
 }

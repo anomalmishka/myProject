@@ -12,11 +12,6 @@ public class FilterUserProfileServiceImpl implements FilterUserProfileService {
     private final UserPrifileCustomDAO userPrifileCustomDAO;
 
     @Override
-    public UserProfile findWhereNameLastnameEmail(UserProfile userProfile) {
-        return userPrifileCustomDAO.findWhereNameLastnameEmail(userProfile);
-    }
-
-    @Override
     public UserProfile findWhereUserId(Long userId) {
         return userPrifileCustomDAO.findWhereUserId(userId);
     }

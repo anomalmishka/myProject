@@ -14,7 +14,7 @@ import org.example.dto.models.StatusDTO;
 @Builder
 public class UserOrderDTOtoSave {
     private Long id;
-    private StatusDTO statusDTO;
-    private FlightRouteDTO flightRouteDTO;
-    private PassengerProfileDTO passengerProfileDTO;
+    private StatusDTO status;
+    private FlightRouteDTO flightRoute;
+    private PassengerProfileDTO passengerProfile;
 }

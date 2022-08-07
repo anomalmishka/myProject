@@ -5,7 +5,6 @@ import org.example.dto.models.FlightRouteDTO;
 import org.example.dto.models.modif.FlightRouteDTOModif;
 import org.example.mapper.models.FlightRouteMapper;
 import org.example.mapper.models.modif.FlightRouteMapperModif;
-import org.example.model.FlightRoute;
 import org.example.service.modif.api.FlightRouteServiceModif;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +25,7 @@ public class FlightRouteControllerModif {
 
     @GetMapping(path = "read/{id}/", produces = "application/json", consumes = "application/json")
     public FlightRouteDTOModif readById(@PathVariable("id") Long id) {
-        FlightRoute flightRoute = flightRouteServiceModif.readById(id);
-        System.out.println(flightRoute);
-        FlightRouteDTOModif flightRouteDTOModif = flightRouteMapperModif.toDTO(flightRoute);
-        System.out.println(flightRouteDTOModif);
-        return flightRouteDTOModif;
+        return flightRouteMapperModif.toDTO(flightRouteServiceModif.readById(id));
     }
 
     @PostMapping(path = "read/all/id", produces = "application/json", consumes = "application/json")

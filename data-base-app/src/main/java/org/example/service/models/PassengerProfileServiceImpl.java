@@ -21,7 +21,7 @@ public class PassengerProfileServiceImpl implements PassengerProfileService {
 
     @Override
     public PassengerProfile create(PassengerProfile passengerProfile) {
-        if (passengerProfile.getUsername() != null) {
+        if (passengerProfile.getPassengername() != null) {
             return passengerProfileDAO.save(passengerProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");
@@ -67,7 +67,7 @@ public class PassengerProfileServiceImpl implements PassengerProfileService {
 
     @Override
     public PassengerProfile update(PassengerProfile passengerProfile) {
-        if (passengerProfile.getUsername() != null) {
+        if (passengerProfile.getPassengername() != null) {
             return passengerProfileDAO.save(passengerProfile);
         } else {
             throw new ErrorInvalidData("Name must not be null");

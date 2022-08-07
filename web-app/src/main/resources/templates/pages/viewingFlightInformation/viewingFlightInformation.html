@@ -34,7 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="view : ${viewingFlightInformationPage}">
+                    <tr th:each="view : ${viewingFlightInformationPageList}">
                         <td><span th:text="${view.id}"></span></td>
                         <td><span th:text="${view.routeStart}"></span></td>
                         <td><span th:text="${view.routeEnd}"></span></td>
@@ -63,8 +63,8 @@
                         <th>isActive</th>
                     </tr>
                     </thead>
-                    <tbody th:each="view : ${viewingFlightInformationPage}">
-                    <tr th:each="airPlane : ${view.airPlanePageList}">
+                    <tbody th:each="view : ${viewingFlightInformationPageList}">
+                    <tr th:each="airPlane : ${view.airPlaneList}">
                         <td>
                             <a th:with="baseUrl=('/view/flight/information/seat/')"
                                th:href="@{${baseUrl}+${airPlane.id}}"
@@ -100,8 +100,8 @@
                         <th>countryLocation</th>
                     </tr>
                     </thead>
-                    <tbody th:each="view : ${viewingFlightInformationPage}">
-                    <tr th:each="airCompany : ${view.airCompanyPageList}">
+                    <tbody th:each="view : ${viewingFlightInformationPageList}">
+                    <tr th:each="airCompany : ${view.airCompanyList}">
                         <td><span th:text="${airCompany.id}"></span></td>
                         <td><span th:text="${airCompany.nameCompany}"></span></td>
                         <td><span th:text="${airCompany.countryLocation}"></span></td>

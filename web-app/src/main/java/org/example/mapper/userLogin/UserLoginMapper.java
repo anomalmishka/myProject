@@ -27,7 +27,7 @@ public class UserLoginMapper {
             }
         }
         return UserLogin.builder()
-                .username(userLoginDTO.getLoginUsername())
+                .username(userLoginDTO.getUsername())
                 .password(userLoginDTO.getPassword())
                 .passwordConfirm(userLoginDTO.getPasswordConfirm())
                 .authorities(List.of(Authorities.builder()

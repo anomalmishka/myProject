@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Viewing Flight Information</title>
+    <title>Ready to Order</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -20,7 +20,7 @@
         <div class="row justify-content-md-center">
             <div class="col">
                 <form action="#" th:action="@{'/order/create/'}" th:object="${orderDataPage}" method="post">
-                    <table cellspacing="2" border="1" cellpadding="5">
+                    <table cellspacing="2" border="1" cellpadding="5" align="center">
                         <thead>
                         <tr>
                             <th>idFlightRoute</th>
@@ -45,7 +45,7 @@
                             <td>
                                 <select th:field="*{idPassangerProfile}">
                                     <option th:each="profile : ${passengerProfilePageList}" th:value="${profile.id}"
-                                            th:text="${profile.lastname}"
+                                            th:text="${profile.passengerlastname}"
                                     ></option>
                                 </select>
                             </td>

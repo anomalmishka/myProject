@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.dto.models.BankCardDTO;
+import org.example.dto.models.modif.PassengerProfileDTOModif;
 
 import java.util.List;
 
@@ -13,13 +15,13 @@ import java.util.List;
 @Builder
 public class UserProfilePage {
     private Long id;
-    private String profileUsername;
+    private String profilename;
     private String lastname;
     private Integer phone;
     private String email;
     private Boolean isBlockedProfile;
     private Long userId;
-    private List<PassengerProfilePage> passengerProfilePageList;
-    private List<BankCardPage> bankCardPageList;
+    private List<BankCardDTO> bankCardList;
+    private List<PassengerProfileDTOModif> passengerProfileList;
 }
 

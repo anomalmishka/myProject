@@ -19,4 +19,9 @@ public class FilterFlightRouteServiceImpl implements FilterFlightRouteService {
     public List<FlightRoute> filter(FilterObj filterObj) {
         return flightRouteCustomDAO.filter(filterObj);
     }
+
+    @Override
+    public List<FlightRoute> findById(Long id) {
+        return flightRouteCustomDAO.findById(id);
+    }
 }

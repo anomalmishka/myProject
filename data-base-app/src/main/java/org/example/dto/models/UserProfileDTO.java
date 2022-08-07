@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserProfileDTO {
     private Long id;
-    private String username;
+    private String profilename;
     private String lastname;
     private Integer phone;
     private String email;

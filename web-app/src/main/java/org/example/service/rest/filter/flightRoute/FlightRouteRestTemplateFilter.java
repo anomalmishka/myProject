@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FlightRouteRestTemplateFilter {
     List<FlightRouteDTOModif> exchangeFilterToFlightRoute(FilterDTO filterDTO, String uriVar);
+    List<FlightRouteDTOModif> findById(Long id);
 }

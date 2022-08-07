@@ -28,13 +28,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public UserOrderDTOModif create(OrderDataDTO orderDataDTO) {
         UserOrderDTOtoSave userOrderDTOtoSave = UserOrderDTOtoSave.builder()
-                .statusDTO(StatusDTO.builder()
+                .status(StatusDTO.builder()
                         .id(1L)
                         .build())
-                .flightRouteDTO(FlightRouteDTO.builder()
+                .flightRoute(FlightRouteDTO.builder()
                         .id(orderDataDTO.getIdFlightRoute())
                         .build())
-                .passengerProfileDTO(PassengerProfileDTO.builder()
+                .passengerProfile(PassengerProfileDTO.builder()
                         .id(orderDataDTO.getIdPassangerProfile())
                         .build())
                 .build();
@@ -54,6 +54,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<PassengerProfileDTOModif> readPassangerProfile(UserProfileDTOModif userProfileDTOModif) {
-        return userProfileDTOModif.getPassengerProfileDTOModifList();
+        return userProfileDTOModif.getPassengerProfileList();
     }
 }

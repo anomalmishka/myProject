@@ -12,7 +12,7 @@ import javax.persistence.Column;
 @Data
 @Builder
 public class UserLoginDTO {
-    private String loginUsername;
+    private String username;
     private String password;
     private String passwordConfirm;
     private String authorities;

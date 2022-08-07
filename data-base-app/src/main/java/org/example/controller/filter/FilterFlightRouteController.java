@@ -22,5 +22,10 @@ public class FilterFlightRouteController {
     public List<FlightRouteDTOModif> filter(@RequestBody FilterDTO filterDTO) {
         return flightRouteMapperModif.toDTO(filterFlightRouteService.filter(filterMapper.toModel(filterDTO)));
     }
+
+    @GetMapping(path = "find/{id}", produces = "application/json", consumes = "application/json")
+    public List<FlightRouteDTOModif> findById(@PathVariable("id") Long id) {
+        return flightRouteMapperModif.toDTO(filterFlightRouteService.findById(id));
+    }
 }
 

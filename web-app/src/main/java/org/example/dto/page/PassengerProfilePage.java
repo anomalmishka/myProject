@@ -13,9 +13,9 @@ import java.util.List;
 @Builder
 public class PassengerProfilePage {
     private Long id;
-    private String passangerUsername;
-    private String lastname;
+    private String passengername;
+    private String passengerlastname;
     private String passportNumber;
-    private List<UserOrderPage> userOrderPageList;
+    private List<UserOrderPage> userOrderList;
 }
 

@@ -23,16 +23,6 @@ public class UserProfileRestTemplateFilterImpl implements UserProfileRestTemplat
     private String DATA_BASE_APP_URL;
 
     @Override
-    public UserProfileDTOModif findWhereNameLastnameEmail(UserProfileDTOModif userProfileDTOModif) {
-        String uriVar = "where/user";
-        String PATH = "/buisness/filter/user/profile/";
-        ResponseEntity<UserProfileDTOModif> responseEntity =
-                restTemplate.exchange(DATA_BASE_APP_URL + PATH + uriVar, HttpMethod.POST,
-                        new HttpEntity<>(userProfileDTOModif), UserProfileDTOModif.class);
-        return responseEntity.getBody();
-    }
-
-    @Override
     public UserProfileDTOModif findWhereUserId(Long userId) {
         String url = DATA_BASE_APP_URL + "/buisness/filter/user/profile/where/user/" + userId + "/";
         HttpHeaders headers = new HttpHeaders();

@@ -1,4 +1,4 @@
-package org.example.service.rest.models.UserProfile;
+package org.example.service.rest.models.userProfile;
 
 import org.example.dto.models.modif.UserProfileDTOModif;
 

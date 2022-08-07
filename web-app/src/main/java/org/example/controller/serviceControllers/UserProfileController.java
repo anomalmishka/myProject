@@ -6,6 +6,7 @@ import org.example.dto.page.PassengerProfilePage;
 import org.example.dto.page.UserProfilePage;
 import org.example.mapper.page.PassengerProfileMapperPage;
 import org.example.mapper.page.UserProfileMapperPage;
+import org.example.service.models.passengerProfile.PassengerProfileService;
 import org.example.service.models.userProfileCustom.UserProfilePageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class UserProfileController {
     private final UserProfilePageService userProfilePageService;
     private final UserProfileMapperPage userProfileMapperPage;
     private final PassengerProfileMapperPage passengerProfileMapperPage;
+    private  final PassengerProfileService passengerProfileService;
 
     @GetMapping("/profile")
     public String getProfile(Model model, Principal principal) {
@@ -49,12 +51,10 @@ public class UserProfileController {
 
     @PostMapping("/profile/passenger")
     public String createPassengerProfile(Model model,
-                                @ModelAttribute PassengerProfilePage passengerProfilePage
-    ) {
-        System.out.println("passengerProfilePage create " + passengerProfilePage);
-        passengerProfileMapperPage.toDTO(passengerProfilePage);
-//        UserProfilePage profilePage = userProfileMapperPage.toPage(userProfilePageService.updateProfile(userProfileMapperPage.toDTO(userProfilePage)));
-        model.addAttribute("userProfilePage", passengerProfilePage);
-        return "pages/userProfile/userProfile";
+                                @ModelAttribute PassengerProfilePage passengerProfilePage, Principal principal) {
+        PassengerProfilePage passengerProfilePageCreated =
+                passengerProfileMapperPage.toPage(passengerProfileService.create(passengerProfileMapperPage.toDTO(passengerProfilePage)));
+        model.addAttribute("passengerProfilePageCreated", passengerProfilePageCreated);
+        return "pages/userProfile/passengerProfile";
     }
 }

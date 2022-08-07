@@ -27,4 +27,15 @@ public class FlightRouteRestTemplateFilterImpl implements FlightRouteRestTemplat
                         new HttpEntity<>(filterDTO), FlightRouteDTOModif[].class);
         return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
     }
+    @Override
+    public List<FlightRouteDTOModif> findById(Long id) {
+        String url = DATA_BASE_APP_URL + "/buisness/filter/flight/route/find/" + id + "/";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<FlightRouteDTOModif> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<FlightRouteDTOModif[]> responseEntity =
+                restTemplate.exchange(url, HttpMethod.GET,
+                        httpEntity, FlightRouteDTOModif[].class);
+        return Arrays.stream(Objects.requireNonNull(responseEntity.getBody())).collect(Collectors.toList());
+    }
 }

@@ -13,9 +13,9 @@ import java.util.List;
 @Builder
 public class PassengerProfileDTOModif {
     private Long id;
-    private String username;
-    private String lastname;
+    private String passengername;
+    private String passengerlastname;
     private String passportNumber;
-    private List<UserOrderDTOModif> userOrderDTOModifList;
+    private List<UserOrderDTOModif> userOrderList;
 }
 

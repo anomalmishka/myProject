@@ -2,7 +2,7 @@ package org.example.service.models.userProfile;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.models.modif.UserProfileDTOModif;
-import org.example.service.rest.models.UserProfile.UserProfileRestTemlateService;
+import org.example.service.rest.models.userProfile.UserProfileRestTemlateService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -15,8 +15,8 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "USERNAME")
-    private String username;
+    @Column(name = "PROFILENAME")
+    private String profilename;
     @Column(name = "LASTNAME")
     private String lastname;
     @Column(name = "PHONE")

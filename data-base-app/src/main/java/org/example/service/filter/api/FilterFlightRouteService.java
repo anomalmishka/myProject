@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface FilterFlightRouteService {
     List<FlightRoute> filter(FilterObj filterObj);
+    List<FlightRoute> findById(Long id);
 }
 

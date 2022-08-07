@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AirPlaneFlightRouteDTOModif {
     private Long id;
-    private AirPlaneDTOModif airPlaneDTOModif;
+    private AirPlaneDTOModif airPlane;
 }

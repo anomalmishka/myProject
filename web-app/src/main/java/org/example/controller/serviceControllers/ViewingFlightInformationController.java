@@ -6,7 +6,7 @@ import org.example.dto.page.SeatPage;
 import org.example.dto.page.ViewingFlightInformationPage;
 import org.example.mapper.page.SeatMapperPage;
 import org.example.mapper.page.ViewingFlightInformationMapperPage;
-import org.example.service.models.flightRoute.FlightRouteService;
+import org.example.service.filter.FindFlightRouteByFilterService;
 import org.example.service.models.seat.SeatService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +19,19 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class ViewingFlightInformationController {
-    private final FlightRouteService flightRouteService;
+    private final FindFlightRouteByFilterService findFlightRouteByFilterService;
     private final SeatService seatService;
     private final SeatMapperPage seatMapperPage;
     private final ViewingFlightInformationMapperPage viewingFlightInformationMapperPage;
 
     private Long ID_FLIGHTROUTE;
-    private Long ID_AIR_PLANE;
 
     @GetMapping("/view/flight/information/{idFlightRoute}")
     public String viewFlightInfo(Model model,
                                  @PathVariable("idFlightRoute") Long idFlightRoute) {
-        ViewingFlightInformationPage viewingFlightInformationPage =
-                viewingFlightInformationMapperPage.toPage(flightRouteService.readById(idFlightRoute));
-        model.addAttribute("viewingFlightInformationPage", viewingFlightInformationPage);
+
+        List<ViewingFlightInformationPage> viewingFlightInformationPageList = viewingFlightInformationMapperPage.toPage(findFlightRouteByFilterService.findById(idFlightRoute));
+        model.addAttribute("viewingFlightInformationPageList", viewingFlightInformationPageList);
         ID_FLIGHTROUTE = idFlightRoute;
         model.addAttribute("idFlightRoute", idFlightRoute);
         return "pages/viewingFlightInformation/viewingFlightInformation";
@@ -43,7 +42,6 @@ public class ViewingFlightInformationController {
                                @PathVariable("idAirPlane") Long idAirPlane,
                                @ModelAttribute OrderDataPage orderDataPage
     ) {
-        ID_AIR_PLANE = idAirPlane;
         orderDataPage.setIdFlightRoute(String.valueOf(ID_FLIGHTROUTE));
         List<SeatPage> seatPageList = seatMapperPage.toPage(seatService.findSeatWhereAirPlaneId(idAirPlane));
         model.addAttribute("seatPageList", seatPageList);

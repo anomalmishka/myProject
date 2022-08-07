@@ -21,6 +21,6 @@ public class FlightRouteDTOModif {
     private Timestamp flightDateEnd;
     private Long duration;
     private Integer price;
+    private List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteList;
     private Boolean isActive;
-    private List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteDTOModifList;
 }

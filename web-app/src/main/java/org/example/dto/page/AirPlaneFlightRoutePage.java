@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AirPlaneFlightRoutePage {
     private Long id;
-    private AirPlanePage airPlanePage;
+    private AirPlanePage airPlane;
 }

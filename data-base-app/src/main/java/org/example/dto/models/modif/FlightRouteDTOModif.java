@@ -22,5 +22,5 @@ public class FlightRouteDTOModif {
     private Integer duration;
     private Integer price;
     private Boolean isActive;
-    private List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteDTOModifList;
+    private List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteList;
 }

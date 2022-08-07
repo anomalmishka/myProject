@@ -21,6 +21,6 @@ public class FlightRoutePage {
     private Timestamp flightDateEnd;
     private Long duration;
     private Integer price;
+    private List<AirPlaneFlightRoutePage> airPlaneFlightRouteList;
     private Boolean isActive;
-    private List<AirPlaneFlightRoutePage> airPlaneFlightRoutePageList;
 }

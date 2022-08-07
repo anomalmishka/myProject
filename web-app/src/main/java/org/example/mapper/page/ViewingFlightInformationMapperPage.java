@@ -37,34 +37,32 @@ public class ViewingFlightInformationMapperPage {
                         .map(this::toPage).collect(Collectors.toList())).orElse(null);
     }
 
-//    public ViewingFlightInformationPage toPage(FlightRouteDTOModif flightRouteDTOModif) {
-//        List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteDTOModifList =
-//                flightRouteDTOModif.getAirPlaneFlightRouteDTOModifList();
-//        List<AirPlaneDTOModif> airPlaneDTOModifList =
-//                airPlaneFlightRouteDTOModifList.stream()
-//                        .map(AirPlaneFlightRouteDTOModif::getAirPlaneDTOModif)
-//                        .collect(Collectors.toList());
-//        List<AirCompanyDTO> airCompanyDTOList =
-//                airPlaneDTOModifList.stream()
-//                        .map(AirPlaneDTOModif::getAirCompanyDTO)
-//                        .collect(Collectors.toList());
-//        return ViewingFlightInformationPage.builder()
-//                .id(flightRouteDTOModif.getId())
-//                .routeStart(flightRouteDTOModif.getRouteStart())
-//                .routeEnd(flightRouteDTOModif.getRouteEnd())
-//                .distance(flightRouteDTOModif.getDistance())
-//                .flightDateStart(flightRouteDTOModif.getFlightDateStart())
-//                .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
-//                .duration(flightRouteDTOModif.getDuration())
-//                .price(flightRouteDTOModif.getPrice())
-//                .isActive(flightRouteDTOModif.getIsActive())
-//                .airPlaneFlightRoutePageList(airPlaneFlightRouteMapperPage.toPage(airPlaneFlightRouteDTOModifList))
-//                .airPlanePageList(airPlaneMapperPage.toPage(airPlaneDTOModifList))
-//                .airCompanyPageList(airCompanyMapperPage.toPage(airCompanyDTOList))
-//                .build();
-//    }
-
     public ViewingFlightInformationPage toPage(FlightRouteDTOModif flightRouteDTOModif) {
-        return modelMapper.map(flightRouteDTOModif, ViewingFlightInformationPage.class);
+        List<AirPlaneFlightRouteDTOModif> airPlaneFlightRouteDTOModifList =
+                flightRouteDTOModif.getAirPlaneFlightRouteList();
+        List<AirPlaneDTOModif> airPlaneDTOModifList =
+                airPlaneFlightRouteDTOModifList.stream()
+                        .map(AirPlaneFlightRouteDTOModif::getAirPlane)
+                        .collect(Collectors.toList());
+        List<AirCompanyDTO> airCompanyDTOList =
+                airPlaneDTOModifList.stream()
+                        .map(AirPlaneDTOModif::getAirCompany)
+                        .collect(Collectors.toList());
+        return ViewingFlightInformationPage.builder()
+                .id(flightRouteDTOModif.getId())
+                .routeStart(flightRouteDTOModif.getRouteStart())
+                .routeEnd(flightRouteDTOModif.getRouteEnd())
+                .distance(flightRouteDTOModif.getDistance())
+                .flightDateStart(flightRouteDTOModif.getFlightDateStart())
+                .flightDateEnd(flightRouteDTOModif.getFlightDateEnd())
+                .duration(flightRouteDTOModif.getDuration())
+                .price(flightRouteDTOModif.getPrice())
+                .isActive(flightRouteDTOModif.getIsActive())
+                .airPlaneFlightRouteList(airPlaneFlightRouteMapperPage.toPage(airPlaneFlightRouteDTOModifList))
+                .airPlaneList(airPlaneMapperPage.toPage(airPlaneDTOModifList))
+                .airCompanyList(airCompanyMapperPage.toPage(airCompanyDTOList))
+                .build();
     }
+
+
 }

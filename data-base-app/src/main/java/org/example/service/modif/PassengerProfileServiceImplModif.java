@@ -55,7 +55,7 @@ public class PassengerProfileServiceImplModif implements PassengerProfileService
 
     private PassengerProfile setForgetValueOnId(PassengerProfile passengerProfile) {
         System.out.println(passengerProfile);
-        if (passengerProfile.getUsername() != null) {
+        if (passengerProfile.getPassengername() != null) {
             List<Long> userOrderIdList = passengerProfile.getUserOrderList().stream().map(UserOrder::getId).collect(Collectors.toList());
             List<UserOrder> userOrderList = userOrderService.readAllByIds(userOrderIdList);
             passengerProfile.setUserOrderList(userOrderList);

@@ -93,8 +93,8 @@ class UserProfileServiceImplModifTest {
     private final List<UserOrder> userOrderList = List.of(userOrder);
     private final PassengerProfile passengerProfile = PassengerProfile.builder()
             .id(1L)
-            .username("Admin")
-            .lastname("Admin")
+            .passengername("Admin")
+            .passengerlastname("Admin")
             .passportNumber("KK1112223")
             .userOrderList(userOrderList)
             .build();

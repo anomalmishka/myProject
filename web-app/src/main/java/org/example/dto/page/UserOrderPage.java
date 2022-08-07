@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserOrderPage {
     private Long id;
-    private StatusPage statusPage;
-    private FlightRoutePage flightRoutePage;
+    private StatusPage status;
+    private FlightRoutePage flightRoute;
 }

@@ -14,13 +14,13 @@ import java.util.List;
 @Builder
 public class UserProfileDTOModif {
     private Long id;
-    private String username;
+    private String profilename;
     private String lastname;
     private Integer phone;
     private String email;
     private Boolean isBlockedProfile;
     private Long userId;
-    private List<BankCardDTO> bankCardDTOList;
-    private List<PassengerProfileDTOModif> passengerProfileDTOModifList;
+    private List<BankCardDTO> bankCardList;
+    private List<PassengerProfileDTOModif> passengerProfileList;
 }
 

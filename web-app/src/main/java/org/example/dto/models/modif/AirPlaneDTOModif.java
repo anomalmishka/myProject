@@ -20,6 +20,6 @@ public class AirPlaneDTOModif {
     private Integer numberSeatLowcost;
     private Integer numberSeatBuisness;
     private Boolean isActive;
-    private AirCompanyDTO airCompanyDTO;
-    private List<SeatDTO> seatDTOList;
+    private AirCompanyDTO airCompany;
+    private List<SeatDTO> seatList;
 }

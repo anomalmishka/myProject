@@ -15,10 +15,10 @@ public class PassengerProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "USERNAME")
-    private String username;
-    @Column(name = "LASTNAME")
-    private String lastname;
+    @Column(name = "PASSENGERNAME")
+    private String passengername;
+    @Column(name = "PASSENGERLASTNAME")
+    private String passengerlastname;
     @Column(name = "PASSPORT_NUMBER")
     private String passportNumber;
 

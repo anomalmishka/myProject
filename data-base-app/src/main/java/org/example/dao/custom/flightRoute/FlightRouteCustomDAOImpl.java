@@ -352,4 +352,15 @@ public class FlightRouteCustomDAOImpl implements FlightRouteCustomDAO {
         }
         return entityManager.createQuery(query).getResultList();
     }
+
+    @Override
+    public List<FlightRoute> findById(Long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<FlightRoute> query = criteriaBuilder.createQuery(FlightRoute.class);
+        Root<FlightRoute> root = query.from(FlightRoute.class);
+        Predicate predicate = criteriaBuilder.equal(root.get(FlightRoute_.id), id);
+        query.where(predicate).distinct(true);
+        return entityManager.createQuery(query).getResultList();
+    }
 }

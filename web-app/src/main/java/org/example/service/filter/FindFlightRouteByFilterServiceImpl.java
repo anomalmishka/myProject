@@ -18,4 +18,9 @@ public class FindFlightRouteByFilterServiceImpl implements FindFlightRouteByFilt
     public List<FlightRouteDTOModif> findByCondition(FilterDTO filterDTO) {
         return flightRouteRestTemplateFilter.exchangeFilterToFlightRoute(filterDTO,"find");
     }
+
+    @Override
+    public List<FlightRouteDTOModif> findById(Long id) {
+        return flightRouteRestTemplateFilter.findById(id);
+    }
 }
