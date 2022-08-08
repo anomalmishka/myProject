@@ -6,7 +6,7 @@ services:
 #    restart: on-failure
     image: postgres:14
     env_file:
-      - ./web-db/database.env
+      - web-db/database.env
     volumes:
       - ./web-db/secure.sql:/docker-entrypoint-initdb.d/secure.sql
       - ./web-db/data.sql:/docker-entrypoint-initdb.d/data.sql
@@ -15,7 +15,7 @@ services:
       - "5432:5432"
 
 
-  data_base-app:
+  data-base-app:
     container_name: data-base-app
     build: ./data-base-app
     image: data-base-app:data-base-app
@@ -28,8 +28,8 @@ services:
       DB_PASSWORD: admin
       DB_DIALECT: org.hibernate.dialect.PostgreSQL10Dialect
     #    restart: on-failure
-    depends_on:
-      - web-db
+#    depends_on:
+#      - web-db
  
   web-app:
     container_name: web-app
@@ -45,7 +45,7 @@ services:
       DB_PASSWORD: admin
       DB_DIALECT: org.hibernate.dialect.PostgreSQL10Dialect
     depends_on:
-      - web-db
+#      - web-db
       - data-base-app
 #    restart: on-failure
 
