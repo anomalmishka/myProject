@@ -1,6 +1,8 @@
 package org.example.config.secure;
 
 import lombok.RequiredArgsConstructor;
+import org.example.config.CustomAuthenticationFailureHandler;
+import org.example.config.CustomLogoutSuccessHandler;
 import org.example.dao.UserLoginDAO;
 import org.example.service.models.userLoginDetails.UserLoginDetailsService;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -33,6 +37,16 @@ public class SecurityConfigDocker extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return new UserLoginDetailsService(userLoginDAO);
     }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -47,13 +61,37 @@ public class SecurityConfigDocker extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/find/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/templates/**").permitAll()
+                .antMatchers("/registration/**").permitAll()
+                .antMatchers("/restore/password/**").permitAll()
+                .antMatchers("/models/**").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/order/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+                .antMatchers("/profile/**").hasAnyAuthority("ADMIN","MANAGER","USER")
+                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
+//                .anyRequest().authenticated()
                 .and()
-                .logout().logoutSuccessUrl("/")
+                .formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/perform_login")
+//                .successForwardUrl("/")
+//                .defaultSuccessUrl("/", true)
+                .failureUrl("/access/denied")
+//                .failureHandler(authenticationFailureHandler())
                 .and()
-                .exceptionHandling().accessDeniedPage("/access/denied")
+                .exceptionHandling()
+                .accessDeniedPage("/access/denied")
                 .and()
-                .formLogin();
-    }
+                .logout()
+                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID");
+//                .logoutSuccessHandler(logoutSuccessHandler());
 
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("h2-console/**").permitAll()
+//                .anyRequest().authenticated()
+                .and()
+                .headers()
+                .frameOptions().disable();
+    }
 }
