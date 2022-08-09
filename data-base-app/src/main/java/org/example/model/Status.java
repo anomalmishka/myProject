@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,10 +22,11 @@ public class Status {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
             cascade = CascadeType.MERGE,
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            mappedBy = "status"
     )
-    @JoinColumn(name = "STATUS_ID")
     private List<UserOrder> userOrder;
 }

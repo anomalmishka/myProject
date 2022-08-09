@@ -18,24 +18,18 @@ public class UserOrder {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private FlightRoute flightRoute;
-    public FlightRoute getFlightRoute(){
-        return flightRoute;
-    }
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "STATUS_ID")
     private Status status;
-    public Status getStatus(){
-        return status;
-    }
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "PASSENGER_PROFILE_ID")
     private PassengerProfile passengerProfile;
-    public PassengerProfile getPassengerProfile(){
-        return passengerProfile;
-    }
 }

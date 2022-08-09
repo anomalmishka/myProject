@@ -18,16 +18,12 @@ public class AirPlaneFlightRoute {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "AIR_PLANE_ID")
     private AirPlane airPlane;
-    public AirPlane getAirPlane(){
-        return airPlane;
-    }
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private FlightRoute flightRoute;
-    public FlightRoute getFlightRoute(){
-        return flightRoute;
-    }
-
 }

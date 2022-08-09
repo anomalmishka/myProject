@@ -17,6 +17,7 @@ public class UserProfileMapper {
     private final ModelMapper modelMapper;
 
     public UserProfileDTO toDTO(UserProfile userProfile) {
+        System.out.println(userProfile);
         return modelMapper.map(userProfile, UserProfileDTO.class);
     }
 

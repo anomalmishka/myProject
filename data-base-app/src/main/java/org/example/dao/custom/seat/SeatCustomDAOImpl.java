@@ -25,6 +25,8 @@ public class SeatCustomDAOImpl implements SeatCustomDAO {
         Join<Seat, AirPlane> airPlaneJoin = root.join(Seat_.airPlane, JoinType.LEFT);
         Predicate predicate = criteriaBuilder.equal(airPlaneJoin.get(AirPlane_.id), id);
         query.where(predicate).distinct(true);
-        return entityManager.createQuery(query).getResultList();
+        List<Seat> resultList = entityManager.createQuery(query).getResultList();
+        entityManager.close();
+        return resultList;
     }
 }

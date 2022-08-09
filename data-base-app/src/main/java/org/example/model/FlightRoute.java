@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -35,20 +37,21 @@ public class FlightRoute {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            mappedBy = "flightRoute"
     )
-    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private List<AirPlaneFlightRoute> airPlaneFlightRouteList;
-
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
             cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            mappedBy = "flightRoute"
     )
-    @JoinColumn(name = "FLIGHT_ROUTE_ID")
     private List<UserOrder> userOrderList;
 }

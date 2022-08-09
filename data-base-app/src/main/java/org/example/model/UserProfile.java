@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,18 +32,22 @@ public class UserProfile {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy="userProfile"
     )
-    @JoinColumn(name="USER_PROFILE_ID")
     private List<BankCard> bankCardList;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy="userProfile"
     )
-    @JoinColumn(name="USER_PROFILE_ID")
     private List<PassengerProfile> passengerProfileList;
 }
 

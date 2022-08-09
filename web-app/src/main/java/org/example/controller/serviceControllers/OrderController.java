@@ -69,7 +69,6 @@ public class OrderController {
         List<PassengerProfilePage> passengerProfilePageList =
                 passengerProfileMapperPage.toPage(
                         passengerProfileCustomService.getPassanger(principal));
-        System.out.println(passengerProfilePageList);
         model.addAttribute("passengerProfilePageList", passengerProfilePageList);
         return "pages/order/getOrder";
     }

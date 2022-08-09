@@ -19,9 +19,7 @@ public class BankCard {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_PROFILE_ID")
     private UserProfile userProfile;
-    public UserProfile getUserProfile(){
-        return userProfile;
-    }
 }

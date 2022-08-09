@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,9 +25,10 @@ public class AirCompany implements Serializable {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.MERGE,
+            mappedBy = "airCompany"
     )
-    @JoinColumn(name = "AIR_COMPANY_ID")
     private List<AirPlane> airPlaneList;
 }

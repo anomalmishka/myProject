@@ -28,6 +28,8 @@ public class UserLoginCustomDAOImpl implements UserLoginCustomDAO {
         Root<UserLogin> root = query.from(UserLogin.class);
         Predicate predicate = criteriaBuilder.equal(root.get(UserLogin_.username), username);
         query.where(predicate);
-        return entityManager.createQuery(query).getResultList();
+        List<UserLogin> resultList = entityManager.createQuery(query).getResultList();
+        entityManager.close();
+        return resultList;
     }
 }
