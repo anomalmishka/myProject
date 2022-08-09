@@ -11,8 +11,8 @@ import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
-@Repository
 @Transactional
+@Repository
 public class UserPrifileCustomDAOImpl implements UserPrifileCustomDAO {
     private final EntityManagerFactory entityManagerFactory;
 
@@ -24,6 +24,8 @@ public class UserPrifileCustomDAOImpl implements UserPrifileCustomDAO {
         Root<UserProfile> root = query.from(UserProfile.class);
         Predicate predicateUserID = criteriaBuilder.equal(root.get(UserProfile_.userId), userId);
         query.where(predicateUserID);
-        return entityManager.createQuery(query).getSingleResult();
+        UserProfile singleResult = entityManager.createQuery(query).getSingleResult();
+        entityManager.close();
+        return singleResult;
     }
 }

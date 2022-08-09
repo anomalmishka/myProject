@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
-import static org.modelmapper.config.Configuration.AccessLevel.PUBLIC;
 
 @Configuration
 public class MapperConfig {
@@ -20,7 +19,6 @@ public class MapperConfig {
                 .setMatchingStrategy(MatchingStrategies.STRICT)
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true)
-                .setFieldAccessLevel(PUBLIC)
                 .setFieldAccessLevel(PRIVATE);
         return mapper;
     }
@@ -31,12 +29,4 @@ public class MapperConfig {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper;
     }
-
-//    @PostConstruct
-//    public void setupMapper() {
-//        mapper.createTypeMap(Droid.class, DroidDto.class)
-//                .addMappings(m -> m.skip(DroidDto::setUnicornId)).setPostConverter(toDtoConverter());
-//        mapper.createTypeMap(DroidDto.class, Droid.class)
-//                .addMappings(m -> m.skip(Droid::setUnicorn)).setPostConverter(toEntityConverter());
-//    }
 }

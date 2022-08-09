@@ -23,9 +23,7 @@ public class Seat {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AIR_PLANE_ID")
     private AirPlane airPlane;
-    public AirPlane getAirPlane(){
-        return airPlane;
-    }
 }

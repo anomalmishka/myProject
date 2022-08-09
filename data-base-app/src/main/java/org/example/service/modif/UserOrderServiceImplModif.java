@@ -66,9 +66,9 @@ public class UserOrderServiceImplModif implements UserOrderServiceModif {
     public UserOrder update(UserOrder userOrder) {
         Long userOrderId = userOrder.getId();
         UserOrder userOrderById = userOrderService.readById(userOrderId);
-//        Long statusId = userOrder.getStatus().getId();
-//        Status statusById = statusService.readById(statusId);
-        userOrderById.setStatus(userOrder.getStatus());
+        Long statusId = userOrder.getStatus().getId();
+        Status statusById = statusService.readById(statusId);
+        userOrderById.setStatus(statusById);
         return userOrderService.update(userOrderById);
     }
 }

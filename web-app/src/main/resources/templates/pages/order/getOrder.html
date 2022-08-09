@@ -25,8 +25,6 @@
                         <th>passengername</th>
                         <th>passengerlastname</th>
                         <th>passportNumber</th>
-
-                        <th>Select to cancel order</th>
                         <th>Order</th>
                         <th>Order</th>
                         <th>Order</th>
@@ -53,8 +51,6 @@
                         <td>
                             <span th:text="${passenger.passportNumber}"></span>
                         </td>
-                        <td>
-                        </td>
                         <td th:each="userOrder : ${passenger.userOrderList}"
                             th:with="baseUrl=('/order/cancel/')">
                             <a th:href="@{${baseUrl}+${userOrder.id}}"
@@ -78,7 +74,7 @@
                             <span th:text="${userOrderPage.id}"></span>
                         </td>
                         <td th:each="stat : ${statusPage}">
-                            <span th:text="${stat.id}"></span>
+                            <span th:text="${stat.status}"></span>
                         </td>
                         <td th:each="flightRoute : ${flightRoute}">
                             <span th:text="${flightRoute.routeStart}"></span>

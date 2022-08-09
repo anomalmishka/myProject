@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,27 +32,25 @@ public class AirPlane {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @JoinColumn(name = "AIR_COMPANY_ID")
     private AirCompany airCompany;
-    public AirCompany getAirCompany(){
-        return airCompany;
-    }
-
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.MERGE,
+            mappedBy = "airPlane"
     )
-    @JoinColumn(name = "AIR_PLANE_ID")
     private List<AirPlaneFlightRoute> airPlaneFlightRouteList;
 
-
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            mappedBy = "airPlane"
     )
-    @JoinColumn(name = "AIR_PLANE_ID")
     private List<Seat> seatList;
 }
